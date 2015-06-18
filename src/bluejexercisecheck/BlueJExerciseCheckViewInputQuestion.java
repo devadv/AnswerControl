@@ -91,7 +91,7 @@ public class BlueJExerciseCheckViewInputQuestion extends JFrame {
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 
-		this.setTitle("Invoer vragen");
+		this.setTitle("Input Questions");
 		this.setResizable(false);
 		this.setLocation(new Point(800, 200));
 		this.add(panel);
