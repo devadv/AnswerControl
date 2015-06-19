@@ -22,7 +22,7 @@ public class BlueJExerciseCheckController {
 		this.theView.addSaveActionListener(new InputQuestionListener());
 		this.theView.addNextActionListener(new InputAnswerListener());
 		// get values out of db and set in the view
-		//this.theModel.setConnectionDatabase();
+		this.theModel.setConnectionDatabase();
 		
 	}
 

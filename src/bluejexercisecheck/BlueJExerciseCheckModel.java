@@ -33,15 +33,16 @@ public class BlueJExerciseCheckModel {
             InetAddress ip;
             try {
                 ip = InetAddress.getLocalHost();
-                if(ip.getHostName().equals("Home")){
+                if(ip.getHostName().equals("Ubuntu1404")){
                     DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
                     username = "ben";
                     password = "12345";
+                    System.out.println("Location: Home");
                 }else{
                     DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
                     username = "badev";
                     password = "badev";
-                    
+                    System.out.println("Location: Work");
                 }
             } catch (UnknownHostException ex) {
                 Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
