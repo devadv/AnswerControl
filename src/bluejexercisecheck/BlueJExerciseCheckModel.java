@@ -1,25 +1,55 @@
 package bluejexercisecheck;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BlueJExerciseCheckModel {
 
-	public static String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
-	public static String username = "ben";
-	public static String password = "12345";
+	public String DATABASEURL;
+	public String username ;
+	public String password ;
 
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
 
 	public BlueJExerciseCheckModel() throws SQLException {
-
+           setLocation();
+           
+           
+           
 	}
+        
+        private void setLocation(){
+            
+            InetAddress ip;
+            try {
+                ip = InetAddress.getLocalHost();
+                if(ip.getHostName().equals("Home")){
+                    DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
+                    username = "ben";
+                    password = "12345";
+                }else{
+                    DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
+                    username = "badev";
+                    password = "badev";
+                    
+                }
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+		
+		
+            
+        }
 
 	public void setConnectionDatabase() {
 
@@ -35,6 +65,6 @@ public class BlueJExerciseCheckModel {
 		}
 	}
 
-	//Create Retrieve Update and Delete
+	//CRUD : Create, Retrieve, Update, and Delete
 
 }
