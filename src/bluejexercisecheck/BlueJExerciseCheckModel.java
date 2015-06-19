@@ -23,9 +23,7 @@ public class BlueJExerciseCheckModel {
 
 	public BlueJExerciseCheckModel() throws SQLException {
            setLocation();
-           
-           
-           
+                  
 	}
         
         private void setLocation(){

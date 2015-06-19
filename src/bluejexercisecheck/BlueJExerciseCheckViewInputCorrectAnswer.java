@@ -16,18 +16,19 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class BlueJExerciseCheckViewInputCorrectAnswer extends JFrame {
-	private String[] listChapters = {"1","2","3" ,"4","5","6","7","8","9","10"};
-	private String[] listExercises = {"1","2","3","4","5","6","7","8","9","10","11","12"};
+	private String[] listBlocks = BlueJExerciseCheckViewInputQuestion.blocks;
+	private String[] listExercises = BlueJExerciseCheckViewInputQuestion.listExercises;
 
 	
 	private JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
-	private JComboBox<String> chapters = new JComboBox<>(listChapters);
+	private JComboBox<String> setBlock = new JComboBox<>(listBlocks);
 
 	private JComboBox<String> exercise_nr = new JComboBox<>(listExercises);
 	private JTextArea input_question = new JTextArea(6, 10);
 	private JTextArea input_answer = new JTextArea(20, 15);
 	private JScrollPane scrollPaneQuestion = new JScrollPane();
 	private JScrollPane scrollPaneAnswer = new JScrollPane();
+        private JLabel labelChapter = new JLabel("Blok");
 	private JLabel labelExercise = new JLabel("Oefening:");
 	private JLabel labelQuestion = new JLabel("Vraag:");
 	private JLabel labelAnswer = new JLabel("Antwoord:");
@@ -74,8 +75,9 @@ public class BlueJExerciseCheckViewInputCorrectAnswer extends JFrame {
 		
 		//add components to panels	
 		panelTitle.add(title_course);
-		panelTop.add(labelExercise);
-		panelTop.add(chapters);
+                panelTop.add(labelChapter);
+		panelTop.add(setBlock);
+                panelTop.add(labelExercise);
 		panelTop.add(exercise_nr);
 		panelQuestion.add(labelQuestion);
 		panelQuestion.add(scrollPaneQuestion.add(input_question));
