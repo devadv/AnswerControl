@@ -17,7 +17,7 @@ import javax.swing.border.Border;
 
 public class BlueJExerciseCheckViewInputCorrectAnswer extends JFrame {
 	private String[] listBlocks = BlueJExerciseCheckViewInputQuestion.blocks;
-	private String[] listExercises = BlueJExerciseCheckViewInputQuestion.listExercises;
+	private String[] listExercises = BlueJExerciseCheckViewInputQuestion.exercises;
 
 	
 	private JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");

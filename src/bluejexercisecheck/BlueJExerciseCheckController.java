@@ -47,8 +47,8 @@ public class BlueJExerciseCheckController {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-								
-						System.out.println(theViewInputQuestion.getExcercise_nr());
+						System.out.println(theViewInputQuestion.getSelectedBlock());		
+						System.out.println(theViewInputQuestion.getSelectedExercise());
 						System.out.println(theViewInputQuestion.getQuestion());
 						
 						System.out.println("save Clicked!");
