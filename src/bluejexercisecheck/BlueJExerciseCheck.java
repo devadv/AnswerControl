@@ -15,7 +15,7 @@ public class BlueJExerciseCheck {
 	 */
 	public static void main(String[] args) throws SQLException {
 		
-		BlueJExerciseCheckView theView = new BlueJExerciseCheckView();
+		BlueJExerciseCheckMainView theView = new BlueJExerciseCheckMainView();
 		BlueJExerciseCheckModel theModel = new BlueJExerciseCheckModel();
 		
 		BlueJExerciseCheckController theController = new BlueJExerciseCheckController(theView, theModel);
