@@ -31,5 +31,13 @@ public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView 
     }
     public String getQuestion(){
         return input_question.getText();
-	}
+    }
+    
+    //set items in combobox listBlocks
+    public void setBlocks(String[] blocks) {
+        
+        listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
+        
+        
+    }
 }
