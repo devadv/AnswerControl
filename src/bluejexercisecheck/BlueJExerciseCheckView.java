@@ -72,17 +72,17 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         panelTop.add(labelExercise);
         panelTop.add(listExercises);
         panelQuestion.add(labelQuestion);
-        
+
         panelBottom.add(btnSave);
         panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
-       
-         //add to main panel
+
+        //add to main panel
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelQuestion);
         panel.add(panelBottom);
-     
+
         this.setResizable(false);
         this.setLocation(new Point(800, 200));
         this.getContentPane().add(panel);
@@ -125,6 +125,27 @@ public abstract class BlueJExerciseCheckView extends JFrame {
 
     public int getSelectedExerciseIndex() {
         return listExercises.getSelectedIndex() + 1;
+    }
+
+    //set items in combobox listBlocks
+
+    public void setBlocks(String[] blocks) {
+
+        listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
+
+    }
+
+    public void setNextExercise() {
+        if (listExercises.getSelectedIndex() < listExercises.getItemCount() - 1) {
+            listExercises.setSelectedIndex(listExercises.getSelectedIndex() + 1);
+        }
+
+    }
+
+    public void setPreviousExercise() {
+        if (listExercises.getSelectedIndex() > 0) {
+            listExercises.setSelectedIndex(listExercises.getSelectedIndex() - 1);
+        }
     }
 
 }

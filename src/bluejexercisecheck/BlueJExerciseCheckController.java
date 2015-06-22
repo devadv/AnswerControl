@@ -37,7 +37,7 @@ public class BlueJExerciseCheckController {
 			theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
 			theViewInputQuestion.addNextActionListener(new NextBtnListener());
 			theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
-                        theViewInputQuestion.setBlocks(theModel.getBlocksList());
+                        theViewInputQuestion.setBlocks(theModel.getBlockList());
 			theViewInputQuestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			theViewInputQuestion.setSize(400, 600);
 			theViewInputQuestion.setVisible(true);
@@ -63,7 +63,7 @@ public class BlueJExerciseCheckController {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+						theViewInputQuestion.setNextExercise();
 						System.out.println("next  Clicked!");
 
 					}
@@ -73,6 +73,7 @@ public class BlueJExerciseCheckController {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+                                                theViewInputQuestion.setPreviousExercise();
 						System.out.println("previous Clicked!");
 
 					}

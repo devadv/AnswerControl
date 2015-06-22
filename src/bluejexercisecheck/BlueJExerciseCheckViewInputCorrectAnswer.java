@@ -55,11 +55,10 @@ public class BlueJExerciseCheckViewInputCorrectAnswer extends BlueJExerciseCheck
        
         
         this.setTitle("Invoer Antwoord");
-        
-
     }
-     public String getAnswer(){
+    
+    public String getAnswer(){
         return input_answer.getText();
-     }
+    }
 
 }

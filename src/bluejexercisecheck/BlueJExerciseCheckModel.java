@@ -63,7 +63,7 @@ public class BlueJExerciseCheckModel {
     }
 
     //CRUD : Create, Retrieve, Update, and Delete
-    public String[] getBlocksList() {
+    public String[] getBlockList() {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
