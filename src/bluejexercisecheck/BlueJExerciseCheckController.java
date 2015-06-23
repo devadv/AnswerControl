@@ -64,7 +64,7 @@ public class BlueJExerciseCheckController {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						theViewInputQuestion.setNextExercise();
-						System.out.println("next  Clicked!");
+                                                						System.out.println("next  Clicked!");
 
 					}
 					

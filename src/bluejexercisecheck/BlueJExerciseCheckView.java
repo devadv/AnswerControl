@@ -128,7 +128,6 @@ public abstract class BlueJExerciseCheckView extends JFrame {
     }
 
     //set items in combobox listBlocks
-
     public void setBlocks(String[] blocks) {
 
         listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
@@ -137,9 +136,9 @@ public abstract class BlueJExerciseCheckView extends JFrame {
 
     public void setNextExercise() {
         if (listExercises.getSelectedIndex() < listExercises.getItemCount() - 1) {
-            listExercises.setSelectedIndex(listExercises.getSelectedIndex() + 1);
+            listExercises.setSelectedIndex(listExercises.getSelectedIndex() + 1);  
         }
-
+        
     }
 
     public void setPreviousExercise() {
