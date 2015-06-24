@@ -22,29 +22,41 @@ public class BlueJExerciseCheckModel {
     private ResultSet resultSet;
 
     public BlueJExerciseCheckModel() throws SQLException {
-        setLocation();
+//        try {
+//            System.out.println("xxx: "+InetAddress.getLocalHost()); //.getHostName());
+//        } catch (UnknownHostException ex) {
+//            System.out.println("xxx: ");
+//            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+//            System.exit(200);
+//        }
+       setLocation();
 
     }
 
     private void setLocation() {
-
         InetAddress ip;
         try {
             ip = InetAddress.getLocalHost();
-            if (ip.getHostName().equals("Ubuntu1404")) {
+             if (ip.getHostName().equals("Ubuntu1404")) {
                 DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
                 username = "ben";
                 password = "12345";
                 System.out.println("Location: Home");
             } else {
+                // Never reached due to host name not connected to localhost
+                // Handled in the second catch
+            }
+        } catch (UnknownHostException ex) {
+            try {
                 DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
                 username = "badev";
                 password = "badev";
                 System.out.println("Location: Work");
+                
+            } catch (Exception ex2) {
+                Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       }
 
     }
 
