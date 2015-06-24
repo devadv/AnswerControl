@@ -22,13 +22,6 @@ public class BlueJExerciseCheckModel {
     private ResultSet resultSet;
 
     public BlueJExerciseCheckModel() throws SQLException {
-//        try {
-//            System.out.println("xxx: "+InetAddress.getLocalHost()); //.getHostName());
-//        } catch (UnknownHostException ex) {
-//            System.out.println("xxx: ");
-//            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
-//            System.exit(200);
-//        }
        setLocation();
 
     }
