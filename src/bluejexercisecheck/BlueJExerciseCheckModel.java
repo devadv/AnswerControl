@@ -25,7 +25,7 @@ public class BlueJExerciseCheckModel {
        setLocation();
 
     }
-
+ //////////////
     private void setLocation() {
         InetAddress ip;
         try {
