@@ -22,12 +22,13 @@ public class BlueJExerciseCheckModel {
     private ResultSet resultSet;
 
     public BlueJExerciseCheckModel() throws SQLException {
-       setLocation();
+        setLocation();
 
     }
- //////////////
+
     private void setLocation() {
-        InetAddress ip;
+        InetAddress ip;;
+        
         try {
             ip = InetAddress.getLocalHost();
              if (ip.getHostName().equals("Ubuntu1404")) {
@@ -38,6 +39,9 @@ public class BlueJExerciseCheckModel {
             } else {
                 // Never reached due to host name not connected to localhost
                 // Handled in the second catch
+                DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
+                username = "badev";
+                password = "badev";
             }
         } catch (UnknownHostException ex) {
             try {
@@ -45,12 +49,11 @@ public class BlueJExerciseCheckModel {
                 username = "badev";
                 password = "badev";
                 System.out.println("Location: Work");
-                
             } catch (Exception ex2) {
                 Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
             }
        }
-
+        
     }
 
     public void setConnectionDatabase() {
@@ -80,14 +83,19 @@ public class BlueJExerciseCheckModel {
 
             while (resultSet.next()) {
                 arrayList.add(resultSet.getString(1));
-               
+
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         String[] blocks = arrayList.toArray(new String[arrayList.size()]);
-        
+
         return blocks;
+    }
+    
+    //public String getQuestion( String exerciseNumber )
+    {
+        
     }
 }
