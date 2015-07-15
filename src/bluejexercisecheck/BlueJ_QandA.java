@@ -11,4 +11,16 @@ public class BlueJ_QandA
     {
         return 0L;
     }
+    
+    public String[] read( long id )
+    {
+        
+        return null;
+    }
+    
+    public void update( long id, String exerciseNumber, String question, String answer )
+    {
+        
+    }
+    
 }
