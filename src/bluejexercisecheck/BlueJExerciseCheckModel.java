@@ -21,9 +21,17 @@ public class BlueJExerciseCheckModel {
     private Statement statement;
     private ResultSet resultSet;
 
+    /**
+     * constructor with eager database connection, meaning:
+     * a) username, password and location is retrieved.
+     * b) and the databse connection is imediately established using these
+     *    retrievals.
+     * 
+     * @throws SQLException 
+     */
     public BlueJExerciseCheckModel() throws SQLException {
         setLocation();
-
+        setConnectionDatabase();
     }
 
     private void setLocation() {
@@ -71,6 +79,17 @@ public class BlueJExerciseCheckModel {
     }
 
     //CRUD : Create, Retrieve, Update, and Delete
+    
+    /**
+     * A block represents a series of related questions and answers to test one 
+     * or more learning subjects.
+     * The block list is a list of all the blocks defined for this blueJ course.
+     * ( Programmeren in Java met BlueJ vijfde editie Pearson 
+     * ISBN 978-90-430-2389-4 ).
+     * 
+     * 
+     * @return list with all block names defined for this BlueJ course.
+     */
     public String[] getBlockList() {
 
         ArrayList<String> arrayList = new ArrayList<>();
