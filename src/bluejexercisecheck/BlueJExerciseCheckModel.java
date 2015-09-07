@@ -1,5 +1,6 @@
 package bluejexercisecheck;
 
+import com.mysql.jdbc.exceptions.MySQLDataException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -34,35 +35,44 @@ public class BlueJExerciseCheckModel {
         setConnectionDatabase();
     }
 
-    private void setLocation() {
+    private void setLocation() 
+    {
         InetAddress ip;;
         
-        try {
+        try 
+        {
             ip = InetAddress.getLocalHost();
-             if (ip.getHostName().equals("Ubuntu1404")) {
+            
+            if (ip.getHostName().equals("Ubuntu1404")) {
                 DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
                 username = "ben";
                 password = "12345";
                 System.out.println("Location: Home");
-            } else {
+            } 
+            else 
+            {
                 // Never reached due to host name not connected to localhost
                 // Handled in the second catch
-                DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
-                username = "badev";
-                password = "badev";
+                
             }
-        } catch (UnknownHostException ex) {
-            try {
-                DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
-                username = "badev";
-                password = "badev";
+        } 
+        catch (UnknownHostException ex) 
+        {
+            try 
+            {
+                DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
+                username = "badev_hintveld";
+                password = "V99r9R9qwMmYPcqU";
                 System.out.println("Location: Work");
-            } catch (Exception ex2) {
-                Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            catch (Exception e) 
+            {
+                Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, e);
             }
-       }
+            
+        }// end try catch
         
-    }
+    }// end setLocation
 
     public void setConnectionDatabase() {
 
@@ -94,27 +104,146 @@ public class BlueJExerciseCheckModel {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
-        try {
+        try 
+        {
 
             String sql = "SELECT blockname FROM block";
             resultSet = statement.executeQuery(sql);
-            int i = 0;
 
-            while (resultSet.next()) {
+            while (resultSet.next()) 
+            {
                 arrayList.add(resultSet.getString(1));
-
             }
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex) 
+        {
             Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         String[] blocks = arrayList.toArray(new String[arrayList.size()]);
 
         return blocks;
     }
     
-    //public String getQuestion( String exerciseNumber )
+    public void addBlock( String blockName ) throws SQLException
     {
+        if( blockName.isEmpty() )
+        {
+            throw new SQLException( "No data supplied." );
+        }
         
+        try 
+        {
+            String sql = "INSERT INTO block (blockname) VALUES ('" +  blockName + "')";
+            statement.executeUpdate(sql);
+
+        } catch (SQLException ex) 
+        {
+            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
+     public String[] getBlockListAllFields() {
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        try 
+        {
+
+            String sql = "SELECT idblock, blockname FROM block";
+            resultSet = statement.executeQuery( sql );
+
+            while (resultSet.next()) 
+            {
+                arrayList.add(resultSet.getString(1));
+                arrayList.add(resultSet.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+
+        return blocks;
+    }
+     
+    public String[] deleteBlock( long id ) throws SQLException
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        
+        String[] blockListAll = getBlockListAllFields();
+        int numberOfBlocksBeforeDelete = blockListAll.length;
+        int numberOfBlocksAfterDelete = 0;
+        
+        try 
+        {
+            String sql = "DELETE from block WHERE idblock = ('" + id + "')";
+            statement.executeUpdate(sql);
+            
+            String[] blockListAll_2 = getBlockListAllFields();
+            numberOfBlocksAfterDelete = blockListAll_2.length;
+                       
+        } catch (SQLException ex) 
+        {
+            //Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if( numberOfBlocksBeforeDelete == numberOfBlocksAfterDelete )
+        {
+            throw new SQLException("None existing key.");   
+        } 
+        
+        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+
+        return blocks;
+    }
+    
+    public String[] updateBlock( long id, String blockName ) throws SQLException
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        String[] blockListAll = getBlockListAllFields();
+        int idNumber = 0;
+        boolean upDated = false;
+        
+        for( int i = 0; i < blockListAll.length; i += 2 )
+        {
+            if( id == Integer.parseInt( blockListAll[ i ] ) )
+            {
+                try 
+                {
+                    String sql = "UPDATE block SET blockname = ('" + blockName + "') WHERE idblock = (" + id + 1 + ")";
+                    statement.executeUpdate(sql);
+                    upDated = true;
+                } 
+                catch (SQLException ex) 
+                {
+                    //Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if( upDated == false )
+            {
+                throw new MySQLDataException( " None Existing key." );
+            }
+        }
+                
+        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+
+        return blocks;
+    }// end method updateBlock
+    
+    public void deleteAll() throws SQLException
+    {
+        try 
+        {
+            String sql = "DELETE FROM block " ;
+            statement.executeUpdate( sql );
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
