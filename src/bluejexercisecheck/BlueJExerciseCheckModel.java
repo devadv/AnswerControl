@@ -3,6 +3,7 @@ package bluejexercisecheck;
 import com.mysql.jdbc.exceptions.MySQLDataException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -76,15 +77,16 @@ public class BlueJExerciseCheckModel {
 
     public void setConnectionDatabase() {
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(DATABASEURL, username,
-                    password);
+        try 
+        {
+            Class.forName( "com.mysql.jdbc.Driver" );
+            connection = DriverManager.getConnection( DATABASEURL, username, password );
             statement = connection.createStatement();
-
-        } catch (Exception connectException) {
+        } 
+        catch ( Exception connectException ) 
+        {
             connectException.printStackTrace();
-            System.out.println("no connection");
+            System.out.println("No connection");
         }
     }
 
@@ -100,7 +102,8 @@ public class BlueJExerciseCheckModel {
      * 
      * @return list with all block names defined for this BlueJ course.
      */
-    public String[] getBlockList() {
+    public String[] getBlockList() 
+    {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
@@ -112,19 +115,44 @@ public class BlueJExerciseCheckModel {
 
             while (resultSet.next()) 
             {
-                arrayList.add(resultSet.getString(1));
+                arrayList.add(resultSet.getString( 1 ) );
             }
 
-        } catch (SQLException ex) 
+        }
+        catch ( SQLException ex ) 
         {
-            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println( "Error in BlueJExerciseCheckModel.BlockList." );
         }
         
-        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+        String[] blocks = arrayList.toArray( new String[arrayList.size() ] );
 
         return blocks;
     }
     
+    public long getBlockID( String blockText ) //*******************************************************
+    {
+       long row = 0;
+       System.out.println("zzzz");
+       blockText = "1.2";
+       ArrayList<String> arrayList = new ArrayList<>();
+       
+       try       
+       {
+           String sql = "SELECT idblock FROM badev_bluej_exercises.block WHERE blockname = " + blockText;
+           resultSet = statement.executeQuery( sql );
+           System.out.println( "xxx" + resultSet.getString( 1 ) );
+           //row = Long.parseLong( resultSet.getString( 2 ) );          
+       }
+       catch ( SQLException ex ) 
+       {
+           System.out.println( "Error in BlueJExerciseCheckModel.getBlockID. " + ex );
+       }
+
+       return row;
+       
+    }
+    
+    //
     public void addBlock( String blockName ) throws SQLException
     {
         if( blockName.isEmpty() )
@@ -137,13 +165,36 @@ public class BlueJExerciseCheckModel {
             String sql = "INSERT INTO block (blockname) VALUES ('" +  blockName + "')";
             statement.executeUpdate(sql);
 
-        } catch (SQLException ex) 
+        } 
+        catch ( SQLException ex ) 
         {
-            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println( "Error in BlueJExerciseCheckModel.addBlock." );
         }
     }
     
-     public String[] getBlockListAllFields() {
+    //
+    public void addExercise( String exerciseText, long blockID ) throws SQLException
+    {
+        if( exerciseText.isEmpty() || blockID <= 0 )
+        {
+            throw new SQLException( "Exercise or block text missing. ");
+        }
+        
+        try 
+        {
+            String sql = "INSERT INTO correct_answer (exercise_nr, block_id) VALUES ('" +  exerciseText + "," + blockID + "')";
+            statement.executeUpdate(sql);
+
+        }  
+        catch ( SQLException ex ) 
+        {
+            System.out.println( "Error in BlueJExerciseCheckModel.addExercise" );
+        }
+    }
+    
+    // 
+    public String[] getBlockListAllFields() 
+    {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
@@ -155,12 +206,14 @@ public class BlueJExerciseCheckModel {
 
             while (resultSet.next()) 
             {
-                arrayList.add(resultSet.getString(1));
-                arrayList.add(resultSet.getString(2));
+                arrayList.add( resultSet.getString( 1 ) );
+                arrayList.add( resultSet.getString( 2 ) );
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch ( SQLException ex ) 
+        {
+            System.out.println( "Error in BlueJExerciseCheckModel.getBlockListAllFields" );
         }
         
         String[] blocks = arrayList.toArray(new String[arrayList.size()]);
@@ -168,6 +221,7 @@ public class BlueJExerciseCheckModel {
         return blocks;
     }
      
+    
     public String[] deleteBlock( long id ) throws SQLException
     {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -179,19 +233,20 @@ public class BlueJExerciseCheckModel {
         try 
         {
             String sql = "DELETE from block WHERE idblock = ('" + id + "')";
-            statement.executeUpdate(sql);
+            statement.executeUpdate( sql );
             
             String[] blockListAll_2 = getBlockListAllFields();
             numberOfBlocksAfterDelete = blockListAll_2.length;
                        
-        } catch (SQLException ex) 
+        } 
+        catch ( SQLException ex ) 
         {
-            //Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
         if( numberOfBlocksBeforeDelete == numberOfBlocksAfterDelete )
         {
-            throw new SQLException("None existing key.");   
+            throw new SQLException( "None existing key." );   
         } 
         
         String[] blocks = arrayList.toArray(new String[arrayList.size()]);
@@ -199,6 +254,7 @@ public class BlueJExerciseCheckModel {
         return blocks;
     }
     
+    //
     public String[] updateBlock( long id, String blockName ) throws SQLException
     {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -216,7 +272,7 @@ public class BlueJExerciseCheckModel {
                     statement.executeUpdate(sql);
                     upDated = true;
                 } 
-                catch (SQLException ex) 
+                catch ( SQLException ex ) 
                 {
                     //Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -228,7 +284,7 @@ public class BlueJExerciseCheckModel {
             }
         }
                 
-        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+        String[] blocks = arrayList.toArray( new String[ arrayList.size() ] );
 
         return blocks;
     }// end method updateBlock

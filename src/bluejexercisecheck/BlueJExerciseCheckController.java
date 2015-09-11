@@ -37,7 +37,7 @@ public class BlueJExerciseCheckController {
 			theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
 			theViewInputQuestion.addNextActionListener(new NextBtnListener());
 			theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
-                        theViewInputQuestion.setBlocks(theModel.getBlockList());
+            theViewInputQuestion.setBlocks(theModel.getBlockList());
 			theViewInputQuestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			theViewInputQuestion.setSize(400, 600);
 			theViewInputQuestion.setVisible(true);
