@@ -90,4 +90,22 @@ public class BlueJExerciseCheckModel {
         
         return blocks;
     }
+    
+    public void createQuestion(String exercise_nr, String question, int block)
+			throws SQLException {
+
+		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+				+ exercise_nr + "','" + question + "','" + block + "')";
+		statement.executeUpdate(sql);
+		System.out.println(sql);
+
+	}
+    public void updateQuestion(String exercise_nr, String question) throws SQLException{
+		String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='"+ exercise_nr +"'";
+				
+		statement.executeUpdate(sql);
+		System.out.println(sql);
+
+	}
+	
 }
