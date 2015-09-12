@@ -22,7 +22,7 @@ public class BlueJExerciseCheckModel {
     private ResultSet resultSet;
 
     public BlueJExerciseCheckModel() throws SQLException {
-       setLocation();
+        setLocation();
 
     }
 
@@ -30,7 +30,7 @@ public class BlueJExerciseCheckModel {
         InetAddress ip;
         try {
             ip = InetAddress.getLocalHost();
-             if (ip.getHostName().equals("Ubuntu1404")) {
+            if (ip.getHostName().equals("Ubuntu1404")) {
                 DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
                 username = "ben";
                 password = "12345";
@@ -45,11 +45,11 @@ public class BlueJExerciseCheckModel {
                 username = "badev";
                 password = "badev";
                 System.out.println("Location: Work");
-                
+
             } catch (Exception ex2) {
                 Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
             }
-       }
+        }
 
     }
 
@@ -80,32 +80,63 @@ public class BlueJExerciseCheckModel {
 
             while (resultSet.next()) {
                 arrayList.add(resultSet.getString(1));
-               
+
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         String[] blocks = arrayList.toArray(new String[arrayList.size()]);
-        
+
         return blocks;
     }
-    
+
     public void createQuestion(String exercise_nr, String question, int block)
-			throws SQLException {
+            throws SQLException {
 
-		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
-				+ exercise_nr + "','" + question + "','" + block + "')";
-		statement.executeUpdate(sql);
-		System.out.println(sql);
+        String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+                + exercise_nr + "','" + question + "','" + block + "')";
+        statement.executeUpdate(sql);
+        System.out.println(sql);
 
-	}
-    public void updateQuestion(String exercise_nr, String question) throws SQLException{
-		String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='"+ exercise_nr +"'";
-				
-		statement.executeUpdate(sql);
-		System.out.println(sql);
+    }
 
-	}
-	
+    public void updateQuestion(String exercise_nr, String question) throws SQLException {
+        String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='" + exercise_nr + "'";
+
+        statement.executeUpdate(sql);
+        System.out.println(sql);
+
+    }
+
+    public boolean exerciseExist(String exercise_nr) throws SQLException {
+
+        String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
+                + exercise_nr + "'";
+        System.out.println(sql);
+        resultSet = statement.executeQuery(sql);
+        if (resultSet.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String getQuestion(String exercise_nr ){
+        String question = "";
+        try {
+            String sql = "SELECT question FROM correct_answer WHERE exercise_nr='"
+                    + exercise_nr + "'";
+            System.out.println(sql);
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            question = resultSet.getString("question");
+            System.out.println(question);
+            
+            
+                    } catch (SQLException ex) {
+            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return question;
+    }
+
 }

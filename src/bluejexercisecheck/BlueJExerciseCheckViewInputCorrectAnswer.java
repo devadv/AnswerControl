@@ -60,5 +60,6 @@ public class BlueJExerciseCheckViewInputCorrectAnswer extends BlueJExerciseCheck
     public String getAnswer(){
         return input_answer.getText();
     }
+    
 
 }

@@ -27,14 +27,14 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         "2.46", "2.47", "2.48", "2.49", "2.50", "2.61", "2.62", "2.63", "2.64", "2.65", "2.66", "26.7", "2.68", "2.69",
         "2.70", "2.81", "2.82", "2.83", "2.84", "2.85", "2.86", "2.87", "2.88", "2.89", "2.90", "2.91", "2.92", "2.93"};
 
-    public static String[] blocks = {"1.1 - 1.20", "1.21 - 1.36", "2.1 - 2.20", "etc"};
+    //public static String[] blocks = {"1.1 - 1.20", "1.21 - 1.36", "2.1 - 2.20", "etc"};
 
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
     protected JButton inputQuestion = new JButton("Invoer vragen");
     protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
     protected JComboBox<String> listExercises = new JComboBox<>(exercises);
     protected JLabel labelBlock = new JLabel("Blok");
-    protected JComboBox<String> listBlocks = new JComboBox<>(blocks);
+    protected JComboBox<String> listBlocks = new JComboBox<>();
 
     protected JLabel labelExercise = new JLabel("Oefening:");
     protected JLabel labelQuestion = new JLabel("Vraag:");

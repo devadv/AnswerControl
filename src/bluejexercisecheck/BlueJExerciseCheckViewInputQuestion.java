@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView {
-     private JTextArea input_question = new JTextArea(20,35);
+
+    private JTextArea input_question = new JTextArea(20, 35);
 
     public BlueJExerciseCheckViewInputQuestion() {
         super();
@@ -23,15 +24,21 @@ public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView 
         input_question.setBackground(new Color(219, 205, 197));
         box.add(new JScrollPane(input_question));
         panelQuestion.add(box);
-        
-        
+
         this.setTitle("Invoer Vragen");
-       
 
     }
-    public String getQuestion(){
+
+    public String getQuestion() {
         return input_question.getText();
     }
-    
-   
+
+    public void setQuestion(String question) {
+        input_question.setText(question);
+    }
+
+    public void clearQuestionTextArea() {
+        input_question.setText("");
+    }
+
 }
