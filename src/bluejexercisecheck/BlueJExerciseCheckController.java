@@ -12,6 +12,8 @@ public class BlueJExerciseCheckController {
 
     private final BlueJExerciseCheckMainView theView;
     private final BlueJExerciseCheckModel theModel;
+    private BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
+    private BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
 
     public BlueJExerciseCheckController(BlueJExerciseCheckMainView theView, BlueJExerciseCheckModel theModel)
             throws SQLException {
@@ -23,17 +25,46 @@ public class BlueJExerciseCheckController {
         this.theView.addInputCorrectAnswerListener(new InputAnswerListener());
         // get values out of db and set in the view
         this.theModel.setConnectionDatabase();
+        theViewInputQuestion = new BlueJExerciseCheckViewInputQuestion();
+        theViewInputCorrectAnswer = new BlueJExerciseCheckViewInputCorrectAnswer();
+
+    }
+
+    //if question exists get question form database
+
+    public void setQuestionFromDBToView() {
+        try {
+            if (theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
+                theViewInputQuestion.setQuestion(theModel.getQuestion(theViewInputQuestion.getSelectedExercise()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void addQuestionFromViewToDB() {
+        try {
+
+            if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
+                theModel.createQuestion(theViewInputQuestion.getSelectedExercise(),
+                        theViewInputQuestion.getQuestion(), theViewInputQuestion.getSelectedBlockIndex());
+            } else {
+                theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion());
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     // Save button Listener
     class InputQuestionListener implements ActionListener {
 
-        private BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            theViewInputQuestion = new BlueJExerciseCheckViewInputQuestion();
+            
             theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
             theViewInputQuestion.addNextActionListener(new NextBtnListener());
             theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
@@ -45,36 +76,8 @@ public class BlueJExerciseCheckController {
             theView.dispose();
             System.out.println("Question Clicked!");
         }
-        /*if question exists get question form database*/
 
-        public void setQuestionFromDBToView() {
-            try {
-                if (theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
-                    theViewInputQuestion.setQuestion(theModel.getQuestion(theViewInputQuestion.getSelectedExercise()));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-        public void addQuestionFromViewToDB() {
-            try {
-
-                if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
-                    theModel.createQuestion(theViewInputQuestion.getSelectedExercise(),
-                            theViewInputQuestion.getQuestion(), theViewInputQuestion.getSelectedBlockIndex());
-                } else {
-                    theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion());
-
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
         // Save button Listener
-
         class SaveBtnListener implements ActionListener {
 
             @Override
@@ -121,11 +124,9 @@ public class BlueJExerciseCheckController {
     // Next button Listener
     class InputAnswerListener implements ActionListener {
 
-        private BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            theViewInputCorrectAnswer = new BlueJExerciseCheckViewInputCorrectAnswer();
+            
             theViewInputCorrectAnswer.addSaveActionListener(new SaveBtnListener());
             theViewInputCorrectAnswer.addNextActionListener(new NextBtnListener());
             theViewInputCorrectAnswer.addPreviousActionListener(new PreviousBtnListener());
