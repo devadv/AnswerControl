@@ -4,6 +4,8 @@ package bluejexercisecheck;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
@@ -55,6 +57,13 @@ public class BlueJExerciseCheckController {
                                                 System.out.println(theViewInputQuestion.getSelectedExerciseIndex());
 						System.out.println(theViewInputQuestion.getQuestion());
 						System.out.println("save Clicked!");
+                                            try {
+                                                theModel.createQuestion(theViewInputQuestion.getSelectedExercise(),
+                                                        theViewInputQuestion.getQuestion(), 
+                                                        theViewInputQuestion.getSelectedBlockIndex());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
 
 					}
 

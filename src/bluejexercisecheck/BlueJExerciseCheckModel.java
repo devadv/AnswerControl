@@ -56,11 +56,15 @@ public class BlueJExerciseCheckModel {
                 // Handled in the second catch
                 
             }
+
         } 
         catch (UnknownHostException ex) 
         {
             try 
             {
+
+       
+
                 DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
                 username = "badev_hintveld";
                 password = "V99r9R9qwMmYPcqU";
@@ -138,8 +142,9 @@ public class BlueJExerciseCheckModel {
        
        try       
        {
-           String sql = "SELECT idblock FROM badev_bluej_exercises.block WHERE blockname = " + blockText;
+           String sql = "SELECT idblock FROM block WHERE blockname = " + blockText;
            resultSet = statement.executeQuery( sql );
+           resultSet.next();
            System.out.println( "xxx" + resultSet.getString( 1 ) );
            //row = Long.parseLong( resultSet.getString( 2 ) );          
        }
@@ -302,4 +307,23 @@ public class BlueJExerciseCheckModel {
         }
     }
     
+
+    public void createQuestion(String exercise_nr, String question, int block)
+			throws SQLException {
+
+		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+				+ exercise_nr + "','" + question + "','" + block + "')";
+		statement.executeUpdate(sql);
+		System.out.println(sql);
+
+	}
+    public void updateQuestion(String exercise_nr, String question) throws SQLException{
+		String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='"+ exercise_nr +"'";
+				
+		statement.executeUpdate(sql);
+		System.out.println(sql);
+
+	}
+	
+
 }
