@@ -41,9 +41,9 @@ public class BlueJExerciseCheckModel {
             }
         } catch (UnknownHostException ex) {
             try {
-                DATABASEURL = "jdbc:mysql://10.0.0.2/badev_bluej_exercises";
-                username = "badev";
-                password = "badev";
+                DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
+                username = "badev_hintveld";
+                password = "V99r9R9qwMmYPcqU";
                 System.out.println("Location: Work");
 
             } catch (Exception ex2) {
