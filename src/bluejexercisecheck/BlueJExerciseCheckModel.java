@@ -56,15 +56,11 @@ public class BlueJExerciseCheckModel {
                 // Handled in the second catch
                 
             }
-
         } 
         catch (UnknownHostException ex) 
         {
             try 
             {
-
-       
-
                 DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
                 username = "badev_hintveld";
                 password = "V99r9R9qwMmYPcqU";
@@ -142,7 +138,7 @@ public class BlueJExerciseCheckModel {
        
        try       
        {
-           String sql = "SELECT idblock FROM block WHERE blockname = " + blockText;
+           String sql = "SELECT idblock FROM badev_bluej_exercises.block WHERE blockname = " + blockText;
            resultSet = statement.executeQuery( sql );
            resultSet.next();
            System.out.println( "xxx" + resultSet.getString( 1 ) );
