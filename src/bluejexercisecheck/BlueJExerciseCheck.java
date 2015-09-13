@@ -9,10 +9,7 @@ import javax.swing.JFrame;
 
 public class BlueJExerciseCheck {
 
-	/**
-	 * @param args
-	 * @throws SQLException 
-	 */
+	
 	public static void main(String[] args) throws SQLException {
 		
 		BlueJExerciseCheckMainView theView = new BlueJExerciseCheckMainView();

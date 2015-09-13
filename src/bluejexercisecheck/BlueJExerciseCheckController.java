@@ -13,9 +13,16 @@ public class BlueJExerciseCheckController {
 
     private final BlueJExerciseCheckMainView theView;
     private final BlueJExerciseCheckModel theModel;
-    private BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
-    private BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
+    private final BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
+    private final BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
 
+    /**
+     *The Contoller brings the Model and the View together
+     * @param theView Main View
+     * @param theModel Connection to database
+     * 
+     * @throws SQLException
+     */
     public BlueJExerciseCheckController(BlueJExerciseCheckMainView theView, BlueJExerciseCheckModel theModel)
             throws SQLException {
 
@@ -31,7 +38,12 @@ public class BlueJExerciseCheckController {
 
     }
 
-    //if question exists get question form database
+   
+
+    /**
+     *checks question exsist in database and set the view
+     */
+    
     public void setQuestionFromDBToView() {
         try {
             if (theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
@@ -42,7 +54,9 @@ public class BlueJExerciseCheckController {
         }
 
     }
-
+    /**
+     * create a question if not exsist then update question
+     */
     public void addQuestionFromViewToDB() {
         try {
 
