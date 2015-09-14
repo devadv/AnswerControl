@@ -129,12 +129,10 @@ public class BlueJExerciseCheckModel {
         return blocks;
     }
     
-    public long getBlockID( String blockText ) //*******************************************************
+    public long getBlockID( String blockText )
     {
        long row = 0;
        System.out.println("zzzz");
-       blockText = "1.2";
-       ArrayList<String> arrayList = new ArrayList<>();
        
        try       
        {
@@ -142,7 +140,7 @@ public class BlueJExerciseCheckModel {
            resultSet = statement.executeQuery( sql );
            resultSet.next();
            System.out.println( "xxx" + resultSet.getString( 1 ) );
-           //row = Long.parseLong( resultSet.getString( 2 ) );          
+           row = Long.parseLong( resultSet.getString( 1 ) );          
        }
        catch ( SQLException ex ) 
        {
@@ -150,8 +148,7 @@ public class BlueJExerciseCheckModel {
        }
 
        return row;
-       
-    }
+    }// end method getBlockID
     
     //
     public void addBlock( String blockName ) throws SQLException
@@ -297,31 +294,57 @@ public class BlueJExerciseCheckModel {
             String sql = "DELETE FROM block " ;
             statement.executeUpdate( sql );
         } 
-        catch (SQLException ex) 
+        catch ( SQLException ex ) 
         {
-            Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println( "Error in BlueJExerciseCheckModel.deletAll" );
         }
-    }
+    }// end method deleteAll
+    
 
-    public void createQuestion(String exercise_nr, String question, int block)
-            throws SQLException {
-
+    public void createQuestion( String exercise_nr, String question, int idBlock )
+            throws SQLException 
+    {
+        if( exercise_nr.isEmpty() )
+        {
+            throw new SQLException( "exercise_nr has no data" );
+        }
+        else if( question.isEmpty() )
+        {
+            throw new SQLException( "question has no data" );
+        }
+        else if( idBlock < 1 || idBlock > 37 )
+        {
+            throw new SQLException( "idBlock must be 1 to 37 include" );
+        }
+        
         String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
-                + exercise_nr + "','" + question + "','" + block + "')";
-        statement.executeUpdate(sql);
-        System.out.println(sql);
+                + exercise_nr + "','" + question + "','" + idBlock + "')";
+        statement.executeUpdate( sql );
+        System.out.println( sql );
 
-    }
+    }// end method createQuestion
 
-    public void updateQuestion(String exercise_nr, String question) throws SQLException {
+    public void updateQuestion( String exercise_nr, String question ) throws SQLException 
+    {
+        if( exercise_nr.isEmpty() )
+        {
+            throw new SQLException( "exercise_nr has no data");
+        }
+        else if( question.isEmpty() )
+        {
+            throw new SQLException( "question has no data" );
+        }
+        
         String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='" + exercise_nr + "'";
 
-        statement.executeUpdate(sql);
-        System.out.println(sql);
+        statement.executeUpdate( sql );
+        System.out.println( sql );
 
-    }
+    }// ennd method updateQuestion
 
-    public boolean exerciseExist(String exercise_nr) throws SQLException {
+    
+    public boolean exerciseExist(String exercise_nr) throws SQLException 
+    {
 
         String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
                 + exercise_nr + "'";

@@ -68,6 +68,7 @@ public class BlueJExerciseCheckModelTest
         boolean doInsertWithOutData = true;
         
         boolean doInsert_Exercise = true;
+        boolean doCreateQuestion = true;
 
         System.out.println("Make persistency object.");   
         
@@ -345,20 +346,23 @@ public class BlueJExerciseCheckModelTest
                 
                 for( int i = 0; i < exercises1.length; i++ )
                 {
-                    //blueJExerciseCheckModel.addExercise( exercises1[ i ], blockID );
+                    blueJExerciseCheckModel.addExercise( exercises1[ i ], blockID );
                 }  
             } 
             catch ( Exception e ) 
             {
                 System.out.println( e );
             }
-
             
         }// end doInsert_Exercise
         
+        
+        if( doCreateQuestion )
+        {
+            
+        }
 
     }// end main
-    
     
 }// end class BlueJExerciseCheckModelTest
 
