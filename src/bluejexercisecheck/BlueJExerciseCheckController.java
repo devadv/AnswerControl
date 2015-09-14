@@ -21,7 +21,7 @@ public class BlueJExerciseCheckController {
      * @param theView Main View
      * @param theModel Connection to database
      * 
-     * @throws SQLException
+     * @throws  SQLException SQL exceptions are catched
      */
     public BlueJExerciseCheckController(BlueJExerciseCheckMainView theView, BlueJExerciseCheckModel theModel)
             throws SQLException {
@@ -115,7 +115,9 @@ public class BlueJExerciseCheckController {
                 
 
                 if (theViewInputQuestion.questionChanged()) {
-                    int dialogResult = JOptionPane.showConfirmDialog(theView, "Gegevens zijn gewijzigd, opslaan? ", null, JOptionPane.YES_NO_OPTION);
+                    int dialogResult = JOptionPane.showConfirmDialog(theView, 
+                            "Gegevens zijn gewijzigd, opslaan? "
+                            , null, JOptionPane.YES_NO_OPTION);
                     if (dialogResult == 0) {
                         System.out.println("Yes option");
                         addQuestionFromViewToDB();

@@ -28,9 +28,9 @@ public class BlueJExerciseCheckModel {
      * a) username, password and location is retrieved.
      * b) and the databse connection is imediately established using these
      *    retrievals.
-     * 
-     * @throws SQLException 
+     *  @throws SQLException SQL exceptions are catched
      */
+     
     public BlueJExerciseCheckModel() throws SQLException {
         setLocation();
         setConnectionDatabase();
