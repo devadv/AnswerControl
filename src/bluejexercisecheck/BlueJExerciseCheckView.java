@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -109,6 +110,11 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         btnPrevious.addActionListener(listenForPreviousBtn);
 
     }
+    public void addListBlocksItemListener(ItemListener itemListener){
+       
+        listBlocks.addItemListener(itemListener);
+       
+    }
 
     public String getSelectedBlock() {
         return listBlocks.getSelectedItem().toString();
@@ -128,9 +134,14 @@ public abstract class BlueJExerciseCheckView extends JFrame {
     }
 
     //set items in combobox listBlocks
-    public void setBlocks(String[] blocks) {
+    public void setListBlocks(String[] blocks) {
 
         listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
+
+    }
+     public void setListExercises(String[] blocks) {
+
+        listExercises.setModel(new DefaultComboBoxModel<>(blocks));
 
     }
 

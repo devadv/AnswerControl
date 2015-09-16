@@ -373,5 +373,34 @@ public class BlueJExerciseCheckModel {
         }
         return question;
     }
+    public String[] getExcercisesBlock(String blockname){
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        try 
+        {   //SELECT correct_answer.exercise_nr FROM correct_answer 
+            //INNER JOIN block on block.idblock = correct_answer.block_id WHERE correct_answer.block_id=2
+
+            String sql = "SELECT correct_answer.exercise_nr FROM correct_answer "
+                    + "INNER JOIN block on block.idblock = correct_answer.block_id "
+                    + "WHERE block.blockname='"+ blockname +"'";
+            resultSet = statement.executeQuery( sql );
+
+            while (resultSet.next()) 
+            {
+                arrayList.add( resultSet.getString( 1 ) );
+                
+            }
+
+        } 
+        catch ( SQLException ex ) 
+        {
+            System.out.println( "Error in BlueJExerciseCheckModel.getBlockListAllFields" );
+        }
+        
+        String[] exercices = arrayList.toArray(new String[arrayList.size()]);
+
+        
+        return exercices;
+    }
 
 }

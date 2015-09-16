@@ -2,6 +2,8 @@ package bluejexercisecheck;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,6 +75,8 @@ public class BlueJExerciseCheckController {
 
     }
 
+    
+
     // Save button Listener
     class InputQuestionListener implements ActionListener {
 
@@ -82,7 +86,8 @@ public class BlueJExerciseCheckController {
             theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
             theViewInputQuestion.addNextActionListener(new NextBtnListener());
             theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
-            theViewInputQuestion.setBlocks(theModel.getBlockList());
+            theViewInputQuestion.addListBlocksItemListener(new ListBlocksItemListener());
+            theViewInputQuestion.setListBlocks(theModel.getBlockList());
             setQuestionFromDBToView();
             theViewInputQuestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             theViewInputQuestion.setSize(400, 600);
@@ -149,6 +154,22 @@ public class BlueJExerciseCheckController {
             }
 
         }
+        class ListBlocksItemListener implements ItemListener {
+
+        public ListBlocksItemListener() {
+        }
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    System.out.println("item: " + e.getItem());
+                    String blockname = e.getItem().toString();
+                    
+                    String[] exercises = theModel.getExcercisesBlock(blockname);
+                    theViewInputQuestion.setListExercises(exercises);
+                }
+            }
+    }
 
     }
 
