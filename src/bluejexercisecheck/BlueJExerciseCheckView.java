@@ -77,7 +77,7 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         panel.add(panelTop);
         panel.add(panelQuestion);
         panel.add(panelBottom);
-        listBlocks.addActionListener(new ListBlocksListener());
+       
 
         this.setResizable(false);
         this.setLocation(new Point(800, 200));
@@ -105,10 +105,11 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         btnPrevious.addActionListener(listenForPreviousBtn);
 
     }
-    public void addListBlocksItemListener(ItemListener itemListener){
-       
+
+    public void addListBlocksItemListener(ItemListener itemListener) {
+
         listBlocks.addItemListener(itemListener);
-       
+
     }
 
     public void addListBlocksActionListner(ActionListener listenChangeBlocks) {
@@ -138,7 +139,8 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
 
     }
-     public void setListExercises(String[] blocks) {
+
+    public void setListExercises(String[] blocks) {
 
         listExercises.setModel(new DefaultComboBoxModel<>(blocks));
 
@@ -157,72 +159,4 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         }
     }
 
-    private class ListBlocksListener implements ActionListener {
-
-        public ListBlocksListener() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("ListBlocks changed");
-            System.out.println(getSelectedBlock());
-            String str = getSelectedBlock();
-            String substractStr ="";
-//            if(str !="13" || str !="14"){
-//                 substractStr = str;
-//            }else{
-//                 substractStr = str.substring(0, str.length() - 1);
-//            }
-           
-            System.out.println(str);
-            switch (str){
-                case "1A":
-                    System.out.println("Block 1A");
-                    System.out.println(arrayList_exercises.subList(0, 20));
-                 //Integer[] bar = foo.toArray(new Integer[foo.size()]);
-                   String[] list = arrayList_exercises.subList(0, 20).toArray(new String[arrayList_exercises.size()]);
-                    listExercises.setModel(new DefaultComboBoxModel<>(list));
-                    break;
-                case "1B":
-                    System.out.println("Hoofdstuk 2");
-                    break;
-                case "3":
-                    System.out.println("Hoofdstuk 3");
-                    break;
-                case "4":
-                    System.out.println("Hoofdstuk 4");
-                    break;
-                case "5":
-                    System.out.println("Hoofdstuk 5");
-                    break;
-                case "6":
-                    System.out.println("Hoofdstuk 6");
-                    break;
-                case "7":
-                    System.out.println("Hoofdstuk 7");
-                    break;
-                case "8":
-                    System.out.println("Hoofdstuk 8");
-                    break;
-                case "9":
-                    System.out.println("Hoofdstuk 9");
-                    break;
-                case "10":
-                    System.out.println("Hoofdstuk 10");
-                    break;
-                case "11":
-                    System.out.println("Hoofdstuk 11");
-                    break;
-                case "12":
-                    System.out.println("Hoofdstuk 12");
-                    break;
-                case "13":
-                    System.out.println("Hoofdstuk 13");
-                    break;
-                case "14":
-                    System.out.println("Hoofdstuk 14");
-                    break;
-            }
-        }
-    }
 }
