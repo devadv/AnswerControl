@@ -220,9 +220,9 @@ public class BlueJExerciseCheckModel {
     }
      
     
-    public String[] deleteBlock( long id ) throws SQLException
+    public void deleteBlock( long id ) throws SQLException
     {
-        ArrayList<String> arrayList = new ArrayList<>();
+        //ArrayList<String> arrayList = new ArrayList<>();
         
         String[] blockListAll = getBlockListAllFields();
         int numberOfBlocksBeforeDelete = blockListAll.length;
@@ -247,9 +247,9 @@ public class BlueJExerciseCheckModel {
             throw new SQLException( "None existing key." );   
         } 
         
-        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+        //String[] blocks = arrayList.toArray(new String[arrayList.size()]);
 
-        return blocks;
+        //return blocks;
     }
     
     //
@@ -296,7 +296,7 @@ public class BlueJExerciseCheckModel {
         } 
         catch ( SQLException ex ) 
         {
-            System.out.println( "Error in BlueJExerciseCheckModel.deletAll" );
+            System.out.println( "Error in BlueJExerciseCheckModel.deleteAll" );
         }
     }// end method deleteAll
     

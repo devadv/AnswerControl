@@ -55,7 +55,7 @@ public class BlueJExerciseCheckModelTest
      */
     public static void main(String[] args) 
     {        
-        boolean doBlockTest = false;
+        boolean doBlockTest = true;
         boolean doDeleteAll = true;
         boolean doInsert_1 = true;
         boolean doInsert_2 = true;
