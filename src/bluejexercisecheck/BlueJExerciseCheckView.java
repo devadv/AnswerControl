@@ -75,7 +75,6 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         panel.add(panelTop);
         panel.add(panelQuestion);
         panel.add(panelBottom);
-        listBlocks.addActionListener(new ListBlocksListener());
 
         this.setResizable(false);
         this.setLocation(new Point(800, 200));
@@ -84,54 +83,92 @@ public abstract class BlueJExerciseCheckView extends JFrame {
 
     }
 
+    /**
+     * abstract method must be implemented in the first concrete class
+     */
     abstract public void setGUI();
 
+    /**
+     * action listener for the save button
+     *
+     * @param listenForSaveBtn ActionListener
+     */
     public void addSaveActionListener(ActionListener listenForSaveBtn) {
 
         btnSave.addActionListener(listenForSaveBtn);
 
     }
 
+    /**
+     * action listener for the next button
+     *
+     * @param listenForNextBtn ActionListener
+     */
     public void addNextActionListener(ActionListener listenForNextBtn) {
 
         btnNext.addActionListener(listenForNextBtn);
 
     }
 
+    /**
+     * action listener for the previous button
+     *
+     * @param listenForPreviousBtn ActionListener
+     */
     public void addPreviousActionListener(ActionListener listenForPreviousBtn) {
 
         btnPrevious.addActionListener(listenForPreviousBtn);
 
     }
 
-    public void addListBlocksActionListner(ActionListener listenChangeBlocks) {
-        listBlocks.addActionListener(listenChangeBlocks);
-    }
-
+    /**
+     * get the selected block
+     * @return the selected block
+     */
     public String getSelectedBlock() {
         return listBlocks.getSelectedItem().toString();
     }
 
+    /**
+     * get the selected exercise
+     * @return the selected exercise
+     */
     public String getSelectedExercise() {
         return listExercises.getSelectedItem().toString();
 
     }
 
+    /**
+     * get the selected block index
+     * @return the selected block index
+     */
     public int getSelectedBlockIndex() {
         return listBlocks.getSelectedIndex() + 1;
     }
 
+    /**
+     * get the selected exercise index
+     * @return the selected exercise index
+     */
     public int getSelectedExerciseIndex() {
         return listExercises.getSelectedIndex() + 1;
     }
 
-    //set items in combobox listBlocks
+    /**
+     * set the JComboBox list
+     *
+     * @param blocks list of blocks
+     */
     public void setBlocks(String[] blocks) {
 
         listBlocks.setModel(new DefaultComboBoxModel<>(blocks));
 
     }
 
+    /**
+     * set the index to next exercise
+     *
+     */
     public void setNextExercise() {
         if (listExercises.getSelectedIndex() < listExercises.getItemCount() - 1) {
             listExercises.setSelectedIndex(listExercises.getSelectedIndex() + 1);
@@ -139,78 +176,14 @@ public abstract class BlueJExerciseCheckView extends JFrame {
 
     }
 
+    /**
+     * set the index to previous exercise
+     *
+     */
     public void setPreviousExercise() {
         if (listExercises.getSelectedIndex() > 0) {
             listExercises.setSelectedIndex(listExercises.getSelectedIndex() - 1);
         }
     }
 
-    private class ListBlocksListener implements ActionListener {
-
-        public ListBlocksListener() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("ListBlocks changed");
-            System.out.println(getSelectedBlock());
-            String str = getSelectedBlock();
-            String substractStr ="";
-//            if(str !="13" || str !="14"){
-//                 substractStr = str;
-//            }else{
-//                 substractStr = str.substring(0, str.length() - 1);
-//            }
-           
-            System.out.println(str);
-            switch (str){
-                case "1A":
-                    System.out.println("Block 1A");
-                    System.out.println(arrayList_exercises.subList(0, 20));
-                 //Integer[] bar = foo.toArray(new Integer[foo.size()]);
-                   String[] list = arrayList_exercises.subList(0, 20).toArray(new String[arrayList_exercises.size()]);
-                    listExercises.setModel(new DefaultComboBoxModel<>(list));
-                    break;
-                case "1B":
-                    System.out.println("Hoofdstuk 2");
-                    break;
-                case "3":
-                    System.out.println("Hoofdstuk 3");
-                    break;
-                case "4":
-                    System.out.println("Hoofdstuk 4");
-                    break;
-                case "5":
-                    System.out.println("Hoofdstuk 5");
-                    break;
-                case "6":
-                    System.out.println("Hoofdstuk 6");
-                    break;
-                case "7":
-                    System.out.println("Hoofdstuk 7");
-                    break;
-                case "8":
-                    System.out.println("Hoofdstuk 8");
-                    break;
-                case "9":
-                    System.out.println("Hoofdstuk 9");
-                    break;
-                case "10":
-                    System.out.println("Hoofdstuk 10");
-                    break;
-                case "11":
-                    System.out.println("Hoofdstuk 11");
-                    break;
-                case "12":
-                    System.out.println("Hoofdstuk 12");
-                    break;
-                case "13":
-                    System.out.println("Hoofdstuk 13");
-                    break;
-                case "14":
-                    System.out.println("Hoofdstuk 14");
-                    break;
-            }
-        }
-    }
 }
