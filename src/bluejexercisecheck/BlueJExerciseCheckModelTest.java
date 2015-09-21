@@ -54,7 +54,72 @@ public class BlueJExerciseCheckModelTest
      * @param args none
      */
     public static void main(String[] args) 
-    {        
+    {
+        System.out.println( "Make persistency object." );   
+        
+        try 
+        {
+            blueJExerciseCheckModel = new BlueJExerciseCheckModel();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println( "Geen object of verbinding." );
+        }
+        
+        doBlockTest();
+        
+        
+        
+        boolean doInsert_Exercise = true;
+        boolean doCreateQuestion = true;
+
+        
+        //********************************************************************
+        
+        /*
+         * Test exercise tabel correct_answer
+         */
+        
+        if( doInsert_Exercise )
+        {
+            String[] exercises1 = { "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9" };
+            String[] exercises2 = { "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18" };
+            String[] exercises3 = { "1.19", "1.20", "1.21", "1.22", "1.23", "1.24", "1.25", "1.26", "1.27" };
+            String[] exercises4 = { "1.28", "1.28", "1.29", "1.30", "1.31", "1.32", "1.33", "1.34", "1.35", "1.36" };
+
+            String[] blocks = { "1.1-1.9", "1.10-1.18", "1.19-1.27", "1.28-1.36" };
+
+            System.out.println( "Insert exercises chapter one." );
+            System.out.println("yyyy");
+            
+            
+             
+            try 
+            {
+                long blockID = blueJExerciseCheckModel.getBlockID( blocks[ 0 ] );
+                
+                for( int i = 0; i < exercises1.length; i++ )
+                {
+                    blueJExerciseCheckModel.addExercise( exercises1[ i ], blockID );
+                }  
+            } 
+            catch ( Exception e ) 
+            {
+                System.out.println( e );
+            }
+            
+        }// end doInsert_Exercise
+        
+        
+        if( doCreateQuestion )
+        {
+            
+        }
+
+    }// end main
+    
+    public static void doBlockTest()
+    {
         boolean doBlockTest = true;
         boolean doDeleteAll = true;
         boolean doInsert_1 = true;
@@ -67,23 +132,10 @@ public class BlueJExerciseCheckModelTest
         boolean doUpdateNoneExcisting = true;
         boolean doInsertWithOutData = true;
         
-        boolean doInsert_Exercise = true;
-        boolean doCreateQuestion = true;
-
-        System.out.println("Make persistency object.");   
-        
-        try 
-        {
-            blueJExerciseCheckModel = new BlueJExerciseCheckModel();
-        } 
-        catch (Exception e) 
-        {
-            System.out.println( "Geen object of verbinding." );
-        }
-        
-        
         if( doBlockTest )
-        {               
+        {        
+            
+            
             if( doDeleteAll )
             {
                 System.out.println("Empty persistency object."); 
@@ -318,51 +370,8 @@ public class BlueJExerciseCheckModelTest
                 getBlockListAll();
             }// end doInsertWithOutData
             
-        } // end if doTest
-        
-        //********************************************************************
-        
-        /*
-         * Test exercise tabel correct_answer
-         */
-        
-        if( doInsert_Exercise )
-        {
-            String[] exercises1 = { "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9" };
-            String[] exercises2 = { "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18" };
-            String[] exercises3 = { "1.19", "1.20", "1.21", "1.22", "1.23", "1.24", "1.25", "1.26", "1.27" };
-            String[] exercises4 = { "1.28", "1.28", "1.29", "1.30", "1.31", "1.32", "1.33", "1.34", "1.35", "1.36" };
-
-            String[] blocks = { "1.1-1.9", "1.10-1.18", "1.19-1.27", "1.28-1.36" };
-
-            System.out.println( "Insert exercises chapter one." );
-            System.out.println("yyyy");
-            
-            
-             
-            try 
-            {
-                long blockID = blueJExerciseCheckModel.getBlockID( blocks[ 0 ] );
-                
-                for( int i = 0; i < exercises1.length; i++ )
-                {
-                    blueJExerciseCheckModel.addExercise( exercises1[ i ], blockID );
-                }  
-            } 
-            catch ( Exception e ) 
-            {
-                System.out.println( e );
-            }
-            
-        }// end doInsert_Exercise
-        
-        
-        if( doCreateQuestion )
-        {
-            
-        }
-
-    }// end main
+        } // end if doBlockTest
+    }
     
 }// end class BlueJExerciseCheckModelTest
 

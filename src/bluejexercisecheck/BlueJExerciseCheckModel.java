@@ -291,12 +291,15 @@ public class BlueJExerciseCheckModel {
     {
         try 
         {
-            String sql = "DELETE FROM block " ;
+            //dELETE from block
+            String sql = "SET FOREIGN_KEY_CHECKS=0;\n" +
+                         "TRUNCATE block;\n" +
+                         "SET FOREIGN_KEY_CHECKS=1;" ;
             statement.executeUpdate( sql );
         } 
         catch ( SQLException ex ) 
         {
-            System.out.println( "Error in BlueJExerciseCheckModel.deleteAll" );
+            System.out.println( "Error in BlueJExerciseCheckModel.deleteAll " + ex );
         }
     }// end method deleteAll
     
