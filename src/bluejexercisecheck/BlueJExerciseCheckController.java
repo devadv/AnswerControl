@@ -57,20 +57,27 @@ public class BlueJExerciseCheckController {
     /**
      * create a question if not exsist then update question
      */
-    public void addQuestionFromViewToDB() {
-        try {
-
-            if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
-                theModel.addQuestion(theViewInputQuestion.getSelectedExercise(),
-                        theViewInputQuestion.getQuestion(), theViewInputQuestion.getSelectedBlockIndex());
-            } else {
-                theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion());
-
+    public void addQuestionFromViewToDB() 
+    {
+        try 
+        {
+            if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) 
+            {
+                theModel.addQuestion(
+                        theViewInputQuestion.getSelectedExercise(),
+                        theViewInputQuestion.getQuestion(),
+                        theViewInputQuestion.getSelectedBlockIndex()
+                        );
+            } 
+            else 
+            {
+                theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion() );
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        catch ( SQLException ex ) 
+        {
+            JOptionPane.showMessageDialog(theView, "Missing question.", "Warning!", JOptionPane.WARNING_MESSAGE );
+        }
     }
 
     // Save button Listener
