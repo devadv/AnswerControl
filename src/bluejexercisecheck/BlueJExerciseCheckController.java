@@ -61,7 +61,7 @@ public class BlueJExerciseCheckController {
         try {
 
             if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
-                theModel.createQuestion(theViewInputQuestion.getSelectedExercise(),
+                theModel.addQuestion(theViewInputQuestion.getSelectedExercise(),
                         theViewInputQuestion.getQuestion(), theViewInputQuestion.getSelectedBlockIndex());
             } else {
                 theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion());

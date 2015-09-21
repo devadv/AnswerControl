@@ -287,24 +287,15 @@ public class BlueJExerciseCheckModel {
         return blocks;
     }// end method updateBlock
     
-    public void deleteAll() throws SQLException
-    {
-        try 
-        {
-            //dELETE from block
-            String sql = "SET FOREIGN_KEY_CHECKS=0;\n" +
-                         "TRUNCATE block;\n" +
-                         "SET FOREIGN_KEY_CHECKS=1;" ;
-            statement.executeUpdate( sql );
-        } 
-        catch ( SQLException ex ) 
-        {
-            System.out.println( "Error in BlueJExerciseCheckModel.deleteAll " + ex );
-        }
-    }// end method deleteAll
-    
+    /**
+     * 
+     * @param exercise_nr 
+     * @param question
+     * @param idBlock
+     * @throws SQLException 
+     */    
 
-    public void createQuestion( String exercise_nr, String question, int idBlock )
+    public void addQuestion( String exercise_nr, String question, int idBlock )
             throws SQLException 
     {
         if( exercise_nr.isEmpty() )
