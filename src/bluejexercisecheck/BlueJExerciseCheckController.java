@@ -9,23 +9,24 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class BlueJExerciseCheckController {
-
+public class BlueJExerciseCheckController 
+{
     private final BlueJExerciseCheckMainView theView;
     private final BlueJExerciseCheckModel theModel;
     private final BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
     private final BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
 
     /**
-     *The Contoller brings the Model and the View together
+     * The Contoller brings the Model and the View together
      * @param theView Main View
      * @param theModel Connection to database
      * 
      * @throws  SQLException SQL exceptions are catched
      */
-    public BlueJExerciseCheckController(BlueJExerciseCheckMainView theView, BlueJExerciseCheckModel theModel)
-            throws SQLException {
-
+    
+    public BlueJExerciseCheckController( BlueJExerciseCheckMainView theView,
+            BlueJExerciseCheckModel theModel ) throws SQLException 
+    {
         this.theView = theView;
         this.theModel = theModel;
         // add listeners
@@ -35,8 +36,7 @@ public class BlueJExerciseCheckController {
         this.theModel.setConnectionDatabase();
         theViewInputQuestion = new BlueJExerciseCheckViewInputQuestion();
         theViewInputCorrectAnswer = new BlueJExerciseCheckViewInputCorrectAnswer();
-
-    }
+    }// end BlueJExerciseCheckController
 
    
 
@@ -44,16 +44,22 @@ public class BlueJExerciseCheckController {
      *checks question exsist in database and set the view
      */
     
-    public void setQuestionFromDBToView() {
-        try {
-            if (theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) {
-                theViewInputQuestion.setQuestion(theModel.getQuestion(theViewInputQuestion.getSelectedExercise()));
+    public void setQuestionFromDBToView() 
+    {
+        try 
+        {
+            if (theModel.exerciseExist(theViewInputQuestion.getSelectedExercise()) ) 
+            {
+                theViewInputQuestion.setQuestion( theModel.
+                        getQuestion( theViewInputQuestion.getSelectedExercise()) );
             }
-        } catch (SQLException ex) {
+        } 
+        catch ( SQLException ex ) 
+        {
             Logger.getLogger(BlueJExerciseCheckController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
+    }// end method setQuestionFromDBToView
+    
     /**
      * create a question if not exsist then update question
      */
@@ -61,31 +67,47 @@ public class BlueJExerciseCheckController {
     {
         try 
         {
-            if (!theModel.exerciseExist(theViewInputQuestion.getSelectedExercise())) 
+            if ( !theModel.exerciseExist( theViewInputQuestion.getSelectedExercise() ) ) 
             {
                 theModel.addQuestion(
                         theViewInputQuestion.getSelectedExercise(),
                         theViewInputQuestion.getQuestion(),
-                        theViewInputQuestion.getSelectedBlockIndex()
-                        );
+                        theViewInputQuestion.getSelectedBlockIndex() );
             } 
             else 
             {
-                theModel.updateQuestion(theViewInputQuestion.getSelectedExercise(), theViewInputQuestion.getQuestion() );
-            }
+                theModel.updateQuestion( theViewInputQuestion.getSelectedExercise(),
+                                         theViewInputQuestion.getQuestion() );
+            }// end if else
         }
-        catch ( SQLException ex ) 
+        catch ( SQLException ex )
         {
-            JOptionPane.showMessageDialog(theView, "Missing question.", "Warning!", JOptionPane.WARNING_MESSAGE );
-        }
-    }
+            int dialogResult = JOptionPane.showConfirmDialog( theView,
+                    "Would you stil save this?", "Text area has no data.",
+                    JOptionPane.YES_NO_OPTION );
+            
+            if( dialogResult == 0 )// Yes button is clicked
+            {
+                try
+                {
+                    theModel.addQuestion(
+                        theViewInputQuestion.getSelectedExercise(),
+                        theViewInputQuestion.getQuestion(),
+                        theViewInputQuestion.getSelectedBlockIndex() );
+                }
+                catch( SQLException sqle ) {} // not used so data can saved to database
+            }
+            else if( dialogResult == 1 )// No button is clicked
+            {}// no action required
+        }// end try catch
+    }// end method addQuestionFromViewToDB
 
     // Save button Listener
-    class InputQuestionListener implements ActionListener {
-
+    class InputQuestionListener implements ActionListener 
+    {
         @Override
-        public void actionPerformed(ActionEvent arg0) {
-
+        public void actionPerformed(ActionEvent arg0) 
+        {
             theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
             theViewInputQuestion.addNextActionListener(new NextBtnListener());
             theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
@@ -99,118 +121,118 @@ public class BlueJExerciseCheckController {
         }
 
         // Save button Listener
-        class SaveBtnListener implements ActionListener {
-
+        class SaveBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println(theViewInputQuestion.getSelectedBlock());
-                System.out.println(theViewInputQuestion.getSelectedExercise());
-                System.out.println(theViewInputQuestion.getSelectedBlockIndex());
-                System.out.println(theViewInputQuestion.getSelectedExerciseIndex());
-                System.out.println(theViewInputQuestion.getQuestion());
+            public void actionPerformed(ActionEvent arg0) 
+            {
+                System.out.println( theViewInputQuestion.getSelectedBlock() );
+                System.out.println( theViewInputQuestion.getSelectedExercise() );
+                System.out.println( theViewInputQuestion.getSelectedBlockIndex() );
+                System.out.println( theViewInputQuestion.getSelectedExerciseIndex() );
+                System.out.println( theViewInputQuestion.getQuestion() );
                 addQuestionFromViewToDB();
                 setQuestionFromDBToView();
-
             }
+        }// end method SaveBtnListener
 
-        }
-
-        class NextBtnListener implements ActionListener {
-
+        class NextBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed( ActionEvent e ) 
+            {
                 
-
-                if (theViewInputQuestion.questionChanged()) {
-                    int dialogResult = JOptionPane.showConfirmDialog(theView, 
+                if ( theViewInputQuestion.questionChanged() ) // question changed
+                {
+                    int dialogResult = JOptionPane.showConfirmDialog( theView, 
                             "Gegevens zijn gewijzigd, opslaan? "
                             , null, JOptionPane.YES_NO_OPTION);
-                    if (dialogResult == 0) {
-                        System.out.println("Yes option");
+                    
+                    if ( dialogResult == 0 )// Yes button clicked
+                    {
+                        System.out.println( "Yes option" );
                         addQuestionFromViewToDB();
                         theViewInputQuestion.setNextExercise();
                         theViewInputQuestion.clearQuestionTextArea();
                         setQuestionFromDBToView();
-                    } else {
-                        System.out.println("No Option");
-                    }
-                }else{
+                    } 
+                    else // No button clicked
+                    {
+                        System.out.println( "No Option" );
+                        theViewInputQuestion.setNextExercise();
+                        theViewInputQuestion.clearQuestionTextArea();
+                        setQuestionFromDBToView();
+                    }// end if else
+                }
+                else // question not changed
+                {
                     theViewInputQuestion.setNextExercise();
                     theViewInputQuestion.clearQuestionTextArea();
                     setQuestionFromDBToView();
-                }
-
+                }// end outer if else
             }
+        }// end method  NextBtnListener
 
-        }
-
-        class PreviousBtnListener implements ActionListener {
-
+        class PreviousBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed( ActionEvent e ) 
+            {
                 theViewInputQuestion.setPreviousExercise();
                 //System.out.println("previous Clicked!");
                 theViewInputQuestion.clearQuestionTextArea();
                 setQuestionFromDBToView();
-
             }
-
-        }
-
-    }
+        }// end method  PreviousBtnListener
+    }// end class InputQuestionListener
 
     // Next button Listener
-    class InputAnswerListener implements ActionListener {
-
+    class InputAnswerListener implements ActionListener 
+    {
         @Override
-        public void actionPerformed(ActionEvent arg0) {
+        public void actionPerformed( ActionEvent arg0 ) 
+        {
+            theViewInputCorrectAnswer.addSaveActionListener( new SaveBtnListener() );
+            theViewInputCorrectAnswer.addNextActionListener( new NextBtnListener() );
+            theViewInputCorrectAnswer.addPreviousActionListener( new PreviousBtnListener() );
 
-            theViewInputCorrectAnswer.addSaveActionListener(new SaveBtnListener());
-            theViewInputCorrectAnswer.addNextActionListener(new NextBtnListener());
-            theViewInputCorrectAnswer.addPreviousActionListener(new PreviousBtnListener());
-
-            theViewInputCorrectAnswer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            theViewInputCorrectAnswer.setSize(400, 600);
-            theViewInputCorrectAnswer.setVisible(true);
+            theViewInputCorrectAnswer.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            theViewInputCorrectAnswer.setSize( 400, 600 );
+            theViewInputCorrectAnswer.setVisible( true );
             theView.dispose();
-            System.out.println("Correct Answer Clicked!");
+            System.out.println("Correct Answer Clicked");
         }
 
         // Save button Listener
-        class SaveBtnListener implements ActionListener {
-
+        class SaveBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println(theViewInputCorrectAnswer.getSelectedBlock());
-                System.out.println(theViewInputCorrectAnswer.getSelectedExercise());
-                System.out.println(theViewInputCorrectAnswer.getAnswer());
-                System.out.println("save Clicked!");
-
+            public void actionPerformed( ActionEvent arg0 ) 
+            {
+                System.out.println( theViewInputCorrectAnswer.getSelectedBlock() );
+                System.out.println( theViewInputCorrectAnswer.getSelectedExercise() );
+                System.out.println( theViewInputCorrectAnswer.getAnswer());
+                System.out.println( "save Clicked" );
             }
+        }// end inner class SaveBtnListener
 
-        }
-
-        class NextBtnListener implements ActionListener {
-
+        // Next button Listener
+        class NextBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-                System.out.println("next  Clicked!");
-
+            public void actionPerformed( ActionEvent e ) 
+            {
+                System.out.println( "next  Clicked" );
             }
+        }// end inner class NextBtnListener
 
-        }
-
-        class PreviousBtnListener implements ActionListener {
-
+        class PreviousBtnListener implements ActionListener 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("previous Clicked!");
-
+            public void actionPerformed( ActionEvent e ) 
+            {
+                System.out.println( "previous Clicked" );
             }
-
-        }
-
+        }// end inner class  PreviousBtnListener
     }
-
-}
+}// end class BlueJExerciseCheckController
