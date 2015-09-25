@@ -93,12 +93,12 @@ public class BlueJExerciseCheckController
 
         public WindowClosingAdapter() {
             
-             @Override
-                    public void windowClosing(WindowEvent we) 
-                    {
-                        showDialog(f);
-                        System.exit(0);
-                    }
+//             @Override
+//                    public void windowClosing(WindowEvent we) 
+//                    {
+//                        showDialog(f);
+//                        System.exit(0);
+//                    }
         }
     }
 
@@ -239,5 +239,4 @@ public class BlueJExerciseCheckController
                 System.out.println( "previous Clicked" );
             }
         }// end inner class  PreviousBtnListener
-    }
 }// end class BlueJExerciseCheckController
