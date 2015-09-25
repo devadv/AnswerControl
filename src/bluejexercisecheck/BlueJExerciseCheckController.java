@@ -1,7 +1,10 @@
 package bluejexercisecheck;
 
+import static bluejexercisecheck.FrameByeBye.showDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,25 +85,22 @@ public class BlueJExerciseCheckController
         }
         catch ( SQLException ex )
         {
-            int dialogResult = JOptionPane.showConfirmDialog( theView,
-                    "Would you stil save this?", "Text area has no data.",
-                    JOptionPane.YES_NO_OPTION );
             
-            if( dialogResult == 0 )// Yes button is clicked
-            {
-                try
-                {
-                    theModel.addQuestion(
-                        theViewInputQuestion.getSelectedExercise(),
-                        theViewInputQuestion.getQuestion(),
-                        theViewInputQuestion.getSelectedBlockIndex() );
-                }
-                catch( SQLException sqle ) {} // not used so data can saved to database
-            }
-            else if( dialogResult == 1 )// No button is clicked
-            {}// no action required
         }// end try catch
     }// end method addQuestionFromViewToDB
+
+    private class WindowClosingAdapter extends WindowAdapter {
+
+        public WindowClosingAdapter() {
+            
+             @Override
+                    public void windowClosing(WindowEvent we) 
+                    {
+                        showDialog(f);
+                        System.exit(0);
+                    }
+        }
+    }
 
     // Save button Listener
     class InputQuestionListener implements ActionListener 
@@ -108,6 +108,9 @@ public class BlueJExerciseCheckController
         @Override
         public void actionPerformed(ActionEvent arg0) 
         {
+            theViewInputQuestion.addWindowClosingListener( new WindowClosingAdapter());
+            
+            
             theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
             theViewInputQuestion.addNextActionListener(new NextBtnListener());
             theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
@@ -141,7 +144,6 @@ public class BlueJExerciseCheckController
             @Override
             public void actionPerformed( ActionEvent e ) 
             {
-                
                 if ( theViewInputQuestion.questionChanged() ) // question changed
                 {
                     int dialogResult = JOptionPane.showConfirmDialog( theView, 
@@ -203,6 +205,9 @@ public class BlueJExerciseCheckController
             System.out.println("Correct Answer Clicked");
         }
 
+      
+        }
+        
         // Save button Listener
         class SaveBtnListener implements ActionListener 
         {
