@@ -135,31 +135,21 @@ public class BlueJExerciseCheckModel
      * @param exercise_nr the exercise number
      * @param question the question
      * @param idBlock the block number
-     * @throws SQLException 
-     * Throws a SQLException if no data is added to its parameters or 
-     * they are ouy of specified range.
      */    
 
     public void addQuestion( String exercise_nr, String question, int idBlock )
-            throws SQLException 
-    {
-        if( exercise_nr.isEmpty() )
+    {    
+        try
         {
-            throw new SQLException( "exercise_nr has no data" );
-        }
-        else if( question.isEmpty() )
-        {
-            throw new SQLException( "question has no data" );
-        }
-        else if( idBlock < 1 || idBlock > 37 )
-        {
-            throw new SQLException( "idBlock number must be 1 to 37 include" );
-        }
-        
-        String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+            String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
                 + exercise_nr + "','" + question + "','" + idBlock + "')";
-        statement.executeUpdate( sql );
-        System.out.println( sql );
+            statement.executeUpdate( sql );
+            System.out.println( sql );
+        }
+        catch( SQLException ex )
+        {
+            
+        }
 
     }// end method createQuestion
 
@@ -172,16 +162,7 @@ public class BlueJExerciseCheckModel
      */
     
     public void updateQuestion( String exercise_nr, String question ) throws SQLException 
-    {
-        if( exercise_nr.isEmpty() )
-        {
-            throw new SQLException( "exercise_nr has no data");
-        }
-        else if( question.isEmpty() )
-        {
-            throw new SQLException( "question has no data" );
-        }
-        
+    {        
         String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='" + exercise_nr + "'";
 
         statement.executeUpdate( sql );

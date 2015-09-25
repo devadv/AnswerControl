@@ -3,13 +3,16 @@ package bluejexercisecheck;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 
-public abstract class BlueJExerciseCheckView extends JFrame {
-
+public abstract class BlueJExerciseCheckView extends JFrame 
+{
     public static String[] exercises = {"1.1", "1.2", "1.3", "1.4","1.5","1.6","1.7","1.8","1.9","1.10","1.11","1.12","1.13","1.14","1.15",
  "1.16","1.17","1.18","1.19", "1.20","1.21", "1.22", "1.23","1.24","1.25","1.26","1.27","1.28",
  "1.28","1.29","1.30","1.31","1.32","1.33","1.34","1.35","1.36",
@@ -98,7 +101,10 @@ public abstract class BlueJExerciseCheckView extends JFrame {
     protected JPanel panelBottom;
     protected final List<String> arrayList_exercises;
 
-    public BlueJExerciseCheckView() {
+    public BlueJExerciseCheckView() 
+    {
+        this.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE ); 
+        
         arrayList_exercises = Arrays.asList(exercises);
         //box for textarea
         box = Box.createHorizontalBox();
@@ -136,14 +142,23 @@ public abstract class BlueJExerciseCheckView extends JFrame {
         this.setLocation(new Point(800, 200));
         this.getContentPane().add(panel);
         this.pack();
-
     }
 
+    
     /**
      * abstract method must be implemented in the first concrete class
      */
     abstract public void setGUI();
 
+    /**
+     * Closinglistener for the frame
+     *
+     * @param listenForSaveBtn ActionListener
+     */
+    public void addWindowClosingListener( WindowAdapter windowAdapter) {
+
+         this.addWindowListener( windowAdapter );
+    }
     /**
      * action listener for the save button
      *
