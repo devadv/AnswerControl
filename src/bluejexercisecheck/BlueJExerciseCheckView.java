@@ -151,9 +151,9 @@ public abstract class BlueJExerciseCheckView extends JFrame
     abstract public void setGUI();
 
     /**
-     * Closinglistener for the frame
+     * closing listener for the window
      *
-     * @param listenForSaveBtn ActionListener
+     * @param windowAdapter WindowAdapter
      */
     public void addWindowClosingListener( WindowAdapter windowAdapter) {
 
