@@ -171,11 +171,33 @@ public class BlueJExerciseCheckController {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    theViewInputQuestion.setPreviousExercise();
-                    //System.out.println("previous Clicked!");
-                    theViewInputQuestion.clearQuestionTextArea();
-                    setQuestionFromDBToView();
+                     if (theViewInputQuestion.questionChanged()) // question changed
+                    {
+                        int dialogResult = JOptionPane.showConfirmDialog(theView,
+                                "Gegevens zijn gewijzigd, opslaan? ", null, JOptionPane.YES_NO_OPTION);
+
+                        if (dialogResult == 0)// Yes button clicked
+                        {
+                            System.out.println("Yes option");
+                            addQuestionFromViewToDB();
+                            theViewInputQuestion.setPreviousExercise();
+                            theViewInputQuestion.clearQuestionTextArea();
+                            setQuestionFromDBToView();
+                        } else // No button clicked
+                        {
+                            System.out.println("No Option");
+                            theViewInputQuestion.setPreviousExercise();
+                            theViewInputQuestion.clearQuestionTextArea();
+                            setQuestionFromDBToView();
+                        }// end if else
+                    } else // question not changed
+                    {
+                        theViewInputQuestion.setPreviousExercise();
+                        theViewInputQuestion.clearQuestionTextArea();
+                        setQuestionFromDBToView();
+                    }// end outer if else
                 }
+                
             }// end method  PreviousBtnListener
         }// end class InputQuestionListener
 
@@ -226,3 +248,4 @@ public class BlueJExerciseCheckController {
             }
         }// end inner class  PreviousBtnListener
     }// end class BlueJExerciseCheckController
+
