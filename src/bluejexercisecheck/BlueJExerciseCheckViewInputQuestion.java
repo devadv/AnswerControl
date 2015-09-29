@@ -1,26 +1,24 @@
 package bluejexercisecheck;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView {
+
+public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView 
+{
 
     private JTextArea input_question = new JTextArea(20, 35);
     private String oldtext;
 
-    public BlueJExerciseCheckViewInputQuestion() {
+    public BlueJExerciseCheckViewInputQuestion() 
+    {
         super();
         setGUI();
     }
 
     @Override
-    public void setGUI() {
+    public void setGUI() 
+    {
         // TextArea settings
         input_question.setWrapStyleWord(true);
         input_question.setLineWrap(true);
@@ -31,30 +29,33 @@ public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView 
         
     }
 
-    public String getQuestion() {
+    public String getQuestion() 
+    {
         return input_question.getText();
     }
 
-    public void setQuestion(String question) {
+    public void setQuestion( String question ) 
+    {
         input_question.setText(question);
         oldtext = input_question.getText();
     }
 
-    public void clearQuestionTextArea() {
+    public void clearQuestionTextArea() 
+    {
         input_question.setText("");
     }
     
-    public boolean questionChanged(){
-        System.out.println("Oldtext: " +oldtext);
-        if(getQuestion().equals(oldtext)){
+    public boolean questionChanged()
+    {
+        System.out.println( "Oldtext: " +oldtext );
+        
+        if( getQuestion().equals( oldtext ))
+        {
             return false;
-        }else{
+        }
+        else
+        {
             return true;
         }
-        
     }
-       
-        
-    
-
-}
+}// end class BlueJExerciseCheckViewInputQuestion

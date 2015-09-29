@@ -1,9 +1,6 @@
 package bluejexercisecheck;
-
-import com.mysql.jdbc.exceptions.MySQLDataException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,8 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BlueJExerciseCheckModel {
-
+public class BlueJExerciseCheckModel 
+{
     public String DATABASEURL;
     public String username;
     public String password;
@@ -36,6 +33,9 @@ public class BlueJExerciseCheckModel {
         setConnectionDatabase();
     }
 
+    /**
+     * Specify properties database URL, username, password.
+     */
     private void setLocation() 
     {
         InetAddress ip;;
@@ -44,20 +44,15 @@ public class BlueJExerciseCheckModel {
         {
             ip = InetAddress.getLocalHost();
             
-            if (ip.getHostName().equals("Ubuntu1404")) {
+            if ( ip.getHostName().equals("Ubuntu1404" )) 
+            {
                 DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
                 username = "ben";
                 password = "12345";
-                System.out.println("Location: Home");
+                System.out.println( "Location: Home" );
             } 
-            else 
-            {
-                // Never reached due to host name not connected to localhost
-                // Handled in the second catch
-                
-            }
         } 
-        catch (UnknownHostException ex) 
+        catch ( UnknownHostException ex ) 
         {
             try 
             {
@@ -66,15 +61,21 @@ public class BlueJExerciseCheckModel {
                 password = "V99r9R9qwMmYPcqU";
                 System.out.println("Location: Work");
             } 
-            catch (Exception e) 
+            catch ( Exception e ) 
             {
-                Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, e);
-            }
+                System.out.println( "Can not make connection to database work. " + e );
+            } // end inner try catch
             
-        }// end try catch
+            System.out.println( "Can not make connection to database home. "  + ex );
+            
+        }// end outer try catch
         
     }// end setLocation
 
+    /**
+     * Make connection to a database.
+     */
+    
     public void setConnectionDatabase() {
 
         try 
@@ -128,216 +129,40 @@ public class BlueJExerciseCheckModel {
 
         return blocks;
     }
-    
-    public long getBlockID( String blockText )
-    {
-       long row = 0;
-       System.out.println("zzzz");
-       
-       try       
-       {
-           String sql = "SELECT idblock FROM block WHERE blockname = " + blockText;
-           resultSet = statement.executeQuery( sql );
-           resultSet.next();
-           System.out.println( "xxx" + resultSet.getString( 1 ) );
-           row = Long.parseLong( resultSet.getString( 1 ) );          
-       }
-       catch ( SQLException ex ) 
-       {
-           System.out.println( "Error in BlueJExerciseCheckModel.getBlockID. " + ex );
-       }
-
-       return row;
-    }// end method getBlockID
-    
-    //
-    public void addBlock( String blockName ) throws SQLException
-    {
-        if( blockName.isEmpty() )
-        {
-            throw new SQLException( "No data supplied." );
-        }
-        
-        try 
-        {
-            String sql = "INSERT INTO block (blockname) VALUES ('" +  blockName + "')";
-            statement.executeUpdate(sql);
-
-        } 
-        catch ( SQLException ex ) 
-        {
-            System.out.println( "Error in BlueJExerciseCheckModel.addBlock." );
-        }
-    }
-    
-    //
-    public void addExercise( String exerciseText, long blockID ) throws SQLException
-    {
-        if( exerciseText.isEmpty() || blockID <= 0 )
-        {
-            throw new SQLException( "Exercise or block text missing. ");
-        }
-        
-        try 
-        {
-            String sql = "INSERT INTO correct_answer (exercise_nr, block_id) VALUES ('" +  exerciseText + "," + blockID + "')";
-            statement.executeUpdate(sql);
-
-        }  
-        catch ( SQLException ex ) 
-        {
-            System.out.println( "Error in BlueJExerciseCheckModel.addExercise" );
-        }
-    }
-    
-    // 
-    public String[] getBlockListAllFields() 
-    {
-
-        ArrayList<String> arrayList = new ArrayList<>();
-
-        try 
-        {
-
-            String sql = "SELECT idblock, blockname FROM block";
-            resultSet = statement.executeQuery( sql );
-
-            while (resultSet.next()) 
-            {
-                arrayList.add( resultSet.getString( 1 ) );
-                arrayList.add( resultSet.getString( 2 ) );
-            }
-
-        } 
-        catch ( SQLException ex ) 
-        {
-            System.out.println( "Error in BlueJExerciseCheckModel.getBlockListAllFields" );
-        }
-        
-        String[] blocks = arrayList.toArray(new String[arrayList.size()]);
-
-        return blocks;
-    }
-     
-    
-    public void deleteBlock( long id ) throws SQLException
-    {
-        //ArrayList<String> arrayList = new ArrayList<>();
-        
-        String[] blockListAll = getBlockListAllFields();
-        int numberOfBlocksBeforeDelete = blockListAll.length;
-        int numberOfBlocksAfterDelete = 0;
-        
-        try 
-        {
-            String sql = "DELETE from block WHERE idblock = ('" + id + "')";
-            statement.executeUpdate( sql );
             
-            String[] blockListAll_2 = getBlockListAllFields();
-            numberOfBlocksAfterDelete = blockListAll_2.length;
-                       
-        } 
-        catch ( SQLException ex ) 
-        {
-            
-        }
-        
-        if( numberOfBlocksBeforeDelete == numberOfBlocksAfterDelete )
-        {
-            throw new SQLException( "None existing key." );   
-        } 
-        
-        //String[] blocks = arrayList.toArray(new String[arrayList.size()]);
+    /**
+     * Method to adding a new question to the database.
+     * @param exercise_nr the exercise number
+     * @param question the question
+     * @param idBlock the block number
+     */    
 
-        //return blocks;
-    }
-    
-    //
-    public String[] updateBlock( long id, String blockName ) throws SQLException
-    {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] blockListAll = getBlockListAllFields();
-        int idNumber = 0;
-        boolean upDated = false;
-        
-        for( int i = 0; i < blockListAll.length; i += 2 )
+    public void addQuestion( String exercise_nr, String question, int idBlock )
+    {    
+        try
         {
-            if( id == Integer.parseInt( blockListAll[ i ] ) )
-            {
-                try 
-                {
-                    String sql = "UPDATE block SET blockname = ('" + blockName + "') WHERE idblock = (" + id + 1 + ")";
-                    statement.executeUpdate(sql);
-                    upDated = true;
-                } 
-                catch ( SQLException ex ) 
-                {
-                    //Logger.getLogger(BlueJExerciseCheckModel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            
-            if( upDated == false )
-            {
-                throw new MySQLDataException( " None Existing key." );
-            }
-        }
-                
-        String[] blocks = arrayList.toArray( new String[ arrayList.size() ] );
-
-        return blocks;
-    }// end method updateBlock
-    
-    public void deleteAll() throws SQLException
-    {
-        try 
-        {
-            //dELETE from block
-            String sql = "SET FOREIGN_KEY_CHECKS=0;\n" +
-                         "TRUNCATE block;\n" +
-                         "SET FOREIGN_KEY_CHECKS=1;" ;
-            statement.executeUpdate( sql );
-        } 
-        catch ( SQLException ex ) 
-        {
-            System.out.println( "Error in BlueJExerciseCheckModel.deleteAll " + ex );
-        }
-    }// end method deleteAll
-    
-
-    public void createQuestion( String exercise_nr, String question, int idBlock )
-            throws SQLException 
-    {
-        if( exercise_nr.isEmpty() )
-        {
-            throw new SQLException( "exercise_nr has no data" );
-        }
-        else if( question.isEmpty() )
-        {
-            throw new SQLException( "question has no data" );
-        }
-        else if( idBlock < 1 || idBlock > 37 )
-        {
-            throw new SQLException( "idBlock must be 1 to 37 include" );
-        }
-        
-        String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+            String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
                 + exercise_nr + "','" + question + "','" + idBlock + "')";
-        statement.executeUpdate( sql );
-        System.out.println( sql );
+            statement.executeUpdate( sql );
+            System.out.println( sql );
+        }
+        catch( SQLException ex )
+        {
+            
+        }
 
     }// end method createQuestion
 
+    /**
+     * Method to updated a questioon in the database.
+     * @param exercise_nr the eexercise number
+     * @param question the question
+     * @throws SQLException 
+     * Throws a SQLException if no data is added to its parameters
+     */
+    
     public void updateQuestion( String exercise_nr, String question ) throws SQLException 
-    {
-        if( exercise_nr.isEmpty() )
-        {
-            throw new SQLException( "exercise_nr has no data");
-        }
-        else if( question.isEmpty() )
-        {
-            throw new SQLException( "question has no data" );
-        }
-        
+    {        
         String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='" + exercise_nr + "'";
 
         statement.executeUpdate( sql );
@@ -353,12 +178,16 @@ public class BlueJExerciseCheckModel {
                 + exercise_nr + "'";
         System.out.println(sql);
         resultSet = statement.executeQuery(sql);
-        if (resultSet.next()) {
+        
+        if (resultSet.next()) 
+        {
             return true;
-        } else {
+        } else 
+        {
             return false;
         }
     }
+    
     public String getQuestion(String exercise_nr ){
         String question = "";
         try {
@@ -376,5 +205,4 @@ public class BlueJExerciseCheckModel {
         }
         return question;
     }
-
 }

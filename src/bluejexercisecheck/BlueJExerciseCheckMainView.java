@@ -15,10 +15,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class BlueJExerciseCheckMainView extends JFrame {
-    
-    
-	
+public class BlueJExerciseCheckMainView extends JFrame 
+{
 	protected JButton inputQuestion = new JButton("Invoer vragen");
         protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
 	
@@ -34,25 +32,16 @@ public class BlueJExerciseCheckMainView extends JFrame {
 		this.setLocation(new Point(800, 200));
 		this.getContentPane().add(panel);
 		this.pack();
-		
-		
-		
 	}
 		
-	public void addInputQuestionListener(ActionListener listenForInputQuestion) {
-		
+	public void addInputQuestionListener(ActionListener listenForInputQuestion) 
+    {
 		inputQuestion.addActionListener(listenForInputQuestion);
-
 	}
 
-	public void addInputCorrectAnswerListener(ActionListener listenForNextBtn) {
-		
+	public void addInputCorrectAnswerListener(ActionListener listenForNextBtn) 
+    {
 		inputCorrectAnswer.addActionListener(listenForNextBtn);
 
 	}
-
-	
-	
-	
-
 }
