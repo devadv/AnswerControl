@@ -99,10 +99,12 @@ public class BlueJExerciseCheckController {
 
         }
     }
-
+    
+    
         // Save button Listener
         class InputQuestionListener implements ActionListener {
-
+            
+            
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 theViewInputQuestion.addWindowClosingListener(new WindowClosingAdapter());
@@ -110,6 +112,7 @@ public class BlueJExerciseCheckController {
                 theViewInputQuestion.addSaveActionListener(new SaveBtnListener());
                 theViewInputQuestion.addNextActionListener(new NextBtnListener());
                 theViewInputQuestion.addPreviousActionListener(new PreviousBtnListener());
+                theViewInputQuestion.addListExercisesListener(new listenForListExercisesComb());
                 theViewInputQuestion.setBlocks(theModel.getBlockList());
                 setQuestionFromDBToView();
                 theViewInputQuestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,6 +121,22 @@ public class BlueJExerciseCheckController {
                 theView.dispose();
                 System.out.println("Question Clicked!");
             }
+            
+            class listenForListExercisesComb implements ActionListener {//***************************************************
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    
+                    System.out.println(theViewInputQuestion.getSelectedExerciseIndex());
+                    
+                    theViewInputQuestion.getQuestion();
+                    theViewInputQuestion.clearQuestionTextArea();
+                    setQuestionFromDBToView();
+                    
+                }
+            }
+            
+            
 
             // Save button Listener
             class SaveBtnListener implements ActionListener {

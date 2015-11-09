@@ -150,6 +150,10 @@ public abstract class BlueJExerciseCheckView extends JFrame
      * abstract method must be implemented in the first concrete class
      */
     abstract public void setGUI();
+    
+    public void addListExercisesListener(ActionListener listenForListExercisesComb){
+        listExercises.addActionListener(listenForListExercisesComb);
+    }
 
     /**
      * closing listener for the window
@@ -229,6 +233,7 @@ public abstract class BlueJExerciseCheckView extends JFrame
     public int getSelectedExerciseIndex() {
         return listExercises.getSelectedIndex() + 1;
     }
+
 
     /**
      * set the JComboBox list

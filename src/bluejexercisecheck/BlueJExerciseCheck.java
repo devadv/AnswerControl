@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class BlueJExerciseCheck 
 {
 	public static void main(String[] args) throws SQLException
-    {
+    {        
 		BlueJExerciseCheckMainView theView = new BlueJExerciseCheckMainView();
 		BlueJExerciseCheckModel theModel = new BlueJExerciseCheckModel();
 		
