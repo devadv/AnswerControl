@@ -2,22 +2,22 @@
     wat ga ik doen 
     wat verwacht ik voor rsultaat
     wat is het werkelijke resultaat
-*/
+
 package bluejexercisecheck;
 
 import java.sql.SQLException;
 
 
-/*
+
  * CRUD test class to test persistentcy object blueJExerciseCheckModel
-*/
+
 public class BlueJExerciseCheckModelTest 
 {    
     private static BlueJExerciseCheckModel blueJExerciseCheckModel;
     
-    /**
+    *//**
      * method to show all keys of persistentcy object blueJExerciseCheckModel
-     */
+     *//*
     public static void getBlockList()
     {
         String[] blockList = blueJExerciseCheckModel.getBlockList();
@@ -30,9 +30,9 @@ public class BlueJExerciseCheckModelTest
         System.out.println();
     }
     
-    /**
+    *//**
      * method to show all data of persistentcy object blueJExerciseCheckModel
-     */
+     *//*
     public static void getBlockListAll()
     {
         String[] blockListAll = blueJExerciseCheckModel.getBlockListAllFields();
@@ -47,12 +47,12 @@ public class BlueJExerciseCheckModelTest
         System.out.println();
     }
     
-    /**
+    *//**
      * Steps to test all data access of persistentcy object 
      * blueJExerciseCheckModel 
      * 
      * @param args none
-     */
+     *//*
     public static void main(String[] args) 
     {
         System.out.println( "Make persistency object." );   
@@ -76,9 +76,9 @@ public class BlueJExerciseCheckModelTest
         
         //********************************************************************
         
-        /*
+        
          * Test exercise tabel correct_answer
-         */
+         
         
         if( doInsert_Exercise )
         {
@@ -375,3 +375,4 @@ public class BlueJExerciseCheckModelTest
     
 }// end class BlueJExerciseCheckModelTest
 
+*/
