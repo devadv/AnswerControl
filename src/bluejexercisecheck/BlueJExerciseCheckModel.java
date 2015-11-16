@@ -1,6 +1,7 @@
 package bluejexercisecheck;
 
-import com.mysql.jdbc.exceptions.MySQLDataException;
+
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Array;
@@ -278,7 +279,7 @@ public class BlueJExerciseCheckModel {
             
             if( upDated == false )
             {
-                throw new MySQLDataException( " None Existing key." );
+                //throw new Exception( " None Existing key." );
             }
         }
                 
