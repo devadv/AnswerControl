@@ -20,7 +20,7 @@ public class BlueJExerciseCheckMainView extends JFrame
 	protected JButton inputQuestion = new JButton("Invoer vragen");
         protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
 	
-	
+	//ashdfkjhasdkjf
 	public BlueJExerciseCheckMainView(){
 		super();
 		JPanel panel = new JPanel();
