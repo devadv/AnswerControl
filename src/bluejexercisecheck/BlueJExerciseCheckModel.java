@@ -56,7 +56,7 @@ public class BlueJExerciseCheckModel
         {
             try 
             {
-                DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
+                DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
                 username = "badev_hintveld";
                 password = "V99r9R9qwMmYPcqU";
                 System.out.println("Location: Work");
