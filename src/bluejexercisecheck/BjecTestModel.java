@@ -70,9 +70,23 @@ public class BjecTestModel extends BlueJExerciseCheckModel
     {    
            // Original SQL:
     	   //  "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
-    	this.exercise_nr.add(exercise_nr);
-    	this.question.add(question);
+    	if (exerciseExist(exercise_nr))
+    	{
+    		System.out.println("Error: question already exists");
+    	}
+    	else
+    	{
+    		
+   			while (this.question.size() < this.exercise_nr.size())
+				this.question.add(null);
+   			while (this.question.size() > this.exercise_nr.size())
+				this.exercise_nr.add(null);
 
+
+    		System.out.println("OK, adding question @ " + this.question.size());
+        	this.exercise_nr.add(exercise_nr);
+        	this.question.add(question);
+    	}
     }
 
     /**
@@ -86,6 +100,15 @@ public class BjecTestModel extends BlueJExerciseCheckModel
     public void updateQuestion( String exercise_nr, String question ) throws SQLException 
     {        
      //   String sql = "UPDATE correct_answer SET question='" + question + "' WHERE exercise_nr='" + exercise_nr + "'";
+    	
+       	if (! exerciseExist(exercise_nr))
+    	{
+    		System.out.println("Error: question does not exist");
+    		return;
+    	}
+     	
+    	
+       	
     	int n = 0;
     	for(String item : this.exercise_nr)
     	{
@@ -94,15 +117,18 @@ public class BjecTestModel extends BlueJExerciseCheckModel
     			while (this.question.size() <= n)
     				this.question.add(null);
     			this.question.set(n, question);
+    			System.out.println("OK: updated @ " + n);
     			break;
     		}
     		n++;
     		
     	}
+    	
+    	
     }
 
     
-    public boolean exerciseExist(String exercise_nr) throws SQLException 
+    public boolean exerciseExist(String exercise_nr) 
     {
     	for(String item : this.exercise_nr)
     	{
@@ -126,6 +152,7 @@ public class BjecTestModel extends BlueJExerciseCheckModel
     	{
     		if (iter.next().equals(exercise_nr))
     		{
+    			System.out.println("Got question for " + exercise_nr + " @ " +n);
     			return question.get(n);
     		}
 

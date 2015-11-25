@@ -43,6 +43,7 @@ public class BlueJExerciseCheckViewInputQuestion extends BlueJExerciseCheckView
     public void clearQuestionTextArea() 
     {
         input_question.setText("");
+        oldtext = "";
     }
     
     public boolean questionChanged()
