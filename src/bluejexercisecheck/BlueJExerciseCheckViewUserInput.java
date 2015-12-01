@@ -17,7 +17,7 @@ import java.awt.Component;
  * @author david
  */
 @SuppressWarnings("serial")
-public class BjecViewUserInput extends BlueJExerciseCheckView
+public class BlueJExerciseCheckViewUserInput extends BlueJExerciseCheckView
 {
 	
 	private JPanel panelQuestion;
@@ -32,7 +32,7 @@ public class BjecViewUserInput extends BlueJExerciseCheckView
 	private JLabel labelAnswer;
 	
 	
-	public BjecViewUserInput()
+	public BlueJExerciseCheckViewUserInput()
 	{
 		super();
 		setGUI();
@@ -88,86 +88,6 @@ public class BjecViewUserInput extends BlueJExerciseCheckView
 	}
 	
 
-	/* used by printHierarchy */
-	private static String getCompDescr(Component comp)
-	{
-		String rv;
-		if (comp instanceof JLabel)
-		{
-			rv = ((JLabel) comp).getText();
-			if (rv.length() > 15)
-			{
-				rv = rv.substring(0, 13) + "..";
-			}
-		}
-		else
-		{
-			rv = "";
-		}
-		return rv;
-	}
-	
-	/* Used by printHierarchy */
-	private static void printHierRec(Container container, int level)
-	{
-		Component[] subcomponent = container.getComponents();
-		
-		StringBuilder sp = new StringBuilder();
-		for (int i = 0; i< level; i++)
-			sp.append("  ");
-
-		
-		for (int i = 0; i < subcomponent.length; i++)
-		{
-						
-			System.out.print(sp  + subcomponent[i].getClass().getSimpleName());
-			if (subcomponent[i] instanceof Container)
-			{
-				Container subcontainer = (Container) subcomponent[i];
-				String lo = ( subcontainer.getLayout() != null ) ? 
-								subcontainer.getLayout().getClass().getSimpleName() : "";
-				String compDescr = getCompDescr(subcomponent[i]);
-
-				//System.out.println(" -- is container --" + lo);
-				System.out.println("  " + lo + "   " +  compDescr );
-								
-				printHierRec((Container) subcomponent[i], level + 1);
-			}
-			else
-			{
-				System.out.println(" -- is geen container");
-			}
-		}
-
-	}
-	
-
-	/**
-	 * Prints GUI hierarchy tree on the console, starting from this object.
-	 */
-	private void printHierarchy()
-	{
-		Container container = null;
-		if (this instanceof JFrame)
-		{
-			System.out.println("JFrame " + this.getClass().getName() + "  "
-						+ this.getLayout().getClass().getSimpleName());
-
-			container = this.getContentPane();
-			System.out.println(this.getContentPane().getClass().getSimpleName() + " " +
-					this.getContentPane().getLayout() +	" = content pane" );
-		}
-		else
-		{
-			container = this;
-		}
-		
-		printHierRec(container, 1);
-	
-		
-	}
-
-	
 
 	/**
 	 * Main method for testing 
@@ -175,12 +95,12 @@ public class BjecViewUserInput extends BlueJExerciseCheckView
 	public static void main(String[] args)
 	{
 		System.out.println("Show the userInput window for testing...\n");
-		BjecViewUserInput userInput = new BjecViewUserInput();
+		BlueJExerciseCheckViewUserInput userInput = new BlueJExerciseCheckViewUserInput();
 		userInput.setSize(400, 600);
 		userInput.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		userInput.setVisible(true);
 		
-		userInput.printHierarchy();
+		GuiUtils.printHierarchy(userInput);
 	}
 
 }
