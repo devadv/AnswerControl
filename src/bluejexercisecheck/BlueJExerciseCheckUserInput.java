@@ -17,7 +17,7 @@ import java.awt.Component;
  * @author david
  */
 @SuppressWarnings("serial")
-public class BlueJExerciseCheckViewUserInput extends BlueJExerciseCheckView
+public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 {
 	
 	private JPanel panelQuestion;
@@ -32,7 +32,7 @@ public class BlueJExerciseCheckViewUserInput extends BlueJExerciseCheckView
 	private JLabel labelAnswer;
 	
 	
-	public BlueJExerciseCheckViewUserInput()
+	public BlueJExerciseCheckUserInput()
 	{
 		super();
 		setGUI();
@@ -95,7 +95,7 @@ public class BlueJExerciseCheckViewUserInput extends BlueJExerciseCheckView
 	public static void main(String[] args)
 	{
 		System.out.println("Show the userInput window for testing...\n");
-		BlueJExerciseCheckViewUserInput userInput = new BlueJExerciseCheckViewUserInput();
+		BlueJExerciseCheckUserInput userInput = new BlueJExerciseCheckUserInput();
 		userInput.setSize(400, 600);
 		userInput.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		userInput.setVisible(true);
