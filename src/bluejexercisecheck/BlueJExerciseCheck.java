@@ -8,7 +8,7 @@ public class BlueJExerciseCheck
 	public static void main(String[] args) throws SQLException
     {        
 		BlueJExerciseCheckMainView theView = new BlueJExerciseCheckMainView();
-		BlueJExerciseCheckModel theModel = new BjecTestModel();  // testModel
+		BlueJExerciseCheckModel theModel = new BlueJExerciseCheckModel();  // testModel
 		
 		BlueJExerciseCheckController theController = new BlueJExerciseCheckController( theView, theModel );
         theView.setTitle("BlueJ Input Questions and Answers");

@@ -1,31 +1,27 @@
 package bluejexercisecheck;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class BlueJExerciseCheckMainView extends JFrame 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2015110200010001L;
+
 	protected JButton inputQuestion = new JButton("Invoer vragen");
-        protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
+    protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
+    protected JButton userInputButton = new JButton("User input");
 	
-	//ashdfkjhasdkjf
 	public BlueJExerciseCheckMainView(){
 		super();
 		JPanel panel = new JPanel();
 		panel.add(inputQuestion);
 		panel.add(inputCorrectAnswer);
+		panel.add(userInputButton);
 		
 		this.add(panel);
 		this.setResizable(false);
@@ -43,5 +39,10 @@ public class BlueJExerciseCheckMainView extends JFrame
     {
 		inputCorrectAnswer.addActionListener(listenForNextBtn);
 
+	}
+	
+	public void addUserInputButtonListener(ActionListener userInputButtonListener)
+	{
+		userInputButton.addActionListener(userInputButtonListener);
 	}
 }
