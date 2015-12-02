@@ -19,7 +19,6 @@ import javax.swing.border.Border;
  * Gui for input of user answers
  * @author david
  */
-
 public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 {
 	private static final long serialVersionUID = 1L;
@@ -156,7 +155,6 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		userInput.setVisible(true);
 		
 		GuiUtils.printHierarchy(userInput);
-
 
 	}
 
