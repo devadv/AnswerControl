@@ -41,7 +41,8 @@ public class BlueJExerciseCheckController {
         theViewInputQuestion = new BlueJExerciseCheckViewInputQuestion();
         theViewInputCorrectAnswer = new BlueJExerciseCheckViewInputCorrectAnswer();
         
-                
+        // Listener for button that selects the user input window
+        this.theView.addUserInputButtonListener(new userInputButttonLister());
         
     }// end BlueJExerciseCheckController
 
@@ -283,7 +284,7 @@ public class BlueJExerciseCheckController {
         
         /**
          * Listener for userInput button in MainView
-         * Should create the window and add listeners 
+         * Creates the window and add listeners 
          * @author dvogel
          */
         class userInputButttonLister implements ActionListener
@@ -294,6 +295,16 @@ public class BlueJExerciseCheckController {
 			{
 				System.out.println("Display userinput window");
 				
+				userInputWindow = new BlueJExerciseCheckUserInput();
+				
+				
+				// Adds the window closing listener contained in userInputWindow
+				//   note: Listener should be moved to the controller
+				userInputWindow.addWindowClosingListener(userInputWindow.new WindowClosingListener());
+				
+				// close mainView
+				theView.dispose();
+
 			}
         	
         }

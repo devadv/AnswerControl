@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -23,7 +24,7 @@ import javax.swing.border.Border;
  */
 public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 {
-	private static final long serialVersionUID = 201512020020L;
+	private static final long serialVersionUID = 201512020030L;
 
 
 	//for testing
@@ -80,7 +81,7 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		
 		textAreaAnswer = new JTextArea(4, 20);
 		textAreaAnswer.setLineWrap(true);
-		textAreaAnswer.setPreferredSize(new Dimension(200,240));
+		//textAreaAnswer.setPreferredSize(new Dimension(200,240));
 		textAreaAnswer.setWrapStyleWord(true);
 		textAreaAnswer.setBorder(greenBorder);
 		textAreaAnswer.setText("Antwoord");
@@ -135,17 +136,6 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	
 	
 	
-	class WindowClosingListener extends WindowAdapter
-	{
-		@Override
-		public void windowClosing(WindowEvent e)
-		{
-			System.out.println("Closing userinput window" );
-			BlueJExerciseCheckUserInput.this.dispose();			
-		}
-		
-	}
-	
 	
 	/**
 	 * Adds the given window closing listener 
@@ -159,6 +149,20 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	}
 	
 	
+
+/***__/``````` Listeners ````\____*/
+	
+	class WindowClosingListener extends WindowAdapter
+	{
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			System.out.println("Closing userinput window" );
+			BlueJExerciseCheckUserInput.this.dispose();			
+		}
+		
+	}
+
 	
 	class comboListenerUser implements ActionListener
 	{
@@ -175,27 +179,31 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	}
 	
 	
+ /*****\__ end  listeners __/**/
+	
 
 	/**
-	 * Test userinput gui 
+	 * Test userinput window. 
+	 *  
+	 * @throws SQLException 
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) throws SQLException
 	{
 		BlueJExerciseCheckUserInput userInput  =  new BlueJExerciseCheckUserInput();
 		userInput.addWindowClosingListener(userInput.new WindowClosingListener());
 		
 		//userInput.model = new BlueJExerciseCheckModel();
+		userInput.model = new BjecTestModel();
 		
 		userInput.addWindowClosingListener(userInput.new WindowClosingListener());
 		
 		userInput.addListExercisesListener(userInput.new comboListenerUser());
-		
 	
 		
 		
 		userInput.setVisible(true);
 		
-		//GuiUtils.printHierarchy(userInput);
+		GuiUtils.printHierarchy(userInput);
 
 	}
 

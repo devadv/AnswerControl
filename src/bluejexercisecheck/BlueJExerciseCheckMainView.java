@@ -10,7 +10,7 @@ public class BlueJExerciseCheckMainView extends JFrame
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2015110200010001L;
+	private static final long serialVersionUID = 201512020030L;
 
 	protected JButton inputQuestion = new JButton("Invoer vragen");
     protected JButton inputCorrectAnswer = new JButton("Invoer antwoorden");
