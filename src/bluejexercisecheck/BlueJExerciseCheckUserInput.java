@@ -14,6 +14,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
+
+/**
+ * Gui for input of user answers
+ * @author david
+ */
+
 public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 {
 	private static final long serialVersionUID = 1L;
@@ -48,6 +54,7 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	public void setGUI()
 	{
 
+		this.setTitle("BlueJ Exercise Check  -  User input");
 		this.setResizable(true);
 		this.setSize(480, 640);
 		this.setMinimumSize(new Dimension(240, 300));
@@ -80,8 +87,6 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		labelAnswer.setBorder(emptyBorder);
 		panelAnswer = new JPanel();
 		
-		
-	
 	
 		jspQuestion = new JScrollPane(textAreaQuestion, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -146,8 +151,11 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	 */
 	public static void main(String[] args)
 	{
-		BlueJExerciseCheckUserInput bjecUser  =  new BlueJExerciseCheckUserInput();
-		bjecUser.addWindowClosingListener(bjecUser.new WindowClosingListener());
+		BlueJExerciseCheckUserInput userInput  =  new BlueJExerciseCheckUserInput();
+		userInput.addWindowClosingListener(userInput.new WindowClosingListener());
+		userInput.setVisible(true);
+		
+		GuiUtils.printHierarchy(userInput);
 
 
 	}
