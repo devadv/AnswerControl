@@ -18,6 +18,9 @@ public class BlueJExerciseCheckController {
     private final BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
     private final BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
 
+    private  BlueJExerciseCheckUserInput userInputWindow;
+
+    
     /**
      * The Contoller brings the Model and the View together
      *
@@ -37,6 +40,9 @@ public class BlueJExerciseCheckController {
         this.theModel.setConnectionDatabase();
         theViewInputQuestion = new BlueJExerciseCheckViewInputQuestion();
         theViewInputCorrectAnswer = new BlueJExerciseCheckViewInputCorrectAnswer();
+        
+                
+        
     }// end BlueJExerciseCheckController
 
     /**
@@ -101,7 +107,12 @@ public class BlueJExerciseCheckController {
     }
     
     
-        // Save button Listener
+       /**
+        * Listener for inputQuestion button in MainView. 
+        *  <ul><li>  Adds the listeners for InputQuestion View.
+        *      <li>  Sets the size, and makes InputQuestion view visable.
+        *   </ul> 
+        */
         class InputQuestionListener implements ActionListener {
             
             
@@ -236,7 +247,7 @@ public class BlueJExerciseCheckController {
                 System.out.println("Correct Answer Clicked");
             }
 
-        }
+
 
         // Save button Listener
         class SaveBtnListener implements ActionListener {
@@ -265,6 +276,33 @@ public class BlueJExerciseCheckController {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("previous Clicked");
             }
+        }
+        
         }// end inner class  PreviousBtnListener
+        
+        
+        /**
+         * Listener for userInput button in MainView
+         * Should create the window and add listeners 
+         * @author dvogel
+         */
+        class userInputButttonLister implements ActionListener
+        {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("Display userinput window");
+				
+			}
+        	
+        }
+        
+        
+        
+        
+        
+        
+        
     }// end class BlueJExerciseCheckController
 

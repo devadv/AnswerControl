@@ -3,6 +3,8 @@ package bluejexercisecheck;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -21,7 +23,12 @@ import javax.swing.border.Border;
  */
 public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 201512020020L;
+
+
+	//for testing
+	private BlueJExerciseCheckModel model = null;
+	
 	
 	private JTextArea textAreaQuestion;
 	private JTextArea textAreaAnswer;
@@ -60,8 +67,8 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		
 		Font textAreaFont = new Font("", Font.BOLD, 13);
 
-		textAreaQuestion = new JTextArea();
-		textAreaQuestion.setPreferredSize(new Dimension(200,140));
+		textAreaQuestion = new JTextArea(4, 20);
+		//textAreaQuestion.setPreferredSize(new Dimension(200,140));
 		textAreaQuestion.setBorder(blueBorder);
 		textAreaQuestion.setLineWrap(true);
 		textAreaQuestion.setWrapStyleWord(true);
@@ -69,7 +76,9 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		textAreaQuestion.setBorder(cmpBlue);
 		textAreaQuestion.setFont(textAreaFont);
 		
-		textAreaAnswer = new JTextArea();
+		textAreaQuestion.setEditable(false);
+		
+		textAreaAnswer = new JTextArea(4, 20);
 		textAreaAnswer.setLineWrap(true);
 		textAreaAnswer.setPreferredSize(new Dimension(200,240));
 		textAreaAnswer.setWrapStyleWord(true);
@@ -107,6 +116,10 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		panelAnswer.setBorder(emptyBorder);
 		
 		//panelQuestion.setBorder(testBorder);
+		
+		panelTitle.setMaximumSize(new Dimension(300,20));
+		panelTop.setMaximumSize(new Dimension(300,20));
+		
 				
 		panel.add(panelQuestion);
 		
@@ -144,6 +157,24 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		// TODO Auto-generated method stub
 		super.addWindowClosingListener(windowAdapter);
 	}
+	
+	
+	
+	class comboListenerUser implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			String selectedExercise = getSelectedExercise();
+			System.out.println(selectedExercise);
+			String question = model.getQuestion(selectedExercise);
+			textAreaQuestion.setText(question);
+		}
+		
+	}
+	
+	
 
 	/**
 	 * Test userinput gui 
@@ -152,9 +183,19 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 	{
 		BlueJExerciseCheckUserInput userInput  =  new BlueJExerciseCheckUserInput();
 		userInput.addWindowClosingListener(userInput.new WindowClosingListener());
+		
+		//userInput.model = new BlueJExerciseCheckModel();
+		
+		userInput.addWindowClosingListener(userInput.new WindowClosingListener());
+		
+		userInput.addListExercisesListener(userInput.new comboListenerUser());
+		
+	
+		
+		
 		userInput.setVisible(true);
 		
-		GuiUtils.printHierarchy(userInput);
+		//GuiUtils.printHierarchy(userInput);
 
 	}
 
