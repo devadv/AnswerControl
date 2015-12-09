@@ -134,8 +134,15 @@ public class BlueJExerciseCheckUserInput extends BlueJExerciseCheckView
 		this.setVisible(true);		
 	}
 	
-	
-	
+	/**
+	 * Set question in textarea
+	 * @param question
+	 */
+    public void setQuestion( String question )
+    {
+    	textAreaQuestion.setText(question);
+    }
+
 	
 	/**
 	 * Adds the given window closing listener 

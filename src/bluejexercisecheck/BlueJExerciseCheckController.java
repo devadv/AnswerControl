@@ -18,7 +18,7 @@ public class BlueJExerciseCheckController {
     private final BlueJExerciseCheckViewInputQuestion theViewInputQuestion;
     private final BlueJExerciseCheckViewInputCorrectAnswer theViewInputCorrectAnswer;
 
-    private  BlueJExerciseCheckUserInput userInputWindow;
+    private BlueJExerciseCheckUserInput userInputWindow;
 
     
     /**
@@ -284,7 +284,13 @@ public class BlueJExerciseCheckController {
         
         /**
          * Listener for userInput button in MainView
-         * Creates the window and adds listeners 
+         * Creates the window
+         * Adds listeners via the parent class methods
+         * Get from datase and set in view: exercise blocknumbers
+         *  
+         *  TODO:  listeners as inner classes for the
+         *  functionality of, the save, next and previous button.
+         *  
          * @author dvogel
          */
         class userInputButttonLister implements ActionListener
@@ -296,16 +302,135 @@ public class BlueJExerciseCheckController {
 				System.out.println("Display userinput window");
 				
 				userInputWindow = new BlueJExerciseCheckUserInput();
+				userInputWindow.setBlocks(theModel.getBlockList());
+				
+				userInputWindow.addSaveActionListener(new saveButtonListener());
+				userInputWindow.addPreviousActionListener(new previousButtonListener());
+				userInputWindow.addNextActionListener(new nextButtonListener());
+				userInputWindow.addListExercisesListener(new comboSelectExerciseListener());
+				
 				
 				
 				// Adds the window closing listener contained in userInputWindow
 				//   note: Listener should be moved to the controller
 				userInputWindow.addWindowClosingListener(userInputWindow.new WindowClosingListener());
 				
+				checkExist();
+				setQuestion();
+				
 				// close mainView
 				theView.dispose();
+			}
+
+			
+
+			/**
+			 * This listener should save the given answer 
+			 */
+			class saveButtonListener implements ActionListener
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					// TODO Auto-generated method stub
+					System.out.println("Saving answer.. not implemented");
+				}
+				
+			}
+			
+			
+			class nextButtonListener implements ActionListener
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println("Save (not implemented), then go to next");
+					userInputWindow.setNextExercise();
+					// clear
+					setQuestion();
+				}
+		
+			}
+			
+			
+			class previousButtonListener implements ActionListener
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					// TODO Auto-generated method stub
+					System.out.println("Save (not implemented), then go to previous .");
+					userInputWindow.setPreviousExercise();
+					//clear
+					//set from db to view
+					setQuestion();
+
+				}
 
 			}
+			
+			
+			
+			class comboSelectExerciseListener implements ActionListener
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					setQuestion();
+					
+				}
+				
+			}
+			
+			
+			/// Check and set question methods,
+			///    used by nextbuton, previousbutton , window setup, combobox
+			
+			/**
+			 * Check if currently selected exercise exists in database
+			 * @return 
+			 */
+			private boolean checkExist()
+			{
+				try
+				{
+					if (theModel.exerciseExist(userInputWindow.getSelectedExercise()))
+					{
+						return true;
+					}
+				} catch (SQLException e)
+				{
+					System.out.println("SQL exception");
+					e.printStackTrace();
+				}
+				return false;
+			}
+			
+			/**
+			 * Check if currently selected exercise exists in database,
+			 *   then gets question from db and set in view 
+			 */
+			private void setQuestion()
+			{
+				if (checkExist())
+				{
+					String question = theModel.getQuestion(userInputWindow.getSelectedExercise());
+					userInputWindow.setQuestion(question);
+				}
+				else
+				{
+					System.out.println("Error: Selected exercise does"
+							+ "not exist in database");
+				}
+				
+			}
+			
+			
+			//// END Methods used by ..
+
+	
         	
         }
         
