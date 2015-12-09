@@ -284,7 +284,7 @@ public class BlueJExerciseCheckController {
         
         /**
          * Listener for userInput button in MainView
-         * Creates the window and add listeners 
+         * Creates the window and adds listeners 
          * @author dvogel
          */
         class userInputButttonLister implements ActionListener
