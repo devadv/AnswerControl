@@ -43,11 +43,14 @@ public abstract class View extends JFrame implements iView, Observer{
 	protected JPanel btnGroup;
 	protected JPanel top;
 	protected JLabel label;
-	private JComboBox<String> blocks_id = new JComboBox<>(blocks);
-	private JPanel subtop;
+	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
+	protected JPanel subtop;
+	protected iControllerRecord controller;
+	protected Model model;
 
 	public View(Model model,iControllerRecord controller ) {
-		
+		this.model = model;
+		this.controller = controller;
 	}
 
 	public void setGUI() {

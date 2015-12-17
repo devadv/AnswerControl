@@ -11,12 +11,12 @@ import mvc.model.Model;
 
 public class ViewInputQuestion extends View {
 
-	private Model model;
-	private iControllerRecord controller;
+	/*private Model model;
+	private iControllerRecord controller;*/
 
 	public ViewInputQuestion(Model model, iControllerRecord controller) {
 		super(model, controller);
-		this.model = model;
+		//this.model = model;
 		model.createDBConnection();
 		setGUI();
 		questionField.setText(model.getQuestion(getExcercise()));
