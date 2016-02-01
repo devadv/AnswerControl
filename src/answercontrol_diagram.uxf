@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>30</x>
+      <y>50</y>
+      <w>680</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>mvc.controller
+--
+
+
+
+
+
+bg=light_gray
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>280</y>
+      <w>300</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ControllerInputQuestion(Model model)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>290</x>
+      <y>80</y>
+      <w>180</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>iControllerRecord
+--
++createDBConnection()
++createRecord()
++deleteRecord()
++getRecord()
++updateRecord()
++isRecord
+
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>280</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ControllerInputAnswer(Model model)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>90</y>
+      <w>200</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>90</y>
+      <w>210</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;190.0</additional_attributes>
+  </element>
+</diagram>
