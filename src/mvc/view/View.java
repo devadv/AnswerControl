@@ -47,6 +47,7 @@ public abstract class View extends JFrame implements iView, Observer{
 	protected JPanel subtop;
 	protected iControllerRecord controller;
 	protected Model model;
+	private JPanel mainPanel;
 
 	public View(Model model,iControllerRecord controller ) {
 		this.model = model;
@@ -59,9 +60,9 @@ public abstract class View extends JFrame implements iView, Observer{
 		btnPrevious.addActionListener(this);
 		exercise_nr.addActionListener(this);
 		blocks_id.addActionListener(this);
-		// top panel
-		//top = new JPanel();
-		
+		//main panel
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
 		label = new JLabel();
 		
 		subtop = new JPanel();
@@ -75,15 +76,23 @@ public abstract class View extends JFrame implements iView, Observer{
 		btnGroup.add(btnSave);
 		btnGroup.add(btnNext);
 		btnGroup.add(btnPrevious);
+		
+		//config field
+		questionField.setBorder(BorderFactory.createLineBorder(Color.black));
+		//center panel
 		center = new JPanel();
 		center.setBorder(new EmptyBorder(8, 8, 8, 8));
 		center.setLayout(new BorderLayout());
-		questionField.setBorder(BorderFactory.createLineBorder(Color.black));
 		center.add(questionField, BorderLayout.WEST);
-		//center.add(top, BorderLayout.NORTH);
 		center.add(subtop, BorderLayout.NORTH);
 		center.add(btnGroup, BorderLayout.SOUTH);
-		add(center);
+		
+		
+		// main panel
+		mainPanel.add(subtop, BorderLayout.NORTH);
+		mainPanel.add(center , BorderLayout.CENTER);
+		mainPanel.add(btnGroup , BorderLayout.SOUTH);
+		add(mainPanel);
 		
 	}
 
