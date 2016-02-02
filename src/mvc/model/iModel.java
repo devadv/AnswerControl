@@ -9,7 +9,7 @@ public interface iModel {
 	//CRUD Question
 	void createQuestion(String exercise_nr, String question, int block_id);
 	
-	String getQuestion(String exercise_nr);
+	String retrieveQuestion(String exercise_nr);
 	
 	void updateQuestion(String exercise_nr, String question, int block_id);
 	
@@ -23,7 +23,7 @@ public interface iModel {
 	//CRUD Answer
 	void createAnswer(String exercise_nr, String answer, int block_id);
 	
-	String getAnswer(String exercise_nr);
+	String retrieveAnswer(String exercise_nr);
 	
 	void updateAnswer(String exercise_nr, String answer, int block_id);
 	

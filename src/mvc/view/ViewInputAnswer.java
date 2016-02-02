@@ -20,23 +20,23 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import mvc.controller.ControllerInputQuestion;
-import mvc.controller.iController;
-import mvc.controller.iControllerRecord;
+import mvc.controller.iControllerAnswerQuestion;
+import mvc.controller.iCRUD;
 import mvc.model.Model;
 
 public class ViewInputAnswer extends View {
 	
 
-	private iControllerRecord controller;
+	private iCRUD controller;
 	private Model model;
 	private JTextArea answer;
 
-	public ViewInputAnswer(Model model, iControllerRecord controller) {
+	public ViewInputAnswer(Model model, iCRUD controller) {
 		super(model, controller);
 		this.model = model;
 		this.controller = controller;
 		setGUI();
-		questionField.setText(model.getQuestion(getExcercise()));
+		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
 
 	@Override
@@ -60,17 +60,17 @@ public class ViewInputAnswer extends View {
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==exercise_nr){
 			System.out.println("exercise_nr changed!");
-			questionField.setText(model.getQuestion(getExcercise()));
+			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}else if(event.getSource()==btnSave){
 			if(!model.isQuestion(getExcercise())){
-				controller.createRecord();
+				controller.create();
 			}else {
-				controller.updateRecord();
+				controller.update();
 			}
 			
 		}else if(event.getSource()==btnNext){
 			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex()+1);
-			questionField.setText(model.getQuestion(getExcercise()));
+			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}else if(event.getSource()==btnPrevious){
 			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex()-1);
 		}
@@ -80,7 +80,7 @@ public class ViewInputAnswer extends View {
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println("model updated in Answer");
-		questionField.setText(model.getQuestion(getExcercise()));
+		questionField.setText(model.retrieveQuestion(getExcercise()));
 		
 		
 	}

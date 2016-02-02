@@ -5,8 +5,8 @@ import java.util.Observable;
 
 import mvc.controller.ControllerInputAnswer;
 import mvc.controller.ControllerInputQuestion;
-import mvc.controller.iController;
-import mvc.controller.iControllerRecord;
+import mvc.controller.iControllerAnswerQuestion;
+import mvc.controller.iCRUD;
 import mvc.model.Model;
 
 public class ViewInputQuestion extends View {
@@ -14,12 +14,12 @@ public class ViewInputQuestion extends View {
 	/*private Model model;
 	private iControllerRecord controller;*/
 
-	public ViewInputQuestion(Model model, iControllerRecord controller) {
+	public ViewInputQuestion(Model model, iCRUD controller) {
 		super(model, controller);
 		//this.model = model;
 		model.createDBConnection();
 		setGUI();
-		questionField.setText(model.getQuestion(getExcercise()));
+		questionField.setText(model.retrieveQuestion(getExcercise()));
 
 	}
 
@@ -27,10 +27,10 @@ public class ViewInputQuestion extends View {
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == exercise_nr) {
-			questionField.setText(model.getQuestion(getExcercise()));
+			questionField.setText(model.retrieveQuestion(getExcercise()));
 		} else if (event.getSource() == btnSave) {
 			if (!(model.isQuestion(getExcercise()))) {
-				controller.createRecord();
+				controller.create();
 			} else {
 				model.updateQuestion(getExcercise(), getQuestion(),
 						getBlockID());
@@ -38,17 +38,17 @@ public class ViewInputQuestion extends View {
 
 		} else if (event.getSource() == btnNext) {
 			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex() + 1);
-			questionField.setText(model.getQuestion(getExcercise()));
+			questionField.setText(model.retrieveQuestion(getExcercise()));
 		} else if (event.getSource() == btnPrevious) {
 			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex() - 1);
-			questionField.setText(model.getQuestion(getExcercise()));
+			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println("model updated");
-		questionField.setText(model.getQuestion(getExcercise()));
+		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
 
 	@Override

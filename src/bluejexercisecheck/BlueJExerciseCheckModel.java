@@ -12,9 +12,16 @@ import java.util.logging.Logger;
 
 public class BlueJExerciseCheckModel 
 {
-    public String DATABASEURL;
+   /* public String DATABASEURL;
     public String username;
-    public String password;
+    public String password;*/
+	//tijdelijke oplossing voor laptop
+	
+    public static String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+	public static String username = "badev_hintveld";
+	public static String password = "V99r9R9qwMmYPcqU";
+
+   //einde tijdelijke oplossing 
 
     private Connection connection;
     private Statement statement;

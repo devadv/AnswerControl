@@ -4,10 +4,10 @@ package mvc.controller;
 import mvc.model.Model;
 import mvc.view.View;
 import mvc.view.ViewInputAnswer;
-import mvc.view.ViewInputQuestion;
 
 
-public class ControllerInputAnswer implements iControllerRecord{
+
+public class ControllerInputAnswer implements iCRUD{
 
 	private Model model;
 	private View viewQuestion;
@@ -30,37 +30,33 @@ public class ControllerInputAnswer implements iControllerRecord{
 
 
 	@Override
-	public void createRecord() {
+	public void create() {
 		System.out.println("Excercise : " + viewQuestion.getExcercise());
 		System.out.println("Question : " + viewQuestion.getQuestion());
 		System.out.println("BlockID : " + viewQuestion.getBlockID());
-		model.createQuestion(viewQuestion.getExcercise(), viewQuestion.getQuestion(), viewQuestion.getBlockID());
+		model.createAnswer(viewQuestion.getExcercise(), viewQuestion.getQuestion(), viewQuestion.getBlockID());
 	
 		
 	}
 
 	@Override
-	public void getRecord() {
+	public void retrieve() {
 		
 	}
 
 	@Override
-	public void updateRecord() {
+	public void update() {
 		model.updateQuestion(viewQuestion.getExcercise(), viewQuestion.getQuestion(), viewQuestion.getBlockID());
 			
 	}
 
 	@Override
-	public void deleteRecord() {
+	public void delete() {
 		
 		
 	}
 
-	@Override
-	public boolean isRecord() {
-		
-		return false;
-	}
+	
 
 	
 

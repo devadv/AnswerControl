@@ -15,8 +15,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.xml.ws.Dispatch;
 
-import mvc.controller.iController;
-import mvc.controller.iControllerRecord;
+import mvc.controller.iControllerAnswerQuestion;
+import mvc.controller.iCRUD;
 import mvc.model.Model;
 
 public abstract class View extends JFrame implements iView, Observer{
@@ -45,11 +45,11 @@ public abstract class View extends JFrame implements iView, Observer{
 	protected JLabel label;
 	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
 	protected JPanel subtop;
-	protected iControllerRecord controller;
+	protected iCRUD controller;
 	protected Model model;
 	private JPanel mainPanel;
 
-	public View(Model model,iControllerRecord controller ) {
+	public View(Model model,iCRUD controller ) {
 		this.model = model;
 		this.controller = controller;
 	}

@@ -1,6 +1,6 @@
 package mvc.controller;
 
-public interface iController {
+public interface iControllerAnswerQuestion {
 	
 	void createDBConnection();
 	

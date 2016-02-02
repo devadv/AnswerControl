@@ -39,14 +39,14 @@ layer=-1</panel_attributes>
       <w>180</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>iControllerRecord
+    <panel_attributes>iCRUD
 --
 +createDBConnection()
-+createRecord()
-+deleteRecord()
-+getRecord()
-+updateRecord()
-+isRecord
++create()
++delete()
++retrieve()
++update()
+
 
 layer=-1</panel_attributes>
     <additional_attributes/>
@@ -84,5 +84,18 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;190.0;10.0;190.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>250</x>
+      <y>530</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>EmptyPackage
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
