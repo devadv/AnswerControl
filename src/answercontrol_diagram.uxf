@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>6</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>6</x>
-      <y>6</y>
-      <w>408</w>
-      <h>234</h>
+      <x>50</x>
+      <y>135</y>
+      <w>340</w>
+      <h>195</h>
     </coordinates>
     <panel_attributes>mvc.controller
 --
@@ -23,10 +23,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>18</x>
-      <y>162</y>
-      <w>180</w>
-      <h>42</h>
+      <x>60</x>
+      <y>265</y>
+      <w>150</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>ControllerInputQuestion(Model model)
 --
@@ -37,10 +37,10 @@ view:ViewInputQuestion(model)
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>156</x>
-      <y>42</y>
-      <w>108</w>
-      <h>90</h>
+      <x>175</x>
+      <y>165</y>
+      <w>90</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>iCRUD
 --
@@ -49,16 +49,16 @@ view:ViewInputQuestion(model)
 +retrieve()
 +update()
 +delete()
-layer=-1</panel_attributes>
+layer=0</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>222</x>
-      <y>162</y>
-      <w>174</w>
-      <h>42</h>
+      <x>230</x>
+      <y>265</y>
+      <w>145</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>ControllerInputAnswer(Model model)
 --
@@ -69,10 +69,10 @@ view:ViewInputAnswer(model)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>96</x>
-      <y>48</y>
-      <w>120</w>
-      <h>126</h>
+      <x>125</x>
+      <y>170</y>
+      <w>100</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>180.0;10.0;10.0;10.0;10.0;190.0</additional_attributes>
@@ -80,10 +80,10 @@ view:ViewInputAnswer(model)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>48</y>
-      <w>126</w>
-      <h>126</h>
+      <x>220</x>
+      <y>170</y>
+      <w>105</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;190.0;10.0;190.0;190.0</additional_attributes>
@@ -91,10 +91,10 @@ view:ViewInputAnswer(model)
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>642</x>
-      <y>438</y>
-      <w>330</w>
-      <h>216</h>
+      <x>450</x>
+      <y>495</y>
+      <w>275</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>mvc.model
 --
@@ -107,10 +107,10 @@ group=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>678</x>
-      <y>606</y>
-      <w>60</w>
-      <h>18</h>
+      <x>480</x>
+      <y>635</y>
+      <w>50</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Model
 group=2</panel_attributes>
@@ -119,10 +119,10 @@ group=2</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>840</x>
-      <y>474</y>
-      <w>96</w>
-      <h>156</h>
+      <x>615</x>
+      <y>525</y>
+      <w>80</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>iModel
 --
@@ -144,10 +144,10 @@ group=2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>480</y>
-      <w>204</w>
-      <h>138</h>
+      <x>495</x>
+      <y>530</y>
+      <w>170</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 group=2</panel_attributes>
@@ -156,39 +156,37 @@ group=2</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>486</x>
-      <y>6</y>
-      <w>684</w>
-      <h>396</h>
+      <x>450</x>
+      <y>135</y>
+      <w>390</w>
+      <h>330</h>
     </coordinates>
     <panel_attributes>mvc.view
 --
-bg=light_gray
-group=4</panel_attributes>
+bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>540</x>
-      <y>60</y>
-      <w>48</w>
-      <h>48</h>
+      <x>495</x>
+      <y>180</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>iView
 --
 setGUI()
-layer=1
-group=4</panel_attributes>
+layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>642</x>
-      <y>126</y>
-      <w>102</w>
-      <h>84</h>
+      <x>580</x>
+      <y>235</y>
+      <w>85</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>/View/
 --
@@ -198,86 +196,80 @@ group=4</panel_attributes>
 +getExercise()
 +getBlockID()
 
-layer=1
-group=4</panel_attributes>
+layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>732</x>
-      <y>252</y>
-      <w>192</w>
-      <h>84</h>
+      <x>655</x>
+      <y>340</y>
+      <w>160</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>ViewInputAnswer
 --
 +ViewInputAnswer(Model m, Controller c)
 +getAnswer():String
-layer=1
-group=4</panel_attributes>
+layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>252</y>
-      <w>192</w>
-      <h>84</h>
+      <x>465</x>
+      <y>340</y>
+      <w>160</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>ViewInputQuestion
 --
 +ViewInputQuestion(Model m, Controller c)
 +getQuestion(): String
 
-layer=1
-group=4</panel_attributes>
+layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>564</x>
-      <y>66</y>
-      <w>120</w>
-      <h>72</h>
+      <x>515</x>
+      <y>185</y>
+      <w>100</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=4</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;180.0;10.0;180.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>738</x>
-      <y>126</y>
-      <w>60</w>
-      <h>138</h>
+      <x>660</x>
+      <y>235</y>
+      <w>50</w>
+      <h>115</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=4</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;210.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>552</x>
-      <y>126</y>
-      <w>102</w>
-      <h>138</h>
+      <x>505</x>
+      <y>235</y>
+      <w>85</w>
+      <h>115</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=4</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>150.0;10.0;10.0;10.0;10.0;210.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>564</y>
-      <w>258</w>
-      <h>90</h>
+      <x>95</x>
+      <y>600</y>
+      <w>215</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>Main
 --
@@ -289,10 +281,10 @@ controllerInputAnswer(model):ControllerInputAnswer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>96</x>
-      <y>198</y>
-      <w>18</w>
-      <h>378</h>
+      <x>125</x>
+      <y>295</y>
+      <w>15</w>
+      <h>315</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;610.0</additional_attributes>
@@ -300,10 +292,10 @@ controllerInputAnswer(model):ControllerInputAnswer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>198</y>
-      <w>18</w>
-      <h>378</h>
+      <x>295</x>
+      <y>295</y>
+      <w>15</w>
+      <h>315</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;610.0</additional_attributes>
@@ -311,21 +303,21 @@ controllerInputAnswer(model):ControllerInputAnswer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>606</y>
-      <w>378</w>
-      <h>18</h>
+      <x>305</x>
+      <y>635</y>
+      <w>185</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>610.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>350.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>162</x>
-      <y>198</y>
-      <w>354</w>
-      <h>132</h>
+      <x>180</x>
+      <y>295</y>
+      <w>295</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>570.0;200.0;10.0;200.0;10.0;10.0</additional_attributes>
@@ -333,28 +325,12 @@ controllerInputAnswer(model):ControllerInputAnswer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>246</x>
-      <y>198</y>
-      <w>606</w>
-      <h>198</h>
+      <x>250</x>
+      <y>295</y>
+      <w>505</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>990.0;230.0;990.0;310.0;10.0;310.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>954</x>
-      <y>252</y>
-      <w>198</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>ViewUser?
---
-+ViewUser(Model m, Controller c)
-
-layer=1
-group=4</panel_attributes>
-    <additional_attributes/>
   </element>
 </diagram>
