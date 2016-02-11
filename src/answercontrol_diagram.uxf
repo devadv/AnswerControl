@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>10</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>30</x>
-      <y>50</y>
-      <w>680</w>
-      <h>390</h>
+      <x>6</x>
+      <y>6</y>
+      <w>408</w>
+      <h>234</h>
     </coordinates>
     <panel_attributes>mvc.controller
 --
@@ -23,53 +23,56 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>280</y>
-      <w>300</w>
-      <h>70</h>
+      <x>18</x>
+      <y>162</y>
+      <w>180</w>
+      <h>42</h>
     </coordinates>
-    <panel_attributes>ControllerInputQuestion(Model model)</panel_attributes>
+    <panel_attributes>ControllerInputQuestion(Model model)
+--
+view:ViewInputQuestion(model)
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>290</x>
-      <y>80</y>
-      <w>180</w>
-      <h>180</h>
+      <x>156</x>
+      <y>42</y>
+      <w>108</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>iCRUD
 --
 +createDBConnection()
 +create()
-+delete()
 +retrieve()
 +update()
-
-
++delete()
 layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>280</y>
-      <w>290</w>
-      <h>70</h>
+      <x>222</x>
+      <y>162</y>
+      <w>174</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>ControllerInputAnswer(Model model)
+--
+view:ViewInputAnswer(model)
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>90</y>
-      <w>200</w>
-      <h>210</h>
+      <x>96</x>
+      <y>48</y>
+      <w>120</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>180.0;10.0;10.0;10.0;10.0;190.0</additional_attributes>
@@ -77,10 +80,10 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>90</y>
-      <w>210</w>
-      <h>210</h>
+      <x>210</x>
+      <y>48</y>
+      <w>126</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;190.0;10.0;190.0;190.0</additional_attributes>
@@ -88,14 +91,270 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>250</x>
-      <y>530</y>
-      <w>140</w>
-      <h>70</h>
+      <x>642</x>
+      <y>438</y>
+      <w>330</w>
+      <h>216</h>
     </coordinates>
-    <panel_attributes>EmptyPackage
+    <panel_attributes>mvc.model
 --
-bg=orange</panel_attributes>
+bg=light_gray
+layer=-1
+
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>606</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Model
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>840</x>
+      <y>474</y>
+      <w>96</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>iModel
+--
++createQuestion()
++retrieveQuestion()
++updateQuestion
++deleteQuestion()
++isQuestion()
+
++createAnswer()
++retrieveAnswer()
++updateAnswer()
++deleteAnswer()
++isAnswer()
+
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>480</y>
+      <w>204</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=2</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>486</x>
+      <y>6</y>
+      <w>684</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>mvc.view
+--
+bg=light_gray
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>540</x>
+      <y>60</y>
+      <w>48</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>iView
+--
+setGUI()
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>642</x>
+      <y>126</y>
+      <w>102</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>/View/
+--
+-listExercises: String[]
+--
++setGUI()
++getExercise()
++getBlockID()
+
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>252</y>
+      <w>192</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ViewInputAnswer
+--
++ViewInputAnswer(Model m, Controller c)
++getAnswer():String
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>252</y>
+      <w>192</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ViewInputQuestion
+--
++ViewInputQuestion(Model m, Controller c)
++getQuestion(): String
+
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>66</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=4</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;10.0;180.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>738</x>
+      <y>126</y>
+      <w>60</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=4</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>126</y>
+      <w>102</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=4</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>564</y>
+      <w>258</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+model:Model
+controllerInputQuestion(model):ControllerInputQuestion
+controllerInputAnswer(model):ControllerInputAnswer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>96</x>
+      <y>198</y>
+      <w>18</w>
+      <h>378</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;610.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>198</y>
+      <w>18</w>
+      <h>378</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;610.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>606</y>
+      <w>378</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>610.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>198</y>
+      <w>354</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>570.0;200.0;10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>246</x>
+      <y>198</y>
+      <w>606</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>990.0;230.0;990.0;310.0;10.0;310.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>252</y>
+      <w>198</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ViewUser?
+--
++ViewUser(Model m, Controller c)
+
+layer=1
+group=4</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
