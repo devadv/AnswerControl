@@ -38,9 +38,9 @@ public class Model extends Observable implements iModel  {
 	}
 
 	@Override
-	public void createQuestion(String exercise_nr, String question, int block_id) {
+	public void createQuestion(String exercise_id, String question, int block_id) {
 		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
-				+ exercise_nr + "','" + question + "','" + block_id + "')";
+				+ exercise_id + "','" + question + "','" + block_id + "')";
 		try {
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
