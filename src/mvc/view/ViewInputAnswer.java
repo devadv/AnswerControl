@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
@@ -24,17 +25,18 @@ import mvc.controller.iControllerAnswerQuestion;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
 
-public class ViewInputAnswer extends View {
+public class ViewInputAnswer extends ViewInputQuestion {
 	
 
 	private iCRUD controller;
 	private Model model;
-	private JTextArea answer;
+	private JTextArea answer ;
 
 	public ViewInputAnswer(Model model, iCRUD controller) {
 		super(model, controller);
 		this.model = model;
 		this.controller = controller;
+		//model.createDBConnection();
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
@@ -42,24 +44,34 @@ public class ViewInputAnswer extends View {
 	@Override
 	public void setGUI() {
 		super.setGUI();
-		label.setText(String.format("%20s %30s" ,"Question","Answer"));
-		
+		answer = new JTextArea(10, 38);
+		answer.setLineWrap(true);
+		answer.setWrapStyleWord(true);
+		answer.setFont(textAreaFont);
 		questionField.setEditable(false);
-		answer = new JTextArea(10, 20);
-		answer.setBorder(BorderFactory.createLineBorder(Color.green,5));
-		//JLabel distance = new JLabel("distance");
-		//center.add(distance, BorderLayout.CENTER);
-		center.add(answer, BorderLayout.EAST);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocation(800, 200);
-		setVisible(true);
-		pack();
+		questionField.setRows(10);
+		
+		JScrollPane jspAnswer = new JScrollPane(answer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		JPanel panelAnswer = new JPanel();
+		panelAnswer.add(jspAnswer);
+		panel.add(panelAnswer);
+		panel.add(panelBottom);
+		
+		System.out.println("antwoorden");
+		this.setTitle("Invoer Antwoorden");
+		this.setSize(600, 800);
+		this.setLocation(1000, 200);
+		this.getContentPane().add(panel);
+		this.setVisible(true);
+		this.pack();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource()==exercise_nr){
-			System.out.println("exercise_nr changed!");
+		if(event.getSource()==exercise_id){
+			System.out.println("exercise_id changed!");
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}else if(event.getSource()==btnSave){
 			if(!model.isQuestion(getExcercise())){
@@ -69,10 +81,10 @@ public class ViewInputAnswer extends View {
 			}
 			
 		}else if(event.getSource()==btnNext){
-			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex()+1);
+			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()+1);
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}else if(event.getSource()==btnPrevious){
-			exercise_nr.setSelectedIndex(exercise_nr.getSelectedIndex()-1);
+			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()-1);
 		}
 		
 	}

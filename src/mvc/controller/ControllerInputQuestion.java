@@ -9,7 +9,7 @@ import mvc.view.ViewInputQuestion;
 public class ControllerInputQuestion implements iCRUD{
 
 	private Model model;
-	private View view;
+	private ViewInputQuestion view;
 
 
 	public ControllerInputQuestion(Model model) {

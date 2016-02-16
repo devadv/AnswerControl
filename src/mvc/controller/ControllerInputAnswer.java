@@ -10,7 +10,6 @@ import mvc.view.ViewInputAnswer;
 public class ControllerInputAnswer implements iCRUD{
 
 	private Model model;
-	private View viewQuestion;
 	private ViewInputAnswer view;
 
 	public ControllerInputAnswer(Model model) {
@@ -31,10 +30,10 @@ public class ControllerInputAnswer implements iCRUD{
 
 	@Override
 	public void create() {
-		System.out.println("Excercise : " + viewQuestion.getExcercise());
-		System.out.println("Question : " + viewQuestion.getQuestion());
-		System.out.println("BlockID : " + viewQuestion.getBlockID());
-		model.createAnswer(viewQuestion.getExcercise(), viewQuestion.getQuestion(), viewQuestion.getBlockID());
+		System.out.println("Excercise : " + view.getExcercise());
+		System.out.println("Question : " + view.getQuestion());
+		System.out.println("BlockID : " + view.getBlockID());
+		model.createAnswer(view.getExcercise(), view.getQuestion(), view.getBlockID());
 	
 		
 	}
@@ -46,7 +45,7 @@ public class ControllerInputAnswer implements iCRUD{
 
 	@Override
 	public void update() {
-		model.updateQuestion(viewQuestion.getExcercise(), viewQuestion.getQuestion(), viewQuestion.getBlockID());
+		model.updateQuestion(view.getExcercise(), view.getQuestion(), view.getBlockID());
 			
 	}
 
