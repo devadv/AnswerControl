@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -123,12 +124,14 @@ public abstract class View extends JFrame implements iView, Observer{
 	protected JPanel panelTop;
 	protected JPanel panelBottom;
 	protected Font textAreaFont;
-	
+	protected JTextArea questionField = new JTextArea(10, 20);
+	protected JScrollPane jspQuestion;
+	protected JPanel panelQuestion;
 
 	public View(Model model,iCRUD controller ) {
 		this.model = model;
 		this.controller = controller;
-		model.createDBConnection();
+		
 	}
 
 	public void setGUI() {
@@ -139,7 +142,21 @@ public abstract class View extends JFrame implements iView, Observer{
 		btnPrevious.addActionListener(this);
 		exercise_id.addActionListener(this);
 		blocks_id.addActionListener(this);
-				
+		
+		questionField.setRows(23);
+		questionField.setColumns(38);
+		questionField.setLineWrap(true);
+		questionField.setWrapStyleWord(true);
+		//questionField.setText("Vraag");
+		questionField.setFont(textAreaFont);
+		questionField.setBackground(new Color(219, 205, 197));
+		
+		jspQuestion = new JScrollPane(questionField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			
+		panelQuestion = new JPanel();
+		panelQuestion.add(jspQuestion);
+		
         //main panel - layout vertical
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -178,6 +195,10 @@ public abstract class View extends JFrame implements iView, Observer{
 	}
 	public int getBlockID(){
 		return blocks_id.getSelectedIndex()+1;
+	}
+	public String getQuestion() {
+		 
+		return questionField.getText();
 	}
 
 	

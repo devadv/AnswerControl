@@ -117,18 +117,18 @@ public class Model extends Observable implements iModel  {
 	@Override
 	public void createAnswer(String exercise_nr, String answer, int block_id) {
 		// TODO
-
+		System.out.println("Create Answer in database");
 	}
 
 	@Override
 	public String retrieveAnswer(String exercise_nr) {
-		return null;
+		return "geen data beschikbaar" ;
 
 	}
 
 	@Override
 	public void updateAnswer(String exercise_nr, String answer, int block_id) {
-		// TODO
+		System.out.println("Update Answer in database");
 
 	}
 

@@ -19,39 +19,23 @@ import mvc.model.Model;
 public class ViewInputQuestion extends View {
 
 	
-	protected JTextArea questionField = new JTextArea(10, 20);
-	protected JScrollPane jspQuestion;
+	
 
 	public ViewInputQuestion(Model model, iCRUD controller) {
 		super(model, controller);
-		//model.createDBConnection();
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-
+		
+		
 	}
 	@Override
 	public void setGUI() {
 		super.setGUI();
 		
-		questionField.setRows(23);
-		questionField.setColumns(38);
-		questionField.setLineWrap(true);
-		questionField.setWrapStyleWord(true);
-		questionField.setText("Vraag");
-		questionField.setFont(textAreaFont);
-		questionField.setBackground(new Color(219, 205, 197));
-		
-		jspQuestion = new JScrollPane(questionField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			
-		JPanel panelQuestion = new JPanel();
-		panelQuestion.add(jspQuestion);
-		//add to main panel
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         
-		
-		this.pack();
+        this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
 		this.setLocation(200, 100);
@@ -89,10 +73,7 @@ public class ViewInputQuestion extends View {
 	}
 
 	
-	public String getQuestion() {
-		 
-		return questionField.getText();
-	}
+	
 
 
 }

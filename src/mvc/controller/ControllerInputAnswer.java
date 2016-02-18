@@ -31,9 +31,9 @@ public class ControllerInputAnswer implements iCRUD{
 	@Override
 	public void create() {
 		System.out.println("Excercise : " + view.getExcercise());
-		System.out.println("Question : " + view.getQuestion());
+		System.out.println("Answer : " + view.getAnswer());
 		System.out.println("BlockID : " + view.getBlockID());
-		model.createAnswer(view.getExcercise(), view.getQuestion(), view.getBlockID());
+		model.createAnswer(view.getExcercise(), view.getAnswer(), view.getBlockID());
 	
 		
 	}
@@ -45,7 +45,10 @@ public class ControllerInputAnswer implements iCRUD{
 
 	@Override
 	public void update() {
-		model.updateQuestion(view.getExcercise(), view.getQuestion(), view.getBlockID());
+		System.out.println("Excercise : " + view.getExcercise());
+		System.out.println("Answer : " + view.getAnswer());
+		System.out.println("BlockID : " + view.getBlockID());
+		model.updateAnswer(view.getExcercise(), view.getAnswer(), view.getBlockID());
 			
 	}
 
