@@ -135,7 +135,7 @@ public class BlueJExerciseCheckController {
             }
             
             // List Exercise combobox Listener
-            class listenForListExercisesComb implements ActionListener {//***************************************************
+            class listenForListExercisesComb implements ActionListener {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {

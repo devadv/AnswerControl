@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 public class Model extends Observable implements iModel  {
 
-	public static String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
-	public static String username = "ben";
-	public static String password = "12345";
+//	public static String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
+//	public static String username = "ben";
+//	public static String password = "12345";
 	
-	//public static String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
-	//public static String username = "badev_hintveld";
-	//public static String password = "V99r9R9qwMmYPcqU";
+	public static String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+	public static String username = "badev_hintveld";
+	public static String password = "V99r9R9qwMmYPcqU";
 
 	private Connection connection;
 	private Statement statement;
@@ -70,10 +70,20 @@ public class Model extends Observable implements iModel  {
 		}
 		return question;
 	}
+    
+    /*
+    
+    Insert:
+    insert into tablename (LASTTOUCH) values (CURRENT_TIMESTAMP);
+
+    Update:
+    update tablename set LASTTOUCH=CURRENT_TIMESTAMP;
+    update correct_answer set creation_date = CURRENT_TIMESTAMP() where idcorrect_answer = 1;
+    */
 
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
-		String sql = "UPDATE correct_answer SET question='" + question + "'WHERE exercise_nr='"+ exercise_nr +"'";
+		String sql = "UPDATE correct_answer SET question='" + question + "'WHERE exercise_nr='"+ exercise_nr +", creating_date = CURRENT_TIMESTAMP()'";
 		
 		try {
 			statement.executeUpdate(sql);
