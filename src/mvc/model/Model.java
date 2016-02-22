@@ -72,19 +72,16 @@ public class Model extends Observable implements iModel  {
 	}
     
     /*
-    
-    Insert:
-    insert into tablename (LASTTOUCH) values (CURRENT_TIMESTAMP);
-
-    Update:
-    update tablename set LASTTOUCH=CURRENT_TIMESTAMP;
-    update correct_answer set creation_date = CURRENT_TIMESTAMP() where idcorrect_answer = 1;
+            
+    update multiple columns data in jdbc
     */
 
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
-		String sql = "UPDATE correct_answer SET question='" + question + "'WHERE exercise_nr='"+ exercise_nr +", creating_date = CURRENT_TIMESTAMP()'";
+		String sql = "UPDATE correct_answer SET question = '" + question + "',"
+                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
 		
+        
 		try {
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
