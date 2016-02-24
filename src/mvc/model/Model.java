@@ -1,6 +1,7 @@
 package mvc.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,15 +40,26 @@ public class Model extends Observable implements iModel  {
 
 	@Override
 	public void createQuestion(String exercise_id, String question, int block_id) {
-		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
-				+ exercise_id + "','" + question + "','" + block_id + "')";
+        
+//		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+//				+ exercise_id + "','" + question + "','" + block_id + "')";
+        int result = 0;
+        
 		try {
-			statement.executeUpdate(sql);
+            PreparedStatement create = connection.prepareStatement(
+                "INSERT INTO correct_answer" +
+                "( exercise_nr, question, block_id )" + 
+                "VALUES( ?, ?, ? )");
+                create.setString(1, exercise_id);
+                create.setString(2, question);
+                create.setString(3, String.valueOf(block_id));
+                result = create.executeUpdate(question);
+			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(sql);
+		//System.out.println(sql);
 		setChanged();
 		notifyObservers();
 
@@ -80,7 +92,6 @@ public class Model extends Observable implements iModel  {
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
 		String sql = "UPDATE correct_answer SET question = '" + question + "',"
                 + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
-		
         
 		try {
 			statement.executeUpdate(sql);
