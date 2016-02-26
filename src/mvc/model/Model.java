@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +55,7 @@ public class Model extends Observable implements iModel  {
                 create.setString(1, exercise_id);
                 create.setString(2, question);
                 create.setString(3, String.valueOf(block_id));
-                result = create.executeUpdate(question);
+                result = create.executeUpdate();
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -90,16 +92,24 @@ public class Model extends Observable implements iModel  {
 
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
-		String sql = "UPDATE correct_answer SET question = '" + question + "',"
-                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
+//		String sql = "UPDATE correct_answer SET question = '" + question + "',"
+//                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
         
 		try {
-			statement.executeUpdate(sql);
+            PreparedStatement update = connection.prepareStatement(
+                "UPDATE correct_answer" +
+                "( question, creation_date = CURRENT_TIMESTAMP, excersise_nr )"+
+                "VALUES( ? )" +
+                "WHERE exercise_nr = ?");
+            update.setString(1, question);
+            update.setString(2, exercise_nr);
+            
+			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(sql);
+		//System.out.println(sql);
 		setChanged();
 		notifyObservers();
 
