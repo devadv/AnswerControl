@@ -45,8 +45,7 @@ public class Model extends Observable implements iModel  {
         
 //		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
 //				+ exercise_id + "','" + question + "','" + block_id + "')";
-        int result = 0;
-        
+                
 		try {
             PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO correct_answer" +
@@ -54,8 +53,9 @@ public class Model extends Observable implements iModel  {
                 "VALUES( ?, ?, ? )");
                 create.setString(1, exercise_id);
                 create.setString(2, question);
-                create.setString(3, String.valueOf(block_id));
-                result = create.executeUpdate();
+                create.setInt(3, block_id);
+                create.executeUpdate();
+                System.out.println("hellol world");
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,7 +77,7 @@ public class Model extends Observable implements iModel  {
 			resultSet = statement.executeQuery(sql);
 			resultSet.next();
 			question = resultSet.getString("question");
-			System.out.println(question);
+			System.out.println(question + " lijn 80");
 
 		} catch (SQLException ex) {
 			Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
