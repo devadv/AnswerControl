@@ -43,19 +43,22 @@ public class Model extends Observable implements iModel  {
 	@Override
 	public void createQuestion(String exercise_id, String question, int block_id) {
         
-//		String sql = "INSERT INTO correct_answer (exercise_nr, question,block_id) VALUES ('"
+//		String sql = "INSERT INTO correct_answer (exercise_nr, question, block_id) VALUES ('"
 //				+ exercise_id + "','" + question + "','" + block_id + "')";
                 
 		try {
-            PreparedStatement create = connection.prepareStatement(
-                "INSERT INTO correct_answer" +
-                "( exercise_nr, question, block_id )" + 
-                "VALUES( ?, ?, ? )");
+            PreparedStatement create = connection.prepareStatement
+                ( "INSERT INTO correct_answer "
+                + "exercise_nr "
+                + ", question "
+                + ", block_id " 
+                + "VALUES( ?, ?, ? )"
+                );
+            
                 create.setString(1, exercise_id);
                 create.setString(2, question);
                 create.setInt(3, block_id);
-                create.executeUpdate();
-                System.out.println("hellol world");
+                create.executeUpdate(question);
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,41 +72,74 @@ public class Model extends Observable implements iModel  {
 //questions
 	@Override
 	public String retrieveQuestion(String exercise_nr) {
-		String question = "";
-		try {
-			String sql = "SELECT question FROM correct_answer WHERE exercise_nr='" + exercise_nr
-					+ "'";
-			System.out.println(sql);
-			resultSet = statement.executeQuery(sql);
-			resultSet.next();
-			question = resultSet.getString("question");
-			System.out.println(question + " lijn 80");
-
-		} catch (SQLException ex) {
-			Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return question;
+		ResultSet rs = null;
+        String question = "";
+        
+        try 
+        {
+            if(exerciseExist(exercise_nr))
+            {
+                try 
+                {
+//                    String sql = "SELECT question FROM correct_answer WHERE exercise_nr='" + exercise_nr
+//                            + "'";
+//                    System.out.println(sql);
+//                    resultSet = statement.executeQuery(sql);
+                    PreparedStatement retrieve = connection.prepareStatement
+                        ( "SELECT question " 
+                        + "FROM correct_answer "
+                        + "WHERE exercise_nr = ? "
+                        );
+                    
+                    retrieve.setString(1, exercise_nr);
+                    retrieve.executeQuery();
+                    rs = retrieve.getResultSet();
+                    //question = resultSet.getString("question");
+                    
+                    while(rs.next())
+                    {
+                        question = rs.getString("question");
+                    }
+                    System.out.println("xx " + question);
+                }
+                catch (SQLException ex) 
+                {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                return question;
+            }
+            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
 	}
     
-    /*
-            
-    update multiple columns data in jdbc
-    */
-
+    
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
-//		String sql = "UPDATE correct_answer SET question = '" + question + "',"
-//                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
+		/*
+        String sql = "UPDATE correct_answer SET question = '" + question + "',"
+                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
+        */
         
 		try {
-            PreparedStatement update = connection.prepareStatement(
-                "UPDATE correct_answer" +
-                "( question, creation_date = CURRENT_TIMESTAMP, excersise_nr )"+
-                "VALUES( ? )" +
-                "WHERE exercise_nr = ?");
-            update.setString(1, question);
-            update.setString(2, exercise_nr);
-            
+             PreparedStatement update = connection.prepareStatement
+                 ( "UPDATE correct_answer " 
+                 + "SET creation_date = CURRENT_TIMESTAMP "
+                 + ", question = ? "
+               //+ ", eenKolom = waarde "    ... enz ...       
+                 + "WHERE exercise_nr = ? " 
+                 );
+             
+             update.setString(1, question);
+             update.setString(2, exercise_nr);
+             update.executeUpdate();
+        
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -141,6 +177,35 @@ public class Model extends Observable implements iModel  {
 		return false;
 		
 	}
+    
+    public boolean exerciseExist(String exercise_nr) throws SQLException 
+    {
+//        String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
+//                + exercise_nr + "'";
+//        System.out.println(sql);
+        
+        PreparedStatement exist = connection.prepareStatement
+            (
+             "SELECT exercise_nr " + 
+             "FROM correct_answer " +
+             "WHERE exercise_nr = ? "
+            );
+        
+        exist.setString(1, exercise_nr);
+        resultSet = exist.executeQuery();
+        
+        //resultSet = statement.executeQuery(sql);
+        
+        if (resultSet.next()) 
+        {
+            return true;
+        } 
+        else 
+        {
+            return false;
+        }
+    }
+    
 //answers
 	@Override
 	public void createAnswer(String exercise_nr, String answer, int block_id) {
