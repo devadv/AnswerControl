@@ -195,7 +195,7 @@ public class BlueJExerciseCheckModel
         }
     }
     
-    public String getQuestion( String exercise_nr ){//*******************************************************
+    public String getQuestion( String exercise_nr ){
         String question = "";
         try {
             String sql = "SELECT question FROM correct_answer WHERE exercise_nr='"
