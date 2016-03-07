@@ -72,6 +72,7 @@ public class Model extends Observable implements iModel  {
 	public String retrieveQuestion(String exercise_nr) {
 		ResultSet rs = null;
         String question = "";
+        
         try 
         {
             if(exerciseExist(exercise_nr))
