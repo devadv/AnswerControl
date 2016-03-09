@@ -50,7 +50,7 @@ public class ViewInputQuestion extends View {
 		if (event.getSource() == exercise_id) {
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 		} else if (event.getSource() == btnSave) {
-			if (!(model.isQuestion(getExcercise()))) {
+			if (!(model.questionExist(getExcercise()))) {
 				controller.create();
 			} else {
 				model.updateQuestion(getExcercise(), getQuestion(),

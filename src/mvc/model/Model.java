@@ -46,7 +46,8 @@ public class Model extends Observable implements iModel  {
 //		String sql = "INSERT INTO correct_answer (exercise_nr, question, block_id) VALUES ('"
 //				+ exercise_id + "','" + question + "','" + block_id + "')";
                 
-		try {
+		try 
+        {
             PreparedStatement create = connection.prepareStatement
                 ( "INSERT INTO correct_answer "
                 + "exercise_nr "
@@ -127,7 +128,8 @@ public class Model extends Observable implements iModel  {
                 + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
         */
         
-		try {
+		try 
+        {
              PreparedStatement update = connection.prepareStatement
                  ( "UPDATE correct_answer " 
                  + "SET creation_date = CURRENT_TIMESTAMP "
@@ -152,22 +154,38 @@ public class Model extends Observable implements iModel  {
 	}
 
 	@Override
-	public void deleteQuestion() {
-		// TODO
-
+	public void deleteQuestion() 
+    {
+        
 	}
 
 	@Override
-	public boolean isQuestion(String exercise_nr) {
-		String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
-				+ exercise_nr + "'";
-		try {
-			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				System.out.println("exsist: true");
+	public boolean questionExist(String exercise_nr) {
+        ResultSet rs = null;
+        
+//		String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
+//				+ exercise_nr + "'";
+        
+		try 
+        {
+            PreparedStatement isQuestion = connection.prepareStatement
+            ( "SELECT exercise_nr "
+            + "FROM correct_answer "
+            + "WHERE exercise_nr = ? "
+            );
+            
+            isQuestion.setString(1, exercise_nr);
+            isQuestion.executeQuery();
+            rs = isQuestion.getResultSet();
+            
+			//resultSet = statement.executeQuery(sql);
+			if (rs.next())//resultSet.next()
+            {
+				System.out.println("exist: true");
 				return true;
-			} else {
-				System.out.println("exsist: false");
+			} else 
+            {
+				System.out.println("exist: false");
 				return false;
 			}
 		} catch (SQLException e) {

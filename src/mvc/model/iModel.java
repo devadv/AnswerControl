@@ -17,7 +17,7 @@ public interface iModel {
 	
 	//tools Question
 	
-	boolean isQuestion(String exercise_nr);
+	boolean questionExist(String exercise_nr);
 	
 	
 	//CRUD Answer

@@ -62,7 +62,7 @@ public class ViewInputAnswer extends View {
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
 		}else if(event.getSource()==btnSave){
-			if(!model.isQuestion(getExcercise())){
+			if(!model.questionExist(getExcercise())){
 				controller.create();
 			}else {
 				controller.update();
