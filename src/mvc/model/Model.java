@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -107,10 +105,9 @@ public class Model extends Observable implements iModel  {
                 {
                     Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+                                
                 return question;
-            }
-            
+            }// end if
         } 
         catch (Exception ex) 
         {
@@ -154,7 +151,7 @@ public class Model extends Observable implements iModel  {
 	}
 
 	@Override
-	public void deleteQuestion() 
+	public void deactivateQuestion() 
     {
         
 	}

@@ -56,27 +56,56 @@ public class ViewInputAnswer extends View {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
-		if(event.getSource()==exercise_id){
+	public void actionPerformed(ActionEvent event) 
+    {
+		if(event.getSource() == exercise_id)
+        {
+            if(exercise_id.getSelectedIndex() == 0)
+            {
+                btnPrevious.setEnabled(false);
+                btnNext.setEnabled(true);
+            }
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
+            {
+                btnPrevious.setEnabled(true);
+                btnNext.setEnabled(false);
+            }
+            
 			System.out.println("exercise_id changed!");
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
-		}else if(event.getSource()==btnSave){
-			if(!model.questionExist(getExcercise())){
+		}
+        else if(event.getSource() == btnSave)
+        {
+			if(!model.questionExist(getExcercise()))
+            {
 				controller.create();
-			}else {
+			}
+            else 
+            {
 				controller.update();
 			}
-			
-		}else if(event.getSource()==btnNext){
-			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()+1);
-			questionField.setText(model.retrieveQuestion(getExcercise()));
-			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
-		}else if(event.getSource()==btnPrevious){
+		}
+        else if(event.getSource() == btnNext)
+        {
+            btnPrevious.setEnabled(true);
+            if(exercise_id.getSelectedIndex()+1 < exercise_id.getItemCount())
+            {
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()+1);
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+                answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated 
+            }
+            else
+            {
+                btnNext.setEnabled(false);
+            }
+		}
+        else if(event.getSource()==btnPrevious)
+        {
+            btnNext.setEnabled(true);
 			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()-1);
 			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
 		}
-		
 	}
 	
 	@Override

@@ -102,8 +102,7 @@ public abstract class View extends JFrame implements iView, Observer{
 	protected JButton btnPrevious = new JButton("Previous");
 	protected JLabel labelExercise = new JLabel("Oefening:");
 	protected JComboBox<String> exercise_id = new JComboBox<>(listExercises);
-	
-	
+
 	protected JLabel label = new JLabel();
 	protected JLabel labelBlock = new JLabel("Blok");
 	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
@@ -134,12 +133,19 @@ public abstract class View extends JFrame implements iView, Observer{
 		
 	}
 
-	public void setGUI() {
-		
+	public void setGUI() 
+    {     
+        
 		textAreaFont = new Font("", Font.BOLD, 13);
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
+        if(exercise_id.getItemCount() == 1)
+        {
+            btnNext.setEnabled(false);
+        }
+        
 		btnPrevious.addActionListener(this);
+        btnPrevious.setEnabled(false);
 		exercise_id.addActionListener(this);
 		blocks_id.addActionListener(this);
 		
@@ -200,10 +206,5 @@ public abstract class View extends JFrame implements iView, Observer{
 		 
 		return questionField.getText();
 	}
-
-	
-	
-	
-
 	
 }

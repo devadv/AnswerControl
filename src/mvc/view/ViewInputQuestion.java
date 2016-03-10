@@ -45,35 +45,70 @@ public class ViewInputQuestion extends View {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
-
-		if (event.getSource() == exercise_id) {
-			questionField.setText(model.retrieveQuestion(getExcercise()));
-		} else if (event.getSource() == btnSave) {
-			if (!(model.questionExist(getExcercise()))) {
-				controller.create();
-			} else {
-				model.updateQuestion(getExcercise(), getQuestion(),
-						getBlockID());
-			}
-
-		} else if (event.getSource() == btnNext) {
-			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-			questionField.setText(model.retrieveQuestion(getExcercise()));
-		} else if (event.getSource() == btnPrevious) {
-			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+	public void actionPerformed(ActionEvent event) 
+    {
+		if (event.getSource() == exercise_id) 
+        {
+            if(exercise_id.getSelectedIndex() == 0)
+            {
+                btnPrevious.setEnabled(false);
+            }
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
+            {
+                btnNext.setEnabled(false);
+                btnPrevious.setEnabled(true);
+            }
+            else
+            {
+                btnPrevious.setEnabled(true);
+            }
 			questionField.setText(model.retrieveQuestion(getExcercise()));
 		}
-	}
+        else if (event.getSource() == btnSave) 
+        {
+			if (!(model.questionExist(getExcercise()))) 
+            {
+				controller.create();
+			} 
+            else 
+            {
+				model.updateQuestion(getExcercise(), getQuestion(),getBlockID());
+			}
 
+		} 
+        else if (event.getSource() == btnNext) 
+        {
+            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+            {
+                btnPrevious.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+            }
+            else
+            {
+                btnNext.setEnabled(false);
+            }
+            
+		} 
+        else if (event.getSource() == btnPrevious) 
+        {
+            if(exercise_id.getSelectedIndex() > 0)
+            {
+                btnNext.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+            }
+            else
+            {
+                btnPrevious.setEnabled(false);
+            }
+	    }
+    }
+    
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println("model updated");
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
-
-	
-	
-
 
 }

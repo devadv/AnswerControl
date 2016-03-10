@@ -13,7 +13,7 @@ public interface iModel {
 	
 	void updateQuestion(String exercise_nr, String question, int block_id);
 	
-	void deleteQuestion();
+	void deactivateQuestion();
 	
 	//tools Question
 	
