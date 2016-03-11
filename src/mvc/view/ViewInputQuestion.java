@@ -3,9 +3,15 @@ package mvc.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
 
 import javax.swing.Box;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -35,6 +41,23 @@ public class ViewInputQuestion extends View {
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         
+        JMenu testMenu = new JMenu("Test");
+        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
+        testMenu.add(resetDeactivateDate);
+        resetDeactivateDate.addActionListener(
+            new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    
+                }
+        });
+        
+        JMenuBar bar = new JMenuBar();
+        setJMenuBar(bar);
+        bar.add(testMenu);
+        
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
@@ -43,6 +66,16 @@ public class ViewInputQuestion extends View {
 		this.setVisible(true);
 		
 	}
+    
+    private class windowClosingAdaptor extends WindowAdapter
+    {
+        @Override
+        public void windowClosing(WindowEvent we)
+        {
+            System.out.println("Closing event");
+            
+        }
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent event) 

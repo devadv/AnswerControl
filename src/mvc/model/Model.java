@@ -71,7 +71,6 @@ public class Model extends Observable implements iModel  {
 //questions
 	@Override
 	public String retrieveQuestion(String exercise_nr) {
-		ResultSet rs = null;
         String question = "";
         
         try 
@@ -80,8 +79,7 @@ public class Model extends Observable implements iModel  {
             {
                 try 
                 {
-//                    String sql = "SELECT question FROM correct_answer WHERE exercise_nr='" + exercise_nr
-//                            + "'";
+//                    String sql = "SELECT question FROM correct_answer WHERE exercise_nr= '" + exercise_nr "'";
 //                    System.out.println(sql);
 //                    resultSet = statement.executeQuery(sql);
                     PreparedStatement retrieve = connection.prepareStatement
@@ -92,12 +90,12 @@ public class Model extends Observable implements iModel  {
                     
                     retrieve.setString(1, exercise_nr);
                     retrieve.executeQuery();
-                    rs = retrieve.getResultSet();
+                    resultSet = retrieve.getResultSet();
                     //question = resultSet.getString("question");
                     
-                    while(rs.next())
+                    while(resultSet.next())
                     {
-                        question = rs.getString("question");
+                        question = resultSet.getString("question");
                     }
                     System.out.println("xx " + question);
                 }
@@ -151,14 +149,45 @@ public class Model extends Observable implements iModel  {
 	}
 
 	@Override
-	public void deactivateQuestion() 
+	public void deactivateQuestion(String exercise_nr) 
     {
-        
+        try 
+        {
+            PreparedStatement deactivate = connection.prepareStatement
+            ( "UPDATE correct_answer "
+            + "SET deactivate_date = CURRENT_TIMESTAMP "
+            + "WHERE exercise_nr = ? "
+            );
+            
+            deactivate.setString(1, exercise_nr);
+            deactivate.executeUpdate();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
 	}
+    
+    @Override
+    public void resetDeactivateDate()
+    {
+        try 
+        {
+            PreparedStatement reset = connection.prepareStatement
+            ( "UPDATE correct_answer "
+            + "SET deactivate_date = NULL "
+            );
+            
+            reset.executeUpdate();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public boolean questionExist(String exercise_nr) {
-        ResultSet rs = null;
         
 //		String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
 //				+ exercise_nr + "'";
@@ -173,10 +202,10 @@ public class Model extends Observable implements iModel  {
             
             isQuestion.setString(1, exercise_nr);
             isQuestion.executeQuery();
-            rs = isQuestion.getResultSet();
+            resultSet = isQuestion.getResultSet();
             
 			//resultSet = statement.executeQuery(sql);
-			if (rs.next())//resultSet.next()
+			if (resultSet.next())//resultSet.next()
             {
 				System.out.println("exist: true");
 				return true;

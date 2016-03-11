@@ -13,7 +13,9 @@ public interface iModel {
 	
 	void updateQuestion(String exercise_nr, String question, int block_id);
 	
-	void deactivateQuestion();
+	void deactivateQuestion(String exercise_nr);
+    
+    void resetDeactivateDate();
 	
 	//tools Question
 	

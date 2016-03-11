@@ -2,8 +2,13 @@ package mvc.view;
 
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
-
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -46,13 +51,30 @@ public class ViewInputAnswer extends View {
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 		this.pack();
-		
+        
+		JMenu testMenu = new JMenu("Test");
+        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
+        testMenu.add(resetDeactivateDate);
+        resetDeactivateDate.addActionListener(
+            new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    
+                }
+        });
+        
+        JMenuBar bar = new JMenuBar();
+        setJMenuBar(bar);
+        bar.add(testMenu);
+        
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
 		this.setLocation(1000, 200);
 		this.getContentPane().add(panel);
 		this.setVisible(true);
-		
+        
 	}
 
 	@Override
@@ -120,8 +142,12 @@ public class ViewInputAnswer extends View {
 		return answerField.getText();
 	}
 
-	
-	
-
-	
+	private class windowClosingAdaptor extends WindowAdapter
+    {
+        @Override
+        public void windowClosing(WindowEvent we)
+        {
+            System.out.println("Closing event");
+        }
+    }
 }
