@@ -16,9 +16,10 @@ import javax.swing.JTextArea;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
 
-public class ViewInputAnswer extends View {
-	
 
+public class ViewInputAnswer extends View
+{
+	
 	private iCRUD controller;
 	private Model model;
 	private JTextArea answerField ;
@@ -52,26 +53,11 @@ public class ViewInputAnswer extends View {
 		panel.add(panelBottom);
 		this.pack();
         
-		JMenu testMenu = new JMenu("Test");
-        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
-        testMenu.add(resetDeactivateDate);
-        resetDeactivateDate.addActionListener(
-            new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                    
-                }
-        });
-        
-        JMenuBar bar = new JMenuBar();
-        setJMenuBar(bar);
-        bar.add(testMenu);
-        
+		        
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
 		this.setLocation(1000, 200);
+        
 		this.getContentPane().add(panel);
 		this.setVisible(true);
         
@@ -80,6 +66,7 @@ public class ViewInputAnswer extends View {
 	@Override
 	public void actionPerformed(ActionEvent event) 
     {
+        
 		if(event.getSource() == exercise_id)
         {
             if(exercise_id.getSelectedIndex() == 0)
@@ -122,12 +109,14 @@ public class ViewInputAnswer extends View {
                 btnNext.setEnabled(false);
             }
 		}
-        else if(event.getSource()==btnPrevious)
+        else if(event.getSource() == btnPrevious)
         {
             btnNext.setEnabled(true);
 			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()-1);
 			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
 		}
+        
+        
 	}
 	
 	@Override
@@ -142,12 +131,4 @@ public class ViewInputAnswer extends View {
 		return answerField.getText();
 	}
 
-	private class windowClosingAdaptor extends WindowAdapter
-    {
-        @Override
-        public void windowClosing(WindowEvent we)
-        {
-            System.out.println("Closing event");
-        }
-    }
 }

@@ -19,8 +19,6 @@ public interface iModel {
 	
 	//tools Question
 	
-	boolean questionExist(String exercise_nr);
-	
 	
 	//CRUD Answer
 	void createAnswer(String exercise_nr, String answer, int block_id);

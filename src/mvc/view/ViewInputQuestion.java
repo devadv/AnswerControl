@@ -24,9 +24,6 @@ import mvc.model.Model;
 
 public class ViewInputQuestion extends View {
 
-	
-	
-
 	public ViewInputQuestion(Model model, iCRUD controller) {
 		super(model, controller);
 		setGUI();
@@ -41,41 +38,19 @@ public class ViewInputQuestion extends View {
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         
-        JMenu testMenu = new JMenu("Test");
-        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
-        testMenu.add(resetDeactivateDate);
-        resetDeactivateDate.addActionListener(
-            new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                    
-                }
-        });
-        
-        JMenuBar bar = new JMenuBar();
-        setJMenuBar(bar);
-        bar.add(testMenu);
-        
+                
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
+        
 		this.setLocation(200, 100);
 		this.getContentPane().add(panel);
 		this.setVisible(true);
+        
 		
 	}
     
-    private class windowClosingAdaptor extends WindowAdapter
-    {
-        @Override
-        public void windowClosing(WindowEvent we)
-        {
-            System.out.println("Closing event");
-            
-        }
-    }
+    
 
 	@Override
 	public void actionPerformed(ActionEvent event) 
@@ -143,5 +118,6 @@ public class ViewInputQuestion extends View {
 		System.out.println("model updated");
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
+    
 
 }

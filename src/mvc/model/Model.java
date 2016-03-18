@@ -75,7 +75,7 @@ public class Model extends Observable implements iModel  {
         
         try 
         {
-            if(exerciseExist(exercise_nr))
+            if(questionExist(exercise_nr))
             {
                 try 
                 {
@@ -186,9 +186,8 @@ public class Model extends Observable implements iModel  {
         }
     }
 
-	@Override
-	public boolean questionExist(String exercise_nr) {
-        
+	public boolean questionExist(String exercise_nr) 
+    {
 //		String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
 //				+ exercise_nr + "'";
         
@@ -209,46 +208,22 @@ public class Model extends Observable implements iModel  {
             {
 				System.out.println("exist: true");
 				return true;
-			} else 
+			} 
+            else 
             {
 				System.out.println("exist: false");
-				return false;
 			}
-		} catch (SQLException e) {
+		} 
+        catch (SQLException e) 
+        {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
 		return false;
 		
 	}
-    
-    public boolean exerciseExist(String exercise_nr) throws SQLException 
-    {
-//        String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
-//                + exercise_nr + "'";
-//        System.out.println(sql);
-        
-        PreparedStatement exist = connection.prepareStatement
-            (
-             "SELECT exercise_nr " + 
-             "FROM correct_answer " +
-             "WHERE exercise_nr = ? "
-            );
-        
-        exist.setString(1, exercise_nr);
-        resultSet = exist.executeQuery();
-        
-        //resultSet = statement.executeQuery(sql);
-        
-        if (resultSet.next()) 
-        {
-            return true;
-        } 
-        else 
-        {
-            return false;
-        }
-    }
+
     
 //answers
 	@Override

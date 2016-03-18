@@ -5,6 +5,10 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
@@ -14,6 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,8 +31,10 @@ import javax.xml.ws.Dispatch;
 import mvc.controller.iControllerAnswerQuestion;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
+import sun.awt.WindowIDProvider;
 
-public abstract class View extends JFrame implements iView, Observer{
+public abstract class View extends JFrame implements iView, Observer
+{
 
 	private String[] listExercises  = {"1.1", "1.2", "1.3", "1.4","1.5","1.6","1.7","1.8","1.9","1.10","1.11","1.12","1.13","1.14","1.15",
 			 "1.16","1.17","1.18","1.19", "1.20","1.21", "1.22", "1.23","1.24","1.25","1.26","1.27","1.28",
@@ -186,6 +195,25 @@ public abstract class View extends JFrame implements iView, Observer{
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelBottom);
+        this.addWindowListener(new windowClosingAdaptor());
+        
+        JMenu testMenu = new JMenu("Test");
+        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
+        testMenu.add(resetDeactivateDate);
+        
+        resetDeactivateDate.addActionListener(
+            new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    
+                }
+        });
+        
+        JMenuBar bar = new JMenuBar();
+        setJMenuBar(bar);
+        bar.add(testMenu);
         
         /* this.pack();
         this.setSize(600, 600);
@@ -206,5 +234,28 @@ public abstract class View extends JFrame implements iView, Observer{
 		 
 		return questionField.getText();
 	}
+    
+    public boolean isQuestionchanged()
+    {
+        
+        return false;
+    }
+    
+    private class windowClosingAdaptor extends WindowAdapter
+    {
+        @Override
+        public void windowClosing(WindowEvent we)
+        {
+            System.out.println("Closing event");
+            if(!isQuestionchanged())
+            {
+                
+            }
+            else
+            {
+                System.exit(0);
+            }
+        }
+    }
 	
 }

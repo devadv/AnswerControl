@@ -12,7 +12,4 @@ public interface iCRUD {
 	
 	void delete();
 	
-		
-	
-	
 }

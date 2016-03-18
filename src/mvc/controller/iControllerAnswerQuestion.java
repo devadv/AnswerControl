@@ -16,7 +16,7 @@ public interface iControllerAnswerQuestion {
 	
 	boolean isQuestion();
 	
-	
+	    
 	//CRUD Answer
 	void createAnswer();
 	
