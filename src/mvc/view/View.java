@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -117,6 +118,8 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
 	protected iCRUD controller;
 	protected Model model;
+    ViewInputAnswer viewInputAnswer;
+    
 	
 	
 	//borders
@@ -195,7 +198,7 @@ public abstract class View extends JFrame implements iView, Observer
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelBottom);
-        this.addWindowListener(new windowClosingAdaptor());
+        
         
         JMenu testMenu = new JMenu("Test");
         JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
@@ -215,7 +218,7 @@ public abstract class View extends JFrame implements iView, Observer
         setJMenuBar(bar);
         bar.add(testMenu);
         
-        /* this.pack();
+        /*this.pack();
         this.setSize(600, 600);
         this.setResizable(false);
         this.setLocation(new Point(800, 200));
@@ -235,27 +238,27 @@ public abstract class View extends JFrame implements iView, Observer
 		return questionField.getText();
 	}
     
-    public boolean isQuestionchanged()
-    {
-        
-        return false;
-    }
-    
     private class windowClosingAdaptor extends WindowAdapter
-    {
+    {        
         @Override
         public void windowClosing(WindowEvent we)
-        {
-            System.out.println("Closing event");
-            if(!isQuestionchanged())
+        {            
+            if(viewInputAnswer.isAnswerchanged())
             {
-                
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    System.out.println("Yes option");
+                    controller.update();
+                    System.exit(0);
+                }
             }
             else
             {
                 System.exit(0);
             }
         }
-    }
-	
+    }// end class windowClosingAdaptor
+    	
 }

@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,13 +23,13 @@ import mvc.controller.iControllerAnswerQuestion;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
 
-public class ViewInputQuestion extends View {
+public class ViewInputQuestion extends View 
+{
 
 	public ViewInputQuestion(Model model, iCRUD controller) {
 		super(model, controller);
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-		
 		
 	}
 	@Override
@@ -46,11 +47,13 @@ public class ViewInputQuestion extends View {
 		this.setLocation(200, 100);
 		this.getContentPane().add(panel);
 		this.setVisible(true);
-        
 		
 	}
     
-    
+    public void addWindowClosingListener( WindowAdapter windowAdapter) 
+    {
+         this.addWindowListener( windowAdapter );
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent event) 
@@ -119,5 +122,22 @@ public class ViewInputQuestion extends View {
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
     
+    public String getQuestion()
+    {
+        return questionField.getText();
+    }
+    
+    public boolean isQuestionChanged()
+    {
+        String currentText = getQuestion();
+        String oldtext = model.retrieveQuestion(String.valueOf(exercise_id.getSelectedIndex()));
+        
+        if(currentText.equals(oldtext))
+        {
+            return false;
+        }
+        
+        return true;
+    }    
 
-}
+}// end class ViewInputQuestion

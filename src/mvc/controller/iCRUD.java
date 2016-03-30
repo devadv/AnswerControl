@@ -11,5 +11,7 @@ public interface iCRUD {
 	void update();
 	
 	void delete();
+    
+    void updateQuestion();
 	
 }

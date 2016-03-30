@@ -9,6 +9,7 @@ import java.util.Observable;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -31,6 +32,7 @@ public class ViewInputAnswer extends View
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 		answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
+        
 	}
 
 	@Override
@@ -60,6 +62,7 @@ public class ViewInputAnswer extends View
         
 		this.getContentPane().add(panel);
 		this.setVisible(true);
+        
         
 	}
 
@@ -130,5 +133,23 @@ public class ViewInputAnswer extends View
 		 
 		return answerField.getText();
 	}
+    
+    public boolean isAnswerchanged()
+    {
+        String currentText = getAnswer();
+        String oldtext = model.retrieveAnswer(String.valueOf(exercise_id.getSelectedIndex()));
+        
+        if(currentText.equals(oldtext))
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public void addWindowClosingListener( WindowAdapter windowAdapter) 
+    {
+         this.addWindowListener( windowAdapter );
+    }
 
 }
