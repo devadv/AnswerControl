@@ -20,6 +20,7 @@ public class ControllerInputAnswer implements iCRUD{
 		this.model = model;
 		createDBConnection();
 		this.view = new ViewInputAnswer(model, this);
+		this.view.addWindowListener(new WindowClosingAdapter());
 		model.addObserver(view);
 		
 	}
@@ -67,7 +68,7 @@ public class ControllerInputAnswer implements iCRUD{
         model.updateQuestion(view.getQuestion(), view.getAnswer(), view.getBlockID());
     }
     
-    private class windowClosingAdaptor extends WindowAdapter
+    private class WindowClosingAdapter extends WindowAdapter
     {
         @Override
         public void windowClosing(WindowEvent we)
@@ -76,7 +77,7 @@ public class ControllerInputAnswer implements iCRUD{
             
             if(view.isAnswerchanged())
             {
-                int dialogResult = JOptionPane.showInternalConfirmDialog(null,
+                int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", null, JOptionPane.YES_NO_OPTION);
                 if(dialogResult == 0)// yes button clicked
                 {

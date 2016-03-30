@@ -11,7 +11,7 @@ public class Main {
 		System.out.println(" In main app");
 		Model model = new Model();
 		ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+		ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         
         //int dialogResult = JOptionPane.showConfirmDialog(null, "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
 	}

@@ -21,6 +21,7 @@ public class ControllerInputQuestion implements iCRUD
 		this.model = model;
 		createDBConnection();
 		this.view = new ViewInputQuestion(model, this);
+		this.view.addWindowListener(new WindowClosingAdapter());
 		model.addObserver(view);
 		
 	}
@@ -64,7 +65,7 @@ public class ControllerInputQuestion implements iCRUD
         
     }
     
-    private class windowClosingAdaptor extends WindowAdapter
+    private class WindowClosingAdapter extends WindowAdapter
     {
         @Override
         public void windowClosing(WindowEvent we)
