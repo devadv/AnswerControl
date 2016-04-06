@@ -238,12 +238,19 @@ public abstract class View extends JFrame implements iView, Observer
 		return questionField.getText();
 	}
     
-    private class windowClosingAdaptor extends WindowAdapter
-    {        
+    public class windowClosingAdapter extends WindowAdapter
+    {     
+        boolean change;
+        
+        public windowClosingAdapter(boolean isChanged)
+        {
+            change = isChanged;
+        }
+        
         @Override
         public void windowClosing(WindowEvent we)
         {            
-            if(viewInputAnswer.isAnswerchanged())
+            if(change)
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);

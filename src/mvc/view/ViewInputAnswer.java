@@ -55,7 +55,7 @@ public class ViewInputAnswer extends View
 		panel.add(panelBottom);
 		this.pack();
         
-		        
+		this.addWindowListener(new windowClosingAdapter(isAnswerchanged()));        
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
 		this.setLocation(1000, 200);
@@ -147,9 +147,9 @@ public class ViewInputAnswer extends View
         return true;
     }
     
-    public void addWindowClosingListener( WindowAdapter windowAdapter) 
-    {
-         this.addWindowListener( windowAdapter );
-    }
+//    public void addWindowClosingListener( WindowAdapter windowAdapter) 
+//    {
+//         this.addWindowListener( windowAdapter );
+//    }
 
 }

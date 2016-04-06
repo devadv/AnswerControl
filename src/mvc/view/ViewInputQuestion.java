@@ -30,6 +30,7 @@ public class ViewInputQuestion extends View
 		super(model, controller);
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
+        
 		
 	}
 	@Override
@@ -39,7 +40,7 @@ public class ViewInputQuestion extends View
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         
-                
+        this.addWindowListener(new windowClosingAdapter(isQuestionChanged()));
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
@@ -50,10 +51,10 @@ public class ViewInputQuestion extends View
 		
 	}
     
-    public void addWindowClosingListener( WindowAdapter windowAdapter) 
-    {
-         this.addWindowListener( windowAdapter );
-    }
+//    public void addWindowClosingListener( WindowAdapter windowAdapter) 
+//    {
+//         this.addWindowListener( windowAdapter );
+//    }
 
 	@Override
 	public void actionPerformed(ActionEvent event) 
