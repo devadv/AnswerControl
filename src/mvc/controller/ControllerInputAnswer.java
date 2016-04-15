@@ -62,11 +62,6 @@ public class ControllerInputAnswer implements iCRUD{
 		
 	}
     
-    @Override
-    public void updateQuestion()
-    {
-        model.updateQuestion(view.getQuestion(), view.getAnswer(), view.getBlockID());
-    }
     
     
 }

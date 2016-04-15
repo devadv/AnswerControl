@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Observable;
 
 import javax.swing.Box;
@@ -39,8 +40,8 @@ public class ViewInputQuestion extends View
 		
 		panel.add(panelQuestion);
         panel.add(panelBottom);
-        
-        this.addWindowListener(new windowClosingAdapter(isQuestionChanged()));
+                
+        this.addWindowListener( new WindowClosingAdapter1());
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
@@ -50,11 +51,6 @@ public class ViewInputQuestion extends View
 		this.setVisible(true);
 		
 	}
-    
-//    public void addWindowClosingListener( WindowAdapter windowAdapter) 
-//    {
-//         this.addWindowListener( windowAdapter );
-//    }
 
 	@Override
 	public void actionPerformed(ActionEvent event) 
@@ -131,7 +127,7 @@ public class ViewInputQuestion extends View
     public boolean isQuestionChanged()
     {
         String currentText = getQuestion();
-        String oldtext = model.retrieveQuestion(String.valueOf(exercise_id.getSelectedIndex()));
+        String oldtext = model.retrieveQuestion(String.valueOf(exercise_id.getSelectedItem()));
         
         if(currentText.equals(oldtext))
         {
@@ -139,6 +135,29 @@ public class ViewInputQuestion extends View
         }
         
         return true;
-    }    
+    }  
+    
+    public class WindowClosingAdapter1 extends WindowAdapter
+    {           
+        @Override
+        public void windowClosing(WindowEvent we)
+        {         
+            if(isQuestionChanged())
+            {
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    System.out.println("Yes option");
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    System.exit(0);
+                }
+            }
+            else
+            {
+                System.exit(0);
+            }
+        }
+    }// end class windowClosingAdaptor
 
 }// end class ViewInputQuestion

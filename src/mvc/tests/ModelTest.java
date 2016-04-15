@@ -14,8 +14,7 @@ public class ModelTest {
 		model.retrieveQuestion("1.1");
 		model.updateQuestion("1.1" , "Dit de vraag updated", 1);
 		model.retrieveQuestion("1.1");
-		model.questionExist("1.1");
-		model.questionExist("1.45");
+		
 		
 		
 

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Observable;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,6 +17,7 @@ import javax.swing.JTextArea;
 
 import mvc.controller.iCRUD;
 import mvc.model.Model;
+import sun.awt.WindowClosingListener;
 
 
 public class ViewInputAnswer extends View
@@ -31,7 +33,7 @@ public class ViewInputAnswer extends View
 		this.controller = controller;
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-		answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
+		answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
         
 	}
 
@@ -54,8 +56,8 @@ public class ViewInputAnswer extends View
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 		this.pack();
-        
-		this.addWindowListener(new windowClosingAdapter(isAnswerchanged()));        
+                
+		this.addWindowListener(new windowClosingAdapter());
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
 		this.setLocation(1000, 200);
@@ -85,7 +87,7 @@ public class ViewInputAnswer extends View
             
 			System.out.println("exercise_id changed!");
 			questionField.setText(model.retrieveQuestion(getExcercise()));
-			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
+			answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
 		}
         else if(event.getSource() == btnSave)
         {
@@ -105,7 +107,7 @@ public class ViewInputAnswer extends View
             {
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()+1);
                 questionField.setText(model.retrieveQuestion(getExcercise()));
-                answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated 
+                answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated 
             }
             else
             {
@@ -116,7 +118,7 @@ public class ViewInputAnswer extends View
         {
             btnNext.setEnabled(true);
 			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()-1);
-			answerField.setText(model.retrieveAnswer(getExcercise())+ " voor " + getExcercise() );// change when model is updated
+			answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
 		}
         
         
@@ -137,7 +139,7 @@ public class ViewInputAnswer extends View
     public boolean isAnswerchanged()
     {
         String currentText = getAnswer();
-        String oldtext = model.retrieveAnswer(String.valueOf(exercise_id.getSelectedIndex()));
+        String oldtext = model.retrieveAnswer(String.valueOf(exercise_id.getSelectedItem()));
         
         if(currentText.equals(oldtext))
         {
@@ -146,10 +148,30 @@ public class ViewInputAnswer extends View
         
         return true;
     }
-    
-//    public void addWindowClosingListener( WindowAdapter windowAdapter) 
-//    {
-//         this.addWindowListener( windowAdapter );
-//    }
+
+    public class windowClosingAdapter extends WindowAdapter
+    {           
+        @Override
+        public void windowClosing(WindowEvent we)
+        {         
+            if(isAnswerchanged())
+            {
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    System.out.println("Yes option");
+                    System.out.println("exercise_id.getSelectedItem()" + exercise_id.getSelectedItem());
+                    System.out.println("getAnswer()" + getAnswer());
+                    model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
+                    System.exit(0);
+                }
+            }
+            else
+            {
+                System.exit(0);
+            }
+        }
+    }// end class windowClosingAdaptor
 
 }

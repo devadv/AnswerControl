@@ -36,7 +36,6 @@ import sun.awt.WindowIDProvider;
 
 public abstract class View extends JFrame implements iView, Observer
 {
-
 	private String[] listExercises  = {"1.1", "1.2", "1.3", "1.4","1.5","1.6","1.7","1.8","1.9","1.10","1.11","1.12","1.13","1.14","1.15",
 			 "1.16","1.17","1.18","1.19", "1.20","1.21", "1.22", "1.23","1.24","1.25","1.26","1.27","1.28",
 			 "1.29","1.30","1.31","1.32","1.33","1.34","1.35","1.36",
@@ -112,15 +111,14 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JButton btnPrevious = new JButton("Previous");
 	protected JLabel labelExercise = new JLabel("Oefening:");
 	protected JComboBox<String> exercise_id = new JComboBox<>(listExercises);
+    
 
 	protected JLabel label = new JLabel();
 	protected JLabel labelBlock = new JLabel("Blok");
 	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
 	protected iCRUD controller;
 	protected Model model;
-    ViewInputAnswer viewInputAnswer;
-    
-	
+    	
 	
 	//borders
 	Border emptyBorder = BorderFactory.createEmptyBorder(8, 15, 8, 8);
@@ -146,8 +144,7 @@ public abstract class View extends JFrame implements iView, Observer
 	}
 
 	public void setGUI() 
-    {     
-        
+    {
 		textAreaFont = new Font("", Font.BOLD, 13);
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
@@ -233,39 +230,6 @@ public abstract class View extends JFrame implements iView, Observer
 	public int getBlockID(){
 		return blocks_id.getSelectedIndex()+1;
 	}
-	public String getQuestion() {
-		 
-		return questionField.getText();
-	}
-    
-    public class windowClosingAdapter extends WindowAdapter
-    {     
-        boolean change;
-        
-        public windowClosingAdapter(boolean isChanged)
-        {
-            change = isChanged;
-        }
-        
-        @Override
-        public void windowClosing(WindowEvent we)
-        {            
-            if(change)
-            {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
-                {
-                    System.out.println("Yes option");
-                    controller.update();
-                    System.exit(0);
-                }
-            }
-            else
-            {
-                System.exit(0);
-            }
-        }
-    }// end class windowClosingAdaptor
+	
     	
-}
+}// end abstact class View

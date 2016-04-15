@@ -97,7 +97,6 @@ public class Model extends Observable implements iModel  {
                     {
                         question = resultSet.getString("question");
                     }
-                    System.out.println("xx " + question);
                 }
                 catch (SQLException ex) 
                 {
@@ -128,7 +127,7 @@ public class Model extends Observable implements iModel  {
              PreparedStatement update = connection.prepareStatement
                  ( "UPDATE correct_answer " 
                  + "SET creation_date = CURRENT_TIMESTAMP "
-                 + ", question = ? "
+                 + ",question = ? "
                //+ ", eenKolom = waarde "    ... enz ...       
                  + "WHERE exercise_nr = ? " 
                  );
@@ -146,6 +145,32 @@ public class Model extends Observable implements iModel  {
 		setChanged();
 		notifyObservers();
 
+	}
+    
+    @Override
+	public void updateAnswer(String exercise_nr, String answer, int block_id) {
+		System.out.println("Update Answer in database");
+        try 
+        {
+             PreparedStatement update = connection.prepareStatement
+                 ( "UPDATE correct_answer " 
+                 + "SET creation_date = CURRENT_TIMESTAMP "
+                 + ",answer = ? "    
+                 + "WHERE exercise_nr = ? " 
+                 );
+             
+             update.setString(1, answer);
+             update.setString(2, exercise_nr);
+             update.executeUpdate();
+        
+			//statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//System.out.println(sql);
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
@@ -209,10 +234,7 @@ public class Model extends Observable implements iModel  {
 				System.out.println("exist: true");
 				return true;
 			} 
-            else 
-            {
-				System.out.println("exist: false");
-			}
+            
 		} 
         catch (SQLException e) 
         {
@@ -233,17 +255,49 @@ public class Model extends Observable implements iModel  {
 	}
 
 	@Override
-	public String retrieveAnswer(String exercise_nr) {
-		return "geen data beschikbaar" ;
+	public String retrieveAnswer(String exercise_nr) 
+    {
+		String answer = "";
+        
+        try 
+        {
+            if(questionExist(exercise_nr))
+            {
+                try 
+                {
+                    PreparedStatement retrieve = connection.prepareStatement
+                        ( "SELECT answer " 
+                        + "FROM correct_answer "
+                        + "WHERE exercise_nr = ? "
+                        );
+                    
+                    retrieve.setString(1, exercise_nr);
+                    retrieve.executeQuery();
+                    resultSet = retrieve.getResultSet();
+                    
+                    while(resultSet.next())
+                    {
+                        answer = resultSet.getString("answer");
+                    }
+                }
+                catch (SQLException ex) 
+                {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                                
+                return answer;
+            }// end if
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
 
 	}
 
-	@Override
-	public void updateAnswer(String exercise_nr, String answer, int block_id) {
-		System.out.println("Update Answer in database");
-
-	}
-
+	
 	@Override
 	public void deleteAnswer() {
 		// TODO
