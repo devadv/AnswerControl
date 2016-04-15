@@ -152,6 +152,10 @@ public class ViewInputQuestion extends View
                     model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                     System.exit(0);
                 }
+                else
+                {
+                    System.exit(0);
+                }
             }
             else
             {

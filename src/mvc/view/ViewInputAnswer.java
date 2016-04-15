@@ -166,6 +166,10 @@ public class ViewInputAnswer extends View
                     model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
                     System.exit(0);
                 }
+                else
+                {
+                    System.exit(0);
+                }
             }
             else
             {
