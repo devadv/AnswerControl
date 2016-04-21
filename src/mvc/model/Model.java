@@ -73,42 +73,35 @@ public class Model extends Observable implements iModel  {
 	public String retrieveQuestion(String exercise_nr) {
         String question = "";
         
-        try 
+        if(questionExist(exercise_nr))
         {
-            if(questionExist(exercise_nr))
+            try 
             {
-                try 
+//                String sql = "SELECT question FROM correct_answer WHERE exercise_nr= '" + exercise_nr + "'";
+//                System.out.println(sql);
+//                resultSet = statement.executeQuery(sql);
+                PreparedStatement retrieve = connection.prepareStatement
+                    ( "SELECT question " 
+                    + "FROM correct_answer "
+                    + "WHERE exercise_nr = ? "
+                    );
+
+                retrieve.setString(1, exercise_nr);
+                retrieve.executeQuery();
+                resultSet = retrieve.getResultSet();
+                //question = resultSet.getString("question");
+
+                while(resultSet.next())
                 {
-//                    String sql = "SELECT question FROM correct_answer WHERE exercise_nr= '" + exercise_nr "'";
-//                    System.out.println(sql);
-//                    resultSet = statement.executeQuery(sql);
-                    PreparedStatement retrieve = connection.prepareStatement
-                        ( "SELECT question " 
-                        + "FROM correct_answer "
-                        + "WHERE exercise_nr = ? "
-                        );
-                    
-                    retrieve.setString(1, exercise_nr);
-                    retrieve.executeQuery();
-                    resultSet = retrieve.getResultSet();
-                    //question = resultSet.getString("question");
-                    
-                    while(resultSet.next())
-                    {
-                        question = resultSet.getString("question");
-                    }
+                    question = resultSet.getString("question");
                 }
-                catch (SQLException ex) 
-                {
-                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                                
-                return question;
-            }// end if
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (SQLException ex) 
+            {
+                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            return question;
         }
         
         return "";
@@ -259,38 +252,31 @@ public class Model extends Observable implements iModel  {
     {
 		String answer = "";
         
-        try 
+        if(questionExist(exercise_nr))
         {
-            if(questionExist(exercise_nr))
+            try 
             {
-                try 
+                PreparedStatement retrieve = connection.prepareStatement
+                    ( "SELECT answer " 
+                    + "FROM correct_answer "
+                    + "WHERE exercise_nr = ? "
+                    );
+
+                retrieve.setString(1, exercise_nr);
+                retrieve.executeQuery();
+                resultSet = retrieve.getResultSet();
+
+                while(resultSet.next())
                 {
-                    PreparedStatement retrieve = connection.prepareStatement
-                        ( "SELECT answer " 
-                        + "FROM correct_answer "
-                        + "WHERE exercise_nr = ? "
-                        );
-                    
-                    retrieve.setString(1, exercise_nr);
-                    retrieve.executeQuery();
-                    resultSet = retrieve.getResultSet();
-                    
-                    while(resultSet.next())
-                    {
-                        answer = resultSet.getString("answer");
-                    }
+                    answer = resultSet.getString("answer");
                 }
-                catch (SQLException ex) 
-                {
-                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                                
-                return answer;
-            }// end if
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (SQLException ex) 
+            {
+                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            return answer;
         }
         
         return "";
