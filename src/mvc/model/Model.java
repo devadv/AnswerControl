@@ -1,4 +1,5 @@
 package mvc.model;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,36 +7,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Observable;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class Model extends Observable implements iModel  {
 
-//	public static String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
-//	public static String username = "ben";
-//	public static String password = "12345";
-	
-	public static String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
-	public static String username = "badev_hintveld";
-	public static String password = "V99r9R9qwMmYPcqU";
-
-	private Connection connection;
-	private Statement statement;
+private Statement statement;
 	private ResultSet resultSet;
+
+	// properties are immutable and same for every class object. Therefore:
+	private static final Properties prop = new Properties();
+    private Connection connection;
 
 	@Override
 	public void createDBConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(DATABASEURL, username, password);
+			/*
+			 * load the properties
+			 * 
+			 * Example contents properties file:
+			 * 
+			 	#Tue Feb 23 14:56:57 CET 2016
+			 	DB_USERNAME=John-Doe
+			 	DB_DRIVER=com.mysql.jdbc.Driver
+			 	DB_PASSWORD=mySuperPassword
+			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
+			 */
+			prop.load(new FileInputStream("BlueJ.config"));
+			connection = 
+					DriverManager.getConnection
+						( prop.getProperty("DB_URL")
+						, prop.getProperty("DB_USERNAME")
+						, prop.getProperty("DB_PASSWORD")
+						);
 			statement = connection.createStatement();
+			System.out.println("Connection made!");
 
 		} catch (Exception connectException) {
 			connectException.printStackTrace();
 			System.out.println("no connection");
 		}
-		System.out.println("Connection made!");
+		
 	}
 
 	@Override
