@@ -5,15 +5,28 @@ import mvc.controller.ControllerInputAnswer;
 import mvc.controller.ControllerInputQuestion;
 import mvc.model.Model;
 
-public class Main {
+public class Main 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+    {
 		System.out.println(" In main app");
 		Model model = new Model();
-		ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-		ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
+		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         
-        //int dialogResult = JOptionPane.showConfirmDialog(null, "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-	}
-
+        Object[] setGUI = {"Invoer vragen.", "Invoer antwoorden."};
+        int a = JOptionPane.showOptionDialog(null, "Shoose a uci", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[1]);
+        if(a == 0)
+        {
+            ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
+        }
+        else if(a == 1)
+        {
+            ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+        }
+        
+    }
 }
+
+

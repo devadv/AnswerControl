@@ -86,17 +86,34 @@ public class ViewInputQuestion extends View
 		} 
         else if (event.getSource() == btnNext) 
         {
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+            if(isQuestionChanged())
             {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-            }
-            else
-            {
-                btnNext.setEnabled(false);
-            }
-            
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    System.out.println("Yes option");
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    
+                    if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())  
+                    {
+                        btnPrevious.setEnabled(true);
+                        exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                        questionField.setText(model.retrieveQuestion(getExcercise()));
+                    }
+                }
+                else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+                {
+                    btnPrevious.setEnabled(true);
+                    exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                    questionField.setText(model.retrieveQuestion(getExcercise()));
+                }
+                else
+                {
+                    btnNext.setEnabled(false);
+                }
+                
+            }// end if  isQuestionChanged()
 		} 
         else if (event.getSource() == btnPrevious) 
         {
