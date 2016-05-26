@@ -102,26 +102,58 @@ public class ViewInputAnswer extends View
 		}
         else if(event.getSource() == btnNext)
         {
-            btnPrevious.setEnabled(true);
-            if(exercise_id.getSelectedIndex()+1 < exercise_id.getItemCount())
+            if(isAnswerchanged())
             {
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()+1);
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-                answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated 
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
+                }
+            }           
+            
+            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())  
+            {
+                btnPrevious.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                answerField.setText(model.retrieveAnswer(getExcercise()));
             }
             else
             {
                 btnNext.setEnabled(false);
             }
+            
 		}
         else if(event.getSource() == btnPrevious)
         {
-            btnNext.setEnabled(true);
-			exercise_id.setSelectedIndex(exercise_id.getSelectedIndex()-1);
-			answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
+            if(isAnswerchanged())
+            {
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
+                }
+            }
+                        
+            if(exercise_id.getSelectedIndex() - 1 >= 0)  
+            {
+                btnPrevious.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+            }
+            else
+            {
+                btnPrevious.setEnabled(false);
+            }
+            
+            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+            {
+                btnNext.setEnabled(true);
+            }
+            
 		}
-        
-        
+          
 	}
 	
 	@Override
@@ -141,6 +173,11 @@ public class ViewInputAnswer extends View
         String currentText = getAnswer();
         String oldtext = model.retrieveAnswer(String.valueOf(exercise_id.getSelectedItem()));
         
+        if(oldtext == null)
+        {
+            oldtext = "";
+        }
+      
         if(currentText.equals(oldtext))
         {
             return false;

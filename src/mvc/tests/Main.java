@@ -15,13 +15,14 @@ public class Main
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         
-        Object[] setGUI = {"Invoer vragen.", "Invoer antwoorden."};
-        int a = JOptionPane.showOptionDialog(null, "Shoose a uci", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[1]);
-        if(a == 0)
+        Object[] setGUI = {"Input questions.", "Input answers."};
+        int option = JOptionPane.showOptionDialog(null, "Choose an input", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
+        
+        if(option == 0)// input question uci
         {
             ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
         }
-        else if(a == 1)
+        else if(option == 1)// input answer uci
         {
             ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         }
