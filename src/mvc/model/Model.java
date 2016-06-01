@@ -57,21 +57,22 @@ private Statement statement;
         
 //		String sql = "INSERT INTO correct_answer (exercise_nr, question, block_id) VALUES ('"
 //				+ exercise_id + "','" + question + "','" + block_id + "')";
-                
+          
 		try 
         {
             PreparedStatement create = connection.prepareStatement
                 ( "INSERT INTO correct_answer "
-                + "exercise_nr "
+                + "(exercise_nr "
                 + ", question "
-                + ", block_id " 
+                + ", block_id) " 
                 + "VALUES( ?, ?, ? )"
                 );
             
                 create.setString(1, exercise_id);
                 create.setString(2, question);
                 create.setInt(3, block_id);
-                create.executeUpdate(question);
+                //create.executeUpdate();
+                create.execute();
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

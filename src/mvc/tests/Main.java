@@ -16,7 +16,7 @@ public class Main
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         
         Object[] setGUI = {"Input questions.", "Input answers."};
-        int option = JOptionPane.showOptionDialog(null, "Choose an input", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
+        int option = JOptionPane.showOptionDialog(null, "Choose an ui:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
         
         if(option == 0)// input question uci
         {

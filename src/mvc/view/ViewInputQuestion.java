@@ -80,7 +80,7 @@ public class ViewInputQuestion extends View
 			} 
             else 
             {
-				model.updateQuestion(getExcercise(), getQuestion(),getBlockID());
+				model.updateQuestion(getExcercise(), getQuestion(), getBlockID());
 			}
 
 		} 

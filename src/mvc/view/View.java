@@ -18,9 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -195,33 +192,7 @@ public abstract class View extends JFrame implements iView, Observer
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelBottom);
-        
-        
-        JMenu testMenu = new JMenu("Test");
-        JMenuItem  resetDeactivateDate = new JMenuItem("Reset deactivate date column");
-        testMenu.add(resetDeactivateDate);
-        
-        resetDeactivateDate.addActionListener(
-            new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                    
-                }
-        });
-        
-        JMenuBar bar = new JMenuBar();
-        setJMenuBar(bar);
-        bar.add(testMenu);
-        
-        /*this.pack();
-        this.setSize(600, 600);
-        this.setResizable(false);
-        this.setLocation(new Point(800, 200));
-        this.getContentPane().add(panel);
-        this.setVisible(true);*/
-		
+       
 	}
 
 	public String getExcercise() {
