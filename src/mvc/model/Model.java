@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Model extends Observable implements iModel  {
@@ -34,6 +35,8 @@ private Statement statement;
 			 	DB_DRIVER=com.mysql.jdbc.Driver
 			 	DB_PASSWORD=mySuperPassword
 			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
+            
+                DB_PASSWORD=V99r9R9qwMmYPcqU
 			 */
 			prop.load(new FileInputStream("BlueJ.config"));
 			connection = 
@@ -51,7 +54,54 @@ private Statement statement;
 		}
 		
 	}
+    
+    public void saveUserName(String name)
+    {
+        int option = JOptionPane.showConfirmDialog(null, "Save your name to database?", "Message", JOptionPane.YES_NO_OPTION);
+        
+        //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('hintveld');
+        //INSERT INTO user (username) values ('hintveld');
+        if(option == 0)// yew buuton
+        {
+            try 
+            {
+                PreparedStatement saveUserName = connection.prepareStatement
+                ( "INSERT INTO user "
+                + "(username) "
+                + "VALUES( ? )"
+                );
+                saveUserName.setString(1, name);
+                saveUserName.execute();
+            } 
+            catch (Exception e) 
+            {
+                
+            }
+        }
+        
+    }
+    
+    public boolean userNameExist(String name)
+    {
+        try 
+        {
+            PreparedStatement userNameExist = connection.prepareStatement
+            ( "SELECT username FROM user "
+            + "WHERE username = ? "
+            );
+            
+            userNameExist.setString(1, name);
+            userNameExist.executeQuery(); 
+            resultSet = userNameExist.getResultSet();
+        } 
+        catch (Exception e) 
+        {
+            return false;
+        }
+        return true;
+    }
 
+    
 	@Override
 	public void createQuestion(String exercise_id, String question, int block_id) {
         
@@ -78,7 +128,7 @@ private Statement statement;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//System.out.println(sql);
+		
 		setChanged();
 		notifyObservers();
 
