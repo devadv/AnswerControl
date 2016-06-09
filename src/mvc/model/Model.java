@@ -105,7 +105,7 @@ private Statement statement;
     {
         int idCorrectAnswer = 0;
         
-        try 
+        try
         {
             PreparedStatement retrieveID = connection.prepareStatement
             ( "SELECT idcorrect_answer FROM correct_answer "
