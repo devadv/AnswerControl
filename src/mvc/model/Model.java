@@ -36,7 +36,7 @@ private Statement statement;
 			 	DB_PASSWORD=mySuperPassword
 			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
             
-                DB_PASSWORD=V99r9R9qwMmYPcqU
+                DB_PASSWORD = V99r9R9qwMmYPcqU
 			 */
 			prop.load(new FileInputStream("BlueJ.config"));
 			connection = 
@@ -59,8 +59,8 @@ private Statement statement;
     {
         int option = JOptionPane.showConfirmDialog(null, "Save your name to database?", "Message", JOptionPane.YES_NO_OPTION);
         
-        //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('hintveld');
-        //INSERT INTO user (username) values ('hintveld');
+        //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('name');
+        //INSERT INTO user (username) values ('name');
         if(option == 0)// yew buuton
         {
             try 
@@ -100,6 +100,46 @@ private Statement statement;
         }
         return true;
     }
+    
+    public void createUserAnswer(String answer, String exerciseNr)
+    {
+        int idCorrectAnswer = 0;
+        
+        try 
+        {
+            PreparedStatement retrieveID = connection.prepareStatement
+            ( "SELECT idcorrect_answer FROM correct_answer "
+            + "WHERE exercise_nr = ? "
+            );
+            
+            retrieveID.setString(1, exerciseNr);
+            retrieveID.executeQuery();
+            resultSet = retrieveID.getResultSet();
+            
+            while(resultSet.next())
+            {
+                idCorrectAnswer = resultSet.getInt("idcorrect_answer");
+            }
+            
+            
+            System.out.println(idCorrectAnswer);
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("ex" + e);
+        }
+    }
+    
+    public void updateUserAnswer()
+    {
+        try 
+        {
+            
+        } 
+        catch (Exception e) 
+        {
+        }
+    }
 
     
 	@Override
@@ -121,9 +161,7 @@ private Statement statement;
                 create.setString(1, exercise_id);
                 create.setString(2, question);
                 create.setInt(3, block_id);
-                //create.executeUpdate();
                 create.execute();
-			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
