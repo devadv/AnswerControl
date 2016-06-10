@@ -14,7 +14,7 @@ public class userTest
        model.saveUserName(name);
        System.out.println(model.userNameExist(name));
        
-       model.createUserAnswer("", " 1.1");
+       model.createUserAnswer("", "1.1", name);
        
     }
     

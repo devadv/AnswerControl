@@ -101,33 +101,34 @@ private Statement statement;
         return true;
     }
     
-    public void createUserAnswer(String answer, String exerciseNr)
+    public void createUserAnswer(String answer, String exerciseNr, String userName)
     {
-        int idCorrectAnswer = 0;
+        int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         
-        try
+        if(userNameExist(userName))
         {
-            PreparedStatement retrieveID = connection.prepareStatement
-            ( "SELECT idcorrect_answer FROM correct_answer "
-            + "WHERE exercise_nr = ? "
-            );
+            int userId = getUserId(userName);
+        }   
+        
+        
+        try 
+        {
+            PreparedStatement create = connection.prepareStatement
+                ( "INSERT INTO user_answer "
+                + "(correct_answerid "
+                + ",answer "
+                + ",userid) "
+                + "VALUES( ?, ?, ? )"
+                );
             
-            retrieveID.setString(1, exerciseNr);
-            retrieveID.executeQuery();
-            resultSet = retrieveID.getResultSet();
+            create.setInt(1, correctAnswerId);
             
-            while(resultSet.next())
-            {
-                idCorrectAnswer = resultSet.getInt("idcorrect_answer");
-            }
-            
-            
-            System.out.println(idCorrectAnswer);
         } 
-        catch (Exception e) 
+        catch (Exception e)
         {
-            System.out.println("ex" + e);
         }
+         
+        
     }
     
     public void updateUserAnswer()
@@ -139,6 +140,56 @@ private Statement statement;
         catch (Exception e) 
         {
         }
+    }
+    
+    public int getIdCorrectAnswer(String exerciseNr)
+    {
+        int idCorrectAnswer = 0;
+        
+        try 
+        {
+            PreparedStatement retrieveID = connection.prepareStatement
+            ( "SELECT idcorrect_answer FROM correct_answer "
+            + "WHERE exercise_nr = ? "
+            );
+            
+            retrieveID.setString(1, exerciseNr);
+            retrieveID.executeQuery();
+            resultSet = retrieveID.getResultSet();
+            
+            resultSet.next();
+            idCorrectAnswer = resultSet.getInt("idcorrect_answer");
+        } 
+        catch (Exception e) 
+        {
+        }
+        
+        return idCorrectAnswer;
+    }
+    
+    public int getUserId(String userName)
+    {
+        int idUser = 0;
+        
+        try 
+        {
+            PreparedStatement getUserId = connection.prepareStatement
+                ( "SELECT iduser "
+                + "FROM user "
+                + "WHERE username = ? "
+                );
+
+            getUserId.setString(1, userName);
+            getUserId.executeQuery();
+            resultSet = getUserId.getResultSet();
+            resultSet.next();
+            idUser = resultSet.getInt("iduser");
+        } 
+        catch (Exception e) 
+        {
+        }
+        
+        return idUser;
     }
 
     
@@ -158,10 +209,10 @@ private Statement statement;
                 + "VALUES( ?, ?, ? )"
                 );
             
-                create.setString(1, exercise_id);
-                create.setString(2, question);
-                create.setInt(3, block_id);
-                create.execute();
+            create.setString(1, exercise_id);
+            create.setString(2, question);
+            create.setInt(3, block_id);
+            create.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
