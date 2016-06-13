@@ -46,7 +46,7 @@ private Statement statement;
 						, prop.getProperty("DB_PASSWORD")
 						);
 			statement = connection.createStatement();
-			System.out.println("Connection made!");
+			System.out.println("Connection made");
 
 		} catch (Exception connectException) {
 			connectException.printStackTrace();
@@ -56,27 +56,21 @@ private Statement statement;
 	}
     
     public void saveUserName(String name)
-    {
-        int option = JOptionPane.showConfirmDialog(null, "Save your name to database?", "Message", JOptionPane.YES_NO_OPTION);
-        
+    {        
         //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('name');
         //INSERT INTO user (username) values ('name');
-        if(option == 0)// yew buuton
+        try 
         {
-            try 
-            {
-                PreparedStatement saveUserName = connection.prepareStatement
-                ( "INSERT INTO user "
-                + "(username) "
-                + "VALUES( ? )"
-                );
-                saveUserName.setString(1, name);
-                saveUserName.execute();
-            } 
-            catch (Exception e) 
-            {
-                
-            }
+            PreparedStatement saveUserName = connection.prepareStatement
+            ( "INSERT INTO user "
+            + "(username) "
+            + "VALUES( ? )"
+            );
+            saveUserName.setString(1, name);
+            saveUserName.execute();
+        } 
+        catch (Exception e) 
+        {
         }
         
     }
@@ -104,30 +98,27 @@ private Statement statement;
     public void createUserAnswer(String answer, String exerciseNr, String userName)
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
+        int userId = getUserId(userName);  
         
-        if(userNameExist(userName))
-        {
-            int userId = getUserId(userName);
-        }   
+            try 
+            {
+                PreparedStatement create = connection.prepareStatement
+                    ( "INSERT INTO user_answer "
+                    + "(correct_answerid "
+                    + ",answer "
+                    + ",userid) "
+                    + "VALUES( ?, ?, ? )"
+                    );
+
+                create.setInt(1, correctAnswerId);
+                create.setString(2, answer);
+                create.setInt(3, userId);
+                create.execute();
+            } 
+            catch (Exception e)
+            {
+            }
         
-        
-        try 
-        {
-            PreparedStatement create = connection.prepareStatement
-                ( "INSERT INTO user_answer "
-                + "(correct_answerid "
-                + ",answer "
-                + ",userid) "
-                + "VALUES( ?, ?, ? )"
-                );
-            
-            create.setInt(1, correctAnswerId);
-            
-        } 
-        catch (Exception e)
-        {
-        }
-         
         
     }
     
@@ -135,7 +126,12 @@ private Statement statement;
     {
         try 
         {
-            
+            PreparedStatement update = connection.prepareStatement
+                ( "UPDATE user_answer "
+                + "SET  "
+                + "answer = ?"
+                + "WHERE correctA_answerid = ? "
+                );
         } 
         catch (Exception e) 
         {
@@ -274,8 +270,7 @@ private Statement statement;
              PreparedStatement update = connection.prepareStatement
                  ( "UPDATE correct_answer " 
                  + "SET creation_date = CURRENT_TIMESTAMP "
-                 + ",question = ? "
-               //+ ", eenKolom = waarde "    ... enz ...       
+                 + ",question = ? "    
                  + "WHERE exercise_nr = ? " 
                  );
              
