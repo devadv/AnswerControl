@@ -122,16 +122,25 @@ private Statement statement;
         
     }
     
-    public void updateUserAnswer()
+    public void updateUserAnswer(String answer, String exerciseNr, String userName)
     {
+        int correctAnswerId = getIdCorrectAnswer(exerciseNr);
+        int userId = getUserId(userName);  
+        
         try 
         {
             PreparedStatement update = connection.prepareStatement
                 ( "UPDATE user_answer "
-                + "SET  "
+                + "SET "
                 + "answer = ?"
-                + "WHERE correctA_answerid = ? "
+                + "WHERE correct_answerid = ? "
+                + "AND userid = ? "
                 );
+            
+            update.setString(1, answer);
+            update.setInt(2, correctAnswerId);
+            update.setInt(3, userId);
+            update.executeUpdate();
         } 
         catch (Exception e) 
         {
