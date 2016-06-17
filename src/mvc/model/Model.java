@@ -59,20 +59,22 @@ private Statement statement;
     {        
         //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('name');
         //INSERT INTO user (username) values ('name');
-        try 
+        if(!userNameExist(name))
         {
-            PreparedStatement saveUserName = connection.prepareStatement
-            ( "INSERT INTO user "
-            + "(username) "
-            + "VALUES( ? )"
-            );
-            saveUserName.setString(1, name);
-            saveUserName.execute();
-        } 
-        catch (Exception e) 
-        {
+            try 
+            {
+                PreparedStatement saveUserName = connection.prepareStatement
+                ( "INSERT INTO user "
+                + "(username) "
+                + "VALUES( ? )"
+                );
+                saveUserName.setString(1, name);
+                saveUserName.execute();
+            } 
+            catch (Exception e) 
+            {
+            }
         }
-        
     }
     
     public boolean userNameExist(String name)
@@ -87,6 +89,8 @@ private Statement statement;
             userNameExist.setString(1, name);
             userNameExist.executeQuery(); 
             resultSet = userNameExist.getResultSet();
+            resultSet.next();
+            System.out.println("user: " + resultSet.getString("username"));
         } 
         catch (Exception e) 
         {
@@ -154,7 +158,8 @@ private Statement statement;
         try 
         {
             PreparedStatement retrieveID = connection.prepareStatement
-            ( "SELECT idcorrect_answer FROM correct_answer "
+            ( "SELECT idcorrect_answer "
+            + "FROM correct_answer "
             + "WHERE exercise_nr = ? "
             );
             
