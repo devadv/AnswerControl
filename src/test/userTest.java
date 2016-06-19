@@ -35,12 +35,7 @@ public class userTest {
 			model.createUserAnswer("abcdefgh", "1.6", name);
 			model.updateUserAnswer("hello world", "1.3", name);
 		}
-		/*
-		 * model.updateUserAnswer("hello world", "1.1", name);
-		 * model.updateUserAnswer("hello world", "1.2", name);
-		 * model.updateUserAnswer("hello world", "1.3", name);
-		 * model.updateUserAnswer("hello world", "1.4", name);
-		 */
+		
 
 	}
 
