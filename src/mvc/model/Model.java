@@ -46,7 +46,7 @@ private Statement statement;
 						, prop.getProperty("DB_PASSWORD")
 						);
 			statement = connection.createStatement();
-			System.out.println("Connection made");
+			System.out.println("Connection  database made");
 
 		} catch (Exception connectException) {
 			connectException.printStackTrace();
@@ -90,11 +90,13 @@ private Statement statement;
             userNameExist.executeQuery(); 
             resultSet = userNameExist.getResultSet();
             resultSet.next();
-            System.out.println("user: " + resultSet.getString("username"));
+            System.out.println("User " + resultSet.getString("username") + " does exist" );
         } 
         catch (Exception e) 
         {
+        	//System.out.println("user don't exits");
             return false;
+           
         }
         return true;
     }
@@ -122,7 +124,7 @@ private Statement statement;
             catch (Exception e)
             {
             }
-        
+            System.out.println("Created userAnswer : " + exerciseNr);
         
     }
     
@@ -149,6 +151,7 @@ private Statement statement;
         catch (Exception e) 
         {
         }
+        System.out.println("Updated answer: "+ exerciseNr);
     }
     
     public int getIdCorrectAnswer(String exerciseNr)
@@ -457,6 +460,29 @@ private Statement statement;
 	public boolean isAnswer(String exercise_nr) {
 		// TODO
 		return false;
+	}
+	
+	public void delTable(String table){
+	  
+	String sql = "DELETE FROM " + table;
+		try 
+        {
+            PreparedStatement del = connection.prepareStatement
+                ( sql);
+
+           
+            del.executeUpdate();
+            resultSet = del.getResultSet();
+           
+        }
+        catch (SQLException ex) 
+        {
+           System.out.println("Fault :" + ex);
+        }
+
+		System.out.println("Table : " +table + " deleted!");
+		
+		
 	}
 
 }
