@@ -10,7 +10,6 @@ import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 
 public class Model extends Observable implements iModel  {
@@ -46,7 +45,7 @@ private Statement statement;
 						, prop.getProperty("DB_PASSWORD")
 						);
 			statement = connection.createStatement();
-			System.out.println("Connection  database made");
+			System.out.println("Connection  database: " + prop.getProperty("DB_URL"));
 
 		} catch (Exception connectException) {
 			connectException.printStackTrace();
@@ -390,7 +389,6 @@ private Statement statement;
 			//resultSet = statement.executeQuery(sql);
 			if (resultSet.next())//resultSet.next()
             {
-				System.out.println("exist: true");
 				return true;
 			} 
             
@@ -462,14 +460,14 @@ private Statement statement;
 		return false;
 	}
 	
-	public void delTable(String table){
-	  
-	String sql = "DELETE FROM " + table;
+	public void delTable(String table)
+    {
+        String sql = "DELETE FROM " + table;
+        
 		try 
         {
             PreparedStatement del = connection.prepareStatement
-                ( sql);
-
+                (sql);
            
             del.executeUpdate();
             resultSet = del.getResultSet();
@@ -481,7 +479,6 @@ private Statement statement;
         }
 
 		System.out.println("Table : " +table + " deleted!");
-		
 		
 	}
 

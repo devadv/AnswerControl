@@ -10,10 +10,10 @@ public class userTest {
 		model.delTable("user_answer");
 		model.delTable("user");
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) 
+        {
 			String name = System.getProperty("user.name");
 			
-
 			
 			if (model.userNameExist(name)) {
 
