@@ -2,14 +2,9 @@ package mvc.view;
 
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.Observable;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,17 +12,17 @@ import javax.swing.JTextArea;
 
 import mvc.controller.iCRUD;
 import mvc.model.Model;
-import sun.awt.WindowClosingListener;
 
 
 public class ViewInputAnswer extends View
 {
 	
-	private iCRUD controller;
+	//private iCRUD controller;
 	private Model model;
 	private JTextArea answerField ;
 
-	public ViewInputAnswer(Model model, iCRUD controller) {
+	public ViewInputAnswer(Model model, iCRUD controller) 
+    {
 		super(model, controller);
 		this.model = model;
 		this.controller = controller;
@@ -38,7 +33,8 @@ public class ViewInputAnswer extends View
 	}
 
 	@Override
-	public void setGUI() {
+	public void setGUI()
+    {
 		super.setGUI();
 		answerField = new JTextArea(25, 38);
 		answerField.setLineWrap(true);
@@ -157,14 +153,15 @@ public class ViewInputAnswer extends View
 	}
 	
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg)
+    {
 		System.out.println("model updated in Answer");
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 		
 		
 	}
-	public String getAnswer() {
-		 
+	public String getAnswer() 
+    {
 		return answerField.getText();
 	}
     
