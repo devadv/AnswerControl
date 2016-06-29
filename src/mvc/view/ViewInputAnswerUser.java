@@ -20,12 +20,24 @@ public class ViewInputAnswerUser extends View
         this.model = model;
         this.controller = controller;
         setGUI();
+        questionField.setText(model.retrieveQuestion(getExcercise()));
         
     }
     
     public void setGUI()
     {
         super.setGUI();
+        questionField.setEnabled(false);
+        questionField.setColumns(38);
+        questionField.setRows(5);
+        
+        panel.add(panelQuestion);
+        
+        this.setTitle("Input user answer.");
+        this.setSize(600, 800);
+        this.setLocation(1000, 200);
+        this.getContentPane().add(panel);
+        this.setVisible(true);
         
     }
 

@@ -12,9 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Model extends Observable implements iModel  {
-
-private Statement statement;
+public class Model extends Observable implements iModel  
+{
+    private Statement statement;
 	private ResultSet resultSet;
 
 	// properties are immutable and same for every class object. Therefore:
@@ -22,8 +22,10 @@ private Statement statement;
     private Connection connection;
 
 	@Override
-	public void createDBConnection() {
-		try {
+	public void createDBConnection() 
+    {
+		try 
+        {
 			/*
 			 * load the properties
 			 * 
@@ -47,7 +49,9 @@ private Statement statement;
 			statement = connection.createStatement();
 			System.out.println("Connection  database: " + prop.getProperty("DB_URL"));
 
-		} catch (Exception connectException) {
+		} 
+        catch (Exception connectException) 
+        {
 			connectException.printStackTrace();
 			System.out.println("no connection");
 		}

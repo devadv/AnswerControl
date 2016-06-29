@@ -46,6 +46,7 @@ public class ViewInputAnswer extends View
 		
 		JScrollPane jspAnswer = new JScrollPane(answerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
 		panel.add(panelQuestion);
 		JPanel panelAnswer = new JPanel();
 		panelAnswer.add(jspAnswer);
