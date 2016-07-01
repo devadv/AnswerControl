@@ -11,27 +11,27 @@ public class Main
 
 	public static void main(String[] args)
     {
-		System.out.println(" In main app");
 		Model model = new Model();
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model);
         
-        Object[] setGUI = {"Input questions.", "Input answers.", "Input user answer"};
-        int option = JOptionPane.showOptionDialog(null, "Choose an ui:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
-        
-        if(option == 0)// input question uci
-        {
-            ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-        }
-        else if(option == 1)// input answer uci
-        {
-            ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        }
-        else if(option == 2)// input user answer
-        {
-            ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model);
-        }
-        
+//        Object[] setGUI = {"Input questions.", "Input answers.", "Input user answer"};
+//        int option = JOptionPane.showOptionDialog(null, "Choose an user interface:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
+//        
+//        if(option == 0)// input question uci
+//        {
+//            ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
+//        }
+//        else if(option == 1)// input answer uci
+//        {
+//            ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+//        }
+//        else if(option == 2)// input user answer
+//        {
+//            ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model);
+//        }
+//        
     }
 }
 
