@@ -38,6 +38,10 @@ public class Model extends Observable implements iModel
 			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
             
                 DB_PASSWORD = V99r9R9qwMmYPcqU
+            
+                SET FOREIGN_KEY_CHECKS=0;
+                TRUNCATE correct_answer;
+                SET FOREIGN_KEY_CHECKS=1;
 			 */
 			prop.load(new FileInputStream("BlueJ.config"));
 			connection = 
