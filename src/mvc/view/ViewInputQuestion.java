@@ -25,7 +25,6 @@ public class ViewInputQuestion extends View
 		super(model, controller);
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-        
 		
 	}
 	@Override
