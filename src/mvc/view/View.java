@@ -179,10 +179,12 @@ public abstract class View extends JFrame implements iView, Observer
        
 	}
 
-	public String getExcercise() {
+	public String getExcercise() 
+    {
 		return exercise_id.getSelectedItem().toString();
 	}
-	public int getBlockID(){
+	public int getBlockID()
+    {
 		return blocks_id.getSelectedIndex()+1;
 	}
 	

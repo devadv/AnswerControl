@@ -81,6 +81,11 @@ public class ViewInputAnswer extends View
                 btnPrevious.setEnabled(true);
                 btnNext.setEnabled(false);
             }
+            else
+            {
+                btnPrevious.setEnabled(true);
+                btnNext.setEnabled(true);
+            }
             
 			System.out.println("exercise_id changed!");
 			questionField.setText(model.retrieveQuestion(getExcercise()));

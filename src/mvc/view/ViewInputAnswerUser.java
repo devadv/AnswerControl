@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
-import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import mvc.controller.iCRUD;
@@ -15,8 +15,8 @@ import mvc.model.Model;
 
 public class ViewInputAnswerUser extends View
 {
-    private JTextArea  userAnswerField;
-
+    private JTextArea userAnswerField;
+    
     public ViewInputAnswerUser(Model model, iCRUD controller) 
     {
         super(model, controller);
@@ -30,35 +30,63 @@ public class ViewInputAnswerUser extends View
     public void setGUI()
     {
         super.setGUI();
-        questionField.setEnabled(false);
-        questionField.setColumns(38);
-        questionField.setRows(10);
         
-        userAnswerField = new JTextArea(20, 30);
+        questionField.setRows(10);
+        questionField.setColumns(38);
+        questionField.setFont(textAreaFont);
+        questionField.setEditable(false);
+        
+        userAnswerField = new JTextArea(20, 48);
         userAnswerField.setLineWrap(true);
         userAnswerField.setBackground(new Color(219, 205, 197));
+        
         JScrollPane jspUserAnswer = new JScrollPane(userAnswerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
+        JPanel panelAnswer = new JPanel();
+        panelAnswer.add(jspUserAnswer);
+                
         
         panel.add(panelQuestion);
-        panel.add(jspUserAnswer);
+        panel.add(panelAnswer);
         panel.add(panelBottom);
         
         this.addWindowListener(new windowClosingAdapter());
         this.setTitle("Input user answer.");
         this.setSize(600, 800);
-        this.setLocation(1000, 200);
+        this.setLocation(800, 200);
         this.getContentPane().add(panel);
         this.setVisible(true);
         
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent event) 
     {
+        if(event.getSource() == exercise_id)
+        {
+            if(exercise_id.getSelectedIndex() == 0)
+            {
+                btnPrevious.setEnabled(false);
+            }
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
+            {
+                btnNext.setEnabled(false);
+                btnPrevious.setEnabled(true);
+            }
+            else
+            {
+                btnNext.setEnabled(true);
+                btnPrevious.setEnabled(true);
+            }
+            questionField.setText(model.retrieveQuestion(getExcercise()));
+        }
+        else if(event.getSource() == btnSave)
+        {
+            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), getUserName());
+        }
         
-    }
+    }// end mothod actionPerformed
     
     public String getUserAnswer()
     {
