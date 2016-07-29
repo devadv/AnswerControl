@@ -16,6 +16,7 @@ import mvc.model.Model;
 public class ViewInputAnswerUser extends View
 {
     private JTextArea userAnswerField;
+    private iCRUD controller;
     
     public ViewInputAnswerUser(Model model, iCRUD controller) 
     {
@@ -24,7 +25,6 @@ public class ViewInputAnswerUser extends View
         this.controller = controller;
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
-        
     }
     
     public void setGUI()
@@ -36,7 +36,7 @@ public class ViewInputAnswerUser extends View
         questionField.setFont(textAreaFont);
         questionField.setEditable(false);
         
-        userAnswerField = new JTextArea(20, 48);
+        userAnswerField = new JTextArea(23, 48);
         userAnswerField.setLineWrap(true);
         userAnswerField.setBackground(new Color(219, 205, 197));
         
@@ -45,7 +45,7 @@ public class ViewInputAnswerUser extends View
         
         JPanel panelAnswer = new JPanel();
         panelAnswer.add(jspUserAnswer);
-                
+              
         
         panel.add(panelQuestion);
         panel.add(panelAnswer);
@@ -80,28 +80,37 @@ public class ViewInputAnswerUser extends View
                 btnPrevious.setEnabled(true);
             }
             questionField.setText(model.retrieveQuestion(getExcercise()));
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         }
         else if(event.getSource() == btnSave)
         {
-            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), getUserName());
+            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+        }
+        else if(event.getSource() == btnNext)
+        {
+            
         }
         
     }// end mothod actionPerformed
     
     public String getUserAnswer()
     {
-        return "";
-    }
-    
-    public String getUserName()
-    {
-        return "";
+        return userAnswerField.getText();
     }
 
     @Override
     public void update(Observable o, Object arg) 
     {
         
+    }
+    
+    public boolean isUserAnswerChanged()
+    {
+        String currentAnswerUser = getUserAnswer();
+        String oldText = model.retrieveAnswerUser(getExcercise(), controller.getUserName());
+        
+        
+        return false;
     }
     
     public class windowClosingAdapter extends WindowAdapter

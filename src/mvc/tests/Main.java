@@ -12,9 +12,11 @@ public class Main
 	public static void main(String[] args)
     {
 		Model model = new Model();
+        String name = System.getProperty("user.name");
+        
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model);
+        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         
 //        Object[] setGUI = {"Input questions.", "Input answers.", "Input user answer"};
 //        int option = JOptionPane.showOptionDialog(null, "Choose an user interface:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);

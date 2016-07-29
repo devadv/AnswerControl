@@ -12,5 +12,6 @@ public interface iCRUD {
 	
 	void delete();
     
+    String getUserName();
     
 }

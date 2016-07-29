@@ -59,5 +59,11 @@ public class ControllerInputQuestion implements iCRUD
 		
 	}
 
+    @Override
+    public String getUserName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 	
 }// end class ControllerInputQuestion

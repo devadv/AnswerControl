@@ -8,13 +8,24 @@ public class ControllerInputUserAnswer implements iCRUD
 {
     private Model model;
     private ViewInputAnswerUser view;
+    private String userName;
     
-    public ControllerInputUserAnswer(Model model)
+    public ControllerInputUserAnswer(Model model, String name)
     {
         this.model = model;
         createDBConnection();
-        this.view = new ViewInputAnswerUser(model, this);
+        view = new ViewInputAnswerUser(model, this);
+        userName = name;
         
+        if(!model.userNameExist(name))
+        {
+            model.saveUserName(name);
+        } 
+    }
+    
+    public String getUserName()
+    {
+        return userName;
     }
 
     @Override
@@ -26,7 +37,7 @@ public class ControllerInputUserAnswer implements iCRUD
     @Override
     public void create() 
     {
-        model.createUserAnswer(view.getExcercise(), view.getUserAnswer(), view.getUserName());
+        model.createUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
     }
 
     @Override
@@ -38,7 +49,7 @@ public class ControllerInputUserAnswer implements iCRUD
     @Override
     public void update() 
     {
-        model.updateUserAnswer(view.getExcercise(), view.getUserAnswer(), view.getUserName());
+        model.updateUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
     }
 
     @Override

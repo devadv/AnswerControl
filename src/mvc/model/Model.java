@@ -46,7 +46,7 @@ public class Model extends Observable implements iModel
 			prop.load(new FileInputStream("BlueJ.config"));
 			connection = 
 					DriverManager.getConnection
-						( prop.getProperty("DB_URL")
+						( prop.getProperty("DB_URL") 
 						, prop.getProperty("DB_USERNAME")
 						, prop.getProperty("DB_PASSWORD")
 						);
@@ -61,6 +61,7 @@ public class Model extends Observable implements iModel
 		}
 		
 	}
+    
     
     public void saveUserName(String name)
     {        
@@ -135,17 +136,17 @@ public class Model extends Observable implements iModel
         
     }
     
-    public void updateUserAnswer(String answer, String exerciseNr, String userName)
+    public void updateUserAnswer(String answer, String exerciseNr,  String name)
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
-        int userId = getUserId(userName);  
+        int userId = getUserId(name);
         
         try 
         {
             PreparedStatement update = connection.prepareStatement
                 ( "UPDATE user_answer "
                 + "SET "
-                + "answer = ?"
+                + "answer = ? "
                 + "WHERE correct_answerid = ? "
                 + "AND userid = ? "
                 );
@@ -158,7 +159,6 @@ public class Model extends Observable implements iModel
         catch (Exception e) 
         {
         }
-        System.out.println("Updated answer: "+ exerciseNr);
     }
     
     public int getIdCorrectAnswer(String exerciseNr)
@@ -263,7 +263,6 @@ public class Model extends Observable implements iModel
                 retrieve.setString(1, exercise_nr);
                 retrieve.executeQuery();
                 resultSet = retrieve.getResultSet();
-                //question = resultSet.getString("question");
 
                 while(resultSet.next())
                 {
@@ -280,6 +279,35 @@ public class Model extends Observable implements iModel
         
         return "";
 	}
+    
+    public String retrieveAnswerUser(String exercise_nr, String userName)
+    {
+        int userID = getUserId(userName);
+        int correctAnswerId = getIdCorrectAnswer(exercise_nr);
+        String answerUser = "";
+        
+        try
+        {
+            PreparedStatement retrieve = connection.prepareStatement
+                ( "SELECT answer "
+                + "FROM user_answer "
+                + "WHERE userid = ? "
+                + "AND correct_answerid = ? "
+                );
+            
+            retrieve.setInt(1, userID);
+            retrieve.setInt(2, correctAnswerId);
+            retrieve.execute();
+            resultSet = retrieve.getResultSet();
+            resultSet.next();
+            answerUser = resultSet.getString("answer");
+        }
+        catch(SQLException ex)
+        {       
+        }
+        
+        return answerUser;
+    }// end method retrieveAnswerUser
     
     
 	@Override
