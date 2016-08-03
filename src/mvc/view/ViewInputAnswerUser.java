@@ -23,8 +23,10 @@ public class ViewInputAnswerUser extends View
         super(model, controller);
         this.model = model;
         this.controller = controller;
+        
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
+        userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
     }
     
     public void setGUI()
@@ -65,33 +67,85 @@ public class ViewInputAnswerUser extends View
     {
         if(event.getSource() == exercise_id)
         {
-            if(exercise_id.getSelectedIndex() == 0)
+            if(isUserAnswerChanged())
             {
-                btnPrevious.setEnabled(false);
-            }
-            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
-            {
-                btnNext.setEnabled(false);
-                btnPrevious.setEnabled(true);
+                messageUserAnswer();
             }
             else
             {
-                btnNext.setEnabled(true);
-                btnPrevious.setEnabled(true);
+                if(exercise_id.getSelectedIndex() == 0)
+                {
+                    btnPrevious.setEnabled(false);
+                }
+                else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
+                {
+                    btnNext.setEnabled(false);
+                    btnPrevious.setEnabled(true);
+                }
+                else
+                {
+                    btnNext.setEnabled(true);
+                    btnPrevious.setEnabled(true);
+                }
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
             }
-            questionField.setText(model.retrieveQuestion(getExcercise()));
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         }
         else if(event.getSource() == btnSave)
         {
-            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            if(!model.questionExist(getExcercise()))
+            {
+                model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            }
+            else
+            {
+                model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            }
         }
         else if(event.getSource() == btnNext)
         {
+            if(isUserAnswerChanged())
+            {
+                messageUserAnswer();
+            }
             
+            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+            {
+                btnNext.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            }
+            else
+            {
+                btnNext.setEnabled(false);
+            }  
+        }
+        else if(event.getSource() == btnPrevious)
+        {
+            if(isUserAnswerChanged())
+            {
+                messageUserAnswer();
+            }
+            
+            if(exercise_id.getSelectedIndex() - 1 > exercise_id.getItemCount())
+            {
+                
+            }
         }
         
     }// end mothod actionPerformed
+    
+    public void messageUserAnswer()
+    {
+        int dialogReslult = JOptionPane.showConfirmDialog(null, 
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                
+        if(dialogReslult == 0)// yes button
+        {
+            model.updateUserAnswer(userAnswerField.getText(), getTitle(), controller.getUserName());
+        }
+        
+    }
     
     public String getUserAnswer()
     {
@@ -101,7 +155,7 @@ public class ViewInputAnswerUser extends View
     @Override
     public void update(Observable o, Object arg) 
     {
-        
+        userAnswerField.getText();
     }
     
     public boolean isUserAnswerChanged()
@@ -109,24 +163,33 @@ public class ViewInputAnswerUser extends View
         String currentAnswerUser = getUserAnswer();
         String oldText = model.retrieveAnswerUser(getExcercise(), controller.getUserName());
         
+        if(oldText == null)
+        {
+            oldText = "";
+        }
         
-        return false;
+        if(currentAnswerUser.equals(oldText))
+        {
+            return false;
+        }
+        
+        return true;
     }
     
     public class windowClosingAdapter extends WindowAdapter
     {           
         @Override
         public void windowClosing(WindowEvent we)
-        {         
-            boolean isAnswerchanged = false;
-            if(isAnswerchanged)
+        {
+            if(isUserAnswerChanged())
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                
                 if(dialogResult == 0)// yes button clicked
                 {
                     
-                    //model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
+                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
                     System.exit(0);
                 }
                 else

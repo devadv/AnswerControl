@@ -39,6 +39,10 @@ public class Model extends Observable implements iModel
             
                 DB_PASSWORD = V99r9R9qwMmYPcqU
             
+            SET FOREIGN_KEY_CHECKS=0;
+            TRUNCATE correct_answer;
+            SET FOREIGN_KEY_CHECKS=1;
+            
                 SET FOREIGN_KEY_CHECKS=0;
                 TRUNCATE correct_answer;
                 SET FOREIGN_KEY_CHECKS=1;
@@ -98,7 +102,7 @@ public class Model extends Observable implements iModel
             userNameExist.executeQuery(); 
             resultSet = userNameExist.getResultSet();
             resultSet.next();
-            System.out.println("User " + resultSet.getString("username") + " does exist" );
+            
         } 
         catch (Exception e) 
         {
@@ -132,11 +136,11 @@ public class Model extends Observable implements iModel
             catch (Exception e)
             {
             }
-            System.out.println("Created userAnswer : " + exerciseNr);
+            
         
     }
-    
-    public void updateUserAnswer(String answer, String exerciseNr,  String name)
+        
+    public void updateUserAnswer(String answer, String exerciseNr, String name)
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(name);
