@@ -17,6 +17,7 @@ public class ViewInputAnswerUser extends View
 {
     private JTextArea userAnswerField;
     private iCRUD controller;
+    private String oldExerciseNr = "";
     
     public ViewInputAnswerUser(Model model, iCRUD controller) 
     {
@@ -24,6 +25,7 @@ public class ViewInputAnswerUser extends View
         this.model = model;
         this.controller = controller;
         
+        oldExerciseNr = getExcercise();
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
@@ -67,9 +69,11 @@ public class ViewInputAnswerUser extends View
     {
         if(event.getSource() == exercise_id)
         {
-            if(isUserAnswerChanged())
+            if(isUserAnswerChanged(oldExerciseNr))
             {
                 messageUserAnswer();
+                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+                oldExerciseNr = getExcercise();
             }
             else
             {
@@ -89,11 +93,13 @@ public class ViewInputAnswerUser extends View
                 }
                 questionField.setText(model.retrieveQuestion(getExcercise()));
                 userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+                
+                oldExerciseNr = getExcercise();
             }
         }
         else if(event.getSource() == btnSave)
         {
-            if(!model.questionExist(getExcercise()))
+            if(!model.userAnswerExist(oldExerciseNr, controller.getUserName()))// user answer doesn't exist
             {
                 model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
             }
@@ -104,32 +110,38 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == btnNext)
         {
-            if(isUserAnswerChanged())
+            if(isUserAnswerChanged(oldExerciseNr))
             {
                 messageUserAnswer();
             }
             
             if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
             {
-                btnNext.setEnabled(true);
+                btnPrevious.setEnabled(true);
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
                 userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
             }
             else
             {
-                btnNext.setEnabled(false);
+                btnPrevious.setEnabled(false);
             }  
         }
         else if(event.getSource() == btnPrevious)
         {
-            if(isUserAnswerChanged())
+            if(isUserAnswerChanged(oldExerciseNr))
             {
                 messageUserAnswer();
             }
             
-            if(exercise_id.getSelectedIndex() - 1 > exercise_id.getItemCount())
+            if(exercise_id.getSelectedIndex() - 1 >= 0)
             {
-                
+                btnNext.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            }
+            else
+            {
+                btnNext.setEnabled(false);
             }
         }
         
@@ -158,10 +170,10 @@ public class ViewInputAnswerUser extends View
         userAnswerField.getText();
     }
     
-    public boolean isUserAnswerChanged()
+    public boolean isUserAnswerChanged(String oldExercise)
     {
         String currentAnswerUser = getUserAnswer();
-        String oldText = model.retrieveAnswerUser(getExcercise(), controller.getUserName());
+        String oldText = model.retrieveAnswerUser(oldExercise, controller.getUserName());
         
         if(oldText == null)
         {
@@ -181,7 +193,7 @@ public class ViewInputAnswerUser extends View
         @Override
         public void windowClosing(WindowEvent we)
         {
-            if(isUserAnswerChanged())
+            if(isUserAnswerChanged(oldExerciseNr))
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);

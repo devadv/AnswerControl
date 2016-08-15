@@ -94,7 +94,8 @@ public class Model extends Observable implements iModel
         try 
         {
             PreparedStatement userNameExist = connection.prepareStatement
-            ( "SELECT username FROM user "
+            ( "SELECT username "
+            + "FROM user "
             + "WHERE username = ? "
             );
             
@@ -106,9 +107,7 @@ public class Model extends Observable implements iModel
         } 
         catch (Exception e) 
         {
-        	//System.out.println("user don't exits");
             return false;
-           
         }
         return true;
     }
@@ -163,6 +162,19 @@ public class Model extends Observable implements iModel
         catch (Exception e) 
         {
         }
+    }
+    
+    public String getBlockName(String exerciseNr)
+    {
+        /*
+            select badev_bluej_exercises_test.block.blockname from badev_bluej_exercises_test.correct_answer, badev_bluej_exercises_test.block
+            WHERE badev_bluej_exercises_test.correct_answer.block_id = badev_bluej_exercises_test.block.idblock
+            AND badev_bluej_exercises_test.correct_answer.exercise_nr = "9.1";
+        */
+        
+        String blockId = "";
+        
+        return blockId;
     }
     
     public int getIdCorrectAnswer(String exerciseNr)
@@ -286,7 +298,7 @@ public class Model extends Observable implements iModel
     
     public String retrieveAnswerUser(String exercise_nr, String userName)
     {
-        int userID = getUserId(userName);
+        int userId = getUserId(userName);
         int correctAnswerId = getIdCorrectAnswer(exercise_nr);
         String answerUser = "";
         
@@ -299,7 +311,7 @@ public class Model extends Observable implements iModel
                 + "AND correct_answerid = ? "
                 );
             
-            retrieve.setInt(1, userID);
+            retrieve.setInt(1, userId);
             retrieve.setInt(2, correctAnswerId);
             retrieve.execute();
             resultSet = retrieve.getResultSet();
@@ -313,6 +325,37 @@ public class Model extends Observable implements iModel
         return answerUser;
     }// end method retrieveAnswerUser
     
+    public boolean userAnswerExist(String exerciseNr, String userName)
+    {
+        int userId = getUserId(userName);
+        int correctAnswerId = getIdCorrectAnswer(exerciseNr);
+        
+        try
+        {
+            PreparedStatement isUserAnswer = connection.prepareStatement
+            ( "SELECT answer "
+            + "FROM user_answer "
+            + "WHERE userid = ? "
+            + "AND correct_answerid = ? "
+            );
+            
+            isUserAnswer.setInt(1, userId);
+            isUserAnswer.setInt(2, correctAnswerId);
+            isUserAnswer.executeQuery();
+            resultSet = isUserAnswer.getResultSet();
+            
+            if(resultSet.next())
+            {
+                return true;
+            }
+            
+        }
+        catch(SQLException ex)
+        {
+        }
+        
+        return false;
+    }
     
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
@@ -411,9 +454,6 @@ public class Model extends Observable implements iModel
 
 	public boolean questionExist(String exercise_nr) 
     {
-//		String sql = "SELECT exercise_nr FROM correct_answer WHERE exercise_nr='"
-//				+ exercise_nr + "'";
-        
 		try 
         {
             PreparedStatement isQuestion = connection.prepareStatement
@@ -426,8 +466,7 @@ public class Model extends Observable implements iModel
             isQuestion.executeQuery();
             resultSet = isQuestion.getResultSet();
             
-			//resultSet = statement.executeQuery(sql);
-			if (resultSet.next())//resultSet.next()
+			if (resultSet.next())
             {
 				return true;
 			} 
