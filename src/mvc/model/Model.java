@@ -174,6 +174,15 @@ public class Model extends Observable implements iModel
         */
         
         String blockId = "";
+        try 
+        {
+            PreparedStatement blockName = connection.prepareStatement
+            ( ""
+        )   ;  
+        } 
+        catch (Exception e) 
+        {
+        }
         
         return blockId;
     }
@@ -314,7 +323,6 @@ public class Model extends Observable implements iModel
         }
         catch ( SQLException ex ) 
         {
-            System.out.println( "Error in BlueJExerciseCheckModel.BlockList." );
         }
         
         String[] blocks = arrayList.toArray( new String[arrayList.size() ] );
