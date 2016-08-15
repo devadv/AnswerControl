@@ -83,7 +83,7 @@ public abstract class View extends JFrame implements iView, Observer
 			"14.1", "14.2", "14.3", "14.4","14.5","14.6","14.7","14.8","14.9","14.10","14.11","14.12",
 			"14.13","14.14","14.15","14.16","14.17","14.18","14.19", "14.20","14.21","14.22", "14.23", 	  
 			"14.24","14.25","14.26","14.27","14.28"};
-	private String[] blocks = {"1", "2", "3", "4", "5", "6", "7","8", "9","10", "11", "12","13", "14"};
+	
 	
 	protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
 	
@@ -92,14 +92,15 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JButton btnPrevious = new JButton("Previous");
 	protected JLabel labelExercise = new JLabel("Oefening:");
 	protected JComboBox<String> exercise_id = new JComboBox<>(listExercises);
+    protected JComboBox<String> blocks_id;
     
-
 	protected JLabel label = new JLabel();
 	protected JLabel labelBlock = new JLabel("Blok");
-	protected JComboBox<String> blocks_id = new JComboBox<>(blocks);
+	
 	protected iCRUD controller;
 	protected Model model;
-    	
+    
+    
 	
 	//borders
 	Border emptyBorder = BorderFactory.createEmptyBorder(8, 15, 8, 8);
@@ -121,7 +122,7 @@ public abstract class View extends JFrame implements iView, Observer
 	public View(Model model,iCRUD controller ) {
 		this.model = model;
 		this.controller = controller;
-		
+		blocks_id = new JComboBox<>(model.getBlockList());
 	}
 
 	public void setGUI() 

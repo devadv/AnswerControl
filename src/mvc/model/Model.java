@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -295,6 +296,31 @@ public class Model extends Observable implements iModel
         
         return "";
 	}
+    
+    public String[] getBlockList() 
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        try 
+        {
+            String sql = "SELECT blockname FROM block";
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) 
+            {
+                arrayList.add(resultSet.getString( 1 ) );
+            }
+
+        }
+        catch ( SQLException ex ) 
+        {
+            System.out.println( "Error in BlueJExerciseCheckModel.BlockList." );
+        }
+        
+        String[] blocks = arrayList.toArray( new String[arrayList.size() ] );
+
+        return blocks;
+    }
     
     public String retrieveAnswerUser(String exercise_nr, String userName)
     {
