@@ -173,20 +173,39 @@ public class Model extends Observable implements iModel
             AND badev_bluej_exercises_test.correct_answer.exercise_nr = "9.1";
         */
         
-        String blockId = "";
+        String block = "";
+        
         try 
         {
             PreparedStatement blockName = connection.prepareStatement
-            ( ""
-        )   ;  
+            ( "SELECT blockname "
+            + "FROM correct_answer, block "
+            + "WHERE correct_answer.block_id = block.idblock "
+            + "AND exercise_nr = ? "
+            ); 
+            
+            blockName.setString(1, exerciseNr);
+            blockName.executeQuery();
+            resultSet = blockName.getResultSet();
+            
+            resultSet.next();
+            block = resultSet.getString("blockname");
+            
         } 
         catch (Exception e) 
         {
         }
         
-        return blockId;
+        return block;
     }
     
+    public String getExerciseNr(String blockNr)
+    {
+        
+        
+        return "";
+    }
+        
     public int getIdCorrectAnswer(String exerciseNr)
     {
         int idCorrectAnswer = 0;

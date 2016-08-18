@@ -28,7 +28,8 @@ public class ViewInputQuestion extends View
 		
 	}
 	@Override
-	public void setGUI() {
+	public void setGUI() 
+    {
 		super.setGUI();
 		
 		panel.add(panelQuestion);
@@ -100,7 +101,7 @@ public class ViewInputQuestion extends View
                 btnNext.setEnabled(false);
             }
             
-            
+                        
 		}
         else if (event.getSource() == btnPrevious) 
         {
@@ -116,7 +117,7 @@ public class ViewInputQuestion extends View
             
             if(exercise_id.getSelectedIndex() - 1 >= 0)  
             {
-                btnPrevious.setEnabled(true);
+                btnPrevious.setEnabled(true);System.out.println("blockname: " + model.getBlockName(exercise_id.getSelectedItem().toString()));
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
                 questionField.setText(model.retrieveQuestion(getExcercise()));
             }

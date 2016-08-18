@@ -96,6 +96,8 @@ public class ViewInputAnswerUser extends View
                 
                 oldExerciseNr = getExcercise();
             }
+            
+            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
         }
         else if(event.getSource() == btnSave)
         {
@@ -124,7 +126,9 @@ public class ViewInputAnswerUser extends View
             else
             {
                 btnPrevious.setEnabled(false);
-            }  
+            } 
+            
+            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
         }
         else if(event.getSource() == btnPrevious)
         {
@@ -143,6 +147,12 @@ public class ViewInputAnswerUser extends View
             {
                 btnNext.setEnabled(false);
             }
+            
+            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
+        }
+        else if(event.getSource() == blocks_id)
+        {
+            exercise_id.setSelectedItem(model.getExerciseNr());
         }
         
     }// end mothod actionPerformed
