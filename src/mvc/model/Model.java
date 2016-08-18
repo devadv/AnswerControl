@@ -206,8 +206,17 @@ public class Model extends Observable implements iModel
         try 
         {
             PreparedStatement exerciseNr = connection.prepareStatement
-            ( "SELECT "
+            ( "SELECT exercise_nr "
+            + "FROM correct_answer "
+            + "WHERE block_id = ? "
             ); 
+            
+            exerciseNr.setInt(1, blockNr);
+            exerciseNr.executeQuery();
+            resultSet = exerciseNr.getResultSet();
+            
+            resultSet.next();
+            exercise = resultSet.getString("exercise_nr");
         } 
         catch (Exception e)
         {
