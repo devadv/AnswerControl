@@ -152,7 +152,7 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == blocks_id)
         {
-            exercise_id.setSelectedItem(model.getExerciseNr());
+            exercise_id.setSelectedItem(model.getExerciseNr(getBlockID()));
         }
         
     }// end mothod actionPerformed

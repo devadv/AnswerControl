@@ -199,11 +199,21 @@ public class Model extends Observable implements iModel
         return block;
     }
     
-    public String getExerciseNr(String blockNr)
+    public String getExerciseNr(int blockNr)
     {
+        String exercise = "";
         
+        try 
+        {
+            PreparedStatement exerciseNr = connection.prepareStatement
+            ( "SELECT "
+            ); 
+        } 
+        catch (Exception e)
+        {
+        }
         
-        return "";
+        return exercise;
     }
         
     public int getIdCorrectAnswer(String exerciseNr)
