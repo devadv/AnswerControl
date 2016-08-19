@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -199,9 +201,9 @@ public class Model extends Observable implements iModel
         return block;
     }
     
-    public String getExerciseNr(int blockNr)
+    public String[] getExerciseList(int blockNr)//
     {
-        String exercise = "";
+        ArrayList<String> arrayList = new ArrayList<>();
         
         try 
         {
@@ -215,13 +217,18 @@ public class Model extends Observable implements iModel
             exerciseNr.executeQuery();
             resultSet = exerciseNr.getResultSet();
             
-            resultSet.next();
-            exercise = resultSet.getString("exercise_nr");
+            while (resultSet.next()) 
+            {
+                arrayList.add(resultSet.getString("exercise_nr"));
+            }
+            
         } 
         catch (Exception e)
         {
         }
         
+        String[] exercise = arrayList.toArray(new String[arrayList.size()]);
+        Arrays.sort(exercise);
         return exercise;
     }
         

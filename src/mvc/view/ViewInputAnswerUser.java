@@ -3,9 +3,13 @@ package mvc.view;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -49,7 +53,7 @@ public class ViewInputAnswerUser extends View
         
         JPanel panelAnswer = new JPanel();
         panelAnswer.add(jspUserAnswer);
-              
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
         
         panel.add(panelQuestion);
         panel.add(panelAnswer);
@@ -97,7 +101,6 @@ public class ViewInputAnswerUser extends View
                 oldExerciseNr = getExcercise();
             }
             
-            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
         }
         else if(event.getSource() == btnSave)
         {
@@ -128,7 +131,6 @@ public class ViewInputAnswerUser extends View
                 btnPrevious.setEnabled(false);
             } 
             
-            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
         }
         else if(event.getSource() == btnPrevious)
         {
@@ -148,12 +150,12 @@ public class ViewInputAnswerUser extends View
                 btnNext.setEnabled(false);
             }
             
-            blocks_id.setSelectedItem(model.getBlockName(getExcercise()));
         }
         else if(event.getSource() == blocks_id)
-        {
-            exercise_id.setSelectedItem(model.getExerciseNr(getBlockID()));
+        {            
+            exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         }
+		
         
     }// end mothod actionPerformed
     
