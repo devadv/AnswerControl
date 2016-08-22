@@ -15,8 +15,8 @@ public class Main
         String name = System.getProperty("user.name");
         
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+		ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+        //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         
         
 //        Object[] setGUI = {"Input questions.", "Input answers.", "Input user answer"};
