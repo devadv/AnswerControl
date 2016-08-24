@@ -21,7 +21,7 @@ public interface iModel {
 	
 	
 	//CRUD Answer
-	void createAnswer(String exercise_nr, String answer, int block_id);
+	
 	
 	String retrieveAnswer(String exercise_nr);
 	
@@ -31,7 +31,7 @@ public interface iModel {
 	
 	//tools Answer
 	
-	boolean isAnswer(String exercise_nr);
+	boolean answerExist(String exercise_nr);
 
 	
 	

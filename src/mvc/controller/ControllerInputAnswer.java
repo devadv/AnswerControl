@@ -37,8 +37,7 @@ public class ControllerInputAnswer implements iCRUD{
 		System.out.println("Excercise : " + view.getExcercise());
 		System.out.println("Answer : " + view.getAnswer());
 		System.out.println("BlockID : " + view.getBlockID());
-		model.createAnswer(view.getExcercise(), view.getAnswer(), view.getBlockID());
-	
+		
 		
 	}
 

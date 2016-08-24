@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,6 +21,7 @@ public class ViewInputAnswer extends View
 	//private iCRUD controller;
 	private Model model;
 	private JTextArea answerField ;
+    private String oldExerciseNr;
 
 	public ViewInputAnswer(Model model, iCRUD controller) 
     {
@@ -50,6 +52,11 @@ public class ViewInputAnswer extends View
 		panel.add(panelQuestion);
 		JPanel panelAnswer = new JPanel();
 		panelAnswer.add(jspAnswer);
+        
+        oldExerciseNr = getExcercise();
+        System.out.println("");
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID()))); 
+        
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 		this.pack();
@@ -57,7 +64,7 @@ public class ViewInputAnswer extends View
 		this.addWindowListener(new windowClosingAdapter());
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
-		this.setLocation(1000, 200);
+		this.setLocation(800, 200);
         
 		this.getContentPane().add(panel);
 		this.setVisible(true);
@@ -66,97 +73,109 @@ public class ViewInputAnswer extends View
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) 
+	 public void actionPerformed(ActionEvent event) 
     {
-        
-		if(event.getSource() == exercise_id)
-        {
-            if(exercise_id.getSelectedIndex() == 0)
+        if(event.getSource() == exercise_id)
+        {            
+            if(isAnswerchanged(oldExerciseNr))
             {
-                btnPrevious.setEnabled(false);
-                btnNext.setEnabled(true);
-            }
-            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
-            {
-                btnPrevious.setEnabled(true);
-                btnNext.setEnabled(false);
+                messageUserAnswer();
+                answerField.setText(model.retrieveAnswer(oldExerciseNr));
+                oldExerciseNr = getExcercise();
             }
             else
             {
-                btnPrevious.setEnabled(true);
-                btnNext.setEnabled(true);
+                if(exercise_id.getSelectedIndex() == 0)
+                {
+                    btnPrevious.setEnabled(false);
+                }
+                else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
+                {
+                    btnNext.setEnabled(false);
+                    btnPrevious.setEnabled(true);
+                }
+                else
+                {
+                    btnNext.setEnabled(true);
+                    btnPrevious.setEnabled(true);
+                }
+                questionField.setText(model.retrieveQuestion(getExcercise()));
+                answerField.setText(model.retrieveAnswer(oldExerciseNr));
+                
+                oldExerciseNr = getExcercise();
             }
             
-			System.out.println("exercise_id changed!");
-			questionField.setText(model.retrieveQuestion(getExcercise()));
-			answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
-		}
+        }
         else if(event.getSource() == btnSave)
         {
-			if(!model.questionExist(getExcercise()))
+            if(!model.answerExist(oldExerciseNr))// answer doesn't exist
             {
-				controller.create();
-			}
-            else 
+                model.updateAnswer(oldExerciseNr, answerField.getText(), getBlockID());
+            }
+            else
             {
-				controller.update();
-			}
-		}
+                model.updateAnswer(oldExerciseNr, answerField.getText(), 0);
+            }
+        }
         else if(event.getSource() == btnNext)
         {
-            if(isAnswerchanged())
+            if(isAnswerchanged(oldExerciseNr))
             {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
-                {
-                    model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
-                }
-            }           
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())  
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                answerField.setText(model.retrieveAnswer(getExcercise()));
-            }
-            else
-            {
-                btnNext.setEnabled(false);
-            }
-            
-		}
-        else if(event.getSource() == btnPrevious)
-        {
-            if(isAnswerchanged())
-            {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
-                {
-                    model.updateAnswer(String.valueOf(exercise_id.getSelectedItem()), getAnswer(), 0);
-                }
-            }
-                        
-            if(exercise_id.getSelectedIndex() - 1 >= 0)  
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-            }
-            else
-            {
-                btnPrevious.setEnabled(false);
+                messageUserAnswer();
             }
             
             if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
             {
-                btnNext.setEnabled(true);
+                btnPrevious.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                answerField.setText(model.retrieveAnswer(oldExerciseNr));
+            }
+            else
+            {
+                btnPrevious.setEnabled(false);
+            } 
+            
+            
+            
+        }
+        else if(event.getSource() == btnPrevious)
+        {
+            if(isAnswerchanged(oldExerciseNr))
+            {
+                messageUserAnswer();
             }
             
-		}
-          
-	}
+            if(exercise_id.getSelectedIndex() - 1 >= 0)
+            {
+                btnNext.setEnabled(true);
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                answerField.setText(model.retrieveAnswer(oldExerciseNr));
+            }
+            else
+            {
+                btnNext.setEnabled(false);
+            }
+            
+        }
+        else if(event.getSource() == blocks_id)
+        {            
+            exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        }
+		
+        
+    }// end mothod actionPerformed
+     
+     public void messageUserAnswer()
+    {
+        int dialogReslult = JOptionPane.showConfirmDialog(null, 
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                
+        if(dialogReslult == 0)// yes button
+        {
+            model.updateAnswer(oldExerciseNr, answerField.getText(), 0);
+        }
+        
+    }
 	
 	@Override
 	public void update(Observable o, Object arg)
@@ -171,10 +190,10 @@ public class ViewInputAnswer extends View
 		return answerField.getText();
 	}
     
-    public boolean isAnswerchanged()
+    public boolean isAnswerchanged(String oldExerciseNr)
     {
         String currentText = getAnswer();
-        String oldtext = model.retrieveAnswer(String.valueOf(exercise_id.getSelectedItem()));
+        String oldtext = model.retrieveAnswer(oldExerciseNr);
         
         if(oldtext == null)
         {
@@ -194,7 +213,7 @@ public class ViewInputAnswer extends View
         @Override
         public void windowClosing(WindowEvent we)
         {         
-            if(isAnswerchanged())
+            if(isAnswerchanged(oldExerciseNr))
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);

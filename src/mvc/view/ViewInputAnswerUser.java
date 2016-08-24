@@ -53,6 +53,7 @@ public class ViewInputAnswerUser extends View
         
         JPanel panelAnswer = new JPanel();
         panelAnswer.add(jspUserAnswer);
+        
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
         
         panel.add(panelQuestion);
@@ -166,7 +167,7 @@ public class ViewInputAnswerUser extends View
                 
         if(dialogReslult == 0)// yes button
         {
-            model.updateUserAnswer(userAnswerField.getText(), getTitle(), controller.getUserName());
+            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
         }
         
     }
@@ -182,10 +183,10 @@ public class ViewInputAnswerUser extends View
         userAnswerField.getText();
     }
     
-    public boolean isUserAnswerChanged(String oldExercise)
+    public boolean isUserAnswerChanged(String oldExerciseNr)
     {
         String currentAnswerUser = getUserAnswer();
-        String oldText = model.retrieveAnswerUser(oldExercise, controller.getUserName());
+        String oldText = model.retrieveAnswerUser(oldExerciseNr, controller.getUserName());
         
         if(oldText == null)
         {
