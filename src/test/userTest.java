@@ -7,6 +7,20 @@ public class userTest {
 		
 		Model model = new Model();
 		model.createDBConnection();
+		
+		/*String[] blocks = model.getBlockList();
+		
+		for ( int i = 0;i<blocks.length; i++){
+			System.out.println(blocks[i]);
+		}*/
+		//System.out.println(model.getBlockName("1.2"));
+		String[] lijst =  model.getExerciseList(10);
+		for (int i =0; i< lijst.length;i ++){
+			System.out.println(lijst[i]);
+		}
+		
+		
+		
 //		model.delTable("user_answer");
 //		model.delTable("user");
 //

@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
+
+import javafx.scene.control.ComboBox;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,6 +30,7 @@ public class ViewInputAnswer extends View
     {
 		super(model, controller);
 		this.model = model;
+		System.out.println(model);
 		this.controller = controller;
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
@@ -55,8 +59,12 @@ public class ViewInputAnswer extends View
         
         oldExerciseNr = getExcercise();
         System.out.println("");
-        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID()))); 
-        
+//       exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        //xxx
+        System.out.println("Model =" + model.getExerciseList(3));
+        DefaultComboBoxModel<String> c = new DefaultComboBoxModel<>(model.getExerciseList(1));
+        System.out.println(" C =" +c);
+        //exercise_id.setModel(c); 
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 		this.pack();
