@@ -139,6 +139,7 @@ public abstract class View extends JFrame implements iView, Observer
         btnPrevious.setEnabled(false);
 		exercise_id.addActionListener(this);
 		blocks_id.addActionListener(this);
+        
 		
 		questionField.setRows(23);
 		questionField.setColumns(38);

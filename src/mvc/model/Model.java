@@ -23,7 +23,7 @@ public class Model extends Observable implements iModel
 	// properties are immutable and same for every class object. Therefore:
 	private static final Properties prop = new Properties();
     private Connection connection;
-
+    
 	@Override
 	public void createDBConnection() 
     {
@@ -139,7 +139,6 @@ public class Model extends Observable implements iModel
             {
             }
             
-        
     }
         
     public void updateUserAnswer(String answer, String exerciseNr, String name)
@@ -225,9 +224,11 @@ public class Model extends Observable implements iModel
         } 
         catch (Exception e)
         {
+            
         }
         
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);
+        
         Arrays.sort(exercise);
         return exercise;
     }
@@ -507,7 +508,7 @@ public class Model extends Observable implements iModel
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            
         }
 	}
     
@@ -525,7 +526,7 @@ public class Model extends Observable implements iModel
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            
         }
     }
 
@@ -551,8 +552,7 @@ public class Model extends Observable implements iModel
 		} 
         catch (SQLException e) 
         {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
         
 		return false;
@@ -584,7 +584,7 @@ public class Model extends Observable implements iModel
         }
         catch(SQLException e)
         {
-            System.out.println("fout in answerExist");
+            
         }
 		
 		return false;
@@ -649,7 +649,7 @@ public class Model extends Observable implements iModel
         }
         catch (SQLException ex) 
         {
-           System.out.println("Fault :" + ex);
+           
         }
 
 		System.out.println("Table : " +table + " deleted!");

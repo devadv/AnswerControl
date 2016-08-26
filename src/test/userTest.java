@@ -14,7 +14,7 @@ public class userTest {
 			System.out.println(blocks[i]);
 		}*/
 		//System.out.println(model.getBlockName("1.2"));
-		String[] lijst =  model.getExerciseList(10);
+		String[] lijst =  model.getExerciseList(1);
 		for (int i =0; i< lijst.length;i ++){
 			System.out.println(lijst[i]);
 		}
