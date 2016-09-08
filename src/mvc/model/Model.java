@@ -83,6 +83,7 @@ public class Model extends Observable implements iModel
                 + "(username) "
                 + "VALUES( ? )"
                 );
+                
                 saveUserName.setString(1, name);
                 saveUserName.execute();
             } 
@@ -274,6 +275,7 @@ public class Model extends Observable implements iModel
             getUserId.setString(1, userName);
             getUserId.executeQuery();
             resultSet = getUserId.getResultSet();
+            
             resultSet.next();
             idUser = resultSet.getInt("iduser");
         } 
@@ -305,7 +307,8 @@ public class Model extends Observable implements iModel
             create.setString(2, question);
             create.setInt(3, block_id);
             create.execute();
-		} catch (SQLException e) 
+		} 
+        catch (SQLException e) 
         {
 		
 		}
@@ -395,6 +398,7 @@ public class Model extends Observable implements iModel
             retrieve.setInt(2, correctAnswerId);
             retrieve.execute();
             resultSet = retrieve.getResultSet();
+            
             resultSet.next();
             answerUser = resultSet.getString("answer");
         }

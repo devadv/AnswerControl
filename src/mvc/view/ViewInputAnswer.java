@@ -28,7 +28,6 @@ public class ViewInputAnswer extends View
     {
 		super(model, controller);
 		this.model = model;
-		System.out.println(model);
 		this.controller = controller;
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
@@ -139,8 +138,7 @@ public class ViewInputAnswer extends View
             else
             {
                 btnPrevious.setEnabled(false);
-            } 
-            
+            }   
         }
         else if(event.getSource() == btnPrevious)
         {
@@ -153,13 +151,13 @@ public class ViewInputAnswer extends View
             {
                 btnNext.setEnabled(true);
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                exerciseNr = getExcercise();
                 answerField.setText(model.retrieveAnswer(exerciseNr));
             }
             else
             {
                 btnNext.setEnabled(false);
             }
-            
         }
         else if(event.getSource() == blocks_id)
         {            
@@ -189,8 +187,8 @@ public class ViewInputAnswer extends View
 		System.out.println("model updated in Answer");
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 		
-		
 	}
+    
 	public String getAnswer() 
     {
 		return answerField.getText();
@@ -243,4 +241,4 @@ public class ViewInputAnswer extends View
         }
     }// end class windowClosingAdaptor
 
-}
+}// end class ViewInputAnswer
