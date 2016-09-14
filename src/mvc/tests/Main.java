@@ -15,26 +15,23 @@ public class Main
         String name = System.getProperty("user.name");
         
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-		ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         
         
-//        Object[] setGUI = {"Input questions.", "Input answers.", "Input user answer"};
-//        int option = JOptionPane.showOptionDialog(null, "Choose an user interface:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
-//        
-//        if(option == 0)// input question uci
-//        {
-//            ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
-//        }
-//        else if(option == 1)// input answer uci
-//        {
-//            ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-//        }
-//        else if(option == 2)// input user answer
-//        {
-//            ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model);
-//        }
-//        
+        Object[] setGUI = {"Input questions.", "Input answers."};
+        int option = JOptionPane.showOptionDialog(null, "Choose an user interface:", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, setGUI, setGUI[0]);
+        
+        if(option == 0)// input question uci
+        {
+            ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
+        }
+        else if(option == 1)// input answer uci
+        {
+            ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
+        }
+        
+        
     }
 }
 

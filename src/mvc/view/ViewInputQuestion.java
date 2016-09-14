@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.util.Observable;
 
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,13 +35,14 @@ public class ViewInputQuestion extends View
 		
 		panel.add(panelQuestion);
         panel.add(panelBottom);
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
                 
         this.addWindowListener( new WindowClosingAdapter1());
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
         
-		this.setLocation(200, 100);
+		this.setLocation(500, 200);
 		this.getContentPane().add(panel);
 		this.setVisible(true);
 		
@@ -117,7 +119,7 @@ public class ViewInputQuestion extends View
             
             if(exercise_id.getSelectedIndex() - 1 >= 0)  
             {
-                btnPrevious.setEnabled(true);System.out.println("blockname: " + model.getBlockName(exercise_id.getSelectedItem().toString()));
+                btnPrevious.setEnabled(true);
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
                 questionField.setText(model.retrieveQuestion(getExcercise()));
             }
@@ -131,6 +133,41 @@ public class ViewInputQuestion extends View
                 btnNext.setEnabled(true);
             }
 	    }
+        else if(event.getSource() == blocks_id)
+        {     
+            if(isQuestionChanged())
+            {
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                }
+            }
+            
+            if(exercise_id.getSelectedIndex() == 0)
+                {
+                    btnPrevious.setEnabled(false);
+                }
+                else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+                {
+                    btnNext.setEnabled(false);
+                    btnPrevious.setEnabled(true);
+                }
+                else
+                {
+                    btnNext.setEnabled(true);
+                    btnPrevious.setEnabled(false);
+                }
+            
+            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+            {
+                btnNext.setEnabled(true);
+            }
+            
+            exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+            questionField.setText(model.retrieveQuestion(getExcercise()));
+        }
     }// end method actionPerformed
     
 	@Override

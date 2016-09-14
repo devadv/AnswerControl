@@ -105,8 +105,7 @@ public class ViewInputAnswer extends View
                 }
                 
                 questionField.setText(model.retrieveQuestion(exerciseNr));
-                answerField.setText(model.retrieveAnswer(exerciseNr));
-                 
+                answerField.setText(model.retrieveAnswer(exerciseNr));   
             }
             
         }
@@ -123,6 +122,8 @@ public class ViewInputAnswer extends View
         }
         else if(event.getSource() == btnNext)
         {
+            exerciseNr = getExcercise();
+            
             if(isAnswerchanged(exerciseNr))
             {
                 messageUserAnswer();
@@ -160,9 +161,39 @@ public class ViewInputAnswer extends View
             }
         }
         else if(event.getSource() == blocks_id)
-        {            
+        {    
+            if(isAnswerchanged(exerciseNr))
+            {
+                messageUserAnswer();
+                answerField.setText(model.retrieveAnswer(exerciseNr));
+                exerciseNr = getExcercise();
+            }
+            else
+            {
+                exerciseNr = getExcercise();
+                
+                if(exercise_id.getSelectedIndex() == 0)
+                {
+                    btnPrevious.setEnabled(false);
+                }
+                else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+                {
+                    btnNext.setEnabled(false);
+                    btnPrevious.setEnabled(true);
+                }
+                else
+                {
+                    btnNext.setEnabled(true);
+                    btnPrevious.setEnabled(false);
+                }
+                
+                questionField.setText(model.retrieveQuestion(exerciseNr));
+                answerField.setText(model.retrieveAnswer(exerciseNr));   
+            }
+            
             exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
             exerciseNr = getExcercise();
+            questionField.setText(model.retrieveQuestion(exerciseNr));
             answerField.setText(model.retrieveAnswer(exerciseNr));
         }
 		
