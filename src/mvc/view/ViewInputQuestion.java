@@ -19,8 +19,10 @@ import mvc.controller.iControllerAnswerQuestion;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
 
+
 public class ViewInputQuestion extends View 
 {
+    private String exerciseNr;
 
 	public ViewInputQuestion(Model model, iCRUD controller) {
 		super(model, controller);
@@ -36,7 +38,8 @@ public class ViewInputQuestion extends View
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
-                
+        exerciseNr = getExcercise();
+        
         this.addWindowListener( new WindowClosingAdapter1());
         this.pack();
 		this.setTitle("Invoer vragen");
@@ -53,6 +56,24 @@ public class ViewInputQuestion extends View
     {
 		if (event.getSource() == exercise_id) 
         {
+            if(isQuestionChanged())
+            {
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+                if(dialogResult == 0)// yes button clicked
+                {
+                    if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
+                    {
+                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                    }
+                    else
+                    {
+                        model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    }
+                    
+                }
+            }
+            
             if(exercise_id.getSelectedIndex() == 0)
             {
                 btnPrevious.setEnabled(false);
@@ -88,7 +109,15 @@ public class ViewInputQuestion extends View
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
                 if(dialogResult == 0)// yes button clicked
                 {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
+                    {
+                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                    }
+                    else
+                    {
+                        model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    }
+                    
                 }
             }
             
@@ -96,6 +125,7 @@ public class ViewInputQuestion extends View
             {
                 btnPrevious.setEnabled(true);
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+                exerciseNr = getExcercise();
                 questionField.setText(model.retrieveQuestion(getExcercise()));
             }
             else
@@ -121,6 +151,7 @@ public class ViewInputQuestion extends View
             {
                 btnPrevious.setEnabled(true);
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+                exerciseNr = getExcercise();
                 questionField.setText(model.retrieveQuestion(getExcercise()));
             }
             else
@@ -141,7 +172,15 @@ public class ViewInputQuestion extends View
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
                 if(dialogResult == 0)// yes button clicked
                 {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
+                    {
+                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                    }
+                    else
+                    {
+                        model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                    }
+                    
                 }
             }
             
@@ -166,6 +205,7 @@ public class ViewInputQuestion extends View
             }
             
             exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+            exerciseNr = getExcercise();
             questionField.setText(model.retrieveQuestion(getExcercise()));
         }
     }// end method actionPerformed
@@ -184,7 +224,7 @@ public class ViewInputQuestion extends View
     public boolean isQuestionChanged()
     {
         String currentText = getQuestion();
-        String oldtext = model.retrieveQuestion(String.valueOf(exercise_id.getSelectedItem()));
+        String oldtext = model.retrieveQuestion(exerciseNr);
         
         if(oldtext == null)
         {

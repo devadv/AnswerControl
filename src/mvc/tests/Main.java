@@ -31,7 +31,6 @@ public class Main
             ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         }
         
-        
     }
 }
 
