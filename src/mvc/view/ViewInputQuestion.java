@@ -40,6 +40,7 @@ public class ViewInputQuestion extends View
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
         
+        
         this.addWindowListener( new WindowClosingAdapter1());
         this.pack();
 		this.setTitle("Invoer vragen");
@@ -243,7 +244,7 @@ public class ViewInputQuestion extends View
     {           
         @Override
         public void windowClosing(WindowEvent we)
-        {         
+        {   
             if(isQuestionChanged())
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,

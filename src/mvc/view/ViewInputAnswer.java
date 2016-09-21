@@ -55,9 +55,10 @@ public class ViewInputAnswer extends View
 		JPanel panelAnswer = new JPanel();
 		panelAnswer.add(jspAnswer);
         
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
         
-        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        
         
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
@@ -215,7 +216,6 @@ public class ViewInputAnswer extends View
 	@Override
 	public void update(Observable o, Object arg)
     {
-		System.out.println("model updated in Answer");
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 		
 	}
@@ -247,7 +247,7 @@ public class ViewInputAnswer extends View
     {           
         @Override
         public void windowClosing(WindowEvent we)
-        {         
+        {
             if(isAnswerchanged(exerciseNr))
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
