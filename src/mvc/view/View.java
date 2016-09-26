@@ -119,7 +119,8 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JScrollPane jspQuestion;
 	protected JPanel panelQuestion;
 
-	public View(Model model,iCRUD controller ) {
+	public View(Model model,iCRUD controller ) 
+    {
 		this.model = model;
 		this.controller = controller;
 		blocks_id = new JComboBox<>(model.getBlockList());
@@ -130,6 +131,7 @@ public abstract class View extends JFrame implements iView, Observer
 		textAreaFont = new Font("", Font.BOLD, 13);
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
+        
         if(exercise_id.getItemCount() == 1)
         {
             btnNext.setEnabled(false);
