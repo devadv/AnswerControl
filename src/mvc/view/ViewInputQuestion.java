@@ -1,6 +1,5 @@
 package mvc.view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -52,13 +51,10 @@ public class ViewInputQuestion extends View
 		this.setVisible(true);
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent event) 
-    {
-		if (event.getSource() == exercise_id) 
-        {
-            if(isQuestionChanged())
+    
+    public void exerciseId()
+    {  
+         if(isQuestionChanged())
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
@@ -90,128 +86,129 @@ public class ViewInputQuestion extends View
                 btnPrevious.setEnabled(true);
             }
 			questionField.setText(model.retrieveQuestion(getExcercise()));
-		}
-        else if (event.getSource() == btnSave) 
+    }
+    
+    public void btnSave()
+    { 
+        if (!(model.questionExist(getExcercise()))) 
         {
-			if (!(model.questionExist(getExcercise()))) 
-            {
-				controller.create();
-			} 
-            else 
-            {
-				model.updateQuestion(getExcercise(), getQuestion(), getBlockID());
-			}
-
-		} 
-        else if (event.getSource() == btnNext)
+            controller.create();
+        } 
+        else 
         {
-            if(isQuestionChanged())
-            {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
-                {
-                    if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
-                    {
-                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
-                    }
-                    else
-                    {
-                        model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-                    }
-                    
-                }
-            }
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                exerciseNr = getExcercise();
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-            }
-            else
-            {
-                btnNext.setEnabled(false);
-            }
-            
-                        
-		}
-        else if (event.getSource() == btnPrevious) 
+            model.updateQuestion(getExcercise(), getQuestion(), getBlockID());
+        }
+    }
+    
+    public void btnMext()
+    {
+        if(isQuestionChanged())
         {
-            if(isQuestionChanged())
+            int dialogResult = JOptionPane.showConfirmDialog(null,
+                    "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+            if(dialogResult == 0)// yes button clicked
             {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
+                if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
                 {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-                }
-            }
-            
-            if(exercise_id.getSelectedIndex() - 1 >= 0)  
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-                exerciseNr = getExcercise();
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-            }
-            else
-            {
-                btnPrevious.setEnabled(false);
-            }
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                btnNext.setEnabled(true);
-            }
-	    }
-        else if(event.getSource() == blocks_id)
-        {     
-            if(isQuestionChanged())
-            {
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == 0)// yes button clicked
-                {
-                    if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
-                    {
-                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
-                    }
-                    else
-                    {
-                        model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-                    }
-                    
-                }
-            }
-            
-            if(exercise_id.getSelectedIndex() == 0)
-                {
-                    btnPrevious.setEnabled(false);
-                }
-                else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-                {
-                    btnNext.setEnabled(false);
-                    btnPrevious.setEnabled(true);
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
                 }
                 else
                 {
-                    btnNext.setEnabled(true);
-                    btnPrevious.setEnabled(false);
+                    model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                 }
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                btnNext.setEnabled(true);
+
             }
-            
-            exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        }
+
+        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnPrevious.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
             exerciseNr = getExcercise();
             questionField.setText(model.retrieveQuestion(getExcercise()));
         }
-    }// end method actionPerformed
+        else
+        {
+            btnNext.setEnabled(false);
+        }
+    }
     
+    public void btnPrevious()
+    { 
+        if(isQuestionChanged())
+        {
+            int dialogResult = JOptionPane.showConfirmDialog(null,
+                    "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+            if(dialogResult == 0)// yes button clicked
+            {
+                model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+            }
+        }
+
+        if(exercise_id.getSelectedIndex() - 1 >= 0)  
+        {
+            btnPrevious.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+            exerciseNr = getExcercise();
+            questionField.setText(model.retrieveQuestion(getExcercise()));
+        }
+        else
+        {
+            btnPrevious.setEnabled(false);
+        }
+
+        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnNext.setEnabled(true);
+        }
+    }
+    
+    public void blocksId()
+    {
+        if(isQuestionChanged())
+        {
+            int dialogResult = JOptionPane.showConfirmDialog(null,
+                    "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
+            if(dialogResult == 0)// yes button clicked
+            {
+                if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
+                {
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                }
+                else
+                {
+                    model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
+                }
+
+            }
+        }
+            
+        if(exercise_id.getSelectedIndex() == 0)
+        {
+            btnPrevious.setEnabled(false);
+        }
+        else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnNext.setEnabled(false);
+            btnPrevious.setEnabled(true);
+        }
+        else
+        {
+            btnNext.setEnabled(true);
+            btnPrevious.setEnabled(false);
+        }
+
+        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnNext.setEnabled(true);
+        }
+
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        exerciseNr = getExcercise();
+        questionField.setText(model.retrieveQuestion(getExcercise()));
+    }
+    
+	    
 	@Override
 	public void update(Observable o, Object arg) 
     {

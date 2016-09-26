@@ -1,7 +1,5 @@
 package mvc.view;
 
-
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
@@ -75,95 +73,95 @@ public class ViewInputAnswer extends View
         
 	}
 
-	@Override
-	 public void actionPerformed(ActionEvent event) 
-    {
-        if(event.getSource() == exercise_id)
-        {            
-            if(isAnswerchanged(exerciseNr))
-            {
-                messageUserAnswer();
-                answerField.setText(model.retrieveAnswer(exerciseNr));
-                exerciseNr = getExcercise();
-            }
-            else
-            {
-                exerciseNr = getExcercise();
-                
-                if(exercise_id.getSelectedIndex() == 0)
-                {
-                    btnPrevious.setEnabled(false);
-                }
-                else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
-                {
-                    btnNext.setEnabled(false);
-                    btnPrevious.setEnabled(true);
-                }
-                else
-                {
-                    btnNext.setEnabled(true);
-                    btnPrevious.setEnabled(true);
-                }
-                
-                questionField.setText(model.retrieveQuestion(exerciseNr));
-                answerField.setText(model.retrieveAnswer(exerciseNr));   
-            }
-            
-        }
-        else if(event.getSource() == btnSave)
+    public void exerciseId()
+    {  
+        if(isAnswerchanged(exerciseNr))
         {
-            if(!model.answerExist(exerciseNr))// answer doesn't exist
-            {
-                model.updateAnswer(exerciseNr, answerField.getText(), getBlockID());
-            }
-            else
-            {
-                model.updateAnswer(exerciseNr, answerField.getText(), 0);
-            }
+            messageUserAnswer();
+            answerField.setText(model.retrieveAnswer(exerciseNr));
+            exerciseNr = getExcercise();
         }
-        else if(event.getSource() == btnNext)
+        else
         {
             exerciseNr = getExcercise();
-            
-            if(isAnswerchanged(exerciseNr))
-            {
-                messageUserAnswer();
-            }
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                exerciseNr = getExcercise();
-                answerField.setText(model.retrieveAnswer(exerciseNr));
-            }
-            else
+
+            if(exercise_id.getSelectedIndex() == 0)
             {
                 btnPrevious.setEnabled(false);
-            }   
-        }
-        else if(event.getSource() == btnPrevious)
-        {
-            if(isAnswerchanged(exerciseNr))
-            {
-                messageUserAnswer();
             }
-            
-            if(exercise_id.getSelectedIndex() - 1 >= 0)
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
             {
-                btnNext.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-                exerciseNr = getExcercise();
-                answerField.setText(model.retrieveAnswer(exerciseNr));
+                btnNext.setEnabled(false);
+                btnPrevious.setEnabled(true);
             }
             else
             {
-                btnNext.setEnabled(false);
+                btnNext.setEnabled(true);
+                btnPrevious.setEnabled(true);
             }
+
+            questionField.setText(model.retrieveQuestion(exerciseNr));
+            answerField.setText(model.retrieveAnswer(exerciseNr));   
         }
-        else if(event.getSource() == blocks_id)
-        {    
-            if(isAnswerchanged(exerciseNr))
+    }
+    
+    public void btnSave()
+    { 
+        if(!model.answerExist(exerciseNr))// answer doesn't exist
+        {
+            model.updateAnswer(exerciseNr, answerField.getText(), getBlockID());
+        }
+        else
+        {
+            model.updateAnswer(exerciseNr, answerField.getText(), 0);
+        }
+    }
+    
+    public void btnMext()
+    {  
+        exerciseNr = getExcercise();
+            
+        if(isAnswerchanged(exerciseNr))
+        {
+            messageUserAnswer();
+        }
+
+        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnPrevious.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+            exerciseNr = getExcercise();
+            answerField.setText(model.retrieveAnswer(exerciseNr));
+        }
+        else
+        {
+            btnPrevious.setEnabled(false);
+        } 
+    }
+    
+    public void btnPrevious()
+    { 
+        if(isAnswerchanged(exerciseNr))
+        {
+            messageUserAnswer();
+        }
+
+        if(exercise_id.getSelectedIndex() - 1 >= 0)
+        {
+            btnNext.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+            exerciseNr = getExcercise();
+            answerField.setText(model.retrieveAnswer(exerciseNr));
+        }
+        else
+        {
+            btnNext.setEnabled(false);
+        }
+    }
+    
+    public void blocksId()
+    {
+        if(isAnswerchanged(exerciseNr))
             {
                 messageUserAnswer();
                 answerField.setText(model.retrieveAnswer(exerciseNr));
@@ -196,11 +194,9 @@ public class ViewInputAnswer extends View
             exerciseNr = getExcercise();
             questionField.setText(model.retrieveQuestion(exerciseNr));
             answerField.setText(model.retrieveAnswer(exerciseNr));
-        }
-		
-        
-    }// end mothod actionPerformed
-     
+    }
+    
+	     
     public void messageUserAnswer()
     {
         int dialogReslult = JOptionPane.showConfirmDialog(null, 

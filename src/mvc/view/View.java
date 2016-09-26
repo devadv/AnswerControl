@@ -2,13 +2,16 @@ package mvc.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -193,5 +196,29 @@ public abstract class View extends JFrame implements iView, Observer
 		return blocks_id.getSelectedIndex() + 1;
 	}
 	
-    	
+    public void actionPerformed(ActionEvent event) 
+    {
+		if (event.getSource() == exercise_id) 
+        {
+            exerciseId();
+        }           
+        else if (event.getSource() == btnSave) 
+        {
+			btnSave();
+		} 
+        else if (event.getSource() == btnNext)
+        {           
+            btnMext();
+		}
+        else if (event.getSource() == btnPrevious) 
+        {
+            btnPrevious();
+	    }
+        else if(event.getSource() == blocks_id)
+        {     
+            blocksId();
+        }
+    }// end method actionPerformed
+    
+        	
 }// end abstact class View
