@@ -231,7 +231,26 @@ public class Model extends Observable implements iModel
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);
         
         Arrays.sort(exercise);
-        return exercise;
+        String[] exerciseList = new String[exercise.length];
+        int j = 0;
+        
+        for(int i = 0; i < exercise.length; i++)
+        {
+            if(exercise[i].length() == 3)
+            {
+                exerciseList[j++] = exercise[i];
+            }
+        }
+                
+        for(int i = 0; i < exercise.length; i++)
+        {
+            if(exercise[i].length() == 4)
+            {
+                exerciseList[j++] = exercise[i];
+            }
+        }
+        
+        return exerciseList;
     }
         
     public int getIdCorrectAnswer(String exerciseNr)

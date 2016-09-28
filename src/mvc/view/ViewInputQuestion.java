@@ -89,6 +89,7 @@ public class ViewInputQuestion extends View
                 btnPrevious.setEnabled(true);
             }
 			questionField.setText(model.retrieveQuestion(getExcercise()));
+            
 		}
         else if (event.getSource() == btnSave) 
         {
