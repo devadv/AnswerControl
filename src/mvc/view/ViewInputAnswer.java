@@ -108,7 +108,6 @@ public class ViewInputAnswer extends View
                 questionField.setText(model.retrieveQuestion(exerciseNr));
                 answerField.setText(model.retrieveAnswer(exerciseNr));   
             }
-            
         }
         else if(event.getSource() == btnSave)
         {

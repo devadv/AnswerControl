@@ -72,7 +72,7 @@ public class ViewInputQuestion extends View
                         model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                     }
                     
-                }
+                }  
             }
             
             if(exercise_id.getSelectedIndex() == 0)
@@ -88,9 +88,10 @@ public class ViewInputQuestion extends View
             {
                 btnPrevious.setEnabled(true);
             }
-			questionField.setText(model.retrieveQuestion(getExcercise()));
             
-		}
+			questionField.setText(model.retrieveQuestion(getExcercise()));
+            exerciseNr = getExcercise();
+		}// end if
         else if (event.getSource() == btnSave) 
         {
 			if (!(model.questionExist(getExcercise()))) 
@@ -134,7 +135,6 @@ public class ViewInputQuestion extends View
             {
                 btnNext.setEnabled(false);
             }
-            
                         
 		}
         else if (event.getSource() == btnPrevious) 
