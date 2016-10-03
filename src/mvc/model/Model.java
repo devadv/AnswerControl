@@ -20,9 +20,7 @@ public class Model extends Observable implements iModel
     private Statement statement;
 	private ResultSet resultSet;
 
-	// properties are immutable and same for every class object. Therefore:
-	private static final Properties prop = new Properties();
-    private Connection connection;
+	private Connection connection;
     
     public String DATABASEURL;
     public String username;
@@ -31,9 +29,9 @@ public class Model extends Observable implements iModel
 	@Override
 	public void createDBConnection() 
     {
-            DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
-            username = "badev_hintveld";
-            password = "V99r9R9qwMmYPcqU";
+        DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+        username = "badev_hintveld";
+        password = "V99r9R9qwMmYPcqU";
 
         try 
         {
