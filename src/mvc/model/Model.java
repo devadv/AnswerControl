@@ -24,52 +24,32 @@ public class Model extends Observable implements iModel
 	private static final Properties prop = new Properties();
     private Connection connection;
     
+    public String DATABASEURL;
+    public String username;
+    public String password;
+    
 	@Override
 	public void createDBConnection() 
     {
-		try 
-        {
-			/*
-			 * load the properties
-			 * 
-			 * Example contents properties file:
-			 * 
-			 	#Tue Feb 23 14:56:57 CET 2016
-			 	DB_USERNAME=John-Doe
-			 	DB_DRIVER=com.mysql.jdbc.Driver
-			 	DB_PASSWORD=mySuperPassword
-			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
-            
-                DB_PASSWORD = V99r9R9qwMmYPcqU
-            
-            SET FOREIGN_KEY_CHECKS=0;
-            TRUNCATE correct_answer;
-            SET FOREIGN_KEY_CHECKS=1;
-            
-                SET FOREIGN_KEY_CHECKS=0;
-                TRUNCATE correct_answer;
-                SET FOREIGN_KEY_CHECKS=1;
-			 */
-			prop.load(new FileInputStream("BlueJ.config"));
-			connection = 
-					DriverManager.getConnection
-						( prop.getProperty("DB_URL") 
-						, prop.getProperty("DB_USERNAME")
-						, prop.getProperty("DB_PASSWORD")
-						);
-			statement = connection.createStatement();
-			System.out.println("Connection  database: " + prop.getProperty("DB_URL"));
+            DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+            username = "badev_hintveld";
+            password = "V99r9R9qwMmYPcqU";
 
-		} 
-        catch (Exception connectException) 
+        try 
         {
-			connectException.printStackTrace();
-			System.out.println("no connection");
-		}
+            Class.forName( "com.mysql.jdbc.Driver" );
+            connection = DriverManager.getConnection( DATABASEURL, username, password );
+            statement = connection.createStatement();
+        } 
+        catch ( Exception connectException ) 
+        {
+            connectException.printStackTrace();
+            System.out.println("No connection");
+        }
 		
 	}
     
-    
+        
     public void saveUserName(String name)
     {        
         //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('name');
