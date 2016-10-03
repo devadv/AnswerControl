@@ -31,7 +31,7 @@ public class Model extends Observable implements iModel
 	@Override
 	public void createDBConnection() 
     {
-            DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+            DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
             username = "badev_hintveld";
             password = "V99r9R9qwMmYPcqU";
 
