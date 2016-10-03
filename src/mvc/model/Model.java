@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Model extends Observable implements iModel  
@@ -29,7 +30,7 @@ public class Model extends Observable implements iModel
 	@Override
 	public void createDBConnection() 
     {
-        DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+        DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
         username = "badev_hintveld";
         password = "V99r9R9qwMmYPcqU";
 
@@ -41,6 +42,7 @@ public class Model extends Observable implements iModel
         } 
         catch ( Exception connectException ) 
         {
+            JOptionPane.showMessageDialog(null, "No connection to database", "Error", JOptionPane.WARNING_MESSAGE);
             connectException.printStackTrace();
             System.out.println("No connection");
         }
