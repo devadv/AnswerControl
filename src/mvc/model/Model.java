@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Model extends Observable implements iModel  
@@ -63,6 +64,7 @@ public class Model extends Observable implements iModel
 		} 
         catch (Exception connectException) 
         {
+            JOptionPane.showMessageDialog(null, "No database connection", "Error", JOptionPane.WARNING_MESSAGE);
 			connectException.printStackTrace();
 			System.out.println("no connection");
 		}
