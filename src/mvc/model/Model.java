@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Model extends Observable implements iModel  
@@ -29,27 +30,7 @@ public class Model extends Observable implements iModel
     {
 		try 
         {
-			/*
-			 * load the properties
-			 * 
-			 * Example contents properties file:
-			 * 
-			 	#Tue Feb 23 14:56:57 CET 2016
-			 	DB_USERNAME=John-Doe
-			 	DB_DRIVER=com.mysql.jdbc.Driver
-			 	DB_PASSWORD=mySuperPassword
-			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
-            
-                DB_PASSWORD = V99r9R9qwMmYPcqU
-            
-            SET FOREIGN_KEY_CHECKS=0;
-            TRUNCATE correct_answer;
-            SET FOREIGN_KEY_CHECKS=1;
-            
-                SET FOREIGN_KEY_CHECKS=0;
-                TRUNCATE correct_answer;
-                SET FOREIGN_KEY_CHECKS=1;
-			 */
+			
 			prop.load(new FileInputStream("BlueJ.config"));
 			connection = 
 					DriverManager.getConnection
@@ -63,6 +44,7 @@ public class Model extends Observable implements iModel
 		} 
         catch (Exception connectException) 
         {
+            JOptionPane.showMessageDialog(null, "No database connection.", "Error", JOptionPane.WARNING_MESSAGE);
 			connectException.printStackTrace();
 			System.out.println("no connection");
 		}
