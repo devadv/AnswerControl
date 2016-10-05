@@ -57,6 +57,7 @@ public class ViewInputAnswerUser extends View
         panelAnswer.add(jspUserAnswer);
         
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
+        exerciseNr = getExcercise();
         
         panel.add(panelQuestion);
         panel.add(panelAnswer);
@@ -74,6 +75,7 @@ public class ViewInputAnswerUser extends View
     @Override
     public void actionPerformed(ActionEvent event) 
     {
+        
         if(event.getSource() == exercise_id)
         {
             if(isUserAnswerChanged(exerciseNr))
@@ -107,7 +109,6 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == btnSave)
         {
-            exerciseNr = getExcercise();
             
             if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
             {
@@ -153,7 +154,7 @@ public class ViewInputAnswerUser extends View
                 exerciseNr = getExcercise();
                 userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
             }
-            else
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount())
             {
                 btnNext.setEnabled(false);
             }
