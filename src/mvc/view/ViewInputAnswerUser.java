@@ -121,8 +121,7 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == btnNext)
         {
-            exerciseNr = getExcercise();
-            
+                        
             if(isUserAnswerChanged(exerciseNr))
             {
                 messageUserAnswer();
