@@ -107,6 +107,8 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == btnSave)
         {
+            exerciseNr = getExcercise();
+            
             if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
             {
                 model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
@@ -118,6 +120,8 @@ public class ViewInputAnswerUser extends View
         }
         else if(event.getSource() == btnNext)
         {
+            exerciseNr = getExcercise();
+            
             if(isUserAnswerChanged(exerciseNr))
             {
                 messageUserAnswer();
