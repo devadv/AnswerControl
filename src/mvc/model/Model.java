@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -661,4 +660,4 @@ public class Model extends Observable implements iModel
 		
 	}
 
-}
+}// end class Model
