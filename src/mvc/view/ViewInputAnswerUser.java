@@ -73,101 +73,94 @@ public class ViewInputAnswerUser extends View
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) 
-    {
-        
-        if(event.getSource() == exercise_id)
+    public void exerciseId()
+    {  
+        if(isUserAnswerChanged(exerciseNr))
         {
-            if(isUserAnswerChanged(exerciseNr))
-            {
-                messageUserAnswer();
-                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-                exerciseNr = getExcercise();
-            }
-            else
-            {
-                if(exercise_id.getSelectedIndex() == 0)
-                {
-                    btnPrevious.setEnabled(false);
-                }
-                else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
-                {
-                    btnNext.setEnabled(false);
-                    btnPrevious.setEnabled(true);
-                }
-                else
-                {
-                    btnNext.setEnabled(true);
-                    btnPrevious.setEnabled(true);
-                }
-                questionField.setText(model.retrieveQuestion(getExcercise()));
-                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-                
-                exerciseNr = getExcercise();
-            }
-            
+            messageUserAnswer();
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            exerciseNr = getExcercise();
         }
-        else if(event.getSource() == btnSave)
+        else
         {
-            
-            if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
-            {
-                model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
-            }
-            else
-            {
-                model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
-            }
-        }
-        else if(event.getSource() == btnNext)
-        {
-                        
-            if(isUserAnswerChanged(exerciseNr))
-            {
-                messageUserAnswer();
-            }
-            
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                btnPrevious.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-            }
-            else
+            if(exercise_id.getSelectedIndex() == 0)
             {
                 btnPrevious.setEnabled(false);
-            } 
-            
-        }
-        else if(event.getSource() == btnPrevious)
-        {
-            if(isUserAnswerChanged(exerciseNr))
-            {
-                messageUserAnswer();
             }
-            
-            if(exercise_id.getSelectedIndex() - 1 >= 0)
-            {
-                btnNext.setEnabled(true);
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-                exerciseNr = getExcercise();
-                userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-            }
-            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount())
+            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
             {
                 btnNext.setEnabled(false);
+                btnPrevious.setEnabled(true);
             }
-            
-        }
-        else if(event.getSource() == blocks_id)
-        {            
-            exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+            else
+            {
+                btnNext.setEnabled(true);
+                btnPrevious.setEnabled(true);
+            }
+            questionField.setText(model.retrieveQuestion(getExcercise()));
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+
             exerciseNr = getExcercise();
-            userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
         }
-		
-        
-    }// end mothod actionPerformed
+    }
+    
+    public void btnSave()
+    { 
+        if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
+        {
+            model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+        }
+        else
+        {
+            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+        }
+    }
+    
+    public void btnMext()
+    {  
+        if(isUserAnswerChanged(exerciseNr))
+        {
+            messageUserAnswer();
+        }
+
+        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnPrevious.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+        }
+        else
+        {
+            btnPrevious.setEnabled(false);
+        } 
+    }
+    
+    public void btnPrevious()
+    { 
+        if(isUserAnswerChanged(exerciseNr))
+        {
+            messageUserAnswer();
+        }
+
+        if(exercise_id.getSelectedIndex() - 1 >= 0)
+        {
+            btnNext.setEnabled(true);
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+            exerciseNr = getExcercise();
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+        }
+        else
+        {
+            btnNext.setEnabled(false);
+        }
+    }
+    
+    public void blocksId()
+    {
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        exerciseNr = getExcercise();
+        userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+    }
     
     public void messageUserAnswer()
     {

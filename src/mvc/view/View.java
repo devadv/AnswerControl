@@ -2,6 +2,7 @@ package mvc.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -182,6 +183,30 @@ public abstract class View extends JFrame implements iView, Observer
         panel.add(panelBottom);
        
 	}
+    
+    public void actionPerformed(ActionEvent event) 
+    {
+		if (event.getSource() == exercise_id) 
+        {
+            exerciseId();
+        }           
+        else if (event.getSource() == btnSave) 
+        {
+			btnSave();
+		} 
+        else if (event.getSource() == btnNext)
+        {           
+            btnMext();
+		}
+        else if (event.getSource() == btnPrevious) 
+        {
+            btnPrevious();
+	    }
+        else if(event.getSource() == blocks_id)
+        {     
+            blocksId();
+        }
+    }// end method actionPerformed
 
 	public String getExcercise() 
     {
