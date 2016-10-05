@@ -7,4 +7,5 @@ public interface iView extends ActionListener
 {
 	void setGUI();
 
+    
 }
