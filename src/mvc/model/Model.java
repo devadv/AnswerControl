@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -64,12 +63,13 @@ public class Model extends Observable implements iModel
 		} 
         catch (Exception connectException) 
         {
-            JOptionPane.showMessageDialog(null, "No database connection", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Database connection failed", "Error", JOptionPane.WARNING_MESSAGE);
 			connectException.printStackTrace();
 			System.out.println("no connection");
 		}
 		
 	}
+    
     
     
     public void saveUserName(String name)
@@ -123,25 +123,26 @@ public class Model extends Observable implements iModel
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(userName);  
         
-            try 
-            {
-                PreparedStatement create = connection.prepareStatement
-                    ( "INSERT INTO user_answer "
-                    + "(correct_answerid "
-                    + ",answer "
-                    + ",userid) "
-                    + "VALUES( ?, ?, ? )"
-                    );
+        try 
+        {
+            PreparedStatement create = connection.prepareStatement
+                ( "INSERT INTO user_answer "
+                + "(correct_answerid "
+                + ",answer "
+                + ",userid) "
+                + "VALUES( ?, ?, ? )"
+                );
 
-                create.setInt(1, correctAnswerId);
-                create.setString(2, answer);
-                create.setInt(3, userId);
-                create.execute();
-            } 
-            catch (Exception e)
-            {
-            }
+            create.setInt(1, correctAnswerId);
+            create.setString(2, answer);
+            create.setInt(3, userId);
+            create.execute();
+        } 
+        catch (Exception e)
+        {
+        }
             
+        
     }
         
     public void updateUserAnswer(String answer, String exerciseNr, String name)
@@ -167,6 +168,7 @@ public class Model extends Observable implements iModel
         catch (Exception e) 
         {
         }
+        
     }
     
     public String getBlockName(String exerciseNr)
@@ -487,7 +489,7 @@ public class Model extends Observable implements iModel
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//System.out.println(sql);
+		
 		setChanged();
 		notifyObservers();
 

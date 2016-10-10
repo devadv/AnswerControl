@@ -19,7 +19,7 @@ public class ControllerInputAnswer implements iCRUD{
     {
 		this.model = model;
 		createDBConnection();
-		this.view = new ViewInputAnswer(model, this);
+		view = new ViewInputAnswer(model, this);
 		
 		model.addObserver(view);
 		

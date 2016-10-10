@@ -182,6 +182,7 @@ public class ViewInputAnswerUser extends View
     @Override
     public void update(Observable o, Object arg) 
     {
+        questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.getText();
     }
     

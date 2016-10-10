@@ -1,9 +1,5 @@
 package mvc.controller;
 
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
 import mvc.model.Model;
 import mvc.view.View;
 import mvc.view.ViewInputAnswer;
