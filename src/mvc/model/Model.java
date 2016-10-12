@@ -63,14 +63,25 @@ public class Model extends Observable implements iModel
 		} 
         catch (Exception connectException) 
         {
-            JOptionPane.showMessageDialog(null, "Database connection failed", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Database connection failed");
 			connectException.printStackTrace();
-			System.out.println("no connection");
 		}
 		
 	}
     
-    
+    public boolean allAnswersFilled(int blockNr, String userName)
+    {
+        try
+        {
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
+        }
+        
+        return false;
+    }
     
     public void saveUserName(String name)
     {        

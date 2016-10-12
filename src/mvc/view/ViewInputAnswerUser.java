@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public class ViewInputAnswerUser extends View
     private JTextArea userAnswerField;
     private iCRUD controller;
     private String exerciseNr = "";
+    private JButton btnCheckAnswer;
     
     public ViewInputAnswerUser(Model model, iCRUD controller) 
     {
@@ -33,6 +35,7 @@ public class ViewInputAnswerUser extends View
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+        
     }
     
     public void setGUI()
@@ -59,6 +62,10 @@ public class ViewInputAnswerUser extends View
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
         exerciseNr = getExcercise();
         
+        btnCheckAnswer = new JButton("Check answer");
+        btnCheckAnswer.addActionListener(this);
+        panelBottom.add(btnCheckAnswer);
+        
         panel.add(panelQuestion);
         panel.add(panelAnswer);
         panel.add(panelBottom);
@@ -70,6 +77,18 @@ public class ViewInputAnswerUser extends View
         this.getContentPane().add(panel);
         this.setVisible(true);
         
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent event)
+    {
+        if(event.getSource() == btnCheckAnswer)
+        {
+            if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+            {
+                
+            }
+        }
     }
 
     @Override
