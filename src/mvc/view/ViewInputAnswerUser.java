@@ -84,7 +84,7 @@ public class ViewInputAnswerUser extends View
     {
         if(event.getSource() == btnCheckAnswer)
         {
-            if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+            if(model.allAnswersFilled(String.valueOf(getBlockID()), controller.getUserName()))
             {
                 
             }

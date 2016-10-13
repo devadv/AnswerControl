@@ -69,10 +69,37 @@ public class Model extends Observable implements iModel
 		
 	}
     
-    public boolean allAnswersFilled(int blockNr, String userName)
+    /**
+     * @param blockNr 
+     * @param userName 
+     * @return false if an answerfield is not filled 
+    */
+    
+    public boolean allAnswersFilled(String blockNr, String userName)
     {
+        int userId = getUserId(userName);
+        int correctAnswerId = getIdCorrectAnswer(blockNr);
+        
         try
         {
+            PreparedStatement answer = connection.prepareStatement
+            ( "SELECT answer "
+            + "FROM user_answer "
+            + "WHERE correct_answerid = ? "
+            + "AND userid = ? "
+            );
+            
+            answer.setInt(1, correctAnswerId);
+            answer.setInt(2, userId);
+            resultSet = answer.getResultSet();
+            
+            while(resultSet.next())
+            {
+                if((resultSet.getString("answer")).equals("") || (resultSet.getString("answer")).equals(" ") || (resultSet.getString("answer")) == null)
+                {
+                    return false;
+                }
+            }// end while
             
         }
         catch(Exception e)
@@ -80,8 +107,8 @@ public class Model extends Observable implements iModel
             JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
         }
         
-        return false;
-    }
+        return true;
+    }// end method allAnswersFilled
     
     public void saveUserName(String name)
     {        
