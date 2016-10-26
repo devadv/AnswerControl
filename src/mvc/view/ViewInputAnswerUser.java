@@ -23,7 +23,6 @@ public class ViewInputAnswerUser extends View
     private JTextArea userAnswerField;
     private iCRUD controller;
     private String exerciseNr = "";
-    private JButton btnCheckAnswer;
     
     public ViewInputAnswerUser(Model model, iCRUD controller) 
     {
@@ -62,10 +61,7 @@ public class ViewInputAnswerUser extends View
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
         exerciseNr = getExcercise();
         
-        btnCheckAnswer = new JButton("Check answer");
-        btnCheckAnswer.addActionListener(this);
-        panelBottom.add(btnCheckAnswer);
-        
+                
         panel.add(panelQuestion);
         panel.add(panelAnswer);
         panel.add(panelBottom);
@@ -79,17 +75,6 @@ public class ViewInputAnswerUser extends View
         
     }
     
-    @Override
-    public void actionPerformed(ActionEvent event)
-    {
-        if(event.getSource() == btnCheckAnswer)
-        {
-            if(model.allAnswersFilled(String.valueOf(getBlockID()), controller.getUserName()))
-            {
-                
-            }
-        }
-    }
 
     @Override
     public void exerciseId()
@@ -135,7 +120,8 @@ public class ViewInputAnswerUser extends View
         }
     }
     
-    public void btnMext()
+    @Override
+    public void btnNext()
     {  
         if(isUserAnswerChanged(exerciseNr))
         {
@@ -180,6 +166,13 @@ public class ViewInputAnswerUser extends View
         exerciseNr = getExcercise();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
     }
+    
+    public void btnCheckAnswer()
+    {
+        //JOptionPane.showMessageDialog(null, "btnCheckAnswer");
+        model.allAnswersFilled(getBlockID(), controller.getUserName());
+    }
+    
     
     public void messageUserAnswer()
     {

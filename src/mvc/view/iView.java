@@ -3,20 +3,20 @@ package mvc.view;
 import java.awt.event.ActionListener;
 
 
-public interface iView extends ActionListener 
+public interface iView extends ActionListener
 {
 	void setGUI();
     
     void exerciseId();
     
-    public void btnSave();
+    void btnSave();
     
-    public void btnMext();
+    void btnNext();
     
-    public void btnPrevious();
+    void btnPrevious();
     
-    public void blocksId();
+    void blocksId();
 
-    
+    void btnCheckAnswer();
     
 }

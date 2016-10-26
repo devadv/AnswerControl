@@ -73,7 +73,7 @@ public class ViewInputAnswer extends View
         
 	}
 
- public void exerciseId()
+    public void exerciseId()
     {  
         if(isAnswerchanged(exerciseNr))
         {
@@ -117,7 +117,7 @@ public class ViewInputAnswer extends View
         }
     }
     
-    public void btnMext()
+    public void btnNext()
     {  
         exerciseNr = getExcercise();
             
@@ -194,6 +194,11 @@ public class ViewInputAnswer extends View
             exerciseNr = getExcercise();
             questionField.setText(model.retrieveQuestion(exerciseNr));
             answerField.setText(model.retrieveAnswer(exerciseNr));
+    }
+    
+     public void btnCheckAnswer()
+    {
+        
     }
      
     public void messageUserAnswer()

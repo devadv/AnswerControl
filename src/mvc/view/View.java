@@ -2,7 +2,9 @@ package mvc.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -119,6 +121,8 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JTextArea questionField = new JTextArea(10, 20);
 	protected JScrollPane jspQuestion;
 	protected JPanel panelQuestion;
+    
+    protected JButton btnCheckAnswer;
 
 	public View(Model model,iCRUD controller ) 
     {
@@ -130,8 +134,10 @@ public abstract class View extends JFrame implements iView, Observer
 	public void setGUI() 
     {
 		textAreaFont = new Font("", Font.BOLD, 13);
+        
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
+        btnCheckAnswer = new JButton("Check answer");
         
         if(exercise_id.getItemCount() == 1)
         {
@@ -142,7 +148,7 @@ public abstract class View extends JFrame implements iView, Observer
         btnPrevious.setEnabled(false);
 		exercise_id.addActionListener(this);
 		blocks_id.addActionListener(this);
-        
+        btnCheckAnswer.addActionListener(this);
 		
 		questionField.setRows(23);
 		questionField.setColumns(38);
@@ -176,36 +182,41 @@ public abstract class View extends JFrame implements iView, Observer
         panelBottom.add(btnSave);
         panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
-              
+        panelBottom.add(btnCheckAnswer);          
         //add to main panel
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelBottom);
+        
        
 	}
     
     @Override
     public void actionPerformed(ActionEvent event) 
     {
-		if (event.getSource() == exercise_id) 
+        if (event.getSource() == exercise_id) 
         {
-            exerciseId();
+           exerciseId();
         }           
         else if (event.getSource() == btnSave) 
         {
-			btnSave();
-		} 
+            btnSave();
+        } 
         else if (event.getSource() == btnNext)
         {           
-            btnMext();
-		}
+           btnNext();
+        }
         else if (event.getSource() == btnPrevious) 
         {
-            btnPrevious();
-	    }
+           btnPrevious();
+        }
         else if(event.getSource() == blocks_id)
         {     
             blocksId();
+        } 
+        else if(event.getSource() == btnCheckAnswer)
+        {
+            btnCheckAnswer();
         }
     }// end method actionPerformed
 

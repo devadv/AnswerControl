@@ -102,7 +102,7 @@ public class ViewInputQuestion extends View
         }
     }
     
-    public void btnMext()
+    public void btnNext()
     {
         if(isQuestionChanged())
         {
@@ -210,7 +210,10 @@ public class ViewInputQuestion extends View
         questionField.setText(model.retrieveQuestion(getExcercise()));
     }
 
-
+     public void btnCheckAnswer()
+    {
+        
+    }
     
 	@Override
 	public void update(Observable o, Object arg) 

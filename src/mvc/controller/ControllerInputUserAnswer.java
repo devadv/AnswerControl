@@ -15,7 +15,7 @@ public class ControllerInputUserAnswer implements iCRUD
         this.model = model;
         createDBConnection();
         userName = name;
-        view = new ViewInputAnswerUser(model, this);
+        view = new ViewInputAnswerUser(model, this) {};
         model.addObserver(view);
         
         if(!model.userNameExist(name))

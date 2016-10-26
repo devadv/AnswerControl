@@ -75,35 +75,34 @@ public class Model extends Observable implements iModel
      * @return false if an answerfield is not filled 
     */
     
-    public boolean allAnswersFilled(String blockNr, String userName)
-    {
-        int userId = getUserId(userName);
-        int correctAnswerId = getIdCorrectAnswer(blockNr);
-        
+    public boolean allAnswersFilled(int blockNr, String userName)
+    {    
         try
         {
             PreparedStatement answer = connection.prepareStatement
-            ( "SELECT answer "
-            + "FROM user_answer "
-            + "WHERE correct_answerid = ? "
-            + "AND userid = ? "
+            ( "SELECT COUNT (*) "
+            + "FROM block "
+            + "INNER JOIN correct_answer "
+            + "ON block.idblock = correct_answer.block_id "
+            + "INNER JOIN user_answer "
+            + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
+            + "INNER JOIN user "
+            + "ON user_answer.userid = user.iduser "
+            + "WHERE username = ? "
+            + "AND user_answer.answer IS NULL "
+            + "AND correct_answer.block_id = 1 "
             );
             
-            answer.setInt(1, correctAnswerId);
-            answer.setInt(2, userId);
+            answer.setString(1, userName);
+            //answer.setInt(2, blockNr);
+            answer.executeQuery();
             resultSet = answer.getResultSet();
             
-            while(resultSet.next())
-            {
-                if((resultSet.getString("answer")).equals("") || (resultSet.getString("answer")).equals(" ") || (resultSet.getString("answer")) == null)
-                {
-                    return false;
-                }
-            }// end while
             
         }
         catch(Exception e)
         {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
         }
         
@@ -273,14 +272,14 @@ public class Model extends Observable implements iModel
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);
         
         Arrays.sort(exercise);
-        String[] exerciseList = new String[exercise.length];
+        String[] list = new String[exercise.length];
         int j = 0;
         
         for(int i = 0; i < exercise.length; i++)
         {
             if(exercise[i].length() == 3)
             {
-                exerciseList[j++] = exercise[i];
+                list[j++] = exercise[i];
             }
         }
                 
@@ -288,11 +287,11 @@ public class Model extends Observable implements iModel
         {
             if(exercise[i].length() == 4)
             {
-                exerciseList[j++] = exercise[i];
+                list[j++] = exercise[i];
             }
         }
         
-        return exerciseList;
+        return list;
     }
         
     public int getIdCorrectAnswer(String exerciseNr)
