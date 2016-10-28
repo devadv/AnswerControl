@@ -75,13 +75,13 @@ public class ViewInputAnswerUser extends View
         
     }
     
-
+    
     @Override
     public void exerciseId()
     {  
         if(isUserAnswerChanged(exerciseNr))
         {
-            messageUserAnswer();
+            messageUser();
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
             exerciseNr = getExcercise();
         }
@@ -106,6 +106,13 @@ public class ViewInputAnswerUser extends View
 
             exerciseNr = getExcercise();
         }
+        
+        if(exercise_id.getSelectedIndex() == 0)
+        {
+            btnPrevious.setEnabled(false);
+        }
+        
+        setEnable_btnCheckAllAnswer();
     }
     
     public void btnSave()
@@ -118,14 +125,18 @@ public class ViewInputAnswerUser extends View
         {
             model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
         }
+        
+        setEnable_btnCheckAllAnswer();
     }
     
+    boolean message = true;
     @Override
     public void btnNext()
-    {  
+    {
         if(isUserAnswerChanged(exerciseNr))
         {
-            messageUserAnswer();
+            messageUser();
+            message = false;
         }
 
         if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
@@ -138,13 +149,17 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(false);
         } 
+        
+        setEnable_btnCheckAllAnswer();
+        message = true;
     }
     
     public void btnPrevious()
     { 
         if(isUserAnswerChanged(exerciseNr))
         {
-            messageUserAnswer();
+            messageUser();
+            message = false;
         }
 
         if(exercise_id.getSelectedIndex() - 1 >= 0)
@@ -154,36 +169,59 @@ public class ViewInputAnswerUser extends View
             exerciseNr = getExcercise();
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         }
-        else
+        else if(exercise_id.getSelectedIndex() == 0)
         {
-            btnNext.setEnabled(false);
+            btnPrevious.setEnabled(false);
         }
+        setEnable_btnCheckAllAnswer();
+        message = true;
     }
     
+    @Override
     public void blocksId()
     {
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+        questionField.setText(model.retrieveQuestion(getExcercise()));
+        setEnable_btnCheckAllAnswer();
     }
     
+    @Override
     public void btnCheckAnswer()
     {
-        //JOptionPane.showMessageDialog(null, "btnCheckAnswer");
-        model.allAnswersFilled(getBlockID(), controller.getUserName());
+        if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+        {
+            JOptionPane.showMessageDialog(null, "All answers filled.");
+        }
     }
     
     
-    public void messageUserAnswer()
+    private void messageUser()
     {
-        int dialogReslult = JOptionPane.showConfirmDialog(null, 
+        if(message)
+        {
+            int dialogReslult = JOptionPane.showConfirmDialog(null, 
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
                 
-        if(dialogReslult == 0)// yes button
-        {
-            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            if(dialogReslult == 0)// yes button
+            {
+                model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            }
         }
-        
+                
+    }// end method messageUser
+    
+    private void setEnable_btnCheckAllAnswer()
+    {
+        if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+        {
+            btnCheckAnswer.setEnabled(true);
+        }
+        else
+        {
+            btnCheckAnswer.setEnabled(false);
+        }
     }
     
     public String getUserAnswer()

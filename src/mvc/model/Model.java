@@ -80,7 +80,7 @@ public class Model extends Observable implements iModel
         try
         {
             PreparedStatement answer = connection.prepareStatement
-            ( "SELECT COUNT (*) "
+            ( "SELECT COUNT(*) "
             + "FROM block "
             + "INNER JOIN correct_answer "
             + "ON block.idblock = correct_answer.block_id "
@@ -89,15 +89,26 @@ public class Model extends Observable implements iModel
             + "INNER JOIN user "
             + "ON user_answer.userid = user.iduser "
             + "WHERE username = ? "
-            + "AND user_answer.answer IS NULL "
-            + "AND correct_answer.block_id = 1 "
+            + "AND user_answer.answer IS NULL OR user_answer.answer = '' "
+            + "AND correct_answer.block_id = ? "
             );
             
             answer.setString(1, userName);
-            //answer.setInt(2, blockNr);
+            answer.setInt(2, blockNr);
             answer.executeQuery();
             resultSet = answer.getResultSet();
             
+            int nr= 0;
+            
+            if(resultSet.next())
+            {
+                nr = resultSet.getInt(1);
+            }  
+            
+            if(nr < 1)
+            {
+                return  true;
+            }
             
         }
         catch(Exception e)
@@ -106,7 +117,7 @@ public class Model extends Observable implements iModel
             JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
         }
         
-        return true;
+        return false;
     }// end method allAnswersFilled
     
     public void saveUserName(String name)

@@ -137,7 +137,8 @@ public abstract class View extends JFrame implements iView, Observer
         
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
-        btnCheckAnswer = new JButton("Check answer");
+        btnCheckAnswer = new JButton("Check answers");
+        btnCheckAnswer.setEnabled(false);
         
         if(exercise_id.getItemCount() == 1)
         {
