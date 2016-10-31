@@ -34,7 +34,7 @@ public class ViewInputAnswerUser extends View
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-        
+        setEnable_btnCheckAllAnswer();
     }
     
     public void setGUI()
@@ -145,6 +145,10 @@ public class ViewInputAnswerUser extends View
             exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         }
+        else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount())
+        {
+            btnNext.setEnabled(false);
+        }
         else
         {
             btnPrevious.setEnabled(false);
@@ -193,6 +197,7 @@ public class ViewInputAnswerUser extends View
         if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
         {
             JOptionPane.showMessageDialog(null, "All answers filled.");
+            
         }
     }
     

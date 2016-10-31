@@ -89,8 +89,8 @@ public class Model extends Observable implements iModel
             + "INNER JOIN user "
             + "ON user_answer.userid = user.iduser "
             + "WHERE username = ? "
+            + "AND correct_answer.block_id = ? "      
             + "AND user_answer.answer IS NULL OR user_answer.answer = '' "
-            + "AND correct_answer.block_id = ? "
             );
             
             answer.setString(1, userName);
