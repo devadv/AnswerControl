@@ -230,6 +230,11 @@ public abstract class View extends JFrame implements iView, Observer
     {
 		return blocks_id.getSelectedIndex() + 1;
 	}
+    
+    public String getBlockName()
+    {
+        return model.getBlockName(getBlockID());
+    }
 	
     	
 }// end abstact class View

@@ -34,7 +34,7 @@ public class ViewInputAnswerUser extends View
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
     }
     
     public void setGUI()
@@ -112,7 +112,7 @@ public class ViewInputAnswerUser extends View
             btnPrevious.setEnabled(false);
         }
         
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
     }
     
     public void btnSave()
@@ -126,7 +126,7 @@ public class ViewInputAnswerUser extends View
             model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
         }
         
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
     }
     
     boolean message = true;
@@ -154,7 +154,7 @@ public class ViewInputAnswerUser extends View
             btnPrevious.setEnabled(false);
         } 
         
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
         message = true;
     }
     
@@ -177,7 +177,7 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(false);
         }
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
         message = true;
     }
     
@@ -188,13 +188,13 @@ public class ViewInputAnswerUser extends View
         exerciseNr = getExcercise();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
         questionField.setText(model.retrieveQuestion(getExcercise()));
-        setEnable_btnCheckAllAnswer();
+        btnCheckAllAnswer_setEnabled();
     }
     
     @Override
     public void btnCheckAnswer()
     {
-        if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+        if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
             JOptionPane.showMessageDialog(null, "All answers filled.");
             
@@ -217,9 +217,9 @@ public class ViewInputAnswerUser extends View
                 
     }// end method messageUser
     
-    private void setEnable_btnCheckAllAnswer()
+    private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+        if(model.blockNameExist(getBlockName(), controller.getUserName()))
         {
             btnCheckAnswer.setEnabled(true);
         }

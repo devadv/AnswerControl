@@ -8,7 +8,9 @@ public class userTest {
 		Model model = new Model();
 		model.createDBConnection();
 		
-        System.out.println("" + model.allAnswersFilled(1, "hintveld"));
+        //System.out.println("" + model.allAnswersFilled(1, "hintveld"));
+       
+        System.out.println("blockname: " +  model.getBlockName(1));
 		/*String[] blocks = model.getBlockList();
 		
 		for ( int i = 0;i<blocks.length; i++){

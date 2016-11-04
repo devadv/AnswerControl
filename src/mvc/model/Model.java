@@ -70,10 +70,47 @@ public class Model extends Observable implements iModel
 	}
     
     /**
-     * @param blockNr 
+     * @param blockName 
      * @param userName 
      * @return false if an answerfield is not filled 
     */
+    
+    public boolean blockNameExist(String blockName, String userName)
+    {       
+        try 
+        {
+            PreparedStatement exist = connection.prepareStatement
+            ( "SELECT * "
+            + "FROM correct_answer "
+            + "INNER JOIN user_answer "
+            + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
+            + "INNER JOIN user "
+            + "ON user_answer.userid = user.iduser "
+            + "INNER JOIN block "
+            + "ON correct_answer.block_id = block.idblock "
+            + "WHERE  username = ? "
+            + "HAVING blockname = ? "
+            );
+            
+            exist.setString(1, userName);
+            exist.setString(2, blockName);
+            exist.executeQuery();
+            
+            resultSet = exist.getResultSet();
+            
+            if(resultSet.next())
+            {
+                allAnswersFilled(blockName, userName);
+            }
+            
+        } 
+        catch (Exception e) 
+        {
+        }
+        
+        return false;
+    }
+    
     
     public boolean allAnswersFilled(int blockNr, String userName)
     {    
@@ -109,7 +146,6 @@ public class Model extends Observable implements iModel
             {
                 return  true;
             }
-            
         }
         catch(Exception e)
         {
@@ -219,38 +255,31 @@ public class Model extends Observable implements iModel
         
     }
     
-    public String getBlockName(String exerciseNr)
-    {
-        /*
-            select badev_bluej_exercises_test.block.blockname from badev_bluej_exercises_test.correct_answer, badev_bluej_exercises_test.block
-            WHERE badev_bluej_exercises_test.correct_answer.block_id = badev_bluej_exercises_test.block.idblock
-            AND badev_bluej_exercises_test.correct_answer.exercise_nr = "9.1";
-        */
-        
-        String block = "";
+    public String getBlockName(int blockNr)
+    {        
+        String blockName = "";
         
         try 
         {
-            PreparedStatement blockName = connection.prepareStatement
+            PreparedStatement block = connection.prepareStatement
             ( "SELECT blockname "
-            + "FROM correct_answer, block "
-            + "WHERE correct_answer.block_id = block.idblock "
-            + "AND exercise_nr = ? "
+            + "FROM block "
+            + "WHERE block.idblock = ? "
             ); 
             
-            blockName.setString(1, exerciseNr);
-            blockName.executeQuery();
-            resultSet = blockName.getResultSet();
+            block.setInt(1, blockNr);
+            block.executeQuery();
+            resultSet = block.getResultSet();
             
             resultSet.next();
-            block = resultSet.getString("blockname");
+            blockName = resultSet.getString("blockname");
             
         } 
         catch (Exception e) 
         {
         }
         
-        return block;
+        return blockName;
     }
     
     public String[] getExerciseList(int blockNr)
@@ -277,7 +306,6 @@ public class Model extends Observable implements iModel
         } 
         catch (Exception e)
         {
-            
         }
         
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);

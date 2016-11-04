@@ -3,11 +3,12 @@ package mvc.controller;
 
 import mvc.model.Model;
 import mvc.view.ViewInputAnswerUser;
+import mvc.view.ViewUserAnswerCorrectAnswer;
 
 public class ControllerUserAnswerCorrectAnswer implements iCRUD
 {
     private Model model;
-    private ViewInputAnswerUser view;
+    private ViewUserAnswerCorrectAnswer view;
     private String userName;
     
     public ControllerUserAnswerCorrectAnswer(Model model, String name)
@@ -15,7 +16,7 @@ public class ControllerUserAnswerCorrectAnswer implements iCRUD
         this.model = model;
         createDBConnection();
         userName = name;
-        view = new ViewInputAnswerUser(model, this) {};
+        view = new ViewUserAnswerCorrectAnswer(model, this);
         model.addObserver(view);
         
         if(!model.userNameExist(name))
