@@ -10,7 +10,7 @@ public class userTest {
 		
         //System.out.println("" + model.allAnswersFilled(1, "hintveld"));
        
-        System.out.println("blockname: " +  model.getBlockName(1));
+        System.out.println("allAnswers filled: " + model.allAnswersFilled("1A", "badev"));
 		/*String[] blocks = model.getBlockList();
 		
 		for ( int i = 0;i<blocks.length; i++){

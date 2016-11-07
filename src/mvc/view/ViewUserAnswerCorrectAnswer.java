@@ -100,13 +100,13 @@ public class ViewUserAnswerCorrectAnswer extends View
     
     private void setEnable_btnCheckAllAnswer()
     {
-        if(model.allAnswersFilled(getBlockID(), controller.getUserName()))
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) <= exercise_id.getItemCount())
         {
-            btnCheckAnswer.setEnabled(true);
+            btnCheckAnswer.setEnabled(false);
         }
         else
         {
-            btnCheckAnswer.setEnabled(false);
+            btnCheckAnswer.setEnabled(true);
         }
     }
     

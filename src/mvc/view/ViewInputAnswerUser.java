@@ -90,6 +90,7 @@ public class ViewInputAnswerUser extends View
             if(exercise_id.getSelectedIndex() == 0)
             {
                 btnPrevious.setEnabled(false);
+                btnNext.setEnabled(true);
             }
             else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
             {
@@ -219,13 +220,13 @@ public class ViewInputAnswerUser extends View
     
     private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.blockNameExist(getBlockName(), controller.getUserName()))
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) <= exercise_id.getItemCount())
         {
-            btnCheckAnswer.setEnabled(true);
+            btnCheckAnswer.setEnabled(false);
         }
         else
         {
-            btnCheckAnswer.setEnabled(false);
+            btnCheckAnswer.setEnabled(true);
         }
     }
     

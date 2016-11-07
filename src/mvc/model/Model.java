@@ -100,7 +100,7 @@ public class Model extends Observable implements iModel
             
             if(resultSet.next())
             {
-                allAnswersFilled(blockName, userName);
+                
             }
             
         } 
@@ -111,41 +111,45 @@ public class Model extends Observable implements iModel
         return false;
     }
     
+    /**
+     * 
+     * @param blockName
+     * @param userName
+     * @return 
+     */
     
-    public boolean allAnswersFilled(int blockNr, String userName)
-    {    
+    public int allAnswersFilled(String blockName, String userName)
+    {  
+        int nr= 0; 
         try
         {
             PreparedStatement answer = connection.prepareStatement
             ( "SELECT COUNT(*) "
-            + "FROM block "
-            + "INNER JOIN correct_answer "
-            + "ON block.idblock = correct_answer.block_id "
+            + "FROM correct_answer "
             + "INNER JOIN user_answer "
             + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
             + "INNER JOIN user "
             + "ON user_answer.userid = user.iduser "
+            + "INNER JOIN block "
+            + "ON correct_answer.block_id = block.idblock "
             + "WHERE username = ? "
-            + "AND correct_answer.block_id = ? "      
-            + "AND user_answer.answer IS NULL OR user_answer.answer = '' "
+            + "AND EXISTS ( SELECT correct_answer.exercise_nr "      
+            + "FROM correct_answer "
+            + "INNER JOIN user_answer "
+            + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
+            + "WHERE blockname = ? ) "
             );
             
             answer.setString(1, userName);
-            answer.setInt(2, blockNr);
+            answer.setString(2, blockName);
             answer.executeQuery();
             resultSet = answer.getResultSet();
-            
-            int nr= 0;
             
             if(resultSet.next())
             {
                 nr = resultSet.getInt(1);
             }  
             
-            if(nr < 1)
-            {
-                return  true;
-            }
         }
         catch(Exception e)
         {
@@ -153,7 +157,7 @@ public class Model extends Observable implements iModel
             JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
         }
         
-        return false;
+        return nr;
     }// end method allAnswersFilled
     
     public void saveUserName(String name)
