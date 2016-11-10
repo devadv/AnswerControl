@@ -68,6 +68,17 @@ public class Model extends Observable implements iModel
 		}
 		
 	}
+	
+	public void createDBConnection(String url, String user,String passwd){
+	
+		try {
+			connection = DriverManager.getConnection(url, user, passwd);
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
     
     /**
      * @param blockName 
@@ -388,6 +399,31 @@ public class Model extends Observable implements iModel
         
         return idUser;
     }
+    
+    /*public void createQuestion(String exercise_nr, String question) {
+        
+//		String sql = "INSERT INTO correct_answer (exercise_nr, question, block_id) VALUES ('"
+//				+ exercise_id + "','" + question + "','" + block_id + "')";
+          
+		try 
+        {
+            PreparedStatement create = connection.prepareStatement
+                ( "INSERT INTO correct_answer (question) VALUES (?)  WHERE exercise_nr = ? "
+                );
+           System.out.println(create.getWarnings());
+            create.setString(1, question);
+            create.setString(2, exercise_nr);
+            create.execute();
+		} 
+        catch (SQLException e) 
+        {
+		
+		}
+		
+		setChanged();
+		notifyObservers();
+
+	}*/
 
     
 	@Override
@@ -420,6 +456,35 @@ public class Model extends Observable implements iModel
 		notifyObservers();
 
 	}
+	
+	public void createQuestion(int chapter, String exercise_id, String question, int block_id) {
+    
+		try 
+        {
+            PreparedStatement create = connection.prepareStatement
+                ( "INSERT INTO correct_answer "
+                + "(chapter"
+                + ", exercise_nr "
+                + ", question "
+                + ", block_id) " 
+                + "VALUES( ?, ?, ? ,?)"
+                );
+            create.setInt(1, chapter);
+            create.setString(2, exercise_id);
+            create.setString(3, question);
+            create.setInt(4, block_id);
+            create.execute();
+		} 
+        catch (SQLException e) 
+        {
+		
+		}
+		
+		setChanged();
+		notifyObservers();
+
+	}
+	
 //questions
 	@Override
 	public String retrieveQuestion(String exercise_nr) {
@@ -543,6 +608,36 @@ public class Model extends Observable implements iModel
         
         return false;
     }
+    public void updateQuestion(String exercise_nr, String question) {
+		/*
+        String sql = "UPDATE correct_answer SET question = '" + question + "',"
+                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
+        */
+        
+		try 
+        {
+             PreparedStatement update = connection.prepareStatement
+                 ( "UPDATE correct_answer " 
+                 + "SET creation_date = CURRENT_TIMESTAMP "
+                 + ",question = ? "    
+                 + "WHERE exercise_nr = ? " 
+                 );
+             
+             update.setString(1, question);
+             update.setString(2, exercise_nr);
+             update.executeUpdate();
+        
+			//statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		setChanged();
+		notifyObservers();
+
+	}
+    
     
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
@@ -762,5 +857,28 @@ public class Model extends Observable implements iModel
 		System.out.println("Table : " +table + " deleted!");
 		
 	}
+	public void truncateTable(){
+		String[] sql = {
+				"SET FOREIGN_KEY_CHECKS=0;",
+				"TRUNCATE correct_answer;",
+				"SET FOREIGN_KEY_CHECKS=1;"};
 
+		for (int i =0 ; i <sql.length;i++){
+			try 
+	        {
+	            PreparedStatement del = connection.prepareStatement
+	                (sql[i]);
+	           
+	            del.executeUpdate();
+	            resultSet = del.getResultSet();
+	           
+	        }
+	        catch (SQLException ex) 
+	        {
+	         ex.printStackTrace();  
+	        }
+			
+			
+		}
+	}
 }
