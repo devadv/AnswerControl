@@ -477,7 +477,7 @@ public class Model extends Observable implements iModel
 		} 
         catch (SQLException e) 
         {
-		
+        	e.printStackTrace();
 		}
 		
 		setChanged();
@@ -629,7 +629,7 @@ public class Model extends Observable implements iModel
         
 			//statement.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -688,6 +688,7 @@ public class Model extends Observable implements iModel
         
 		} catch (SQLException e) 
         {
+			e.printStackTrace();
 		}
         
 		setChanged();
@@ -818,7 +819,7 @@ public class Model extends Observable implements iModel
             }
             catch (SQLException ex) 
             {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            	ex.printStackTrace();
             }
 
             return answer;
@@ -857,6 +858,9 @@ public class Model extends Observable implements iModel
 		System.out.println("Table : " +table + " deleted!");
 		
 	}
+	
+
+	
 	public void truncateTable(){
 		String[] sql = {
 				"SET FOREIGN_KEY_CHECKS=0;",

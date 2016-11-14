@@ -152,27 +152,34 @@ public class FillDatabase {
 			} else {
 				//JOptionPane.showMessageDialog(null, "Database will be deleted");
 				model.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises_test", "ben", "12345");
-				//model.truncateTable();
+				model.truncateTable();
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 
 	}
 	public void questionsFromToDB(){
 		Model model = new Model();
+		
 		model.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises","ben","12345"); 
+		
 		Model model1 = new Model();
+		
 		model1.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises_test", "ben", "12345");
-		for (String exercise_nr: listExercises){
+		String q = model.retrieveQuestion("1.1");
+		System.out.println(q);
+		model1.updateQuestion("1.1", "test");
+		
+		/*for (String exercise_nr: listExercises){
 			String question = model.retrieveQuestion(exercise_nr);
-			question += " from db ";
+			//question += " from db ";
 			System.out.println("Oef " +exercise_nr + " : "  + question);
 			model1.updateQuestion(exercise_nr, question);
 		}
-		
+		*/
 	}
 
 	public void fillData() {
@@ -189,7 +196,7 @@ public class FillDatabase {
 				}
 			}
 			counter++;
-			//System.out.println("Exercise :" +  listExercises[i]);
+			System.out.println("Exercise :" +  listExercises[i]);
 			//String question = "Dit is vraag " + listExercises[i];
 			String question = "";
 			model.createQuestion(getChapter(listExercises[i]),
