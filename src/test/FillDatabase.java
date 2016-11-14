@@ -152,7 +152,7 @@ public class FillDatabase {
 			} else {
 				//JOptionPane.showMessageDialog(null, "Database will be deleted");
 				model.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises_test", "ben", "12345");
-				model.truncateTable();
+				
 			}
 
 		} catch (IOException e) {
@@ -171,18 +171,20 @@ public class FillDatabase {
 		model1.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises_test", "ben", "12345");
 		String q = model.retrieveQuestion("1.1");
 		System.out.println(q);
+	
 		model1.updateQuestion("1.1", "test");
 		
-		/*for (String exercise_nr: listExercises){
+		for (String exercise_nr: listExercises){
 			String question = model.retrieveQuestion(exercise_nr);
 			//question += " from db ";
 			System.out.println("Oef " +exercise_nr + " : "  + question);
 			model1.updateQuestion(exercise_nr, question);
 		}
-		*/
+		
 	}
 
 	public void fillData() {
+		//model.truncateTable();
 		int block_id = 1;
 		int counter = 0;
 		int lastChapter = 0;
@@ -217,7 +219,7 @@ public class FillDatabase {
 
 		FillDatabase filldb = new FillDatabase();
 		//filldb.fillData();
-		filldb.questionsFromToDB();
+		//filldb.questionsFromToDB();
 
 	}
 
