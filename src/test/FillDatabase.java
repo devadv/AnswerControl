@@ -152,7 +152,11 @@ public class FillDatabase {
 			} else {
 				//JOptionPane.showMessageDialog(null, "Database will be deleted");
 				model.createDBConnection("jdbc:mysql://localhost:3306/bluej_exercises_test", "ben", "12345");
+<<<<<<< HEAD
 				
+=======
+				//model.truncateTable();
+>>>>>>> branch 'db_fill_test' of https://github.com/devadv/AnswerControl.git
 			}
 
 		} catch (IOException e) {
