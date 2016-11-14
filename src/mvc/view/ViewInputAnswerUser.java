@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import mvc.controller.ControllerUserAnswerCorrectAnswer;
 import mvc.controller.iCRUD;
 import mvc.model.Model;
 
@@ -55,15 +56,15 @@ public class ViewInputAnswerUser extends View
         JScrollPane jspUserAnswer = new JScrollPane(userAnswerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        JPanel panelAnswer = new JPanel();
-        panelAnswer.add(jspUserAnswer);
+        JPanel panelUserAnswer = new JPanel();
+        panelUserAnswer.add(jspUserAnswer);
         
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
         exerciseNr = getExcercise();
         
                 
         panel.add(panelQuestion);
-        panel.add(panelAnswer);
+        panel.add(panelUserAnswer);
         panel.add(panelBottom);
         
         this.addWindowListener(new windowClosingAdapter());
@@ -197,8 +198,8 @@ public class ViewInputAnswerUser extends View
     {
         if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
-            JOptionPane.showMessageDialog(null, "All answers filled.");
-            
+            ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName());
+            this.setVisible(false);
         }
     }
     
@@ -220,7 +221,7 @@ public class ViewInputAnswerUser extends View
     
     private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) <= exercise_id.getItemCount())
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) < exercise_id.getItemCount())
         {
             btnCheckAnswer.setEnabled(false);
         }

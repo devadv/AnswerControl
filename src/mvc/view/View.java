@@ -102,16 +102,7 @@ public abstract class View extends JFrame implements iView, Observer
 	
 	protected iCRUD controller;
 	protected Model model;
-    
-    
-	
-	//borders
-	Border emptyBorder = BorderFactory.createEmptyBorder(8, 15, 8, 8);
-	Border blueBorder = BorderFactory.createLineBorder(new Color(80,80,190), 2);
-	Border greenBorder = BorderFactory.createLineBorder(new Color(105,170,105), 2);
-	Border cmpBlue = BorderFactory.createCompoundBorder(blueBorder, emptyBorder);
-	Border cmpGreen = BorderFactory.createCompoundBorder(greenBorder, emptyBorder);
-	
+
 	
 	protected JPanel panel;
 	protected JPanel panelTitle;

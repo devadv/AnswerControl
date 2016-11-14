@@ -1,5 +1,6 @@
 package test;
 
+import mvc.controller.ControllerUserAnswerCorrectAnswer;
 import mvc.model.Model;
 
 public class userTest {
@@ -7,10 +8,12 @@ public class userTest {
 		
 		Model model = new Model();
 		model.createDBConnection();
+        
+        String name = System.getProperty("user.name");
 		
         //System.out.println("" + model.allAnswersFilled(1, "hintveld"));
        
-        System.out.println("allAnswers filled: " + model.allAnswersFilled("1A", "badev"));
+        
 		/*String[] blocks = model.getBlockList();
 		
 		for ( int i = 0;i<blocks.length; i++){

@@ -121,6 +121,7 @@ public class Model extends Observable implements iModel
     public int allAnswersFilled(String blockName, String userName)
     {  
         int nr= 0; 
+        
         try
         {
             PreparedStatement answer = connection.prepareStatement
@@ -133,6 +134,8 @@ public class Model extends Observable implements iModel
             + "INNER JOIN block "
             + "ON correct_answer.block_id = block.idblock "
             + "WHERE username = ? "
+            + "AND user_answer.answer != '' "
+            + "OR user_answer.answer != NULL "
             + "AND EXISTS ( SELECT correct_answer.exercise_nr "      
             + "FROM correct_answer "
             + "INNER JOIN user_answer "

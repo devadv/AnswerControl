@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import mvc.controller.ControllerInputAnswer;
 import mvc.controller.ControllerInputQuestion;
 import mvc.controller.ControllerInputUserAnswer;
+import mvc.controller.ControllerUserAnswerCorrectAnswer;
 import mvc.model.Model;
 
 public class Main 
