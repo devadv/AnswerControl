@@ -26,8 +26,10 @@ public class ViewUserAnswerCorrectAnswer extends View
         super(model, controller);
         this.model = model;
         this.controller = controller;
+        exerciseNr = getExcercise();
         
         setGUI();
+        
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         
@@ -42,11 +44,13 @@ public class ViewUserAnswerCorrectAnswer extends View
         btnCheckAnswer.setVisible(false);
         blocks_id.setVisible(false);
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
+        exerciseNr = getExcercise();
         
         questionField.setRows(10);
         questionField.setColumns(78);
         questionField.setFont(textAreaFont);
         questionField.setEditable(false);
+        questionField.setText(model.retrieveQuestion(exerciseNr));
         
         userAnswerField = new JTextArea(23, 38);
         userAnswerField.setFont(textAreaFont);
@@ -65,6 +69,8 @@ public class ViewUserAnswerCorrectAnswer extends View
         correctAnswerField.setBackground(new Color(219, 205, 197));
         JScrollPane jspCorrectAnswer = new JScrollPane(correctAnswerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
+        
         panelAnswer.add(jspCorrectAnswer);
         
         panel.add(panelQuestion);
@@ -91,6 +97,7 @@ public class ViewUserAnswerCorrectAnswer extends View
             exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
             exerciseNr = getExcercise();
             userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+            correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
         }
         else
         {
@@ -107,6 +114,7 @@ public class ViewUserAnswerCorrectAnswer extends View
             exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
             exerciseNr = getExcercise();
             userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+            correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
         }
         else if(exercise_id.getSelectedIndex() == 0)
         {
@@ -145,6 +153,7 @@ public class ViewUserAnswerCorrectAnswer extends View
         exerciseNr = getExcercise();
         questionField.setText(model.retrieveQuestion(exerciseNr));
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+        correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
     }
 
     @Override

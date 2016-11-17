@@ -425,16 +425,14 @@ public class Model extends Observable implements iModel
 	}
 //questions
 	@Override
-	public String retrieveQuestion(String exercise_nr) {
+	public String retrieveQuestion(String exercise_nr) 
+    {
         String question = "";
         
         if(questionExist(exercise_nr))
         {
             try 
             {
-//                String sql = "SELECT question FROM correct_answer WHERE exercise_nr= '" + exercise_nr + "'";
-//                System.out.println(sql);
-//                resultSet = statement.executeQuery(sql);
                 PreparedStatement retrieve = connection.prepareStatement
                     ( "SELECT question " 
                     + "FROM correct_answer "
