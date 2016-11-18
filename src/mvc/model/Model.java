@@ -317,7 +317,7 @@ public class Model extends Observable implements iModel
         
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);
         
-        Arrays.sort(exercise);
+        //Arrays.sort(exercise);
         String[] list = new String[exercise.length];
         int j = 0;
         
@@ -332,6 +332,14 @@ public class Model extends Observable implements iModel
         for(int i = 0; i < exercise.length; i++)
         {
             if(exercise[i].length() == 4)
+            {
+                list[j++] = exercise[i];
+            }
+        }
+        
+        for(int i = 0; i < exercise.length; i++)
+        {
+            if(exercise[i].length() == 5)
             {
                 list[j++] = exercise[i];
             }
