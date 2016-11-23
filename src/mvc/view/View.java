@@ -124,7 +124,7 @@ public abstract class View extends JFrame implements iView, Observer
 
 	public void setGUI() 
     {
-		textAreaFont = new Font("", Font.BOLD, 13);
+		textAreaFont = new Font("", Font.PLAIN, 13);
         
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
