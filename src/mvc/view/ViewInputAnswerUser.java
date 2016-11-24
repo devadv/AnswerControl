@@ -90,30 +90,10 @@ public class ViewInputAnswerUser extends View
         }
         else
         {
-            if(exercise_id.getSelectedIndex() == 0)
-            {
-                btnPrevious.setEnabled(false);
-                btnNext.setEnabled(true);
-            }
-            else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
-            {
-//                btnNext.setEnabled(false);
-//                btnPrevious.setEnabled(true);
-            }
-            else
-            {
-                btnNext.setEnabled(true);
-                btnPrevious.setEnabled(true);
-            }
             questionField.setText(model.retrieveQuestion(getExcercise()));
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
 
             exerciseNr = getExcercise();
-        }
-        
-        if(exercise_id.getSelectedIndex() == 0)
-        {
-            btnPrevious.setEnabled(false);
         }
         
         btnCheckAllAnswer_setEnabled();
@@ -142,25 +122,35 @@ public class ViewInputAnswerUser extends View
             messageUser();
             message = false;
         }
-                
-        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount()-1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
+                        
+        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
         {
             btnNext.setEnabled(false);
         }
         else 
         {
+            btnNext.setEnabled(true);
+            
             if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
             {
                 exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1); 
                 exerciseNr = getExcercise();
             }
-            else if(blocks_id.getSelectedIndex() + 1 < blocks_id.getItemCount()-1)
+            else if(blocks_id.getSelectedIndex() + 1 <= blocks_id.getItemCount() - 1)
             {
-                blocks_id.setSelectedIndex(blockIdNr + 1);
+                blockIdNr++;
+                blocks_id.setSelectedIndex(blockIdNr);
             }
-           
         }
         
+        if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
+        {
+            btnPrevious.setEnabled(false);
+        }
+        else
+        {
+            btnPrevious.setEnabled(true);
+        }
         
         btnCheckAllAnswer_setEnabled();
         message = true;
@@ -173,18 +163,32 @@ public class ViewInputAnswerUser extends View
             messageUser();
             message = false;
         }
-
-        if(exercise_id.getSelectedIndex() - 1 > 0)
+        
+        if(exercise_id.getSelectedIndex() == 0)
         {
-            btnNext.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            blockIdNr--;
+            blocks_id.setSelectedIndex(blockIdNr);
         }
-        else if(exercise_id.getSelectedIndex() == 0)
+        else if(exercise_id.getSelectedIndex() - 1 >= 0)
+        {
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1); 
+            exerciseNr = getExcercise();
+        }
+        else if(blocks_id.getSelectedIndex() - 1 >= 0)
+        {
+            blockIdNr--;
+            blocks_id.setSelectedIndex(blockIdNr);
+        }
+           
+        if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
         {
             btnPrevious.setEnabled(false);
         }
+        else
+        {
+            btnPrevious.setEnabled(true);
+        }
+        
         btnCheckAllAnswer_setEnabled();
         message = true;
     }
@@ -194,10 +198,15 @@ public class ViewInputAnswerUser extends View
     {
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
-        blockIdNr = getBlockID();
+        blockIdNr = blocks_id.getSelectedIndex();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
         questionField.setText(model.retrieveQuestion(getExcercise()));
         btnCheckAllAnswer_setEnabled();
+        
+        if(blockIdNr > 0)
+        {
+            btnPrevious.setEnabled(true);
+        }
     }
     
     @Override
