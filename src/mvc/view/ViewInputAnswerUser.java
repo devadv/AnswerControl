@@ -33,7 +33,7 @@ public class ViewInputAnswerUser extends View
         this.controller = controller;
         
         exerciseNr = getExcercise();
-        blockIdNr = getBlockID();
+        //blockIdNr = getBlockID();
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
@@ -94,6 +94,11 @@ public class ViewInputAnswerUser extends View
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
 
             exerciseNr = getExcercise();
+        }
+        
+        if(exercise_id.getSelectedIndex() > 0)
+        {
+            btnPrevious.setEnabled(true);
         }
         
         btnCheckAllAnswer_setEnabled();
@@ -164,6 +169,11 @@ public class ViewInputAnswerUser extends View
             message = false;
         }
         
+         if(blocks_id.getSelectedIndex() <= blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() <= exercise_id.getItemCount() - 1)
+         {
+             btnNext.setEnabled(true);
+         }
+        
         if(exercise_id.getSelectedIndex() == 0)
         {
             blockIdNr--;
@@ -196,6 +206,11 @@ public class ViewInputAnswerUser extends View
     @Override
     public void blocksId()
     {
+        if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
+        {
+            btnPrevious.setEnabled(false);
+        }
+        
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
         blockIdNr = blocks_id.getSelectedIndex();
@@ -237,13 +252,13 @@ public class ViewInputAnswerUser extends View
     
     private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) < exercise_id.getItemCount())
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) == exercise_id.getItemCount())
         {
-            btnCheckAnswer.setEnabled(false);
+            btnCheckAnswer.setEnabled(true);
         }
         else
         {
-            btnCheckAnswer.setEnabled(true);
+            btnCheckAnswer.setEnabled(false);
         }
     }
     
@@ -305,67 +320,5 @@ public class ViewInputAnswerUser extends View
         }
     }// end class windowClosingAdaptor
     
-    public void oldCode()
-    {
-        /*
-         public void btnNext()
-    {
-        if(isUserAnswerChanged(exerciseNr))
-        {
-            messageUser();
-            message = false;
-        }
-
-        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-        {
-            btnPrevious.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-        }
-        else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount())
-        {
-            btnNext.setEnabled(false);
-        }
-        else
-        {
-            btnPrevious.setEnabled(false);
-        } 
-        
-        btnCheckAllAnswer_setEnabled();
-        message = true;
-    }
-                */
-        
-        /*
-        
-        
-        
-         public void btnPrevious()
-    { 
-        if(isUserAnswerChanged(exerciseNr))
-        {
-            messageUser();
-            message = false;
-        }
-
-        if(exercise_id.getSelectedIndex() - 1 > 0)
-        {
-            btnNext.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-        }
-        else if(exercise_id.getSelectedIndex() == 0)
-        {
-            btnPrevious.setEnabled(false);
-        }
-        btnCheckAllAnswer_setEnabled();
-        message = true;
-    }
-        
-        */
-        
-        
-    }
-    
+       
 }// end class ViewInputAnswerUser
