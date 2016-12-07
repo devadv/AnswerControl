@@ -101,6 +101,11 @@ public class ViewInputAnswerUser extends View
             btnPrevious.setEnabled(true);
         }
         
+        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount()-1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
+        {
+            btnNext.setEnabled(false);
+        }
+        
         btnCheckAllAnswer_setEnabled();
     }
     
@@ -210,6 +215,7 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(false);
         }
+        
         
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
