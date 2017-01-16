@@ -69,6 +69,84 @@ public class Model extends Observable implements iModel
 		
 	}
     
+    
+    public String[][] getUserProgress()
+    {
+        ArrayList<String> arrayList = new ArrayList();
+        String[] userNames = getUserNames();
+        
+        try 
+        {
+            PreparedStatement retrieve = connection.prepareStatement
+            ( "SELECT "
+            + ""
+            );
+            
+            retrieve.executeQuery();
+            resultSet = retrieve.getResultSet();
+            
+            while(resultSet.next())
+            {
+                arrayList.add("");
+            }
+            
+        }
+        catch (Exception e) 
+        {
+        }
+        
+        String userProgress[] = arrayList.toArray(new String[arrayList.size()]);
+        
+        String[][] answers = new String[userNames.length][userProgress.length];
+        
+        
+        
+        return answers;
+    }
+    
+    public String[] getUserNames()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        
+        try 
+        {
+            PreparedStatement retrieveUsername = connection.prepareStatement
+            ( "SELECT username "
+            + "FROM user "
+            );
+            
+            retrieveUsername.executeQuery();
+            resultSet = retrieveUsername.getResultSet();
+            
+            while(resultSet.next())
+            {
+                arrayList.add(resultSet.getString("username"));
+            }
+            
+        } 
+        catch (Exception e) 
+        {
+        }
+        
+        String names[] = arrayList.toArray(new String[arrayList.size()]);
+        return names;
+    }
+    
+    
+    public String[] getColumnNames()
+    {
+        int numberOfBlocks = getBlockList().length;
+        String[] blocks = getBlockList();
+        String[] columnNames = new String[numberOfBlocks + 1];
+        columnNames[0] = "Gebruikers naam";
+        
+        for(int i = 1; i < numberOfBlocks; i++)
+        {
+            columnNames[i] = blocks[i - 1];
+        }
+        return columnNames;
+    }
+    
     /**
      * @param blockName 
      * @param userName 
@@ -157,7 +235,7 @@ public class Model extends Observable implements iModel
         catch(Exception e)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(null, "Exception in Model allAnswersFilled");
+            JOptionPane.showMessageDialog(null, "Exception in Model.allAnswersFilled");
         }
         
         return nr;
@@ -184,6 +262,8 @@ public class Model extends Observable implements iModel
             {
             }
         }
+        setChanged();
+		notifyObservers();
     }
     
     public boolean userNameExist(String name)
@@ -232,7 +312,9 @@ public class Model extends Observable implements iModel
         catch (Exception e)
         {
         }
-            
+        
+        setChanged();
+		notifyObservers();
         
     }
         
@@ -259,7 +341,8 @@ public class Model extends Observable implements iModel
         catch (Exception e) 
         {
         }
-        
+        setChanged();
+		notifyObservers();
     }
     
     public String getBlockName(int blockNr)
@@ -473,12 +556,17 @@ public class Model extends Observable implements iModel
 
         try 
         {
-            String sql = "SELECT blockname FROM block";
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement retrieve = connection.prepareStatement
+                    ( "SELECT blockname " 
+                    + "FROM block "
+                    );
+            
+            retrieve.execute();
+            resultSet = retrieve.getResultSet();
 
             while (resultSet.next()) 
             {
-                arrayList.add(resultSet.getString( 1 ) );
+                arrayList.add(resultSet.getString(1));
             }
 
         }

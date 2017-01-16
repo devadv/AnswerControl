@@ -1,10 +1,7 @@
 package mvc.tests;
 
-import javax.swing.JOptionPane;
-import mvc.controller.ControllerInputAnswer;
 import mvc.controller.ControllerInputQuestion;
-import mvc.controller.ControllerInputUserAnswer;
-import mvc.controller.ControllerUserAnswerCorrectAnswer;
+import mvc.controller.ControllerUserAdvance;
 import mvc.model.Model;
 
 public class Main 
@@ -17,7 +14,9 @@ public class Main
         
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+        //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+        ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
+        
         
         
 //        Object[] setGUI = {"Input questions.", "Input answers."};
