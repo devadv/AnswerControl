@@ -74,31 +74,21 @@ public class Model extends Observable implements iModel
     {
         ArrayList<String> arrayList = new ArrayList();
         String[] userNames = getUserNames();
+        String[] blockList = getBlockList();
+        String[][] answers = new String[userNames.length][blockList.length + 1];
+        int j = 0;
         
-        try 
+        for(int i = 0; i < userNames.length; i++)
         {
-            PreparedStatement retrieve = connection.prepareStatement
-            ( "SELECT "
-            + ""
-            );
+            answers[i][j] = userNames[i];
             
-            retrieve.executeQuery();
-            resultSet = retrieve.getResultSet();
-            
-            while(resultSet.next())
+            for( j = 1; j < blockList.length + 1; j++)
             {
-                arrayList.add("");
+                answers[i][j] = String.valueOf(allAnswersFilled(blockList[j - 1], userNames[i]));
             }
             
+            j = 0;
         }
-        catch (Exception e) 
-        {
-        }
-        
-        String userProgress[] = arrayList.toArray(new String[arrayList.size()]);
-        
-        String[][] answers = new String[userNames.length][userProgress.length];
-        
         
         
         return answers;
@@ -135,12 +125,11 @@ public class Model extends Observable implements iModel
     
     public String[] getColumnNames()
     {
-        int numberOfBlocks = getBlockList().length;
         String[] blocks = getBlockList();
-        String[] columnNames = new String[numberOfBlocks + 1];
+        String[] columnNames = new String[blocks.length + 1];
         columnNames[0] = "Gebruikers naam";
         
-        for(int i = 1; i < numberOfBlocks; i++)
+        for(int i = 1; i < blocks.length + 1; i++)
         {
             columnNames[i] = blocks[i - 1];
         }
@@ -188,6 +177,7 @@ public class Model extends Observable implements iModel
         
         return false;
     }
+
     
     /**
      * 
@@ -371,6 +361,7 @@ public class Model extends Observable implements iModel
         
         return blockName;
     }
+    
     
     public String[] getExerciseList(int blockNr)
     {

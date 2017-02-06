@@ -1,6 +1,7 @@
 package mvc.tests;
 
 import mvc.controller.ControllerInputQuestion;
+import mvc.controller.ControllerInputUserAnswer;
 import mvc.controller.ControllerUserAdvance;
 import mvc.model.Model;
 

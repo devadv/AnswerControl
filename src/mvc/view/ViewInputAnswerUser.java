@@ -92,7 +92,6 @@ public class ViewInputAnswerUser extends View
         {
             questionField.setText(model.retrieveQuestion(getExcercise()));
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
-
             exerciseNr = getExcercise();
         }
         
@@ -166,6 +165,7 @@ public class ViewInputAnswerUser extends View
         message = true;
     }
     
+    @Override
     public void btnPrevious()
     { 
         if(isUserAnswerChanged(exerciseNr))
@@ -250,7 +250,14 @@ public class ViewInputAnswerUser extends View
                 
             if(dialogReslult == 0)// yes button
             {
-                model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
+                {
+                    model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                }
+                else
+                {
+                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                }
             }
         }
                 

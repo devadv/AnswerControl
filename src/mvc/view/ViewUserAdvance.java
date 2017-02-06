@@ -23,50 +23,25 @@ public class ViewUserAdvance extends View
     
     public void setGUI()
     {
-        String[] columnName = model.getBlockList();
-        
-        
-        String[] columnNames = {"First Name",
-                        "Last Name",
-                        "Sport",
-                        "# of Years",
-                        "Vegetarian"};
-    
-        Object[][] data = { {"Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false)},
-                            {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
-    {"Sue", "Black",
-     "Knitting", new Integer(2), new Boolean(false)},
-    {"Jane", "White",
-     "Speed reading", new Integer(20), new Boolean(true)},
-    {"Joe", "Brown",
-     "Pool", new Integer(10), new Boolean(false)},
-                 {"Kathy", "Smith",
-     "Snowboarding", new Integer(5), new Boolean(false)},
-    {"John", "Doe",
-     "Rowing", new Integer(3), new Boolean(true)},
-    {"Sue", "Black",
-     "Knitting", new Integer(2), new Boolean(false)},
-    {"Jane", "White",
-     "Speed reading", new Integer(20), new Boolean(true)},
-    {"Joe", "Brown",
-     "Pool", new Integer(10), new Boolean(false)}
-};
+        String[] columnName = model.getColumnNames();
+        Object[][] userAnswer = model.getUserProgress();
         
         JFrame frame = new JFrame("User Advance");
         JPanel panel = new JPanel();
         
-        JTable userAdvance = new JTable(data, columnNames);
+        JTable userAdvance = new JTable(userAnswer, columnName);
         
         JScrollPane scrollPane = new JScrollPane(userAdvance);
-        userAdvance.setPreferredScrollableViewportSize(new Dimension(900, 500));
+        userAdvance.setPreferredScrollableViewportSize(new Dimension(1550, 200));
         userAdvance.setFillsViewportHeight(true);
+        userAdvance.setAutoResizeMode(0);
         panel.add(scrollPane);
         
         frame.add(panel);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLocation(500, 400);
-        frame.setSize(900, 500);
+        frame.setLocation(300, 400);
+        frame.setSize(1600, 500);
         frame.setVisible(true);
         
     }
