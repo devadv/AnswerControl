@@ -266,7 +266,7 @@ public class Model extends Observable implements iModel
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(userName); 
         
-        System.out.println("createUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + " userName: " + userName);
+        System.out.println("createUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + " nuserName: " + userName);
         
         try 
         {
