@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 
@@ -20,52 +20,33 @@ public class Model extends Observable implements iModel
     private Statement statement;
 	private ResultSet resultSet;
 
-	// properties are immutable and same for every class object. Therefore:
-	private static final Properties prop = new Properties();
+	/*
+	   SET FOREIGN_KEY_CHECKS=0;
+	   TRUNCATE correct_answer;
+       SET FOREIGN_KEY_CHECKS=1;
+	 */
+	
     private Connection connection;
     
 	@Override
 	public void createDBConnection() 
     {
-		try 
-        {
-			/*
-			 * load the properties
-			 * 
-			 * Example contents properties file:
-			 * 
-			 	#Tue Feb 23 14:56:57 CET 2016
-			 	DB_USERNAME=John-Doe
-			 	DB_DRIVER=com.mysql.jdbc.Driver
-			 	DB_PASSWORD=mySuperPassword
-			 	DB_URL=jdbc\:mysql\://sql.zz/badev_bluej_exercises_test
-            
-                DB_PASSWORD = V99r9R9qwMmYPcqU
-            
-            SET FOREIGN_KEY_CHECKS=0;
-            TRUNCATE correct_answer;
-            SET FOREIGN_KEY_CHECKS=1;
-            
-                SET FOREIGN_KEY_CHECKS=0;
-                TRUNCATE correct_answer;
-                SET FOREIGN_KEY_CHECKS=1;
-			 */
-			prop.load(new FileInputStream("BlueJ.config"));
-			connection = 
-					DriverManager.getConnection
-						( prop.getProperty("DB_URL") 
-						, prop.getProperty("DB_USERNAME")
-						, prop.getProperty("DB_PASSWORD")
-						);
-			statement = connection.createStatement();
-			System.out.println("Connection  database: " + prop.getProperty("DB_URL"));
+        String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises";
+        String username = "badev_hintveld";
+        String password = "V99r9R9qwMmYPcqU";
 
-		} 
-        catch (Exception connectException) 
+        try 
         {
-            JOptionPane.showMessageDialog(null, "Database connection failed");
-			connectException.printStackTrace();
-		}
+            Class.forName( "com.mysql.jdbc.Driver" );
+            connection = DriverManager.getConnection( DATABASEURL, username, password );
+            statement = connection.createStatement();
+        } 
+        catch ( Exception connectException ) 
+        {
+            JOptionPane.showMessageDialog(null, "No connection to database", "Error", JOptionPane.WARNING_MESSAGE);
+            connectException.printStackTrace();
+            System.out.println("No connection");
+        }
 		
 	}
     
@@ -233,8 +214,7 @@ public class Model extends Observable implements iModel
     
     public void saveUserName(String name)
     {        
-        //INSERT INTO badev_bluej_exercises_test.`user` (username) values ('name');
-        //INSERT INTO user (username) values ('name');
+        
         if(!userNameExist(name))
         {
             try 
@@ -269,20 +249,24 @@ public class Model extends Observable implements iModel
             userNameExist.setString(1, name);
             userNameExist.executeQuery(); 
             resultSet = userNameExist.getResultSet();
-            resultSet.next();
             
+            if(resultSet.next())
+            {
+            	return true;
+            }
         } 
         catch (Exception e) 
         {
-            return false;
         }
-        return true;
+        return false;
     }
     
     public void createUserAnswer(String answer, String exerciseNr, String userName)
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
-        int userId = getUserId(userName);  
+        int userId = getUserId(userName); 
+        
+        System.out.println("createUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + " userName: " + userName);
         
         try 
         {
@@ -312,6 +296,8 @@ public class Model extends Observable implements iModel
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(name);
+        
+        System.out.println("updateUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + userId + " name: " + name);
         
         try 
         {

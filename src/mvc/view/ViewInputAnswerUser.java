@@ -113,6 +113,7 @@ public class ViewInputAnswerUser extends View
         if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
         {
             model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            System.out.println("");
         }
         else
         {

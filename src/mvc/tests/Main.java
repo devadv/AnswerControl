@@ -12,11 +12,12 @@ public class Main
     {
 		Model model = new Model();
         String name = System.getProperty("user.name");
+        System.out.println("user name: " + name);
         
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
-        ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
+        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+        //ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
         
         
         
