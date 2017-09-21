@@ -1,0 +1,85 @@
+//
+SELECT COUNT(*) 
+             FROM correct_answer 
+             INNER JOIN user_answer 
+             ON correct_answer.idcorrect_answer = user_answer.correct_answerid 
+             INNER JOIN user 
+             ON user_answer.userid = user.iduser 
+             INNER JOIN block 
+             ON correct_answer.block_id = block.idblock 
+             WHERE username = "ben" 
+             AND user_answer.answer != '' 
+             OR user_answer.answer != NULL 
+             AND EXISTS ( SELECT correct_answer.exercise_nr 
+             FROM correct_answer 
+             INNER JOIN user_answer 
+             ON correct_answer.idcorrect_answer = user_answer.correct_answerid 
+             WHERE block.blockname = "1A" ) 
+
+----------------------------Werk in SQL Leo de 2e keer na fout melding
+
+SELECT
+	COUNT( * ),
+	bluej_exercises.user_answer.userid,
+	bluej_exercises.correct_answer.answer,
+	bluej_exercises.block.blockname
+FROM
+	bluej_exercises.correct_answer
+	INNER JOIN bluej_exercises.user_answer
+	 ON bluej_exercises.correct_answer.idcorrect_answer = bluej_exercises.user_answer.correct_answerid
+	INNER JOIN bluej_exercises.block
+	 ON bluej_exercises.correct_answer.block_id = bluej_exercises.block.idblock
+WHERE
+	userid = 1
+	AND blockname = "1B"
+
+
+
+
+--------------------------------------------Werkt ook
+
+SELECT
+	COUNT( * )
+FROM
+	bluej_exercises.correct_answer
+	INNER JOIN bluej_exercises.user_answer
+	 ON bluej_exercises.correct_answer.idcorrect_answer = bluej_exercises.user_answer.correct_answerid
+	INNER JOIN bluej_exercises.block
+	 ON bluej_exercises.correct_answer.block_id = bluej_exercises.block.idblock
+WHERE
+	userid = 1
+	AND blockname = "1B"
+	AND user_answer.answer != ''
+	OR user_answer.answer != NULL
+
+-------------------------------------------------
+SELECT
+	Count( * )
+FROM
+	correct_answer
+	INNER JOIN user_answer
+	 ON correct_answer.idcorrect_answer = user_answer.correct_answerid
+	INNER JOIN user
+	 ON user_answer.userid = user.iduser
+	INNER JOIN block
+	 ON correct_answer.block_id = block.idblock
+WHERE
+	username = "ben"
+	AND blockname	 = "1A"
+
+-----------------------------------------
+SELECT
+	Count( * )
+FROM
+	correct_answer
+	INNER JOIN user_answer
+	 ON correct_answer.idcorrect_answer = user_answer.correct_answerid
+	INNER JOIN user
+	 ON user_answer.userid = user.iduser
+	INNER JOIN block
+	 ON correct_answer.block_id = block.idblock
+WHERE
+	username = "ben"
+	AND blockname = "1A"
+	AND user_answer.answer != ''
+	OR user_answer.answer != NULL

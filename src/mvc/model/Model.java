@@ -34,6 +34,10 @@ public class Model extends Observable implements iModel
         String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
         String username = "badev_hintveld";
         String password = "V99r9R9qwMmYPcqU";
+		/*String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
+         String username = "ben";
+         String password = "12345";
+         System.out.println( "Location: Home" );*/
 
         try
         {
@@ -160,13 +164,6 @@ public class Model extends Observable implements iModel
     }
 
 
-    /**
-     *
-     * @param blockName
-     * @param userName
-     * @return
-     */
-
     public int allAnswersFilled(String blockName, String userName)
     {
         int nr= 0;
@@ -183,13 +180,14 @@ public class Model extends Observable implements iModel
             + "INNER JOIN block "
             + "ON correct_answer.block_id = block.idblock "
             + "WHERE username = ? "
+            + "AND blockname = ? "
             + "AND user_answer.answer != '' "
             + "OR user_answer.answer != NULL "
-            + "AND EXISTS ( SELECT correct_answer.exercise_nr "
+         /*   + "AND EXISTS ( SELECT correct_answer.exercise_nr "
             + "FROM correct_answer "
             + "INNER JOIN user_answer "
             + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
-            + "WHERE blockname = ? ) "
+            + "WHERE blockname = ? ) "*/
             );
 
             answer.setString(1, userName);

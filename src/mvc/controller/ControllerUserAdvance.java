@@ -16,6 +16,7 @@ public class ControllerUserAdvance implements iCRUD
         createDBConnection();
         ViewUserAdvance view = new ViewUserAdvance(model, this);
         model.addObserver(view);
+       System.out.println(model.allAnswersFilled("1B", "ben"));
     }
     
     @Override
