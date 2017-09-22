@@ -114,12 +114,14 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JPanel panelQuestion;
 
     protected JButton btnCheckAnswer;
+    protected int blockId = 0;
 
 	public View(Model model,iCRUD controller )
     {
 		this.model = model;
 		this.controller = controller;
 		blocks_id = new JComboBox<>(model.getBlockList());
+
 	}
 
 	public void setGUI()
@@ -217,9 +219,14 @@ public abstract class View extends JFrame implements iView, Observer
 		return exercise_id.getSelectedItem().toString();
 	}
 
+    public int getBlockId() {
+		return blockId;
+	}
+
 	public int getBlockID()
     {
 		return blocks_id.getSelectedIndex() + 1;
+
 	}
 
     public String getBlockName()

@@ -17,15 +17,15 @@ public class Main
     {
 		Model model = new Model();
         String name = System.getProperty("user.name");
-        //name = "azego";
+        name = "azego";
         //name = "badev";
         System.out.println("User name: " + name);
         //JOptionPane.showMessageDialog(null, "name: " + name);
 
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-        //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
-        ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
+        ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+        //ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
 
 
 

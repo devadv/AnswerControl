@@ -24,7 +24,6 @@ public class ViewInputAnswerUser extends View
     private JTextArea userAnswerField;
     private iCRUD controller;
     private String exerciseNr = "";
-    private int blockIdNr = 0;
 
     public ViewInputAnswerUser(Model model, iCRUD controller)
     {
@@ -147,8 +146,8 @@ public class ViewInputAnswerUser extends View
             }
             else if(blocks_id.getSelectedIndex() + 1 <= blocks_id.getItemCount() - 1)
             {
-                blockIdNr++;
-                blocks_id.setSelectedIndex(blockIdNr);
+                blockId++;
+                blocks_id.setSelectedIndex(blockId);
             }
         }
 
@@ -181,8 +180,8 @@ public class ViewInputAnswerUser extends View
 
         if(exercise_id.getSelectedIndex() == 0)
         {
-            blockIdNr--;
-            blocks_id.setSelectedIndex(blockIdNr);
+            blockId--;
+            blocks_id.setSelectedIndex(blockId);
         }
         else if(exercise_id.getSelectedIndex() - 1 >= 0)
         {
@@ -191,8 +190,8 @@ public class ViewInputAnswerUser extends View
         }
         else if(blocks_id.getSelectedIndex() - 1 >= 0)
         {
-            blockIdNr--;
-            blocks_id.setSelectedIndex(blockIdNr);
+            blockId--;
+            blocks_id.setSelectedIndex(blockId);
         }
 
         if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
@@ -219,12 +218,12 @@ public class ViewInputAnswerUser extends View
 
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
-        blockIdNr = blocks_id.getSelectedIndex();
+        blockId = blocks_id.getSelectedIndex();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
         questionField.setText(model.retrieveQuestion(getExcercise()));
         btnCheckAllAnswer_setEnabled();
 
-        if(blockIdNr > 0)
+        if(blockId > 0)
         {
             btnPrevious.setEnabled(true);
         }
@@ -235,7 +234,8 @@ public class ViewInputAnswerUser extends View
     {
         if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
-            ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName());
+            ControllerUserAnswerCorrectAnswer view =
+            		new ControllerUserAnswerCorrectAnswer(model, controller.getUserName());
             this.setVisible(false);
         }
     }
@@ -305,6 +305,7 @@ public class ViewInputAnswerUser extends View
 
         return true;
     }
+
 
     public class windowClosingAdapter extends WindowAdapter
     {
