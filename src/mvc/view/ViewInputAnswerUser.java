@@ -25,13 +25,13 @@ public class ViewInputAnswerUser extends View
     private iCRUD controller;
     private String exerciseNr = "";
     private int blockIdNr = 0;
-    
-    public ViewInputAnswerUser(Model model, iCRUD controller) 
+
+    public ViewInputAnswerUser(Model model, iCRUD controller)
     {
         super(model, controller);
         this.model = model;
         this.controller = controller;
-        
+
         exerciseNr = getExcercise();
         //blockIdNr = getBlockID();
         setGUI();
@@ -39,49 +39,49 @@ public class ViewInputAnswerUser extends View
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
         btnCheckAllAnswer_setEnabled();
     }
-    
+
     public void setGUI()
     {
         super.setGUI();
-        
+
         questionField.setRows(10);
         questionField.setColumns(38);
         questionField.setFont(textAreaFont);
         questionField.setEditable(false);
-        
-        
+
+
         userAnswerField = new JTextArea(23, 38);
         userAnswerField.setFont(textAreaFont);
         userAnswerField.setLineWrap(true);
         userAnswerField.setBackground(new Color(219, 205, 197));
-        
+
         JScrollPane jspUserAnswer = new JScrollPane(userAnswerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
+
         JPanel panelUserAnswer = new JPanel();
         panelUserAnswer.add(jspUserAnswer);
-        
-        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));   
+
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
-        
-                
+
+
         panel.add(panelQuestion);
         panel.add(panelUserAnswer);
         panel.add(panelBottom);
-        
+
         this.addWindowListener(new windowClosingAdapter());
         this.setTitle("Input user answer.");
         this.setSize(600, 800);
         this.setLocation(800, 200);
         this.getContentPane().add(panel);
         this.setVisible(true);
-        
+
     }
-    
-    
+
+
     @Override
     public void exerciseId()
-    {  
+    {
         if(isUserAnswerChanged(exerciseNr))
         {
             messageUser();
@@ -94,22 +94,22 @@ public class ViewInputAnswerUser extends View
             userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
             exerciseNr = getExcercise();
         }
-        
+
         if(exercise_id.getSelectedIndex() > 0)
         {
             btnPrevious.setEnabled(true);
         }
-        
+
         if(blocks_id.getSelectedIndex() == blocks_id.getItemCount()-1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
         {
             btnNext.setEnabled(false);
         }
-        
+
         btnCheckAllAnswer_setEnabled();
     }
-    
+
     public void btnSave()
-    { 
+    {
         if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
         {
             model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
@@ -118,10 +118,10 @@ public class ViewInputAnswerUser extends View
         {
             model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
         }
-        
+
         btnCheckAllAnswer_setEnabled();
     }
-    
+
     boolean message = true;
     @Override
     public void btnNext()
@@ -131,18 +131,18 @@ public class ViewInputAnswerUser extends View
             messageUser();
             message = false;
         }
-                        
+
         if(blocks_id.getSelectedIndex() == blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
         {
             btnNext.setEnabled(false);
         }
-        else 
+        else
         {
             btnNext.setEnabled(true);
-            
+
             if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
             {
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1); 
+                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
                 exerciseNr = getExcercise();
             }
             else if(blocks_id.getSelectedIndex() + 1 <= blocks_id.getItemCount() - 1)
@@ -151,7 +151,7 @@ public class ViewInputAnswerUser extends View
                 blocks_id.setSelectedIndex(blockIdNr);
             }
         }
-        
+
         if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
         {
             btnPrevious.setEnabled(false);
@@ -160,25 +160,25 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(true);
         }
-        
+
         btnCheckAllAnswer_setEnabled();
         message = true;
     }
-    
+
     @Override
     public void btnPrevious()
-    { 
+    {
         if(isUserAnswerChanged(exerciseNr))
         {
             messageUser();
             message = false;
         }
-        
+
          if(blocks_id.getSelectedIndex() <= blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() <= exercise_id.getItemCount() - 1)
          {
              btnNext.setEnabled(true);
          }
-        
+
         if(exercise_id.getSelectedIndex() == 0)
         {
             blockIdNr--;
@@ -186,7 +186,7 @@ public class ViewInputAnswerUser extends View
         }
         else if(exercise_id.getSelectedIndex() - 1 >= 0)
         {
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1); 
+            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
             exerciseNr = getExcercise();
         }
         else if(blocks_id.getSelectedIndex() - 1 >= 0)
@@ -194,7 +194,7 @@ public class ViewInputAnswerUser extends View
             blockIdNr--;
             blocks_id.setSelectedIndex(blockIdNr);
         }
-           
+
         if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
         {
             btnPrevious.setEnabled(false);
@@ -203,11 +203,11 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(true);
         }
-        
+
         btnCheckAllAnswer_setEnabled();
         message = true;
     }
-    
+
     @Override
     public void blocksId()
     {
@@ -215,21 +215,21 @@ public class ViewInputAnswerUser extends View
         {
             btnPrevious.setEnabled(false);
         }
-        
-        
+
+
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
         blockIdNr = blocks_id.getSelectedIndex();
         userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
         questionField.setText(model.retrieveQuestion(getExcercise()));
         btnCheckAllAnswer_setEnabled();
-        
+
         if(blockIdNr > 0)
         {
             btnPrevious.setEnabled(true);
         }
     }
-    
+
     @Override
     public void btnCheckAnswer()
     {
@@ -239,15 +239,15 @@ public class ViewInputAnswerUser extends View
             this.setVisible(false);
         }
     }
-    
-    
+
+
     private void messageUser()
     {
         if(message)
         {
-            int dialogReslult = JOptionPane.showConfirmDialog(null, 
+            int dialogReslult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                
+
             if(dialogReslult == 0)// yes button
             {
                 if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
@@ -260,12 +260,13 @@ public class ViewInputAnswerUser extends View
                 }
             }
         }
-                
+
     }// end method messageUser
-    
+
     private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) == exercise_id.getItemCount())
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName(),
+        		exercise_id.getItemCount()) == exercise_id.getItemCount())
         {
             btnCheckAnswer.setEnabled(true);
         }
@@ -274,39 +275,39 @@ public class ViewInputAnswerUser extends View
             btnCheckAnswer.setEnabled(false);
         }
     }
-    
+
     public String getUserAnswer()
     {
         return userAnswerField.getText();
     }
 
     @Override
-    public void update(Observable o, Object arg) 
+    public void update(Observable o, Object arg)
     {
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.getText();
     }
-    
+
     public boolean isUserAnswerChanged(String oldExerciseNr)
     {
         String currentAnswerUser = getUserAnswer();
         String oldText = model.retrieveAnswerUser(oldExerciseNr, controller.getUserName());
-        
+
         if(oldText == null)
         {
             oldText = "";
         }
-        
+
         if(currentAnswerUser.equals(oldText))
         {
             return false;
         }
-        
+
         return true;
     }
-    
+
     public class windowClosingAdapter extends WindowAdapter
-    {           
+    {
         @Override
         public void windowClosing(WindowEvent we)
         {
@@ -314,10 +315,10 @@ public class ViewInputAnswerUser extends View
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                
+
                 if(dialogResult == 0)// yes button clicked
                 {
-                    
+
                     model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
                     System.exit(0);
                 }
@@ -332,6 +333,6 @@ public class ViewInputAnswerUser extends View
             }
         }
     }// end class windowClosingAdaptor
-    
-       
+
+
 }// end class ViewInputAnswerUser

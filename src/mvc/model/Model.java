@@ -53,7 +53,6 @@ public class Model extends Observable implements iModel
 
     public String[][] getUserProgress()
     {
-        ArrayList<String> arrayList = new ArrayList();
         String[] userNames = getUserNames();
         String[] blockList = getBlockList();
         String[][] answers = new String[userNames.length][blockList.length + 1];
@@ -65,7 +64,7 @@ public class Model extends Observable implements iModel
 
             for( j = 1; j < blockList.length + 1; j++)
             {
-                answers[i][j] = String.valueOf(allAnswersFilled(blockList[j - 1], userNames[i]));
+                answers[i][j] = String.valueOf(allAnswersFilled(blockList[j - 1], userNames[i], 1000));
             }
 
             j = 0;
@@ -167,9 +166,9 @@ public class Model extends Observable implements iModel
      * @return
      */
 
-    public int allAnswersFilled(String blockName, String userName)
+    public int allAnswersFilled(String blockName, String userName, int nrExercises)
     {
-        int nr= 0;
+        int nr = 0;
 
         try
         {
@@ -183,13 +182,9 @@ public class Model extends Observable implements iModel
             + "INNER JOIN block "
             + "ON correct_answer.block_id = block.idblock "
             + "WHERE username = ? "
-            + "AND user_answer.answer != '' "
-            + "OR user_answer.answer != NULL "
-            + "AND EXISTS ( SELECT correct_answer.exercise_nr "
-            + "FROM correct_answer "
-            + "INNER JOIN user_answer "
-            + "ON correct_answer.idcorrect_answer = user_answer.correct_answerid "
-            + "WHERE blockname = ? ) "
+            + "AND blockname = ? "
+            + "AND user_answer.answer != ' ' "
+        	+ "OR user_answer.answer != NULL "
             );
 
             answer.setString(1, userName);
@@ -201,7 +196,6 @@ public class Model extends Observable implements iModel
             {
                 nr = resultSet.getInt(1);
             }
-
         }
         catch(Exception e)
         {
