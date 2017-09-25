@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
+
+import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -30,13 +32,13 @@ public class ViewUserAnswerCorrectAnswer extends View
         exerciseNr = getExcercise();
 
         setGUI();
-
+        
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
 
     }
-    
-    
+
+
     @Override
     public void setGUI()
     {
@@ -45,9 +47,9 @@ public class ViewUserAnswerCorrectAnswer extends View
         btnSave.setVisible(false);
         btnCheckAnswer.setVisible(false);
         blocks_id.setVisible(false);
-
-        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockId())));
-        exerciseNr = getExcercise();
+        
+        exercise_id = new JComboBox<>();
+        exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(blockId)));
 
         questionField.setRows(10);
         questionField.setColumns(78);
@@ -78,7 +80,6 @@ public class ViewUserAnswerCorrectAnswer extends View
 
         panel.add(panelQuestion);
         panel.add(panelAnswer);
-
         panel.add(panelBottom);
 
         this.addWindowListener(new windowClosingAdapter());

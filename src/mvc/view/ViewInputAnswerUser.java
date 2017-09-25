@@ -32,7 +32,6 @@ public class ViewInputAnswerUser extends View
         this.controller = controller;
 
         exerciseNr = getExcercise();
-        //blockIdNr = getBlockID();
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
