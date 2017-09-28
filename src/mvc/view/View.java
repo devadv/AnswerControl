@@ -29,24 +29,24 @@ public abstract class View extends JFrame implements iView, Observer
 			"2.16","2.17","2.18","2.19", "2.20","2.21","2.22", "2.23","2.24","2.25","2.26","2.27","2.28",
 			"2.29","2.30", "2.31", "2.32", "2.33", "2.34", "2.35","2.36","2.37","2.38","2.39","2.40",
 			"2.41", "2.42", "2.43", "2.44","2.45","2.46","2.47","2.48", "2.49","2.50", "2.51","2.52","2.53",
-			"2.54", "2.55","2.56","2.57", "2.58", "2.59", "2.60", "2.61", 
-			"2.62", "2.63", "2.64","2.65","2.66","2.67","2.68","2.69","2.70","2.71", 
+			"2.54", "2.55","2.56","2.57", "2.58", "2.59", "2.60", "2.61",
+			"2.62", "2.63", "2.64","2.65","2.66","2.67","2.68","2.69","2.70","2.71",
 			"2.72", "2.73", "2.74","2.75","2.76","2.77","2.78","2.79","2.80","2.81",
 			"2.82", "2.83", "2.84","2.85","2.86","2.87","2.88","2.89","2.90","2.91", "2.92", "2.93",
 			"3.1", "3.2", "3.3", "3.4","3.5","3.6","3.7","3.8","3.9","3.10","3.11","3.12","3.13","3.14","3.15",
 			"3.16","3.17","3.18","3.19", "3.20","3.21","3.22", "3.23", "3.24","3.25", "3.26 ","3.27","3.28",
-			"3.29","3.30","3.31","3.32","3.33","3.34","3.35","3.36","3.37","3.38","3.39","3.40","3.41", 
+			"3.29","3.30","3.31","3.32","3.33","3.34","3.35","3.36","3.37","3.38","3.39","3.40","3.41",
 			"3.42", "3.43","3.44","3.45","3.46",
 			"4.1", "4.2", "4.3", "4.4","4.5","4.6","4.7","4.8","4.9","4.10","4.11","4.12","4.13","4.14","4.15",
 			"4.16","4.17","4.18","4.19", "4.20","4.21","4.22", "4.23","4.24","4.25","4.26","4.27","4.28",
-			"4.29","4.30","4.31","4.32","4.33","4.34","4.35","4.36","4.37","4.38","4.39","4.40","4.41", 
+			"4.29","4.30","4.31","4.32","4.33","4.34","4.35","4.36","4.37","4.38","4.39","4.40","4.41",
 			"4.42", "4.43","4.44","4.45","4.46","4.47", "4.48","4.49","4.50","4.51", "4.52", "4.53",
 			"4.54","4.55","4.56","4.57", "4.58","4.59","4.60","4.61", "4.62", "4.63", "4.64",
 			"4.65","4.66","4.67","4.68","4.69","4.70","4.71", "4.72", "4.73", "4.74","4.75",
 			"4.76","4.77","4.78","4.79","4.80","4.81", "4.82", "4.83", "4.84","4.85","4.86","4.87",
 			"5.1", "5.2","5.3","5.4","5.5","5.6","5.7","5.8","5.9","5.10","5.11","5.12","5.13","5.14","5.15",
 			"5.16","5.17","5.18","5.19", "5.20","5.21","5.22", "5.23", "5.24","5.25","5.26","5.27","5.28",
-			"5.29","5.30","5.31","5.32","5.33","5.34","5.35","5.36","5.37","5.38","5.39","5.40","5.41", 
+			"5.29","5.30","5.31","5.32","5.33","5.34","5.35","5.36","5.37","5.38","5.39","5.40","5.41",
 			"5.42", "5.43", "5.44","5.45","5.46","5.47","5.48","5.49","5.50","5.61", "5.62", "4.63",
 			"5.64","5.65","5.66","5.67","5.68","5.69","5.70","5.71", "5.72", "5.73",
 			"6.1", "6.2", "6.3", "6.4","6.5","6.6","6.7","6.8","6.9","6.10","6.11","6.12","6.13","6.14",
@@ -77,33 +77,33 @@ public abstract class View extends JFrame implements iView, Observer
 			"11.58","11.59","11.60","11.61", "11.62", "11.63", "11.64","11.65","11.66","11.67","11.68",
 			"11.69","11.70","11.71", "11.72", "11.73", "11.74","11.75","11.76","11.77","11.78","11.79",
 			"12.1", "12.2", "12.3", "12.4","12.5","12.6","12.7","12.8","12.9","12.10","12.11","12.12",
-			"12.13","12.14","12.15","12.16","12.17","12.18","12.19", "12.20","12.21","12.22", "12.23", 
+			"12.13","12.14","12.15","12.16","12.17","12.18","12.19", "12.20","12.21","12.22", "12.23",
 			"12.24","12.25","12.26","12.27","12.28","12.29","12.30","12.31","12.32","12.33","12.34",
 			"12.35","12.36","12.37","12.38","12.39","12.40","12.41", "12.42", "12.43","12.44","12.45",
 			"12.46","12.47","12.48","12.49","12.50","12.51", "12.52", "12.53","12.54",
 			"13.1", "13.2", "13.3", "13.4","13.5","13.6","13.7","13.8","13.9","13.10","13.11","13.12",
 			"13.13","13.14","13.15","13.16","13.17","13.18",
 			"14.1", "14.2", "14.3", "14.4","14.5","14.6","14.7","14.8","14.9","14.10","14.11","14.12",
-			"14.13","14.14","14.15","14.16","14.17","14.18","14.19", "14.20","14.21","14.22", "14.23", 	  
+			"14.13","14.14","14.15","14.16","14.17","14.18","14.19", "14.20","14.21","14.22", "14.23",
 			"14.24","14.25","14.26","14.27","14.28"};
-	
-	
+
+
 	protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
-	
+
 	protected JButton btnSave = new JButton("Save");
 	protected JButton btnNext = new JButton("Next");
 	protected JButton btnPrevious = new JButton("Previous");
 	protected JLabel labelExercise = new JLabel("Oefening:");
 	protected JComboBox<String> exercise_id = new JComboBox<>(listExercises);
     protected JComboBox<String> blocks_id;
-    
+
 	protected JLabel label = new JLabel();
 	protected JLabel labelBlock = new JLabel("Blok");
-	
+
 	protected iCRUD controller;
 	protected Model model;
 
-	
+
 	protected JPanel panel;
 	protected JPanel panelTitle;
 	protected JPanel panelTop;
@@ -112,60 +112,60 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JTextArea questionField = new JTextArea(10, 20);
 	protected JScrollPane jspQuestion;
 	protected JPanel panelQuestion;
-    
+
     protected JButton btnCheckAnswer;
 
-	public View(Model model,iCRUD controller ) 
+	public View(Model model,iCRUD controller )
     {
 		this.model = model;
 		this.controller = controller;
 		blocks_id = new JComboBox<>(model.getBlockList());
 	}
 
-	public void setGUI() 
+	public void setGUI()
     {
 		textAreaFont = new Font("", Font.PLAIN, 13);
-        
+
 		btnSave.addActionListener(this);
 		btnNext.addActionListener(this);
         btnCheckAnswer = new JButton("Check answers");
         btnCheckAnswer.setEnabled(false);
-        
+
         if(exercise_id.getItemCount() == 1)
         {
             btnNext.setEnabled(false);
         }
-        
+
 		btnPrevious.addActionListener(this);
         btnPrevious.setEnabled(false);
 		exercise_id.addActionListener(this);
 		blocks_id.addActionListener(this);
         btnCheckAnswer.addActionListener(this);
-		
+
 		questionField.setRows(23);
 		questionField.setColumns(38);
 		questionField.setLineWrap(true);
 		questionField.setWrapStyleWord(true);
-		
+
 		questionField.setFont(textAreaFont);
 		questionField.setBackground(new Color(219, 205, 197));
-		
+
 		jspQuestion = new JScrollPane(questionField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			
+
 		panelQuestion = new JPanel();
 		panelQuestion.add(jspQuestion);
-		
+
         //main panel - layout vertical
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        //title panel 		
+        //title panel
         panelTitle = new JPanel();
         //top panel
         panelTop = new JPanel();
         //bottom panel
         panelBottom = new JPanel();
-        
+
         panelTitle.add(title_course);
         panelTop.add(labelBlock);
         panelTop.add(blocks_id);
@@ -174,58 +174,58 @@ public abstract class View extends JFrame implements iView, Observer
         panelBottom.add(btnSave);
         panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
-        panelBottom.add(btnCheckAnswer);          
+        panelBottom.add(btnCheckAnswer);
         //add to main panel
         panel.add(panelTitle);
         panel.add(panelTop);
         panel.add(panelBottom);
-        
-       
+
+
 	}
-    
+
     @Override
-    public void actionPerformed(ActionEvent event) 
+    public void actionPerformed(ActionEvent event)
     {
-        if (event.getSource() == exercise_id) 
+        if (event.getSource() == exercise_id)
         {
            exerciseId();
-        }           
-        else if (event.getSource() == btnSave) 
+        }
+        else if (event.getSource() == btnSave)
         {
             btnSave();
-        } 
+        }
         else if (event.getSource() == btnNext)
-        {           
+        {
            btnNext();
         }
-        else if (event.getSource() == btnPrevious) 
+        else if (event.getSource() == btnPrevious)
         {
            btnPrevious();
         }
         else if(event.getSource() == blocks_id)
-        {     
+        {
             blocksId();
-        } 
+        }
         else if(event.getSource() == btnCheckAnswer)
         {
             btnCheckAnswer();
         }
     }// end method actionPerformed
 
-	public String getExcercise() 
+	public String getExcercise()
     {
 		return exercise_id.getSelectedItem().toString();
 	}
-    
+
 	public int getBlockID()
     {
 		return blocks_id.getSelectedIndex() + 1;
 	}
-    
+
     public String getBlockName()
     {
         return model.getBlockName(getBlockID());
     }
-	
-    	
+
+
 }// end abstact class View

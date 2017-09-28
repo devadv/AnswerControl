@@ -10,54 +10,55 @@ public class ControllerUserAnswerCorrectAnswer implements iCRUD
     private Model model;
     private ViewUserAnswerCorrectAnswer view;
     private String userName;
-    
-    public ControllerUserAnswerCorrectAnswer(Model model, String name)
+    private int blockid;
+
+    public ControllerUserAnswerCorrectAnswer(Model model, String name, int blockid)
     {
         this.model = model;
         createDBConnection();
         userName = name;
-        view = new ViewUserAnswerCorrectAnswer(model, this);
+        //view = new ViewUserAnswerCorrectAnswer(model, this,blockid);
         model.addObserver(view);
-        
+
         if(!model.userNameExist(name))
         {
             model.saveUserName(name);
-        } 
+        }
     }
-    
+
     public String getUserName()
     {
         return userName;
     }
 
     @Override
-    public void createDBConnection() 
+    public void createDBConnection()
     {
         model.createDBConnection();
     }
 
     @Override
-    public void create() 
+    public void create()
     {
         model.createUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
     }
 
     @Override
-    public void retrieve() 
+    public void retrieve()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update() 
+    public void update()
     {
         model.updateUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
     }
 
     @Override
-    public void delete() 
+    public void delete()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
