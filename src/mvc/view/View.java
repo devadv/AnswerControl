@@ -51,7 +51,7 @@ public abstract class View extends JFrame implements iView, Observer
 	protected JPanel panelQuestion;
 
     protected JButton btnCheckAnswer;
-    protected int blockId = 0;
+    static int blockId = 0;
     protected String exerciseNr = "";
 
 	public View(Model model,iCRUD controller )
