@@ -20,41 +20,41 @@ import mvc.controller.iCRUD;
 import mvc.model.Model;
 
 
-public class ViewInputQuestion extends View 
+public class ViewInputQuestion extends View
 {
     private String exerciseNr;
 
-	public ViewInputQuestion(Model model, iCRUD controller) 
+	public ViewInputQuestion(Model model, iCRUD controller)
     {
 		super(model, controller);
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-		
+
 	}
 	@Override
-	public void setGUI() 
+	public void setGUI()
     {
 		super.setGUI();
-		
+
 		panel.add(panelQuestion);
         panel.add(panelBottom);
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
-        
-        
+
+
         this.addWindowListener( new WindowClosingAdapter1());
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
-        
+
 		this.setLocation(500, 200);
 		this.getContentPane().add(panel);
 		this.setVisible(true);
-		
+
 	}
 
     public void exerciseId()
-    {  
+    {
          if(isQuestionChanged())
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,
@@ -63,16 +63,16 @@ public class ViewInputQuestion extends View
                 {
                     if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
                     {
-                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                        model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                     }
                     else
                     {
                         model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                     }
-                    
+
                 }
             }
-            
+
             if(exercise_id.getSelectedIndex() == 0)
             {
                 btnPrevious.setEnabled(false);
@@ -89,19 +89,19 @@ public class ViewInputQuestion extends View
 			questionField.setText(model.retrieveQuestion(getExcercise()));
             exerciseNr = getExcercise();
     }
-    
+
     public void btnSave()
-    { 
-        if (!(model.questionExist(getExcercise()))) 
+    {
+        if (!(model.questionExist(getExcercise())))
         {
             controller.create();
-        } 
-        else 
+        }
+        else
         {
             model.updateQuestion(getExcercise(), getQuestion(), getBlockID());
         }
     }
-    
+
     public void btnNext()
     {
         if(isQuestionChanged())
@@ -112,7 +112,7 @@ public class ViewInputQuestion extends View
             {
                 if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
                 {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                 }
                 else
                 {
@@ -134,9 +134,9 @@ public class ViewInputQuestion extends View
             btnNext.setEnabled(false);
         }
     }
-    
+
     public void btnPrevious()
-    { 
+    {
         if(isQuestionChanged())
         {
             int dialogResult = JOptionPane.showConfirmDialog(null,
@@ -147,7 +147,7 @@ public class ViewInputQuestion extends View
             }
         }
 
-        if(exercise_id.getSelectedIndex() - 1 >= 0)  
+        if(exercise_id.getSelectedIndex() - 1 >= 0)
         {
             btnPrevious.setEnabled(true);
             exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
@@ -164,7 +164,7 @@ public class ViewInputQuestion extends View
             btnNext.setEnabled(true);
         }
     }
-    
+
     public void blocksId()
     {
         if(isQuestionChanged())
@@ -175,7 +175,7 @@ public class ViewInputQuestion extends View
             {
                 if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
                 {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0); 
+                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
                 }
                 else
                 {
@@ -184,7 +184,7 @@ public class ViewInputQuestion extends View
 
             }
         }
-            
+
         if(exercise_id.getSelectedIndex() == 0)
         {
             btnPrevious.setEnabled(false);
@@ -212,43 +212,43 @@ public class ViewInputQuestion extends View
 
      public void btnCheckAnswer()
     {
-        
+
     }
-    
+
 	@Override
-	public void update(Observable o, Object arg) 
+	public void update(Observable o, Object arg)
     {
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 	}
-    
+
     public String getQuestion()
     {
         return questionField.getText();
     }
-    
+
     public boolean isQuestionChanged()
     {
         String currentText = getQuestion();
         String oldtext = model.retrieveQuestion(exerciseNr);
-        
+
         if(oldtext == null)
         {
             oldtext = "";
         }
-        
+
         if(currentText.equals(oldtext))
         {
             return false;
         }
-        
+
         return true;
-    }  
-    
+    }
+
     public class WindowClosingAdapter1 extends WindowAdapter
-    {           
+    {
         @Override
         public void windowClosing(WindowEvent we)
-        {   
+        {
             if(isQuestionChanged())
             {
                 int dialogResult = JOptionPane.showConfirmDialog(null,

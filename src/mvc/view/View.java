@@ -103,7 +103,6 @@ public abstract class View extends JFrame implements iView, Observer
 	protected iCRUD controller;
 	protected Model model;
 
-
 	protected JPanel panel;
 	protected JPanel panelTitle;
 	protected JPanel panelTop;
@@ -121,6 +120,7 @@ public abstract class View extends JFrame implements iView, Observer
 		this.controller = controller;
 		blocks_id = new JComboBox<>(model.getBlockList());
 	}
+
 
 	public void setGUI()
     {
@@ -211,6 +211,7 @@ public abstract class View extends JFrame implements iView, Observer
             btnCheckAnswer();
         }
     }// end method actionPerformed
+
 
 	public String getExcercise()
     {

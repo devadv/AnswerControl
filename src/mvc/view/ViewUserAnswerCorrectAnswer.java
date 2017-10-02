@@ -47,9 +47,10 @@ public class ViewUserAnswerCorrectAnswer extends View
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
 
     }
+
     public  void setSelectedValue(JComboBox comboBox, String value)
     {
-       String item;
+        String item;
         for (int i = 0; i < comboBox.getItemCount(); i++)
         {
             item = (String)comboBox.getItemAt(i);
@@ -67,8 +68,8 @@ public class ViewUserAnswerCorrectAnswer extends View
     {
         super.setGUI();
         btnBack = new JButton("Back to input questions");
-        btnBack.addActionListener(new ActionListener() {
 
+        btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewParent.setVisible(true);

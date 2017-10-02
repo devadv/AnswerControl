@@ -132,7 +132,8 @@ public class ViewInputAnswerUser extends View
             message = false;
         }
 
-        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
+        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount() - 1 &&
+        		exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
         {
             btnNext.setEnabled(false);
         }
@@ -236,7 +237,7 @@ public class ViewInputAnswerUser extends View
         if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
          //   ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName(),getBlockID());
-        	new ViewUserAnswerCorrectAnswer(model, controller,this);
+        	new ViewUserAnswerCorrectAnswer(model, controller, this);
             this.setVisible(false);
         }
     }
