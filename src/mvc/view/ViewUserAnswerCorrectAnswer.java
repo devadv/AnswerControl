@@ -133,36 +133,12 @@ public class ViewUserAnswerCorrectAnswer extends View
     @Override
     public void btnNext()
     {
-
-        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-        {
-            btnPrevious.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-            exerciseNr = getExcercise();
-            userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
-            correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
-        }
-        else
-        {
-            btnPrevious.setEnabled(false);
-        }
-
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
     }
 
     public void btnPrevious()
     {
-        if(exercise_id.getSelectedIndex() - 1 >= 0)
-        {
-            btnNext.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-            userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
-            correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
-        }
-        else if(exercise_id.getSelectedIndex() == 0)
-        {
-            btnPrevious.setEnabled(false);
-        }
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
     }
 
 

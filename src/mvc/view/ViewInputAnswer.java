@@ -18,13 +18,13 @@ import mvc.model.Model;
 
 public class ViewInputAnswer extends View
 {
-	
+
 	//private iCRUD controller;
 	private Model model;
 	private JTextArea answerField ;
     private String exerciseNr;
 
-	public ViewInputAnswer(Model model, iCRUD controller) 
+	public ViewInputAnswer(Model model, iCRUD controller)
     {
 		super(model, controller);
 		this.model = model;
@@ -32,7 +32,7 @@ public class ViewInputAnswer extends View
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 		answerField.setText(model.retrieveAnswer(getExcercise()) );// change when model is updated
-        
+
 	}
 
 	@Override
@@ -43,38 +43,38 @@ public class ViewInputAnswer extends View
 		answerField.setLineWrap(true);
 		answerField.setWrapStyleWord(true);
 		answerField.setFont(textAreaFont);
-        
+
 		questionField.setEditable(false);
 		questionField.setColumns(38);
 		questionField.setRows(5);
-		
+
 		JScrollPane jspAnswer = new JScrollPane(answerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
+
 		panel.add(panelQuestion);
 		JPanel panelAnswer = new JPanel();
 		panelAnswer.add(jspAnswer);
-        
+
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
         exerciseNr = getExcercise();
-        
+
 		panel.add(panelAnswer);
 		panel.add(panelBottom);
 		this.pack();
-                
+
 		this.addWindowListener(new windowClosingAdapter());
 		this.setTitle("Invoer Antwoorden");
 		this.setSize(600, 800);
 		this.setLocation(800, 200);
-        
+
 		this.getContentPane().add(panel);
 		this.setVisible(true);
-        
-        
+
+
 	}
 
     public void exerciseId()
-    {  
+    {
         if(isAnswerchanged(exerciseNr))
         {
             messageUserAnswer();
@@ -101,12 +101,12 @@ public class ViewInputAnswer extends View
             }
 
             questionField.setText(model.retrieveQuestion(exerciseNr));
-            answerField.setText(model.retrieveAnswer(exerciseNr));   
+            answerField.setText(model.retrieveAnswer(exerciseNr));
         }
     }
-    
+
     public void btnSave()
-    { 
+    {
         if(!model.answerExist(exerciseNr))// answer doesn't exist
         {
             model.updateAnswer(exerciseNr, answerField.getText(), getBlockID());
@@ -116,49 +116,17 @@ public class ViewInputAnswer extends View
             model.updateAnswer(exerciseNr, answerField.getText(), 0);
         }
     }
-    
+
     public void btnNext()
-    {  
-        exerciseNr = getExcercise();
-            
-        if(isAnswerchanged(exerciseNr))
-        {
-            messageUserAnswer();
-        }
-
-        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-        {
-            btnPrevious.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-            exerciseNr = getExcercise();
-            answerField.setText(model.retrieveAnswer(exerciseNr));
-        }
-        else
-        {
-            btnPrevious.setEnabled(false);
-        } 
+    {
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
     }
-    
+
     public void btnPrevious()
-    { 
-        if(isAnswerchanged(exerciseNr))
-        {
-            messageUserAnswer();
-        }
-
-        if(exercise_id.getSelectedIndex() - 1 >= 0)
-        {
-            btnNext.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-            answerField.setText(model.retrieveAnswer(exerciseNr));
-        }
-        else
-        {
-            btnNext.setEnabled(false);
-        }
+    {
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
     }
-    
+
     public void blocksId()
     {
         if(isAnswerchanged(exerciseNr))
@@ -170,7 +138,7 @@ public class ViewInputAnswer extends View
             else
             {
                 exerciseNr = getExcercise();
-                
+
                 if(exercise_id.getSelectedIndex() == 0)
                 {
                     btnPrevious.setEnabled(false);
@@ -185,66 +153,66 @@ public class ViewInputAnswer extends View
                     btnNext.setEnabled(true);
                     btnPrevious.setEnabled(false);
                 }
-                
+
                 questionField.setText(model.retrieveQuestion(exerciseNr));
-                answerField.setText(model.retrieveAnswer(exerciseNr));   
+                answerField.setText(model.retrieveAnswer(exerciseNr));
             }
-            
+
             exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
             exerciseNr = getExcercise();
             questionField.setText(model.retrieveQuestion(exerciseNr));
             answerField.setText(model.retrieveAnswer(exerciseNr));
     }
-    
+
      public void btnCheckAnswer()
     {
-        
+
     }
-     
+
     public void messageUserAnswer()
     {
-        int dialogReslult = JOptionPane.showConfirmDialog(null, 
+        int dialogReslult = JOptionPane.showConfirmDialog(null,
                         "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-                
+
         if(dialogReslult == 0)// yes button
         {
             model.updateAnswer(exerciseNr, answerField.getText(), 0);
         }
-        
+
     }
-	
+
 	@Override
 	public void update(Observable o, Object arg)
     {
 		questionField.setText(model.retrieveQuestion(getExcercise()));
-		
+
 	}
-    
-	public String getAnswer() 
+
+	public String getAnswer()
     {
 		return answerField.getText();
 	}
-    
+
     public boolean isAnswerchanged(String exerciseNr)
     {
         String currentText = getAnswer();
         String oldtext = model.retrieveAnswer(exerciseNr);
-        
+
         if(oldtext == null)
         {
             oldtext = "";
         }
-      
+
         if(currentText.equals(oldtext))
         {
             return false;
         }
-        
+
         return true;
     }
 
     public class windowClosingAdapter extends WindowAdapter
-    {           
+    {
         @Override
         public void windowClosing(WindowEvent we)
         {

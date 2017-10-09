@@ -33,7 +33,7 @@ public class ViewInputAnswerUser extends View
         this.controller = controller;
 
         exerciseNr = getExcercise();
-        //blockIdNr = getBlockID();
+
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
@@ -55,15 +55,13 @@ public class ViewInputAnswerUser extends View
         userAnswerField.setLineWrap(true);
         userAnswerField.setBackground(new Color(219, 205, 197));
 
-        JScrollPane jspUserAnswer = new JScrollPane(userAnswerField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane jspUserAnswer = new JScrollPane(userAnswerField,
+        		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         JPanel panelUserAnswer = new JPanel();
         panelUserAnswer.add(jspUserAnswer);
 
         exercise_id.setModel(new DefaultComboBoxModel<>(model.getExerciseList(getBlockID())));
-        //exerciseNr = getExcercise();
-
 
         panel.add(panelQuestion);
         panel.add(panelUserAnswer);
@@ -85,13 +83,15 @@ public class ViewInputAnswerUser extends View
         if(isUserAnswerChanged(exerciseNr))
         {
             messageUser();
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(),
+            		controller.getUserName()));
             exerciseNr = getExcercise();
         }
         else
         {
             questionField.setText(model.retrieveQuestion(getExcercise()));
-            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
+            userAnswerField.setText(model.retrieveAnswerUser(getExcercise(),
+            		controller.getUserName()));
             exerciseNr = getExcercise();
         }
 
@@ -100,7 +100,8 @@ public class ViewInputAnswerUser extends View
             btnPrevious.setEnabled(true);
         }
 
-        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount()-1 && exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
+        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount()-1 &&
+        		exercise_id.getSelectedIndex() == exercise_id.getItemCount()-1)
         {
             btnNext.setEnabled(false);
         }
@@ -112,11 +113,13 @@ public class ViewInputAnswerUser extends View
     {
         if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
         {
-            model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            model.createUserAnswer(userAnswerField.getText(), getExcercise(),
+            		controller.getUserName());
         }
         else
         {
-            model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+            model.updateUserAnswer(userAnswerField.getText(), getExcercise(),
+            		controller.getUserName());
         }
 
         btnCheckAllAnswer_setEnabled();
@@ -126,87 +129,13 @@ public class ViewInputAnswerUser extends View
     @Override
     public void btnNext()
     {
-        if(isUserAnswerChanged(exerciseNr))
-        {
-            messageUser();
-            message = false;
-        }
-
-        if(blocks_id.getSelectedIndex() == blocks_id.getItemCount() - 1 &&
-        		exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
-        {
-            btnNext.setEnabled(false);
-        }
-        else
-        {
-            btnNext.setEnabled(true);
-
-            if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-            {
-                exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-                exerciseNr = getExcercise();
-            }
-            else if(blocks_id.getSelectedIndex() + 1 <= blocks_id.getItemCount() - 1)
-            {
-                blockIdNr++;
-                blocks_id.setSelectedIndex(blockIdNr);
-            }
-        }
-
-        if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
-        {
-            btnPrevious.setEnabled(false);
-        }
-        else
-        {
-            btnPrevious.setEnabled(true);
-        }
-
-        btnCheckAllAnswer_setEnabled();
-        message = true;
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
     }
 
     @Override
     public void btnPrevious()
     {
-        if(isUserAnswerChanged(exerciseNr))
-        {
-            messageUser();
-            message = false;
-        }
-
-         if(blocks_id.getSelectedIndex() <= blocks_id.getItemCount() - 1 && exercise_id.getSelectedIndex() <= exercise_id.getItemCount() - 1)
-         {
-             btnNext.setEnabled(true);
-         }
-
-        if(exercise_id.getSelectedIndex() == 0)
-        {
-            blockIdNr--;
-            blocks_id.setSelectedIndex(blockIdNr);
-        }
-        else if(exercise_id.getSelectedIndex() - 1 >= 0)
-        {
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-        }
-        else if(blocks_id.getSelectedIndex() - 1 >= 0)
-        {
-            blockIdNr--;
-            blocks_id.setSelectedIndex(blockIdNr);
-        }
-
-        if(blocks_id.getSelectedIndex() == 0 && exercise_id.getSelectedIndex() == 0)
-        {
-            btnPrevious.setEnabled(false);
-        }
-        else
-        {
-            btnPrevious.setEnabled(true);
-        }
-
-        btnCheckAllAnswer_setEnabled();
-        message = true;
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
     }
 
     @Override
@@ -236,7 +165,7 @@ public class ViewInputAnswerUser extends View
     {
         if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
-         //   ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName(),getBlockID());
+         // ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName(),getBlockID());
         	new ViewUserAnswerCorrectAnswer(model, controller, this);
             this.setVisible(false);
         }
@@ -254,11 +183,13 @@ public class ViewInputAnswerUser extends View
             {
                 if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
                 {
-                    model.createUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                    model.createUserAnswer(userAnswerField.getText(), getExcercise(),
+                    		controller.getUserName());
                 }
                 else
                 {
-                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(),
+                    		controller.getUserName());
                 }
             }
         }
@@ -267,7 +198,8 @@ public class ViewInputAnswerUser extends View
 
     private void btnCheckAllAnswer_setEnabled()
     {
-        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) == exercise_id.getItemCount())
+        if(model.allAnswersFilled(getBlockName(), controller.getUserName()) ==
+        		exercise_id.getItemCount())
         {
             btnCheckAnswer.setEnabled(true);
         }
@@ -320,7 +252,8 @@ public class ViewInputAnswerUser extends View
                 if(dialogResult == 0)// yes button clicked
                 {
 
-                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(), controller.getUserName());
+                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(),
+                    		controller.getUserName());
                     System.exit(0);
                 }
                 else

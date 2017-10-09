@@ -104,65 +104,12 @@ public class ViewInputQuestion extends View
 
     public void btnNext()
     {
-        if(isQuestionChanged())
-        {
-            int dialogResult = JOptionPane.showConfirmDialog(null,
-                    "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-            if(dialogResult == 0)// yes button clicked
-            {
-                if(model.questionExist(String.valueOf(exercise_id.getSelectedItem())))
-                {
-                    model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-                }
-                else
-                {
-                    model.createQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-                }
-
-            }
-        }
-
-        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-        {
-            btnPrevious.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-            exerciseNr = getExcercise();
-            questionField.setText(model.retrieveQuestion(getExcercise()));
-        }
-        else
-        {
-            btnNext.setEnabled(false);
-        }
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
     }
 
     public void btnPrevious()
     {
-        if(isQuestionChanged())
-        {
-            int dialogResult = JOptionPane.showConfirmDialog(null,
-                    "Gegevens zijn gewijzigd, opslaan?", "Message", JOptionPane.YES_NO_OPTION);
-            if(dialogResult == 0)// yes button clicked
-            {
-                model.updateQuestion(String.valueOf(exercise_id.getSelectedItem()), getQuestion(), 0);
-            }
-        }
-
-        if(exercise_id.getSelectedIndex() - 1 >= 0)
-        {
-            btnPrevious.setEnabled(true);
-            exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-            exerciseNr = getExcercise();
-            questionField.setText(model.retrieveQuestion(getExcercise()));
-        }
-        else
-        {
-            btnPrevious.setEnabled(false);
-        }
-
-        if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
-        {
-            btnNext.setEnabled(true);
-        }
+    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
     }
 
     public void blocksId()
