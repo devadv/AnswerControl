@@ -126,17 +126,7 @@ public class ViewInputAnswerUser extends View
     }
 
     boolean message = true;
-    @Override
-    public void btnNext()
-    {
-    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-    }
 
-    @Override
-    public void btnPrevious()
-    {
-    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-    }
 
     @Override
     public void blocksId()

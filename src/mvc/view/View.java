@@ -228,5 +228,36 @@ public abstract class View extends JFrame implements iView, Observer
         return model.getBlockName(getBlockID());
     }
 
+    public void btnNext()
+    {
+    	if(exercise_id.getSelectedIndex() < exercise_id.getItemCount() - 1){
+    		exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+    	}
+    	else{
+    		nextBlock();
+    	}
+    }
+
+    public void btnPrevious()
+    {
+    	if(exercise_id.getSelectedIndex() > 0 ){
+    		exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
+    	}
+    	else{
+    		previousBlock();
+    		exercise_id.setSelectedIndex(exercise_id.getItemCount() - 1);
+    	}
+    }
+
+    public void nextBlock() {
+		if(blocks_id.getSelectedIndex() < blocks_id.getItemCount() - 1){
+			blocks_id.setSelectedIndex(blocks_id.getSelectedIndex() + 1);
+		}
+	}
+    public void previousBlock() {
+    	if(blocks_id.getSelectedIndex() > 0){
+			blocks_id.setSelectedIndex(blocks_id.getSelectedIndex() - 1);
+		}
+	}
 
 }// end abstact class View

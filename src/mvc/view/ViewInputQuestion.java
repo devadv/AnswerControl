@@ -102,15 +102,6 @@ public class ViewInputQuestion extends View
         }
     }
 
-    public void btnNext()
-    {
-    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
-    }
-
-    public void btnPrevious()
-    {
-    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
-    }
 
     public void blocksId()
     {
