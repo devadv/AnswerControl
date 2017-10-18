@@ -26,7 +26,7 @@ public class ViewInputQuestion extends View
 
 	public ViewInputQuestion(Model model, iCRUD controller)
     {
-		super(model, controller);
+		super(model, controller, "ViewInputQuestion");
 		setGUI();
 		questionField.setText(model.retrieveQuestion(getExcercise()));
 

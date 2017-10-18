@@ -14,15 +14,15 @@ import mvc.view.ViewInputAnswer;
 public class ControllerInputAnswer implements iCRUD{
 
 	private Model model;
-	private ViewInputAnswer view;
+	private ViewInputAnswer viewInputAnswer;
 
 	public ControllerInputAnswer(Model model) 
     {
 		this.model = model;
 		createDBConnection();
-		view = new ViewInputAnswer(model, this);
+		viewInputAnswer = new ViewInputAnswer(model, this);
 		
-		model.addObserver(view);
+		model.addObserver(viewInputAnswer);
 		
 	}
 
@@ -35,9 +35,9 @@ public class ControllerInputAnswer implements iCRUD{
 
 	@Override
 	public void create() {
-		System.out.println("Excercise : " + view.getExcercise());
-		System.out.println("Answer : " + view.getAnswer());
-		System.out.println("BlockID : " + view.getBlockID());
+		System.out.println("Excercise : " + viewInputAnswer.getExcercise());
+		System.out.println("Answer : " + viewInputAnswer.getAnswer());
+		System.out.println("BlockID : " + viewInputAnswer.getBlockID());
 		
 		
 	}
@@ -49,10 +49,10 @@ public class ControllerInputAnswer implements iCRUD{
 
 	@Override
 	public void update() {
-		System.out.println("Excercise : " + view.getExcercise());
-		System.out.println("Answer : " + view.getAnswer());
-		System.out.println("BlockID : " + view.getBlockID());
-		model.updateAnswer(view.getExcercise(), view.getAnswer(), view.getBlockID());
+		System.out.println("Excercise : " + viewInputAnswer.getExcercise());
+		System.out.println("Answer : " + viewInputAnswer.getAnswer());
+		System.out.println("BlockID : " + viewInputAnswer.getBlockID());
+		model.updateAnswer(viewInputAnswer.getExcercise(), viewInputAnswer.getAnswer(), viewInputAnswer.getBlockID());
 			
 	}
 

@@ -31,7 +31,7 @@ public class ViewUserAnswerCorrectAnswer extends View
 
     public ViewUserAnswerCorrectAnswer(Model model, iCRUD controller, View viewParent)
     {
-        super(model, controller);
+        super(model, controller, "ViewUserAnswerCorrectAnswer");
         this.viewParent = viewParent;
         this.model = model;
         this.controller = controller;

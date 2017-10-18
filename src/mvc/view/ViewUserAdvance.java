@@ -15,35 +15,35 @@ public class ViewUserAdvance extends View
 {
     public ViewUserAdvance(Model model, iCRUD controller)
     {
-        super(model, controller);
+        super(model, controller, "ViewInputQuestion");
         this.model = model;
         this.controller = controller;
         setGUI();
     }
-    
+
     public void setGUI()
     {
         String[] columnName = model.getColumnNames();
         Object[][] userAnswer = model.getUserProgress();
-        
+
         JFrame frame = new JFrame("User Advance");
         JPanel panel = new JPanel();
-        
+
         JTable userAdvance = new JTable(userAnswer, columnName);
-        
+
         JScrollPane scrollPane = new JScrollPane(userAdvance);
         userAdvance.setPreferredScrollableViewportSize(new Dimension(1550, 200));
         userAdvance.setFillsViewportHeight(true);
         userAdvance.setAutoResizeMode(0);
         panel.add(scrollPane);
-        
+
         frame.add(panel);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocation(300, 400);
         frame.setSize(1600, 500);
         frame.setVisible(true);
-        
+
     }
 
     @Override

@@ -28,7 +28,7 @@ public class ViewInputAnswerUser extends View
 
     public ViewInputAnswerUser(Model model, iCRUD controller)
     {
-        super(model, controller);
+        super(model, controller, "viewInputAnswerUser");
         this.model = model;
         this.controller = controller;
 
