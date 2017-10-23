@@ -15,7 +15,7 @@ public class ViewUserAdvance extends View
 {
     public ViewUserAdvance(Model model, iCRUD controller)
     {
-        super(model, controller, "ViewInputQuestion");
+        super(model, controller);
         this.model = model;
         this.controller = controller;
         setGUI();

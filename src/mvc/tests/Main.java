@@ -19,7 +19,7 @@ public class Main
         String name = System.getProperty("user.name");
         //name = "azego";
         System.out.println("user name: " + name);
-        JOptionPane.showMessageDialog(null, "name: " + name);
+        //JOptionPane.showMessageDialog(null, "name: " + name);
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
         ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);

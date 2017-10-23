@@ -24,16 +24,17 @@ public class ViewInputAnswerUser extends View
     private JTextArea userAnswerField;
     private iCRUD controller;
     private String exerciseNr = "";
+    private String oldExerciseNr = "";
     private int blockIdNr = 0;
 
     public ViewInputAnswerUser(Model model, iCRUD controller)
     {
-        super(model, controller, "viewInputAnswerUser");
+        super(model, controller);
         this.model = model;
         this.controller = controller;
 
         exerciseNr = getExcercise();
-
+        oldExerciseNr = getExcercise();
         setGUI();
         questionField.setText(model.retrieveQuestion(getExcercise()));
         userAnswerField.setText(model.retrieveAnswerUser(getExcercise(), controller.getUserName()));
@@ -106,6 +107,7 @@ public class ViewInputAnswerUser extends View
             btnNext.setEnabled(false);
         }
 
+        oldExerciseNr = exerciseNr;
         btnCheckAllAnswer_setEnabled();
     }
 
@@ -155,7 +157,6 @@ public class ViewInputAnswerUser extends View
     {
         if(model.blockNameExist(getBlockName(), controller.getUserName()));
         {
-         // ControllerUserAnswerCorrectAnswer view = new ControllerUserAnswerCorrectAnswer(model, controller.getUserName(),getBlockID());
         	new ViewUserAnswerCorrectAnswer(model, controller, this);
             this.setVisible(false);
         }
@@ -173,12 +174,12 @@ public class ViewInputAnswerUser extends View
             {
                 if(!model.userAnswerExist(exerciseNr, controller.getUserName()))// user answer doesn't exist
                 {
-                    model.createUserAnswer(userAnswerField.getText(), getExcercise(),
+                    model.createUserAnswer(userAnswerField.getText(), oldExerciseNr,
                     		controller.getUserName());
                 }
                 else
                 {
-                    model.updateUserAnswer(userAnswerField.getText(), getExcercise(),
+                    model.updateUserAnswer(userAnswerField.getText(), oldExerciseNr,
                     		controller.getUserName());
                 }
             }

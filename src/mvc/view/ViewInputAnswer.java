@@ -26,7 +26,7 @@ public class ViewInputAnswer extends View
 
 	public ViewInputAnswer(Model model, iCRUD controller)
     {
-		super(model, controller, "ViewInputAnswer");
+		super(model, controller);
 		this.model = model;
 		this.controller = controller;
 		setGUI();
@@ -164,7 +164,7 @@ public class ViewInputAnswer extends View
             answerField.setText(model.retrieveAnswer(exerciseNr));
     }
 
-     public void btnCheckAnswer()
+    public void btnCheckAnswer()
     {
 
     }

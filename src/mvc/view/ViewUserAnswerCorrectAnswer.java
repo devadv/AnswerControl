@@ -31,7 +31,7 @@ public class ViewUserAnswerCorrectAnswer extends View
 
     public ViewUserAnswerCorrectAnswer(Model model, iCRUD controller, View viewParent)
     {
-        super(model, controller, "ViewUserAnswerCorrectAnswer");
+        super(model, controller);
         this.viewParent = viewParent;
         this.model = model;
         this.controller = controller;
@@ -73,10 +73,11 @@ public class ViewUserAnswerCorrectAnswer extends View
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				viewParent.setVisible(true);
-				ViewUserAnswerCorrectAnswer.this.setVisible(false);
-
+				//ViewUserAnswerCorrectAnswer.this.setVisible(false);
+				ViewUserAnswerCorrectAnswer.this.dispose();
 			}
 		});
+
         labelBlock.setVisible(false);
         btnSave.setVisible(false);
         btnCheckAnswer.setVisible(false);
@@ -133,9 +134,12 @@ public class ViewUserAnswerCorrectAnswer extends View
     @Override
     public void btnNext()
     {
-    	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+    	if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount()){
+    		exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() + 1);
+    	}
     }
 
+    @Override
     public void btnPrevious()
     {
     	exercise_id.setSelectedIndex(exercise_id.getSelectedIndex() - 1);
@@ -169,10 +173,27 @@ public class ViewUserAnswerCorrectAnswer extends View
     @Override
     public void exerciseId()
     {
-        exerciseNr = viewParent.getExcercise();
+        exerciseNr = getExcercise();
         questionField.setText(model.retrieveQuestion(exerciseNr));
-        //userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
-        //correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
+        userAnswerField.setText(model.retrieveAnswerUser(exerciseNr, controller.getUserName()));
+        correctAnswerField.setText(model.retrieveAnswer(exerciseNr));
+        if(exercise_id.getSelectedIndex() == 0)
+        {
+            btnPrevious.setEnabled(false);
+        }
+        else if(exercise_id.getSelectedIndex() + 1 < exercise_id.getItemCount())
+        {
+            btnNext.setEnabled(true);
+            btnPrevious.setEnabled(true);
+        }
+        else if(exercise_id.getSelectedIndex() == exercise_id.getItemCount() - 1)
+        {
+            btnNext.setEnabled(false);
+            btnPrevious.setEnabled(true);
+        }
+
+        
+
     }
 
     @Override
@@ -182,7 +203,7 @@ public class ViewUserAnswerCorrectAnswer extends View
 
     @Override
     public void blocksId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override

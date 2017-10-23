@@ -22,8 +22,6 @@ import mvc.model.Model;
 
 public abstract class View extends JFrame implements iView, Observer
 {
-	private static char[] getclass;
-
 	protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
 
 	protected JButton btnSave = new JButton("Save");
@@ -50,7 +48,7 @@ public abstract class View extends JFrame implements iView, Observer
 
     protected JButton btnCheckAnswer;
 
-	public View(Model model,iCRUD controller, String nameOfSubclass )
+	public View(Model model,iCRUD controller )
     {
 		this.model = model;
 		this.controller = controller;
