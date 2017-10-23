@@ -9,7 +9,7 @@ import mvc.controller.ControllerInputQuestion;
 import mvc.controller.ControllerInputUserAnswer;
 import mvc.controller.ControllerUserAdvance;
 import mvc.model.Model;
-import mvc.view.ViewTest;
+import mvc.testview.ViewTest;
 
 public class Main
 {
@@ -25,7 +25,7 @@ public class Main
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
        // ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         //ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
-       // ViewTest viewTest = new ViewTest(model);
+         ViewTest viewTest = new ViewTest(model);
 
 
 //        Object[] setGUI = {"Input questions.", "Input answers."};

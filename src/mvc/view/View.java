@@ -116,7 +116,6 @@ public abstract class View extends JFrame implements iView, Observer
         panel.add(panelTop);
         panel.add(panelBottom);
 
-
 	}
 
     @Override
