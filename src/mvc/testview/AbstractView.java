@@ -3,6 +3,7 @@ package mvc.testview;
 import mvc.model.Model;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observer;
@@ -27,6 +28,8 @@ public abstract class AbstractView extends JFrame implements Observer {
     protected JPanel panelTop;
     /** Bottom panel to hold components */
     protected JPanel panelBottom;
+    protected Font textAreaFont;
+
     /** model */
 
 
@@ -34,28 +37,38 @@ public abstract class AbstractView extends JFrame implements Observer {
     public AbstractView(Model model){
         /** initialize model */
         this.model = model;
+        exercise = new JComboBox<>(model.getExerciseList(1));
     }
 
     public void setComponents(){
+        /** setup font */
+        textAreaFont = new Font("", Font.PLAIN, 13);
         /** initialize panels */
         panel = new JPanel();
         panelTitle = new JPanel();
         panelTop = new JPanel();
         panelBottom = new JPanel();
-        /** set actionlisteners*/
+        /** set actionlisteners to buttons*/
         btnNext.addActionListener(new NextButtonLister());
         btnPrevious.addActionListener(new PreviousButtonListener());
         /** combobox exercise */
         exercise = new JComboBox<>(model.getExerciseList(1));
+        /** layout managers */
+        panel.setLayout(new BorderLayout(5,5));//Borderlayout to main panel
+        panelBottom.setLayout(new GridLayout(1,2,5,5));
         /** add title to panel */
         panelTitle.add(title_course);
         /** add titlepanel to main panel*/
         panel.add(panelTitle);
-        /** add buttons to bottom panel*/
+        /** add execercise combobox to top panel */
+        panelTop.add(exercise);
+        /** add top panel to main panel */
+        panel.add(panelTop);
+        /** add buttons to bottom panel */
         panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
         /** add bottom panel to main panel*/
-        panel.add(panelBottom);
+        panel.add(panelBottom, BorderLayout.SOUTH);
         /** add main panel to frame */
         add(panel);
 

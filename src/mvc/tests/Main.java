@@ -17,6 +17,9 @@ public class Main
 	public static void main(String[] args)
     {
 		Model model = new Model();
+		model.createDBConnection();
+
+
         String name = System.getProperty("user.name");
         //name = "azego";
         System.out.println("user name: " + name);
