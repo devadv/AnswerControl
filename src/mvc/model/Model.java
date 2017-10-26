@@ -375,7 +375,7 @@ public class Model extends Observable implements iModel
 
         String[] exercise = arrayList.toArray(new String[arrayList.size()]);
 
-        //Arrays.sort(exercise);
+        //Arrays.sort(exerciseBox);
         String[] list = new String[exercise.length];
         int j = 0;
 

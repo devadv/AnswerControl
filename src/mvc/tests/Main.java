@@ -28,6 +28,7 @@ public class Main
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
        // ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         //ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
+
          ViewTest viewTest = new ViewTest(model);
 
 

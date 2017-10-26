@@ -3,7 +3,7 @@ package mvc.testview;
 import mvc.model.Model;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.util.Observable;
 
 public class ViewTest extends AbstractView {
@@ -27,7 +27,7 @@ public class ViewTest extends AbstractView {
         for (String s : ex_list){
             System.out.println(s);
         }
-        exercise.setModel(new DefaultComboBoxModel<>((model.getExerciseList(0))));
+        exerciseBox.setModel(new DefaultComboBoxModel<>(model.getExerciseList(1)));
         /*answerField = new JTextArea(25, 38);
         answerField.setLineWrap(true);
         answerField.setWrapStyleWord(true);
@@ -43,6 +43,27 @@ public class ViewTest extends AbstractView {
 
     @Override
     public void update(Observable o, Object arg) {
+
+    }
+
+    @Override
+    public void btnNext() {
+        super.btnNext();
+    }
+
+    @Override
+    public void btnPrevious() {
+        super.btnPrevious();
+    }
+
+    @Override
+    public void updateView(ItemEvent event) {
+        super.updateView(event);
+        System.out.println("paramString: "  + event.paramString());
+        if(event.getStateChange()==ItemEvent.DESELECTED){
+            System.out.println("DESELECTED item: " + event.getItem());
+        }
+        System.out.println("--------------------------------------");
 
     }
 }
