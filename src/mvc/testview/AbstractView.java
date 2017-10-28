@@ -19,6 +19,14 @@ public abstract class AbstractView extends JFrame implements Observer {
      * title label
      */
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
+    /**
+     * label for exercise
+     */
+    protected JLabel exercise_label = new JLabel("Exercise");
+    /**
+     * label for block
+     */
+    protected JLabel block_label = new JLabel("Block");
     /** default components */
     /**
      * button for next exerciseBox
@@ -29,7 +37,11 @@ public abstract class AbstractView extends JFrame implements Observer {
      */
     protected JButton btnPrevious = new JButton("Previous");
     /**
-     * combobox which holds exerciseBox number
+     * combobox which holds blocks
+     */
+    protected JComboBox<String> blockBox = new JComboBox<>();
+    /**
+     * combobox which holds exercise number
      */
     protected JComboBox<String> exerciseBox = new JComboBox<>();
     /**
@@ -48,17 +60,20 @@ public abstract class AbstractView extends JFrame implements Observer {
      * Bottom panel to hold components
      */
     protected JPanel panelBottom;
+
+    //todo javadoc on textareafont
     protected Font textAreaFont;
 
     /**
-     * model
+     * Constructor for abstract view class to intialize the model
+     *
+     * @param Model model
      */
-
 
     public AbstractView(Model model) {
         /** initialize model */
         this.model = model;
-        exerciseBox = new JComboBox<>(model.getExerciseList(1));
+
     }
 
     public void setComponents() {
@@ -72,8 +87,11 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** set actionlisteners to buttons*/
         btnNext.addActionListener(new NextButtonLister());
         btnPrevious.addActionListener(new PreviousButtonListener());
+        /** combobox blockBox */
+        blockBox = new JComboBox<>(model.getBlockList());
+        blockBox.addItemListener(new BlockBoxListener());
         /** combobox exerciseBox */
-        exerciseBox = new JComboBox<>(model.getExerciseList(1));
+        exerciseBox = new JComboBox<>(model.getExerciseList(blockBox.getSelectedIndex()));
         exerciseBox.addItemListener(new ExerciseBoxListener());
         /** layout managers */
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
@@ -81,8 +99,14 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** add title to panel */
         panelTitle.add(title_course);
         /** add titlepanel to main panel*/
-        panel.add(panelTitle);
-        /** add execercise combobox to top panel */
+        panel.add(panelTitle, BorderLayout.NORTH);
+        /** add label for block combobox to top panel */
+        panelTop.add(block_label);
+        /** add block combobox to top panel */
+        panelTop.add(blockBox);
+        /** add label for excercise combobox to top panel */
+        panelTop.add(exercise_label);
+        /** add excercise combobox to top panel */
         panelTop.add(exerciseBox);
         /** add top panel to main panel */
         panel.add(panelTop);
@@ -120,17 +144,19 @@ public abstract class AbstractView extends JFrame implements Observer {
         System.out.println("item changed to " + event.getItem());
     }
 
-    //TODO write javadoc
+    /**
+     * inner class for actionListener on the next button
+     */
     private class NextButtonLister implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             btnNext();
         }
-
-
     }
 
-    //TODO write javadoc
+    /**
+     * inner class for actionListener on the previous button
+     */
     private class PreviousButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -138,15 +164,27 @@ public abstract class AbstractView extends JFrame implements Observer {
         }
     }
 
-    //TODO write javadoc
+    /**
+     * inner class for itemlistener on the combobox exerciseBox
+     */
     private class ExerciseBoxListener implements ItemListener {
-
         @Override
         public void itemStateChanged(ItemEvent e) {
-
             updateView(e);
         }
     }
+
+    /**
+     * inner class for itemlistener on the combobox blockBox
+     */
+    private class BlockBoxListener implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            exerciseBox.setModel(new DefaultComboBoxModel<>(model.getExerciseList(blockBox.getSelectedIndex() + 1)));
+
+        }
+    }
+
 }
 
 
