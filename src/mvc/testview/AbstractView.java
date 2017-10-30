@@ -3,6 +3,9 @@ package mvc.testview;
 import mvc.model.Model;
 
 import javax.swing.*;
+
+import org.w3c.dom.events.Event;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,14 +14,17 @@ import java.awt.event.ItemListener;
 import java.util.Observer;
 
 public abstract class AbstractView extends JFrame implements Observer {
+
     /**
      * Model for access database
      */
     protected Model model;
+
     /**
      * title label
      */
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
+
     /**
      * label for exercise
      */
@@ -37,11 +43,11 @@ public abstract class AbstractView extends JFrame implements Observer {
      */
     protected JButton btnPrevious = new JButton("Previous");
     /**
-     * combobox which holds blocks
+     * JComboBox which holds blocks
      */
     protected JComboBox<String> blockBox = new JComboBox<>();
     /**
-     * combobox which holds exercise number
+     * JComboBox which holds exercise number
      */
     protected JComboBox<String> exerciseBox = new JComboBox<>();
     /**
@@ -61,11 +67,14 @@ public abstract class AbstractView extends JFrame implements Observer {
      */
     protected JPanel panelBottom;
 
-    //todo javadoc on textareafont
+    //todo javadoc on textAreaFont
     protected Font textAreaFont;
 
+    protected int lastBlockIndex;
+	protected int lastExerciseIndex;
+
     /**
-     * Constructor for abstract view class to intialize the model
+     * Constructor for abstract view class to initialize the model
      *
      * @param Model model
      */
@@ -84,6 +93,7 @@ public abstract class AbstractView extends JFrame implements Observer {
         panelTitle = new JPanel();
         panelTop = new JPanel();
         panelBottom = new JPanel();
+
         /** set actionlisteners to buttons*/
         btnNext.addActionListener(new NextButtonLister());
         btnPrevious.addActionListener(new PreviousButtonListener());
@@ -140,8 +150,9 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     }
 
-    public void updateView(ItemEvent event) {
-        System.out.println("item changed to " + event.getItem());
+    public void updateView(String listener) {
+
+
     }
 
     /**
@@ -170,7 +181,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     private class ExerciseBoxListener implements ItemListener {
         @Override
         public void itemStateChanged(ItemEvent e) {
-            updateView(e);
+            updateView("ExerciseBoxListener");
         }
     }
 
@@ -178,10 +189,24 @@ public abstract class AbstractView extends JFrame implements Observer {
      * inner class for itemlistener on the combobox blockBox
      */
     private class BlockBoxListener implements ItemListener {
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            exerciseBox.setModel(new DefaultComboBoxModel<>(model.getExerciseList(blockBox.getSelectedIndex() + 1)));
 
+		@Override
+        public void itemStateChanged(ItemEvent e) {
+        	lastBlockIndex = blockBox.getSelectedIndex();
+        	lastExerciseIndex = exerciseBox.getSelectedIndex();
+
+            exerciseBox.setModel(new DefaultComboBoxModel<>(
+            		model.getExerciseList(blockBox.getSelectedIndex() + 1)));
+
+            try{
+	            exerciseBox.setSelectedIndex(1);
+	            exerciseBox.setSelectedIndex(0);
+            }
+            catch (Exception exception) {
+            	exerciseBox.setSelectedIndex(0);
+			}
+
+			updateView("BlockBoxListener");
         }
     }
 

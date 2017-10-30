@@ -23,12 +23,10 @@ public class ViewTest extends AbstractView {
     @Override
     public void setComponents() {
         super.setComponents();
-        String []  ex_list = model.getExerciseList(1);
-        for (String s : ex_list){
-            System.out.println(s);
-        }
+
         exerciseBox.setModel(new DefaultComboBoxModel<>(model.getExerciseList(1)));
-        /*answerField = new JTextArea(25, 38);
+
+        answerField = new JTextArea(25, 38);
         answerField.setLineWrap(true);
         answerField.setWrapStyleWord(true);
         answerField.setFont(textAreaFont);
@@ -38,7 +36,7 @@ public class ViewTest extends AbstractView {
 
         JPanel panelAnswer = new JPanel();
         panelAnswer.add(jspAnswer);
-        panel.add(panelAnswer);*/
+        panel.add(panelAnswer);
     }
 
     @Override
@@ -57,13 +55,9 @@ public class ViewTest extends AbstractView {
     }
 
     @Override
-    public void updateView(ItemEvent event) {
-        super.updateView(event);
-        System.out.println("paramString: "  + event.paramString());
-        if(event.getStateChange()==ItemEvent.DESELECTED){
-            System.out.println("DESELECTED item: " + event.getItem());
-        }
-        System.out.println("--------------------------------------");
+    public void updateView(String listener) {
+
+        super.updateView(listener);
 
     }
 }

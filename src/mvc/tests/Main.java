@@ -26,10 +26,10 @@ public class Main
         //JOptionPane.showMessageDialog(null, "name: " + name);
 		//ControllerInputQuestion controllerInputQuestion = new ControllerInputQuestion(model);
 		//ControllerInputAnswer controllerInputAnswer = new ControllerInputAnswer(model);
-       // ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
+        //ControllerInputUserAnswer controllerInputUserAnswer = new ControllerInputUserAnswer(model, name);
         //ControllerUserAdvance controllerUserAdvance = new ControllerUserAdvance(model);
 
-         ViewTest viewTest = new ViewTest(model);
+        ViewTest viewTest = new ViewTest(model);
 
 
 //        Object[] setGUI = {"Input questions.", "Input answers."};
