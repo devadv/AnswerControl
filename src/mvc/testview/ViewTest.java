@@ -3,6 +3,8 @@ package mvc.testview;
 import mvc.model.Model;
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.util.Observable;
 
@@ -23,9 +25,7 @@ public class ViewTest extends AbstractView {
     @Override
     public void setComponents() {
         super.setComponents();
-
-        exerciseBox.setModel(new DefaultComboBoxModel<>(model.getExerciseList(1)));
-
+        
         answerField = new JTextArea(25, 38);
         answerField.setLineWrap(true);
         answerField.setWrapStyleWord(true);
@@ -36,12 +36,13 @@ public class ViewTest extends AbstractView {
 
         JPanel panelAnswer = new JPanel();
         panelAnswer.add(jspAnswer);
-        panel.add(panelAnswer);
+        panel.add(panelAnswer, BorderLayout.CENTER);
+        answerField.setText(model.retrieveQuestion(exerciseBox.getSelectedItem().toString()));
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
+    	updateView();
     }
 
     @Override
@@ -55,9 +56,8 @@ public class ViewTest extends AbstractView {
     }
 
     @Override
-    public void updateView(String listener) {
-
-        super.updateView(listener);
+    public void updateView() {
+    	answerField.setText(model.retrieveQuestion(exerciseBox.getSelectedItem().toString()));
 
     }
 }

@@ -15,63 +15,52 @@ import java.util.Observer;
 
 public abstract class AbstractView extends JFrame implements Observer {
 
-    /**
-     * Model for access database
-     */
+    /** Model for access database */
     protected Model model;
 
-    /**
-     * title label
-     */
+    /** label contains the title course: Programmeren in JAVA met BlueJ */
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
 
-    /**
-     * label for exercise
-     */
+    /** label for exercise */
     protected JLabel exercise_label = new JLabel("Exercise");
-    /**
-     * label for block
-     */
+
+    /** label for block */
     protected JLabel block_label = new JLabel("Block");
+
     /** default components */
-    /**
-     * button for next exerciseBox
-     */
+    /** button for next exerciseBox */
     protected JButton btnNext = new JButton("Next");
-    /**
-     * button for previous exerciseBox
-     */
+
+    /** button for previous exerciseBox */
     protected JButton btnPrevious = new JButton("Previous");
-    /**
-     * JComboBox which holds blocks
-     */
+
+    /** JComboBox which holds blocks */
     protected JComboBox<String> blockBox = new JComboBox<>();
-    /**
-     * JComboBox which holds exercise number
-     */
+
+    /** JComboBox which holds exercise number */
     protected JComboBox<String> exerciseBox = new JComboBox<>();
-    /**
-     * panel to hold panel
-     */
+
+    /** panel to hold panel */
     protected JPanel panel;
-    /**
-     * panel to hold title label
-     */
+
+    /** panel to hold titlelabel, labelblock, labelexcercise and comboboxes */
+    protected JPanel panelTitleAndTop;
+
+	/** panel to hold title label */
     protected JPanel panelTitle;
-    /**
-     * Top panel to hold components
-     */
+
+    /** Top panel to hold components */
     protected JPanel panelTop;
-    /**
-     * Bottom panel to hold components
-     */
+
+    /** Bottom panel to hold components */
     protected JPanel panelBottom;
 
     //todo javadoc on textAreaFont
     protected Font textAreaFont;
-
     protected int lastBlockIndex;
 	protected int lastExerciseIndex;
+	/** Text area to show question */
+	protected JTextArea questionTextArea;
 
     /**
      * Constructor for abstract view class to initialize the model
@@ -88,11 +77,13 @@ public abstract class AbstractView extends JFrame implements Observer {
     public void setComponents() {
         /** setup font */
         textAreaFont = new Font("", Font.PLAIN, 13);
+        questionTextArea = new JTextArea();
         /** initialize panels */
         panel = new JPanel();
         panelTitle = new JPanel();
         panelTop = new JPanel();
         panelBottom = new JPanel();
+        panelTitleAndTop = new JPanel();
 
         /** set actionlisteners to buttons*/
         btnNext.addActionListener(new NextButtonLister());
@@ -100,16 +91,25 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** combobox blockBox */
         blockBox = new JComboBox<>(model.getBlockList());
         blockBox.addItemListener(new BlockBoxListener());
+
+        /** set blockBox to the first index */
+        blockBox.setSelectedIndex(0);
         /** combobox exerciseBox */
-        exerciseBox = new JComboBox<>(model.getExerciseList(blockBox.getSelectedIndex()));
+        exerciseBox = new JComboBox<>(
+        		model.getExerciseList(blockBox.getSelectedIndex() + 1));
         exerciseBox.addItemListener(new ExerciseBoxListener());
+
         /** layout managers */
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
         panelBottom.setLayout(new GridLayout(1, 2, 5, 5));
+        panelTop.setLayout(new GridBagLayout());
+
+        panelTitleAndTop.setLayout(new BoxLayout(panelTitleAndTop, BoxLayout.Y_AXIS));
         /** add title to panel */
         panelTitle.add(title_course);
-        /** add titlepanel to main panel*/
-        panel.add(panelTitle, BorderLayout.NORTH);
+
+
+
         /** add label for block combobox to top panel */
         panelTop.add(block_label);
         /** add block combobox to top panel */
@@ -118,8 +118,14 @@ public abstract class AbstractView extends JFrame implements Observer {
         panelTop.add(exercise_label);
         /** add excercise combobox to top panel */
         panelTop.add(exerciseBox);
-        /** add top panel to main panel */
-        panel.add(panelTop);
+
+
+
+        /**  */
+        panelTitleAndTop.add(panelTitle);
+        panelTitleAndTop.add(panelTop);
+        panel.add(panelTitleAndTop, BorderLayout.NORTH);
+
         /** add buttons to bottom panel */
         panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
@@ -128,7 +134,11 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** add main panel to frame */
         add(panel);
 
-
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        panelTop.add(block_label);
     }
 
     //TODO write javadoc
@@ -150,9 +160,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     }
 
-    public void updateView(String listener) {
-
-
+    public void updateView() {
     }
 
     /**
@@ -181,7 +189,8 @@ public abstract class AbstractView extends JFrame implements Observer {
     private class ExerciseBoxListener implements ItemListener {
         @Override
         public void itemStateChanged(ItemEvent e) {
-            updateView("ExerciseBoxListener");
+            updateView();
+
         }
     }
 
@@ -205,9 +214,7 @@ public abstract class AbstractView extends JFrame implements Observer {
             catch (Exception exception) {
             	exerciseBox.setSelectedIndex(0);
 			}
-
-			updateView("BlockBoxListener");
-        }
+		}
     }
 
 }
