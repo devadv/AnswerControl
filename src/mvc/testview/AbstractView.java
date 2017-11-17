@@ -67,7 +67,6 @@ public abstract class AbstractView extends JFrame implements Observer {
      *
      * @param Model model
      */
-
     public AbstractView(Model model) {
         /** initialize model */
         this.model = model;

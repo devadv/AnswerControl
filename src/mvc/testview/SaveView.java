@@ -17,7 +17,6 @@ public abstract class SaveView extends AbstractView {
 
 	}
 
-
 	@Override
 	public void setComponents() {
 		super.setComponents();

@@ -9,7 +9,13 @@
       <w>390</w>
       <h>170</h>
     </coordinates>
-    <panel_attributes>/SaveView/</panel_attributes>
+    <panel_attributes>/SaveView/
+--
++btnSave
+--
++SaveView(Model model)
+--
++setComponents</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -18,7 +24,7 @@
       <x>440</x>
       <y>30</y>
       <w>280</w>
-      <h>250</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>ControllerSave</panel_attributes>
     <additional_attributes/>
@@ -31,7 +37,18 @@
       <w>390</w>
       <h>230</h>
     </coordinates>
-    <panel_attributes>/AbstractView/</panel_attributes>
+    <panel_attributes>/AbstractView/
+--
++btnNext
++btnPrevious
++updateView
++blockBox
++exerciesBox
+--
++AbstractView(Model model)
+--
++setComponents
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -40,7 +57,7 @@
       <x>750</x>
       <y>30</y>
       <w>270</w>
-      <h>250</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>Model</panel_attributes>
     <additional_attributes/>
