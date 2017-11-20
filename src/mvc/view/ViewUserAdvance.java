@@ -24,7 +24,7 @@ public class ViewUserAdvance extends View
     public void setGUI()
     {
         String[] columnName = model.getColumnNames();
-        Object[][] userAnswer = model.getUserProgress();
+        String[][] userAnswer = model.getUserProgress();
 
         JFrame frame = new JFrame("User Advance");
         JPanel panel = new JPanel();

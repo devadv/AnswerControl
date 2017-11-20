@@ -52,10 +52,13 @@ public class Model extends Observable implements iModel
 
 	}
 
-
+	/**
+	 * Returns an array of all users names and how many answers they have filled for each blok.
+	 * @return String[][] name, number
+	 */
     public String[][] getUserProgress()
     {
-        ArrayList<String> arrayList = new ArrayList();
+
         String[] userNames = getUserNames();
         String[] blockList = getBlockList();
         String[][] answers = new String[userNames.length][blockList.length + 1];

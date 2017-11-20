@@ -43,7 +43,7 @@ label block, combobox block, label exercise, combobox exercise</panel_attributes
       <w>560</w>
       <h>310</h>
     </coordinates>
-    <panel_attributes>panelTitleAndTop(north)</panel_attributes>
+    <panel_attributes>panelTitleAndTop(north) BoxLayout</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

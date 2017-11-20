@@ -22,10 +22,10 @@ public abstract class AbstractView extends JFrame implements Observer {
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
 
     /** label for exercise */
-    protected JLabel exercise_label = new JLabel("Exercise");
+    protected JLabel exercise_label = new JLabel("Exercise:");
 
     /** label for block */
-    protected JLabel block_label = new JLabel("Block");
+    protected JLabel block_label = new JLabel("Block:");
 
     /** default components */
     /** button for next exerciseBox */
@@ -76,11 +76,10 @@ public abstract class AbstractView extends JFrame implements Observer {
     public void setComponents() {
         /** setup font */
         textAreaFont = new Font("", Font.PLAIN, 13);
-        questionTextArea = new JTextArea();
+
         /** initialize panels */
         panel = new JPanel();
         panelTitle = new JPanel();
-        panelTop = new JPanel();
         panelBottom = new JPanel();
         panelTitleAndTop = new JPanel();
 
@@ -101,28 +100,13 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** layout managers */
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
         panelBottom.setLayout(new GridLayout(1, 2, 5, 5));
-        panelTop.setLayout(new GridBagLayout());
-
         panelTitleAndTop.setLayout(new BoxLayout(panelTitleAndTop, BoxLayout.Y_AXIS));
         /** add title to panel */
         panelTitle.add(title_course);
 
-
-
-        /** add label for block combobox to top panel */
-        panelTop.add(block_label);
-        /** add block combobox to top panel */
-        panelTop.add(blockBox);
-        /** add label for excercise combobox to top panel */
-        panelTop.add(exercise_label);
-        /** add excercise combobox to top panel */
-        panelTop.add(exerciseBox);
-
-
-
         /**  */
         panelTitleAndTop.add(panelTitle);
-        panelTitleAndTop.add(panelTop);
+        setPanelTop();
         panel.add(panelTitleAndTop, BorderLayout.NORTH);
 
         /** add buttons to bottom panel */
@@ -133,12 +117,58 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** add main panel to frame */
         add(panel);
 
-        GridBagConstraints c = new GridBagConstraints();
+
+    }
+
+    /**
+     * Make panel top which contains label and comboBox block, label and comboBox exercise
+     */
+    public void setPanelTop() {
+
+    	panelTop = new JPanel();
+    	panelTop.setLayout(new GridBagLayout());
+    	panelTitleAndTop.add(panelTop);
+
+    	GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 10);
+        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
-        panelTop.add(block_label);
-    }
+        panelTop.add(block_label, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 0);
+        c.gridwidth = 1;
+        c.gridx = 1;
+        c.gridy = 0;
+        panelTop.add(blockBox, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 30, 0, 10);
+        c.gridwidth = 1;
+        c.gridx = 2;
+        c.gridy = 0;
+        panelTop.add(exercise_label, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 0);
+        c.gridwidth = 1;
+        c.gridx = 3;
+        c.gridy = 0;
+        panelTop.add(exerciseBox, c);
+
+        questionTextArea = new JTextArea();
+        c.fill = GridBagConstraints.CENTER;
+        c.insets = new Insets( 20, 0, 0, 0);
+        c.ipady = 400;
+        c.ipadx = 400;
+        c.gridwidth = 4;
+        c.gridx = 0;
+        c.gridy = 1;
+        panelTop.add(questionTextArea, c);
+
+	}
 
     //TODO write javadoc
     public void btnNext() {
