@@ -101,11 +101,13 @@ public abstract class AbstractView extends JFrame implements Observer {
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
         panelBottom.setLayout(new GridLayout(1, 2, 5, 5));
         panelTitleAndTop.setLayout(new BoxLayout(panelTitleAndTop, BoxLayout.Y_AXIS));
+
         /** add title to panel */
         panelTitle.add(title_course);
 
         /**  */
         panelTitleAndTop.add(panelTitle);
+        /** make panel top  */
         setPanelTop();
         panel.add(panelTitleAndTop, BorderLayout.NORTH);
 
@@ -121,53 +123,52 @@ public abstract class AbstractView extends JFrame implements Observer {
     }
 
     /**
-     * Make panel top which contains label and comboBox block, label and comboBox exercise
+     * Make panel top which contains label and comboBox block, label, comboBox exercise and question textarea.
      */
     public void setPanelTop() {
 
     	panelTop = new JPanel();
     	panelTop.setLayout(new GridBagLayout());
-    	panelTitleAndTop.add(panelTop);
-
+    	
     	GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(0, 0, 0, 10);
+    	questionTextArea = new JTextArea(15,50);
+
+    	//c.fill = GridBagConstraints.HORIZONTAL;
+
+        c.insets = new Insets(10, 120, 0, 10);
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
         panelTop.add(block_label, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(0, 0, 0, 0);
+        c.insets = new Insets(10, 0, 0, 0);
         c.gridwidth = 1;
         c.gridx = 1;
         c.gridy = 0;
         panelTop.add(blockBox, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(0, 30, 0, 10);
+        c.insets = new Insets(10, 20, 0, 10);
         c.gridwidth = 1;
         c.gridx = 2;
         c.gridy = 0;
         panelTop.add(exercise_label, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(0, 0, 0, 0);
+        c.insets = new Insets(10, -175, 0, 0);
         c.gridwidth = 1;
         c.gridx = 3;
         c.gridy = 0;
         panelTop.add(exerciseBox, c);
 
-        questionTextArea = new JTextArea();
-        c.fill = GridBagConstraints.CENTER;
-        c.insets = new Insets( 20, 0, 0, 0);
-        c.ipady = 400;
-        c.ipadx = 400;
+        //c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(30, 0, 0, 0);
         c.gridwidth = 4;
+        c.gridheight = 0;
         c.gridx = 0;
         c.gridy = 1;
         panelTop.add(questionTextArea, c);
 
+
+        panelTitleAndTop.add(panelTop);
 	}
 
     //TODO write javadoc
