@@ -49,9 +49,6 @@ public abstract class AbstractView extends JFrame implements Observer {
 	/** panel to hold title label */
     protected JPanel panelTitle;
 
-    /** Top panel to hold components */
-    protected JPanel panelTop;
-
     /** Bottom panel to hold components */
     protected JPanel panelBottom;
 
@@ -61,6 +58,11 @@ public abstract class AbstractView extends JFrame implements Observer {
 	protected int lastExerciseIndex;
 	/** Text area to show question */
 	protected JTextArea questionTextArea;
+
+	private GridBagLayout layout;
+	private GridBagConstraints constraints;
+
+	JPanel panelTop = new JPanel(new GridBagLayout());
 
     /**
      * Constructor for abstract view class to initialize the model
@@ -126,49 +128,38 @@ public abstract class AbstractView extends JFrame implements Observer {
      * Make panel top which contains label and comboBox block, label, comboBox exercise and question textarea.
      */
     public void setPanelTop() {
+    	layout = new GridBagLayout();
+    	constraints = new GridBagConstraints();
+    	panelTop.setLayout(layout);
+    	constraints.fill = GridBagConstraints.BOTH;
 
-    	panelTop = new JPanel();
-    	panelTop.setLayout(new GridBagLayout());
-    	
-    	GridBagConstraints c = new GridBagConstraints();
-    	questionTextArea = new JTextArea(15,50);
-
-    	//c.fill = GridBagConstraints.HORIZONTAL;
-
-        c.insets = new Insets(10, 120, 0, 10);
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy = 0;
-        panelTop.add(block_label, c);
-
-        c.insets = new Insets(10, 0, 0, 0);
-        c.gridwidth = 1;
-        c.gridx = 1;
-        c.gridy = 0;
-        panelTop.add(blockBox, c);
-
-        c.insets = new Insets(10, 20, 0, 10);
-        c.gridwidth = 1;
-        c.gridx = 2;
-        c.gridy = 0;
-        panelTop.add(exercise_label, c);
-
-        c.insets = new Insets(10, -175, 0, 0);
-        c.gridwidth = 1;
-        c.gridx = 3;
-        c.gridy = 0;
-        panelTop.add(exerciseBox, c);
-
-        //c.fill = GridBagConstraints.BOTH;
-        c.insets = new Insets(30, 0, 0, 0);
-        c.gridwidth = 4;
-        c.gridheight = 0;
-        c.gridx = 0;
-        c.gridy = 1;
-        panelTop.add(questionTextArea, c);
+    	addComponent(block_label, 0, 0, 1, 1, 0, 0, 0, 0);
 
 
-        panelTitleAndTop.add(panelTop);
+    	panelTitleAndTop.add(panelTop);
+	}
+
+    /**
+     *
+     * @param component
+     * @param row
+     * @param column
+     * @param width
+     * @param height
+     * @param top
+     * @param left
+     * @param bottom
+     * @param right
+     */
+    private void addComponent(Component component, int row, int column, int width, int height,
+    		int top, int left, int bottom, int right) {
+    	constraints.gridx = column;
+    	constraints.gridy = row;
+    	constraints.gridwidth = width;
+    	constraints.gridheight = height;
+    	constraints.insets = new Insets(top, left, bottom, right);
+    	layout.setConstraints(component, constraints);
+    	panelTop.add(component);
 	}
 
     //TODO write javadoc
