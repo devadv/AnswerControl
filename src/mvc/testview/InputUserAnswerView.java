@@ -7,17 +7,25 @@ import javax.swing.JTextArea;
 import mvc.model.Model;
 
 public class InputUserAnswerView extends SaveView {
-	private JTextArea question;
+	
 	private JTextArea answer;
-
+	
 	public InputUserAnswerView(Model model) {
 		super(model);
-		// TODO Auto-generated constructor stub
+		setComponents();
+		answer = new JTextArea(20, 40);
+		panelBottom.add(answer);
 	}
 
 	@Override
+	public void setComponents() {
+		super.setComponents();
+	}
+	
+	
+	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+
 
 	}
 

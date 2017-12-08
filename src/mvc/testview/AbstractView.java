@@ -58,7 +58,9 @@ public abstract class AbstractView extends JFrame implements Observer {
 	protected int lastExerciseIndex;
 	/** Text area to show question */
 	protected JTextArea questionTextArea;
-
+	/** Text area to show answer user*/
+	protected JTextArea answerUser;
+	
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
 
@@ -76,8 +78,6 @@ public abstract class AbstractView extends JFrame implements Observer {
     }
 
     public void setComponents() {
-        /** setup font */
-        textAreaFont = new Font("", Font.PLAIN, 13);
 
         /** initialize panels */
         panel = new JPanel();
@@ -101,6 +101,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 
         /** layout managers */
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
+        this.setResizable(false);
         panelBottom.setLayout(new GridLayout(1, 2, 5, 5));
         panelTitleAndTop.setLayout(new BoxLayout(panelTitleAndTop, BoxLayout.Y_AXIS));
 
@@ -112,6 +113,10 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** make panel top  */
         setPanelTop();
         panel.add(panelTitleAndTop, BorderLayout.NORTH);
+        
+        /** add text area to bottom panel*/
+        answerUser = new JTextArea(20, 20);
+        //panelBottom.add(answerUser);
 
         /** add buttons to bottom panel */
         panelBottom.add(btnNext);
@@ -125,17 +130,27 @@ public abstract class AbstractView extends JFrame implements Observer {
     }
 
     /**
-     * Make panel top which contains label and comboBox block, label, comboBox exercise and question textarea.
+     * Make panel top which contains label, comboBox block, label, comboBox exercise and question textarea.
      */
     public void setPanelTop() {
     	layout = new GridBagLayout();
     	constraints = new GridBagConstraints();
     	panelTop.setLayout(layout);
+    	textAreaFont = new Font("", Font.PLAIN, 15);
     	constraints.fill = GridBagConstraints.BOTH;
+    	JTextArea questionTextArea = new JTextArea(10, 35);
+    	questionTextArea.setFont(textAreaFont);
+    	questionTextArea.setLineWrap(true);
+    	JScrollPane scrollPane = new JScrollPane(questionTextArea);
+    	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-    	addComponent(block_label, 0, 0, 1, 1, 0, 0, 0, 0);
-
-
+    	int column = 0;
+    	addComponent(block_label, 0, column++, 1, 1, 11, 120, 0, 0);
+    	addComponent(blockBox, 0, column++, 1, 1, 11, 10, 0, 0);
+    	addComponent(exercise_label, 0, column++, 1, 1, 11, 30, 0, 0);
+    	addComponent(exerciseBox, 0, column++, 1, 1, 11, 10, 0, 0);
+    	addComponent(scrollPane, 1, 0, 100, 100, 20, 0, 0, 0);
     	panelTitleAndTop.add(panelTop);
 	}
 
@@ -146,10 +161,10 @@ public abstract class AbstractView extends JFrame implements Observer {
      * @param column
      * @param width
      * @param height
-     * @param top
-     * @param left
-     * @param bottom
-     * @param right
+     * @param top sets the space on the top of the component
+     * @param left sets the space left side of the component
+     * @param bottom sets the space on the bottom of the component
+     * @param right sets the space rigth side of the component
      */
     private void addComponent(Component component, int row, int column, int width, int height,
     		int top, int left, int bottom, int right) {

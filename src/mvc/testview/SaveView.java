@@ -12,7 +12,6 @@ public abstract class SaveView extends AbstractView {
 
 	public SaveView(Model model) {
 		super(model);
-
 		setComponents();
 
 	}
