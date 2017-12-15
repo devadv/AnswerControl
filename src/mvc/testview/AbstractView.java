@@ -3,6 +3,7 @@ package mvc.testview;
 import mvc.model.Model;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import org.w3c.dom.events.Event;
 
@@ -51,6 +52,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     /** Bottom panel to hold components */
     protected JPanel panelBottom;
+    protected JPanel panelCenter;
 
     //todo javadoc on textAreaFont
     protected Font textAreaFont;
@@ -60,7 +62,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 	protected JTextArea questionTextArea;
 	/** Text area to show answer user*/
 	protected JTextArea answerUser;
-	
+
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
 
@@ -84,6 +86,7 @@ public abstract class AbstractView extends JFrame implements Observer {
         panelTitle = new JPanel();
         panelBottom = new JPanel();
         panelTitleAndTop = new JPanel();
+        panelCenter = new JPanel();
 
         /** set actionlisteners to buttons*/
         btnNext.addActionListener(new NextButtonLister());
@@ -103,6 +106,8 @@ public abstract class AbstractView extends JFrame implements Observer {
         panel.setLayout(new BorderLayout(5, 5));//Borderlayout to main panel
         this.setResizable(false);
         panelBottom.setLayout(new GridLayout(1, 2, 5, 5));
+        panelCenter.setLayout(new BorderLayout());
+
         panelTitleAndTop.setLayout(new BoxLayout(panelTitleAndTop, BoxLayout.Y_AXIS));
 
         /** add title to panel */
@@ -113,14 +118,14 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** make panel top  */
         setPanelTop();
         panel.add(panelTitleAndTop, BorderLayout.NORTH);
-        
+
         /** add text area to bottom panel*/
         answerUser = new JTextArea(20, 20);
-        //panelBottom.add(answerUser);
+        panel.add(panelCenter);
 
         /** add buttons to bottom panel */
-        panelBottom.add(btnNext);
-        panelBottom.add(btnPrevious);
+        panelBottom.add(btnNext, 0);
+        panelBottom.add(btnPrevious, 1);
         /** add bottom panel to main panel*/
         panel.add(panelBottom, BorderLayout.SOUTH);
         /** add main panel to frame */
