@@ -143,7 +143,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     	panelTop.setLayout(layout);
     	textAreaFont = new Font("", Font.PLAIN, 15);
     	constraints.fill = GridBagConstraints.BOTH;
-    	JTextArea questionTextArea = new JTextArea(10, 35);
+    	questionTextArea = new JTextArea(10, 35);
     	questionTextArea.setFont(textAreaFont);
     	questionTextArea.setLineWrap(true);
     	JScrollPane scrollPane = new JScrollPane(questionTextArea);
@@ -202,6 +202,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     }
 
     public void updateView() {
+    	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
     }
 
     /**
@@ -231,7 +232,6 @@ public abstract class AbstractView extends JFrame implements Observer {
         @Override
         public void itemStateChanged(ItemEvent e) {
             updateView();
-
         }
     }
 

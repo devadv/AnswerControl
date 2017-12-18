@@ -2,8 +2,11 @@ package mvc.testview;
 
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+
 import mvc.model.Model;
 
 public class InputUserAnswerView extends SaveView {
@@ -20,7 +23,9 @@ public class InputUserAnswerView extends SaveView {
 		JScrollPane scrollPane = new JScrollPane(answer);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
 		panelCenter.add(scrollPane);
+		updateView();
 	}
 
 

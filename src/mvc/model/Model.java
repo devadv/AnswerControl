@@ -522,7 +522,6 @@ public class Model extends Observable implements iModel
 
             return question;
         }
-
         return "";
 	}
 
