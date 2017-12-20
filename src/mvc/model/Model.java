@@ -291,12 +291,12 @@ public class Model extends Observable implements iModel
 
     }
 
-    public void updateUserAnswer(String answer, String exerciseNr, String name)
+    public void updateUserAnswer(String answer, String exerciseNr, String userName)
     {
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
-        int userId = getUserId(name);
+        int userId = getUserId(userName);
 
-        System.out.println("updateUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + userId + " name: " + name);
+        System.out.println("updateUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + userId + " name: " + userName);
 
         try
         {

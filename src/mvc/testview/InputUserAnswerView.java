@@ -22,13 +22,11 @@ public class InputUserAnswerView extends SaveView {
 		answer = new JTextArea(30, 40);
 		JScrollPane scrollPane = new JScrollPane(answer);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
 		panelCenter.add(scrollPane);
 		updateView();
 	}
-
-
 
 	@Override
 	public void update(Observable o, Object arg) {

@@ -189,7 +189,6 @@ public abstract class AbstractView extends JFrame implements Observer {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() + 1);
         }
 
-
     }
 
     //TODO write javadoc
@@ -203,6 +202,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     public void updateView() {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
+    	answerUser.setText(model.retrieveAnswerUser((String) exerciseBox.getSelectedItem(), System.getProperty("user.name")));
     }
 
     /**
@@ -234,6 +234,19 @@ public abstract class AbstractView extends JFrame implements Observer {
             updateView();
         }
     }
+
+    /**
+     * exercise number
+     * @return
+     * string value
+     */
+    public String getExerciseNr() {
+		return (String) exerciseBox.getSelectedItem();
+	}
+
+    public int getBlockId() {
+		return blockBox.getSelectedIndex() + 1;
+	}
 
     /**
      * inner class for itemlistener on the combobox blockBox
