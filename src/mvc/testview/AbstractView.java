@@ -60,8 +60,6 @@ public abstract class AbstractView extends JFrame implements Observer {
 	protected int lastExerciseIndex;
 	/** Text area to show question */
 	protected JTextArea questionTextArea;
-	/** Text area to show answer user*/
-	protected JTextArea answerUser;
 
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
@@ -119,8 +117,6 @@ public abstract class AbstractView extends JFrame implements Observer {
         setPanelTop();
         panel.add(panelTitleAndTop, BorderLayout.NORTH);
 
-        /** add text area to bottom panel*/
-        answerUser = new JTextArea(20, 20);
         panel.add(panelCenter);
 
         /** add buttons to bottom panel */
@@ -202,7 +198,6 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     public void updateView() {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
-    	answerUser.setText(model.retrieveAnswerUser((String) exerciseBox.getSelectedItem(), System.getProperty("user.name")));
     }
 
     /**
@@ -244,6 +239,11 @@ public abstract class AbstractView extends JFrame implements Observer {
 		return (String) exerciseBox.getSelectedItem();
 	}
 
+    /**
+     * block number
+     * @return
+     * int value
+     */
     public int getBlockId() {
 		return blockBox.getSelectedIndex() + 1;
 	}
@@ -271,7 +271,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 		}
     }
 
-}
+}// end class AbstractView
 
 
 

@@ -11,7 +11,7 @@ import mvc.model.Model;
 
 public class InputUserAnswerView extends SaveView {
 
-	private JTextArea answer;
+	public JTextArea answer;
 
 	public InputUserAnswerView(Model model) {
 		super(model);
@@ -29,10 +29,17 @@ public class InputUserAnswerView extends SaveView {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void updateView() {
+		super.updateView();
+		answer.setText(model.retrieveAnswerUser(String.valueOf(exerciseBox.getSelectedItem()),
+				System.getProperty("user.name")));
+	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		updateView();
 
 	}
 
 
-}
+}// end class InputUserAnswerView

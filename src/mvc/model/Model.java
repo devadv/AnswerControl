@@ -296,8 +296,6 @@ public class Model extends Observable implements iModel
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(userName);
 
-        System.out.println("updateUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + userId + " name: " + userName);
-
         try
         {
             PreparedStatement update = connection.prepareStatement
@@ -663,8 +661,8 @@ public class Model extends Observable implements iModel
              update.setString(2, exercise_nr);
              update.executeUpdate();
 
-		} catch (SQLException e)
-        {
+		} catch (SQLException e){
+
 		}
 
 		setChanged();

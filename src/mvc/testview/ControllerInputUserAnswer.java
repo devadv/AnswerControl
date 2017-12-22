@@ -16,17 +16,19 @@ public class ControllerInputUserAnswer implements ActionListener{
 		model.addObserver(view);
 		view.addSaveButtonListener(this);
 		userName = System.getProperty("user.name");
-		
+
 	}
 
 	// execute when save button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(model.userAnswerExist(view.getExerciseNr(), userName))
-			model.updateAnswer(view.getExerciseNr(), view.answerUser.getText(), view.getBlockId());
+		if(model.userAnswerExist(view.getExerciseNr(), userName)){
+			model.updateUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
+		}
 		else{
-			model.createUserAnswer(view.answerUser.getText(), view.getExerciseNr() , userName);
+			model.createUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
 		}
 	}
+
 
 } // end class ControllerInputUserAnswer
