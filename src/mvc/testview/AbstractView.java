@@ -87,7 +87,7 @@ public abstract class AbstractView extends JFrame implements Observer {
         panelCenter = new JPanel();
 
         /** set actionlisteners to buttons*/
-        btnNext.addActionListener(new NextButtonLister());
+        btnNext.addActionListener(new NextButtonListener());
         btnPrevious.addActionListener(new PreviousButtonListener());
         /** combobox blockBox */
         blockBox = new JComboBox<>(model.getBlockList());
@@ -120,8 +120,8 @@ public abstract class AbstractView extends JFrame implements Observer {
         panel.add(panelCenter);
 
         /** add buttons to bottom panel */
-        panelBottom.add(btnNext, 0);
-        panelBottom.add(btnPrevious, 1);
+        panelBottom.add(btnNext);
+        panelBottom.add(btnPrevious);
         /** add bottom panel to main panel*/
         panel.add(panelBottom, BorderLayout.SOUTH);
         /** add main panel to frame */
@@ -203,7 +203,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     /**
      * inner class for actionListener on the next button
      */
-    private class NextButtonLister implements ActionListener {
+    private class NextButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             btnNext();

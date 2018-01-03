@@ -8,7 +8,7 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 
 	public UserAnswerCorrectAnswerView(Model model) {
 		super(model);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override

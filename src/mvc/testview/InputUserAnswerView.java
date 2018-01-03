@@ -1,8 +1,11 @@
 package mvc.testview;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -12,6 +15,7 @@ import mvc.model.Model;
 public class InputUserAnswerView extends SaveView {
 
 	public JTextArea answer;
+	private JButton checkAnswer;
 
 	public InputUserAnswerView(Model model) {
 		super(model);
@@ -25,7 +29,20 @@ public class InputUserAnswerView extends SaveView {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
 		panelCenter.add(scrollPane);
+		checkAnswer = new JButton("Check answer");
+		checkAnswer.addActionListener(new checkAnswerListener());
+		panelBottom.add(checkAnswer);
 		updateView();
+	}
+
+	private class checkAnswerListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			UserAnswerCorrectAnswerView UACAV = new UserAnswerCorrectAnswerView(model);
+
+		}
+
 	}
 
 	@Override
