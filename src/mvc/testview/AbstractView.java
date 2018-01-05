@@ -74,7 +74,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     public AbstractView(Model model) {
         /** initialize model */
         this.model = model;
-
+        
     }
 
     public void setComponents() {
@@ -142,6 +142,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     	questionTextArea = new JTextArea(10, 35);
     	questionTextArea.setFont(textAreaFont);
     	questionTextArea.setLineWrap(true);
+    	questionTextArea.setEditable(false);
     	JScrollPane scrollPane = new JScrollPane(questionTextArea);
     	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

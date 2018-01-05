@@ -21,7 +21,7 @@ public class InputUserAnswerView extends SaveView {
 		super(model);
 		this.setTitle("Input user answer.");
         this.setSize(600, 800);
-        this.setLocation(800, 200);
+        this.setLocation(700, 150);
         this.setVisible(true);
 		answer = new JTextArea(30, 40);
 		JScrollPane scrollPane = new JScrollPane(answer);
@@ -39,7 +39,9 @@ public class InputUserAnswerView extends SaveView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			UserAnswerCorrectAnswerView UACAV = new UserAnswerCorrectAnswerView(model);
+			String blockId = String.valueOf(blockBox.getSelectedItem());
+			UserAnswerCorrectAnswerView userAnswerCorrectAnswerView = new UserAnswerCorrectAnswerView(model, blockId);
+			//InputUserAnswerView.this.setVisible(false);
 
 		}
 
