@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>40</y>
+      <x>110</x>
+      <y>100</y>
       <w>580</w>
-      <h>550</h>
+      <h>680</h>
     </coordinates>
     <panel_attributes>Panel</panel_attributes>
     <additional_attributes/>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>100</y>
+      <x>140</x>
+      <y>160</y>
       <w>520</w>
       <h>40</h>
     </coordinates>
@@ -26,46 +26,63 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>150</y>
+      <x>140</x>
+      <y>210</y>
       <w>520</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>panelTop
+
 label block, combobox block, label exercise, combobox exercise</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>70</y>
+      <x>120</x>
+      <y>130</y>
       <w>560</w>
       <h>310</h>
     </coordinates>
-    <panel_attributes>panelTitleAndTop(north) BoxLayout</panel_attributes>
+    <panel_attributes>panelTitleAndTop(north)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>460</y>
-      <w>550</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>panelBottom(south)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>290</x>
-      <y>210</y>
+      <x>160</x>
+      <y>280</y>
       <w>480</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>questionTextArea</panel_attributes>
+    <panel_attributes>questionTextArea
+fg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>660</y>
+      <w>550</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>panelBottom(south)
+
+button next, button previous</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>450</y>
+      <w>550</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>panelCenter
+
+answer  JTextArea</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

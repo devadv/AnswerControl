@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>0</y>
+      <w>580</w>
+      <h>750</h>
+    </coordinates>
+    <panel_attributes>Panel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>60</y>
+      <w>520</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>panelTitle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>110</y>
+      <w>520</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>panelTop
+label block, combobox block, label exercise, combobox exercise</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>30</y>
+      <w>560</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>panelTitleAndTop(north)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>660</y>
+      <w>560</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>panelBottom(south)
+button next, button previous</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>170</y>
+      <w>480</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>questionTextArea
+fg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>430</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>answer Label</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>430</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>correct answer Label</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>360</y>
+      <w>560</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>panel Center
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>470</y>
+      <w>220</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>answer  JTextarea</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>470</y>
+      <w>230</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>correct answer JTextArea</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>400</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>answer panel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>400</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>correctAnswer panel</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
