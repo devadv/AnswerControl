@@ -18,6 +18,12 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 	private JLabel answerLabel;
 	private JLabel correctAnswerLabel;
 
+	/**
+	 * constructor makes view with question, user answer and correct answer textArea
+	 * to check the user answer with correct answer.
+	 * @param model
+	 * @param blockId
+	 */
 	public UserAnswerCorrectAnswerView(Model model, String blockId) {
 
 		super(model);
@@ -30,10 +36,12 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 
 		JPanel answerPanel = new JPanel(new BorderLayout());
 		answerLabel = new JLabel("Your answer:");
-		answer = new JTextArea(30, 40);
+		answer = new JTextArea(30, 38);
 		answer.setLineWrap(true);
 		answer.setWrapStyleWord(true);
 		answer.setMargin(new Insets(5, 10, 0, 5));
+		answer.setCaretPosition(0);
+
 		JScrollPane scrollPane = new JScrollPane(answer);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -41,11 +49,14 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 		answerPanel.add(scrollPane, BorderLayout.CENTER);
 		answerPanel.add(answerLabel, BorderLayout.NORTH);
 
+
 		JPanel correctAnswerPanel = new JPanel(new BorderLayout());
 		correctAnswerLabel = new JLabel("Correct answer:");
-		correctAnswer = new JTextArea(30, 40);
+		correctAnswer = new JTextArea(30, 38);
 		correctAnswer.setLineWrap(true);
 		correctAnswer.setWrapStyleWord(true);
+		correctAnswer.setMargin(new Insets(5, 10, 0, 5));
+
 		JScrollPane scrollPane1 = new JScrollPane(correctAnswer);
 		scrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -57,22 +68,30 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 		panelCenter.add(correctAnswerPanel, BorderLayout.EAST);
 		setAnswerAndCorrectAnswer();
 		updateView();
-	}
 
+	}// end constructor UserAnswerCorrectAnswerView
 
-
+	/**
+	 * button next method
+	 */
 	@Override
 	public void btnNext() {
 		super.btnNext();
 		setAnswerAndCorrectAnswer();
 	}
 
+	/**
+	 * button previous method
+	 */
 	@Override
 	public void btnPrevious() {
 		super.btnPrevious();
 		setAnswerAndCorrectAnswer();
 	}
 
+	/**
+	 * method to set answer and correctAnswer textArea.
+	 */
 	public void setAnswerAndCorrectAnswer() {
 		answer.setText(model.retrieveAnswerUser(getExerciseNr(), System.getProperty("user.name")));
 		correctAnswer.setText(model.retrieveAnswer(getExerciseNr()));

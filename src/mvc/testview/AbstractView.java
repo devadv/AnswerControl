@@ -74,7 +74,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     public AbstractView(Model model) {
         /** initialize model */
         this.model = model;
-        
+
     }
 
     public void setComponents() {
@@ -120,8 +120,8 @@ public abstract class AbstractView extends JFrame implements Observer {
         panel.add(panelCenter);
 
         /** add buttons to bottom panel */
-        panelBottom.add(btnNext);
         panelBottom.add(btnPrevious);
+        panelBottom.add(btnNext);
         /** add bottom panel to main panel*/
         panel.add(panelBottom, BorderLayout.SOUTH);
         /** add main panel to frame */
@@ -179,27 +179,34 @@ public abstract class AbstractView extends JFrame implements Observer {
     	panelTop.add(component);
 	}
 
-    //TODO write javadoc
+    /**
+     * method sets exerciseBox to the next item
+     */
     public void btnNext() {
 
         if (exerciseBox.getSelectedIndex() < exerciseBox.getItemCount() - 1) {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() + 1);
         }
 
-    }
+    }// end method btnNext
 
-    //TODO write javadoc
+    /**
+     * method sets exerciseBox to the previous item
+     */
     public void btnPrevious() {
 
         if (exerciseBox.getSelectedIndex() > 0) {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() - 1);
         }
 
-    }
+    }// end method btnPrevious
 
+    /**
+     * method to fill questionTextArea
+     */
     public void updateView() {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
-    }
+    }// end method updateView
 
     /**
      * inner class for actionListener on the next button
@@ -209,7 +216,7 @@ public abstract class AbstractView extends JFrame implements Observer {
         public void actionPerformed(ActionEvent e) {
             btnNext();
         }
-    }
+    }// end class NextButtonListener
 
     /**
      * inner class for actionListener on the previous button
