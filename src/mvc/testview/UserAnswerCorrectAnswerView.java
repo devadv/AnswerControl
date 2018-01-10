@@ -2,6 +2,7 @@ package mvc.testview;
 
 import java.awt.BorderLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 	private JTextArea correctAnswer;
 	private JLabel answerLabel;
 	private JLabel correctAnswerLabel;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane1;
 
 	/**
 	 * constructor makes view with question, user answer and correct answer textArea
@@ -42,7 +45,7 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 		answer.setMargin(new Insets(5, 10, 0, 5));
 		answer.setCaretPosition(0);
 
-		JScrollPane scrollPane = new JScrollPane(answer);
+		scrollPane = new JScrollPane(answer);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		answerPanel.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
@@ -57,7 +60,7 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 		correctAnswer.setWrapStyleWord(true);
 		correctAnswer.setMargin(new Insets(5, 10, 0, 5));
 
-		JScrollPane scrollPane1 = new JScrollPane(correctAnswer);
+		scrollPane1 = new JScrollPane(correctAnswer);
 		scrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		correctAnswerPanel.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
@@ -74,10 +77,13 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 	/**
 	 * button next method
 	 */
+	int s;
 	@Override
 	public void btnNext() {
 		super.btnNext();
 		setAnswerAndCorrectAnswer();
+		answer.setCaretPosition(0);
+		correctAnswer.setCaretPosition(0);
 	}
 
 	/**
@@ -87,6 +93,8 @@ public class UserAnswerCorrectAnswerView extends AbstractView{
 	public void btnPrevious() {
 		super.btnPrevious();
 		setAnswerAndCorrectAnswer();
+		answer.setCaretPosition(0);
+		correctAnswer.setCaretPosition(0);
 	}
 
 	/**

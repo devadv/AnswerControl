@@ -180,7 +180,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 	}
 
     /**
-     * method sets exerciseBox to the next item
+     * sets exerciseBox to the next item
      */
     public void btnNext() {
 
@@ -191,7 +191,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     }// end method btnNext
 
     /**
-     * method sets exerciseBox to the previous item
+     * sets exerciseBox to the previous item
      */
     public void btnPrevious() {
 
@@ -202,11 +202,16 @@ public abstract class AbstractView extends JFrame implements Observer {
     }// end method btnPrevious
 
     /**
-     * method to fill questionTextArea
+     * to fill questionTextArea
      */
     public void updateView() {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
+    	questionTextArea.setCaretPosition(0);
     }// end method updateView
+    
+    public void setVisible() {
+		
+	}
 
     /**
      * inner class for actionListener on the next button

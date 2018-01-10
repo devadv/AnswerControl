@@ -21,7 +21,7 @@ public abstract class SaveView extends AbstractView {
 	}
 
 	/**
-	 * method sets components for this view and calls super class setComponent
+	 * sets components for this view and calls super class setComponent
 	 */
 	@Override
 	public void setComponents() {
@@ -31,7 +31,7 @@ public abstract class SaveView extends AbstractView {
 	}
 
 	/**
-	 * method add ActionListener to button save
+	 * add ActionListener to button save
 	 * @param actionListener
 	 */
 	public void addSaveButtonListener(ActionListener actionListener) {
