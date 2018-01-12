@@ -96,8 +96,7 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** set blockBox to the first index */
         blockBox.setSelectedIndex(0);
         /** combobox exerciseBox */
-        exerciseBox = new JComboBox<>(
-        		model.getExerciseList(blockBox.getSelectedIndex() + 1));
+        exerciseBox = new JComboBox<>(model.getExerciseList(blockBox.getSelectedIndex() + 1));
         exerciseBox.addItemListener(new ExerciseBoxListener());
 
         /** layout managers */
@@ -208,9 +207,9 @@ public abstract class AbstractView extends JFrame implements Observer {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
     	questionTextArea.setCaretPosition(0);
     }// end method updateView
-    
+
     public void setVisible() {
-		
+
 	}
 
     /**
@@ -253,12 +252,16 @@ public abstract class AbstractView extends JFrame implements Observer {
 	}
 
     /**
-     * block number
+     * block number = 1
      * @return
      * int value
      */
-    public int getBlockId() {
-		return blockBox.getSelectedIndex() + 1;
+    public String getBlockName() {
+		return String.valueOf(blockBox.getSelectedItem());
+	}
+
+    public String getUserName() {
+		return System.getProperty("user.name");
 	}
 
     /**

@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -32,6 +33,7 @@ public class InputUserAnswerView extends SaveView {
 		checkAnswer = new JButton("Check answer");
 		checkAnswer.addActionListener(new checkAnswerListener());
 		panelBottom.add(checkAnswer);
+		checkAnswer.setEnabled(false);
 		updateView();
 	}
 
@@ -40,25 +42,53 @@ public class InputUserAnswerView extends SaveView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String blockId = String.valueOf(blockBox.getSelectedItem());
-			UserAnswerCorrectAnswerView userAnswerCorrectAnswerView = new UserAnswerCorrectAnswerView(model, blockId);
+			UserAnswerCorrectAnswerView userAnswerCorrectAnswerView =
+					new UserAnswerCorrectAnswerView(model, blockId);
 			//InputUserAnswerView.this.setVisible(false);
 
 		}
 
 	}
 
+
 	@Override
 	public void updateView() {
 		super.updateView();
 		answer.setText(model.retrieveAnswerUser(String.valueOf(exerciseBox.getSelectedItem()),
-				System.getProperty("user.name")));
+				getUserName()));
+
+
+
+		if(model.allAnswersFilled(String.valueOf(getBlockName()), getUserName()) == exerciseBox.getItemCount()){
+			checkAnswer.setEnabled(true);
+		}
+		else{
+			checkAnswer.setEnabled(false);
+		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		updateView();
-
 	}
 
+	@Override
+	public void btnNext() {
+		if(model.userAnswerExist(getExerciseNr(), getUserName()) == false ||
+				model.retrieveAnswer(getExerciseNr()) != answer.getText()){
+			saveMessage();
+		}
+		super.btnNext();
+	}
+
+	@Override
+	public void btnPrevious() {
+
+		super.btnPrevious();
+	}
+
+	public void saveMessage() {
+		JOptionPane.showConfirmDialog(null, "Save", "Warning", JOptionPane.YES_NO_OPTION);
+	}
 
 }// end class InputUserAnswerView

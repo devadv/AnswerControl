@@ -183,6 +183,7 @@ public class Model extends Observable implements iModel
             + "WHERE username = ? "
             + "AND blockname = ? "
             + "AND user_answer.answer != '' "
+            + "AND user_answer.answer != ' ' "
             + "OR user_answer.answer != NULL "
          /*   + "AND EXISTS ( SELECT correct_answer.exercise_nr "
             + "FROM correct_answer "
