@@ -42,7 +42,7 @@ public class ViewInputQuestion extends View
         exerciseNr = getExcercise();
 
 
-        this.addWindowListener( new WindowClosingAdapter1());
+        this.addWindowListener( new WindowClosingAdapter());
         this.pack();
 		this.setTitle("Invoer vragen");
         this.setSize(600, 600);
@@ -182,7 +182,7 @@ public class ViewInputQuestion extends View
         return true;
     }
 
-    public class WindowClosingAdapter1 extends WindowAdapter
+    public class WindowClosingAdapter extends WindowAdapter
     {
         @Override
         public void windowClosing(WindowEvent we)

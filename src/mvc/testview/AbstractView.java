@@ -16,51 +16,23 @@ import java.util.Observer;
 
 public abstract class AbstractView extends JFrame implements Observer {
 
-    /** Model for access database */
     protected Model model;
-
-    /** label contains the title course: Programmeren in JAVA met BlueJ */
     protected JLabel title_course = new JLabel("Programmeren in JAVA met BlueJ");
-
-    /** label for exercise */
     protected JLabel exercise_label = new JLabel("Exercise:");
-
-    /** label for block */
     protected JLabel block_label = new JLabel("Block:");
-
-    /** default components */
-    /** button for next exerciseBox */
     protected JButton btnNext = new JButton("Next");
-
-    /** button for previous exerciseBox */
     protected JButton btnPrevious = new JButton("Previous");
-
-    /** JComboBox which holds blocks */
     protected JComboBox<String> blockBox = new JComboBox<>();
-
-    /** JComboBox which holds exercise number */
     protected JComboBox<String> exerciseBox = new JComboBox<>();
-
-    /** panel to hold panel */
     protected JPanel panel;
-
-    /** panel to hold titlelabel, labelblock, labelexcercise and comboboxes */
     protected JPanel panelTitleAndTop;
-
-	/** panel to hold title label */
     protected JPanel panelTitle;
-
-    /** Bottom panel to hold components */
     protected JPanel panelBottom;
     protected JPanel panelCenter;
-
-    //todo javadoc on textAreaFont
     protected Font textAreaFont;
     protected int lastBlockIndex;
 	protected int lastExerciseIndex;
-	/** Text area to show question */
 	protected JTextArea questionTextArea;
-
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
 
@@ -77,6 +49,9 @@ public abstract class AbstractView extends JFrame implements Observer {
 
     }
 
+    /**
+     * set default
+     */
     public void setComponents() {
 
         /** initialize panels */
@@ -126,7 +101,6 @@ public abstract class AbstractView extends JFrame implements Observer {
         /** add main panel to frame */
         add(panel);
 
-
     }
 
     /**
@@ -138,9 +112,11 @@ public abstract class AbstractView extends JFrame implements Observer {
     	panelTop.setLayout(layout);
     	textAreaFont = new Font("", Font.PLAIN, 15);
     	constraints.fill = GridBagConstraints.BOTH;
-    	questionTextArea = new JTextArea(10, 35);
+    	questionTextArea = new JTextArea(10, 34);
     	questionTextArea.setFont(textAreaFont);
     	questionTextArea.setLineWrap(true);
+    	questionTextArea.setMargin(new Insets(5, 10, 0, 10));
+    	questionTextArea.setWrapStyleWord(true);
     	questionTextArea.setEditable(false);
     	JScrollPane scrollPane = new JScrollPane(questionTextArea);
     	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -182,10 +158,10 @@ public abstract class AbstractView extends JFrame implements Observer {
      * sets exerciseBox to the next item
      */
     public void btnNext() {
-
         if (exerciseBox.getSelectedIndex() < exerciseBox.getItemCount() - 1) {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() + 1);
         }
+
 
     }// end method btnNext
 
@@ -193,7 +169,6 @@ public abstract class AbstractView extends JFrame implements Observer {
      * sets exerciseBox to the previous item
      */
     public void btnPrevious() {
-
         if (exerciseBox.getSelectedIndex() > 0) {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() - 1);
         }
@@ -201,7 +176,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     }// end method btnPrevious
 
     /**
-     * to fill questionTextArea
+     * Update view and set question textArea to current state
      */
     public void updateView() {
     	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));

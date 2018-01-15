@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>110</x>
-      <y>100</y>
+      <y>80</y>
       <w>580</w>
       <h>680</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>140</x>
-      <y>160</y>
+      <y>140</y>
       <w>520</w>
       <h>40</h>
     </coordinates>
@@ -27,9 +27,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>140</x>
-      <y>210</y>
+      <y>190</y>
       <w>520</w>
-      <h>180</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>panelTop
 
@@ -40,7 +40,7 @@ label block, combobox block, label exercise, combobox exercise</panel_attributes
     <id>UMLClass</id>
     <coordinates>
       <x>120</x>
-      <y>130</y>
+      <y>110</y>
       <w>560</w>
       <h>310</h>
     </coordinates>
@@ -51,7 +51,7 @@ label block, combobox block, label exercise, combobox exercise</panel_attributes
     <id>UMLClass</id>
     <coordinates>
       <x>160</x>
-      <y>280</y>
+      <y>260</y>
       <w>480</w>
       <h>90</h>
     </coordinates>
@@ -63,8 +63,8 @@ fg=black</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>120</x>
-      <y>660</y>
-      <w>550</w>
+      <y>640</y>
+      <w>560</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>panelBottom(south)
@@ -76,8 +76,8 @@ button next, button previous</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>120</x>
-      <y>450</y>
-      <w>550</w>
+      <y>430</y>
+      <w>560</w>
       <h>200</h>
     </coordinates>
     <panel_attributes>panelCenter
