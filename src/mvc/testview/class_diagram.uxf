@@ -70,30 +70,20 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>590</y>
+      <x>10</x>
+      <y>600</y>
       <w>170</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>InputQuestionView</panel_attributes>
+    <panel_attributes>InputQuestionView
+InputAnswerView</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>590</y>
-      <w>170</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>InputAnswerView</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>360</x>
-      <y>590</y>
+      <x>240</x>
+      <y>610</y>
       <w>170</w>
       <h>110</h>
     </coordinates>
@@ -119,35 +109,13 @@ textArea answer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
+      <x>80</x>
       <y>540</y>
       <w>30</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>240</x>
-      <y>540</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>380</x>
-      <y>460</y>
-      <w>90</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0;70.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -225,5 +193,16 @@ JScrollPane scrollpane
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>540</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
 </diagram>

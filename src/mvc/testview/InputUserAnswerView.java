@@ -98,24 +98,25 @@ public class InputUserAnswerView extends SaveView {
 	 */
 	public void saveMessage() {
 
-		if(model.userAnswerExist(getExerciseNr(), getUserName()) == false |
-				model.retrieveAnswerUser(getExerciseNr(), getUserName()).equals( answer.getText()) == false){
+		if(model.retrieveAnswerUser(getExerciseNr(), getUserName()).equals( answer.getText()) == false){
+			if(model.userAnswerExist(getExerciseNr(), getUserName()) == false){
 
-			// message to user
-			int option = JOptionPane.showConfirmDialog(null, "Save to database?", "Warning",
-					JOptionPane.YES_NO_OPTION);
-			if(option == 0){ // Yes button
-				if(model.userAnswerExist(getExerciseNr(), getUserName())){
-					// user answer exists
-					model.updateUserAnswer(answer.getText(), getExerciseNr(), getUserName());
+				// message to user
+				int option = JOptionPane.showConfirmDialog(null, "Save to database?", "Warning",
+						JOptionPane.YES_NO_OPTION);
+				if(option == 0){ // Yes button
+					if(model.userAnswerExist(getExerciseNr(), getUserName())){
+						// user answer exists
+						model.updateUserAnswer(answer.getText(), getExerciseNr(), getUserName());
+					}
+					else{
+						// make field in database
+						model.createUserAnswer(answer.getText(), getExerciseNr(), getExerciseNr());
+					}
 				}
-				else{
-					// make field in database
-					model.createUserAnswer(answer.getText(), getExerciseNr(), getExerciseNr());
+				else if(option == 1){ // No button
+					// Do nothing
 				}
-			}
-			else if(option == 1){ // No button
-				// Do nothing
 			}
 		}// end outer if
 	}// end method saveMessage

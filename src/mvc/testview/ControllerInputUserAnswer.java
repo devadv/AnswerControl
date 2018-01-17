@@ -9,6 +9,9 @@ public class ControllerInputUserAnswer implements ActionListener{
     private InputUserAnswerView view;
     private String userName;
 
+    /**
+     * Constructor to make the view to see the questions and user answers textAreas.
+     */
 	public ControllerInputUserAnswer() {
 		model = new Model();
 		model.createDBConnection();
@@ -16,7 +19,6 @@ public class ControllerInputUserAnswer implements ActionListener{
 		model.addObserver(view);
 		view.addSaveButtonListener(this);
 		userName = System.getProperty("user.name");
-
 	}
 
 	// execute when save button is clicked

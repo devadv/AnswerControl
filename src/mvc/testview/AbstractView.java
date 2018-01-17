@@ -236,7 +236,8 @@ public abstract class AbstractView extends JFrame implements Observer {
 	}
 
     public String getUserName() {
-		return System.getProperty("user.name");
+		//return System.getProperty("user.name");
+		return "azego";
 	}
 
     /**

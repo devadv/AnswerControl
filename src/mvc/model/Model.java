@@ -29,7 +29,7 @@ public class Model extends Observable implements iModel
 	@Override
 	public void createDBConnection()
     {
-        String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_test";
+        String DATABASEURL = "jdbc:mysql://sql.zz/badev_bluej_exercises_backup";
         String username = "badev_hintveld";
         String password = "V99r9R9qwMmYPcqU";
 /*		String DATABASEURL = "jdbc:mysql://localhost:3306/bluej_exercises";
@@ -76,10 +76,13 @@ public class Model extends Observable implements iModel
             j = 0;
         }
 
-
         return answers;
     }
 
+    /**
+     * Returns an array of all users names.
+     * @return String names[]
+     */
     public String[] getUserNames()
     {
         ArrayList<String> arrayList = new ArrayList<>();
