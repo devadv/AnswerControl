@@ -117,7 +117,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     	questionTextArea.setLineWrap(true);
     	questionTextArea.setMargin(new Insets(5, 10, 0, 10));
     	questionTextArea.setWrapStyleWord(true);
-    	questionTextArea.setEditable(false);
+    	//questionTextArea.setEditable(false);
     	JScrollPane scrollPane = new JScrollPane(questionTextArea);
     	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -218,7 +218,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     }
 
     /**
-     * exercise number
+     * Returns exercise number.
      * @return
      * string value
      */
@@ -227,7 +227,7 @@ public abstract class AbstractView extends JFrame implements Observer {
 	}
 
     /**
-     * block number = 1
+     * Returns block number.
      * @return
      * int value
      */
@@ -235,9 +235,17 @@ public abstract class AbstractView extends JFrame implements Observer {
 		return String.valueOf(blockBox.getSelectedItem());
 	}
 
+    /**
+     * Returns user name from the operating system.
+     * @return
+     */
     public String getUserName() {
 		//return System.getProperty("user.name");
 		return "azego";
+	}
+
+    public int getBlockNumber() {
+		return Integer.valueOf(blockBox.getSelectedIndex() + 1);
 	}
 
     /**

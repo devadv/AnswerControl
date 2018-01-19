@@ -18,10 +18,10 @@ public class ControllerInputUserAnswer implements ActionListener{
 		view = new InputUserAnswerView(model);
 		model.addObserver(view);
 		view.addSaveButtonListener(this);
-		userName = System.getProperty("user.name");
+		userName = view.getUserName();
 	}
 
-	// execute when save button is clicked
+	// Execute when save button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(model.userAnswerExist(view.getExerciseNr(), userName)){

@@ -269,8 +269,6 @@ public class Model extends Observable implements iModel
         int correctAnswerId = getIdCorrectAnswer(exerciseNr);
         int userId = getUserId(userName);
 
-        System.out.println("createUserAnswer correctAnswerId: " + correctAnswerId + " userId: " + " nuserName: " + userName);
-
         try
         {
             PreparedStatement create = connection.prepareStatement
@@ -294,6 +292,24 @@ public class Model extends Observable implements iModel
 		notifyObservers();
 
     }
+
+    /**
+     * Create new answer field in database.
+     * @param exerciseNr
+     * @param answer
+     * @param blockNr
+     */
+    public void createAnswer(String exerciseNr, String answer, String blockNr) {
+    	try{
+    		PreparedStatement create = connection.prepareStatement
+    				( ""
+    				);
+    	}
+    	catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Can not make an answer field in database.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     public void updateUserAnswer(String answer, String exerciseNr, String userName)
     {
