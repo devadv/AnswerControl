@@ -1,4 +1,4 @@
-package mvc.testview;
+package mvc.view;
 
 import java.awt.event.ActionListener;
 

@@ -1,62 +1,37 @@
-
 package mvc.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import mvc.model.Model;
-import mvc.view.ViewInputAnswerUser;
+import mvc.view.InputUserAnswerView;
 
-public class ControllerInputUserAnswer implements iCRUD
-{
+public class ControllerInputUserAnswer implements ActionListener{
     private Model model;
-    private ViewInputAnswerUser view;
+    private InputUserAnswerView view;
     private String userName;
-    
-    public ControllerInputUserAnswer(Model model, String name)
-    {
-        this.model = model;
-        createDBConnection();
-        userName = name;
-        view = new ViewInputAnswerUser(model, this) {};
-        model.addObserver(view);
-        
-        if(!model.userNameExist(name))
-        {
-            model.saveUserName(name);
-        } 
-    }
-    
-    public String getUserName()
-    {
-        return userName;
-    }
 
-    @Override
-    public void createDBConnection() 
-    {
-        model.createDBConnection();
-    }
+    /**
+     * Constructor to make the view to see the questions and user answers textAreas.
+     */
+	public ControllerInputUserAnswer() {
+		model = new Model();
+		model.createDBConnection();
+		view = new InputUserAnswerView(model);
+		model.addObserver(view);
+		view.addSaveButtonListener(this);
+		userName = view.getUserName();
+	}
 
-    @Override
-    public void create() 
-    {
-        model.createUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
-    }
+	// Execute when save button is clicked
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(model.userAnswerExist(view.getExerciseNr(), userName)){
+			model.updateUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
+		}
+		else{
+			model.createUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
+		}
+	}
 
-    @Override
-    public void retrieve() 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public void update() 
-    {
-        model.updateUserAnswer(view.getExcercise(), view.getUserAnswer(), userName);
-    }
-
-    @Override
-    public void delete() 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
+} // end class ControllerInputUserAnswer

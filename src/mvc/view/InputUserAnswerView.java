@@ -1,4 +1,4 @@
-package mvc.testview;
+package mvc.view;
 
 import java.awt.Font;
 import java.awt.Insets;
@@ -27,7 +27,7 @@ public class InputUserAnswerView extends SaveView {
         this.setLocation(700, 150);
         this.setVisible(true);
 
-        questionTextArea.setEditable(false);
+        getQuestionTextArea().setEditable(false);
         answer = new JTextArea(10, 35);
         answer.setFont(textAreaFont);
 		answer.setMargin(new Insets(5, 10, 0, 10));

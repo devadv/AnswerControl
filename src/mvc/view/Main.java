@@ -1,4 +1,6 @@
-package mvc.testview;
+package mvc.view;
+
+import mvc.controller.ControllerInputQuestionAnswerView;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package mvc.testview;
+package mvc.view;
 
 import java.awt.Insets;
 import java.util.Observable;
@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import mvc.model.Model;
 
 public class InputQuestionAnswerView extends SaveView {
-	protected JTextArea answer;
+	private JTextArea answer;
 
 	/**
 	 * Constructor to make view to input question and aswer.
@@ -23,12 +23,12 @@ public class InputQuestionAnswerView extends SaveView {
         this.setSize(600, 800);
         this.setLocation(600, 170);
         this.setVisible(true);
-        answer = new JTextArea(10, 37);
-        answer.setFont(textAreaFont);
-        answer.setMargin(new Insets(5, 10, 0, 10));
-        answer.setLineWrap(true);
-        answer.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(answer);
+        setAnswer(new JTextArea(10, 37));
+        getAnswer().setFont(textAreaFont);
+        getAnswer().setMargin(new Insets(5, 10, 0, 10));
+        getAnswer().setLineWrap(true);
+        getAnswer().setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(getAnswer());
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 34, 10, 34) );
@@ -40,8 +40,8 @@ public class InputQuestionAnswerView extends SaveView {
 	public void updateView() {
 		super.updateView();
 		
-		answer.setText(model.retrieveAnswer(getExerciseNr()));
-		answer.setCaretPosition(0);
+		getAnswer().setText(model.retrieveAnswer(getExerciseNr()));
+		getAnswer().setCaretPosition(0);
 		
 	}
 
@@ -53,6 +53,16 @@ public class InputQuestionAnswerView extends SaveView {
 	public void update(Observable o, Object arg) {
 		updateView();
 
+	}
+
+
+	public JTextArea getAnswer() {
+		return answer;
+	}
+
+
+	public void setAnswer(JTextArea answer) {
+		this.answer = answer;
 	}
 
 }
