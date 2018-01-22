@@ -35,7 +35,7 @@ public class InputUserAnswerView extends SaveView {
 		JScrollPane scrollPane = new JScrollPane(answer);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
+		panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 33, 10, 34));
 		panelCenter.add(scrollPane);
 		checkAnswer = new JButton("Check answer");
 		checkAnswer.addActionListener(new checkAnswerListener());
@@ -123,7 +123,7 @@ public class InputUserAnswerView extends SaveView {
 	}// end method saveMessage
 
 	/**
-	 * Inner class for if window is closing
+	 * Inner class if window is closing
 	 * @author hintveld
 	 *
 	 */

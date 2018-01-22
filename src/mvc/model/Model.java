@@ -299,7 +299,7 @@ public class Model extends Observable implements iModel
      * @param answer
      * @param blockNr
      */
-    public void createAnswer(String exerciseNr, String answer, String blockNr) {
+    public void createAnswer(String exerciseNr, String answer, int blockNr) {
     	try{
     		PreparedStatement create = connection.prepareStatement
     				( ""
@@ -309,7 +309,8 @@ public class Model extends Observable implements iModel
 			JOptionPane.showMessageDialog(null, "Can not make an answer field in database.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
-	}
+	}// end method createAnswer
+
 
     public void updateUserAnswer(String answer, String exerciseNr, String userName)
     {
@@ -636,10 +637,6 @@ public class Model extends Observable implements iModel
 
 	@Override
 	public void updateQuestion(String exercise_nr, String question, int block_id) {
-		/*
-        String sql = "UPDATE correct_answer SET question = '" + question + "',"
-                + "creation_date = CURRENT_TIMESTAMP WHERE exercise_nr = '" + exercise_nr + "'";
-        */
 
 		try
         {

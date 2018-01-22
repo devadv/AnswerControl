@@ -3,12 +3,15 @@ package mvc.testview;
 import java.awt.Insets;
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import mvc.model.Model;
 
 public class InputQuestionAnswerView extends SaveView {
-	private JTextArea answer;
+	protected JTextArea answer;
 
 	/**
 	 * Constructor to make view to input question and aswer.
@@ -20,11 +23,26 @@ public class InputQuestionAnswerView extends SaveView {
         this.setSize(600, 800);
         this.setLocation(600, 170);
         this.setVisible(true);
-        this.answer = new JTextArea();
+        answer = new JTextArea(10, 37);
         answer.setFont(textAreaFont);
         answer.setMargin(new Insets(5, 10, 0, 10));
         answer.setLineWrap(true);
-        panelCenter.add(answer);
+        answer.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(answer);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panelCenter.setBorder(BorderFactory.createEmptyBorder(10, 34, 10, 34) );
+        panelCenter.add(scrollPane);
+        updateView();
+	}// end constructor InputQuestionAnswerView
+
+
+	public void updateView() {
+		super.updateView();
+		
+		answer.setText(model.retrieveAnswer(getExerciseNr()));
+		answer.setCaretPosition(0);
+		
 	}
 
 

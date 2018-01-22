@@ -240,8 +240,8 @@ public abstract class AbstractView extends JFrame implements Observer {
      * @return
      */
     public String getUserName() {
-		//return System.getProperty("user.name");
-		return "azego";
+		return System.getProperty("user.name");
+		//return "azego";
 	}
 
     public int getBlockNumber() {

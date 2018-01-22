@@ -2,7 +2,6 @@ package mvc.testview;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import mvc.model.Model;
 
 public class ControllerInputQuestionAnswerView implements ActionListener{
@@ -24,20 +23,26 @@ public class ControllerInputQuestionAnswerView implements ActionListener{
 	// Execute when save button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if(model.questionExist(view.getExerciseNr()) == true){
-			model.updateQuestion(view.getExerciseNr(), view.questionTextArea.getText(), view.getBlockNumber());
+		
+		if(model.questionExist(view.getExerciseNr())){
+			if(model.retrieveQuestion(view.getExerciseNr()).equals(view.questionTextArea.getText()) == false){
+				model.updateQuestion(view.getExerciseNr(), view.questionTextArea.getText(), view.getBlockNumber());			
+			}
 		}
 		else{
 			model.createQuestion(view.getExerciseNr(), view.questionTextArea.getText(), view.getBlockNumber());
 		}
-
-		if(model.answerExist(view.getExerciseNr())){
-			model.updateAnswer(view.getExerciseNr(), "TODO", view.getBlockNumber());
+		
+			
+		if(model.retrieveAnswer(view.getExerciseNr()).equals(view.answer.getText()) == false){
+			model.updateAnswer(view.getExerciseNr(), view.answer.getText(), view.getBlockNumber());
 		}
 		else{
-			model.createAnswer(view.getExerciseNr(), "TODO", view.getBlockName());
+			model.createAnswer(view.getExerciseNr(), view.answer.getText(), view.getBlockNumber());
 		}
+
+		
+
 	}// end method actionPerformed
 
 }// end class ControllerInputQuestionAnswerView
