@@ -1,4 +1,4 @@
-package mvc.testview;
+package mvc.view;
 
 import mvc.model.Model;
 
@@ -32,7 +32,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     protected Font textAreaFont;
     protected int lastBlockIndex;
 	protected int lastExerciseIndex;
-	protected JTextArea questionTextArea;
+	private JTextArea questionTextArea;
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
 
@@ -112,13 +112,13 @@ public abstract class AbstractView extends JFrame implements Observer {
     	panelTop.setLayout(layout);
     	textAreaFont = new Font("", Font.PLAIN, 15);
     	constraints.fill = GridBagConstraints.BOTH;
-    	questionTextArea = new JTextArea(10, 34);
-    	questionTextArea.setFont(textAreaFont);
-    	questionTextArea.setLineWrap(true);
-    	questionTextArea.setMargin(new Insets(5, 10, 0, 10));
-    	questionTextArea.setWrapStyleWord(true);
+    	setQuestionTextArea(new JTextArea(10, 34));
+    	getQuestionTextArea().setFont(textAreaFont);
+    	getQuestionTextArea().setLineWrap(true);
+    	getQuestionTextArea().setMargin(new Insets(5, 10, 0, 10));
+    	getQuestionTextArea().setWrapStyleWord(true);
     	//questionTextArea.setEditable(false);
-    	JScrollPane scrollPane = new JScrollPane(questionTextArea);
+    	JScrollPane scrollPane = new JScrollPane(getQuestionTextArea());
     	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -179,8 +179,8 @@ public abstract class AbstractView extends JFrame implements Observer {
      * Update view and set question textArea to current state
      */
     public void updateView() {
-    	questionTextArea.setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
-    	questionTextArea.setCaretPosition(0);
+    	getQuestionTextArea().setText(model.retrieveQuestion(String.valueOf(exerciseBox.getSelectedItem())));
+    	getQuestionTextArea().setCaretPosition(0);
     }// end method updateView
 
     public void setVisible() {
@@ -248,7 +248,15 @@ public abstract class AbstractView extends JFrame implements Observer {
 		return Integer.valueOf(blockBox.getSelectedIndex() + 1);
 	}
 
-    /**
+    public JTextArea getQuestionTextArea() {
+		return questionTextArea;
+	}
+
+	public void setQuestionTextArea(JTextArea questionTextArea) {
+		this.questionTextArea = questionTextArea;
+	}
+
+	/**
      * inner class for itemlistener on the combobox blockBox
      */
     private class BlockBoxListener implements ItemListener {
