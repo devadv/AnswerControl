@@ -294,21 +294,32 @@ public class Model extends Observable implements iModel
     }
 
     /**
-     * Create new answer field in database.
+     * Create new correct answer field in database.
      * @param exerciseNr
      * @param answer
      * @param blockNr
      */
     public void createAnswer(String exerciseNr, String answer, int blockNr) {
+
+    	int correctAnswerId = getIdCorrectAnswer(exerciseNr);
+
     	try{
     		PreparedStatement create = connection.prepareStatement
-    				( ""
+    				( "INSERT INTO correct_answer "
+    				+ "(correct_answerid "
+    				+ ",answer) "
+    				+ "VALUES( ?, ? )"
     				);
+    		create.setInt(1, correctAnswerId);
+    		create.setString(2, answer);
+    		create.execute();
     	}
     	catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Can not make an answer field in database.", "Error",
+			JOptionPane.showMessageDialog(null, "Can't make an answer field in database.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		}
+		}// end try catch
+    	setChanged();
+    	notifyObservers();
 	}// end method createAnswer
 
 

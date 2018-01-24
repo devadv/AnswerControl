@@ -1,41 +1,29 @@
 package mvc.model;
 
 public interface iModel {
-	
-	
+
 	//db connection
 	void createDBConnection();
-		
+
 	//CRUD Question
 	void createQuestion(String exercise_nr, String question, int block_id);
-	
+
 	String retrieveQuestion(String exercise_nr);
-	
+
 	void updateQuestion(String exercise_nr, String question, int block_id);
-	
+
 	void deactivateQuestion(String exercise_nr);
-    
+
     void resetDeactivateDate();
-	
-	//tools Question
-	
-	
-	//CRUD Answer
-	
-	
+
 	String retrieveAnswer(String exercise_nr);
-	
+
 	void updateAnswer(String exercise_nr, String answer, int block_id);
-	
+
 	void deleteAnswer();
-	
+
 	//tools Answer
-	
+
 	boolean answerExist(String exercise_nr);
 
-	
-	
-
-	
-	
 }

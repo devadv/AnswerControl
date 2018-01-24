@@ -248,10 +248,18 @@ public abstract class AbstractView extends JFrame implements Observer {
 		return Integer.valueOf(blockBox.getSelectedIndex() + 1);
 	}
 
+    /**
+     *
+     * @return question.
+     */
     public JTextArea getQuestionTextArea() {
 		return questionTextArea;
 	}
 
+    /**
+     *
+     * @param questionTextArea
+     */
 	public void setQuestionTextArea(JTextArea questionTextArea) {
 		this.questionTextArea = questionTextArea;
 	}
