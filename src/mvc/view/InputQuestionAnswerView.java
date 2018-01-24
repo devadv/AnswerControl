@@ -19,7 +19,7 @@ public class InputQuestionAnswerView extends SaveView {
 	 */
 	public InputQuestionAnswerView(Model model) {
 		super(model);
-        this.setTitle("TestView");
+        this.setTitle("BlueJ version 3.4. Input question and answer.");
         this.setSize(600, 800);
         this.setLocation(600, 170);
         this.setVisible(true);
