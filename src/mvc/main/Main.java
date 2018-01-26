@@ -1,6 +1,6 @@
 package mvc.main;
 
-import mvc.controller.ControllerInputQuestionAnswerView;
+import mvc.controller.ControllerInputQuestionAnswer;
 import mvc.controller.ControllerInputUserAnswer;
 import mvc.controller.ControllerSave;
 

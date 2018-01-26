@@ -8,7 +8,7 @@ import mvc.model.Model;
 
 public abstract class SaveView extends AbstractView {
 
-	private JButton btnSave;
+	public JButton btnSave;
 
 	/**
 	 * constructor SaveView
@@ -37,5 +37,6 @@ public abstract class SaveView extends AbstractView {
 	public void addSaveButtonListener(ActionListener actionListener) {
 		btnSave.addActionListener(actionListener);
 	}
+
 
 }

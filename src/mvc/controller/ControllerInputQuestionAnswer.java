@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import mvc.model.Model;
 import mvc.view.InputQuestionAnswerView;
 
-public class ControllerInputQuestionAnswerView implements ActionListener{
+public class ControllerInputQuestionAnswer implements ActionListener{
 	private Model model;
 	private InputQuestionAnswerView view;
 
 	/**
 	 * Constructor to make the view for input questions and answers.
 	 */
-	public ControllerInputQuestionAnswerView(){
+	public ControllerInputQuestionAnswer(){
 		model = new Model();
 		model.createDBConnection();
 		view = new InputQuestionAnswerView(model);

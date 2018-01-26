@@ -4,7 +4,6 @@ import java.awt.Insets;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -39,10 +38,10 @@ public class InputQuestionAnswerView extends SaveView {
 
 	public void updateView() {
 		super.updateView();
-		
+
 		getAnswer().setText(model.retrieveAnswer(getExerciseNr()));
 		getAnswer().setCaretPosition(0);
-		
+
 	}
 
 

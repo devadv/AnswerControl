@@ -13,19 +13,23 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import mvc.controller.ControllerInputUserAnswer;
 import mvc.model.Model;
 
 public class InputUserAnswerView extends SaveView {
 
 	public JTextArea answer;
 	private JButton checkAnswer;
+	private ControllerInputUserAnswer controllerInputUserAnswer;
 
-	public InputUserAnswerView(Model model) {
+	public InputUserAnswerView(Model model, ControllerInputUserAnswer controllerInputUserAnswer) {
 		super(model);
 		this.setTitle("Input user answer.");
         this.setSize(600, 800);
         this.setLocation(700, 150);
         this.setVisible(true);
+        this.controllerInputUserAnswer = controllerInputUserAnswer;
 
         getQuestionTextArea().setEditable(false);
         answer = new JTextArea(10, 35);
@@ -78,13 +82,19 @@ public class InputUserAnswerView extends SaveView {
 
 	@Override
 	public void btnNext() {
-		saveMessage(); // check if text has been changed
+		// check if text has been changed
+		controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
+				model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
 		super.btnNext();
 	}
 
+
+
 	@Override
 	public void btnPrevious() {
-		saveMessage();// check if text has been changed
+		// check if text has been changed
+		controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
+				model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
 		super.btnPrevious();
 	}
 
@@ -94,44 +104,17 @@ public class InputUserAnswerView extends SaveView {
 	}
 
 	/**
-	 * Check if text is changed or doesn't exist in database
-	 * and ask user to save it.
-	 */
-	public void saveMessage() {
-
-		if(model.retrieveAnswerUser(getExerciseNr(), getUserName()).equals( answer.getText()) == false){
-			if(model.userAnswerExist(getExerciseNr(), getUserName()) == false){
-
-				// message to user
-				int option = JOptionPane.showConfirmDialog(null, "Save to database?", "Warning",
-						JOptionPane.YES_NO_OPTION);
-				if(option == 0){ // Yes button
-					if(model.userAnswerExist(getExerciseNr(), getUserName())){
-						// user answer exists
-						model.updateUserAnswer(answer.getText(), getExerciseNr(), getUserName());
-					}
-					else{
-						// make field in database
-						model.createUserAnswer(answer.getText(), getExerciseNr(), getExerciseNr());
-					}
-				}
-				else if(option == 1){ // No button
-					// Do nothing
-				}
-			}
-		}// end outer if
-	}// end method saveMessage
-
-	/**
 	 * Inner class if window is closing
 	 * @author hintveld
 	 *
 	 */
-	public class windowClosingAdaptor extends WindowAdapter{
+	class windowClosingAdaptor extends WindowAdapter{
 
 		public void windowClosing(WindowEvent e) {
-			saveMessage();
+			controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
+					model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
+			System.exit(1);
 		}
-	}
+	}// end class windowClosingAdaptor
 
 }// end class InputUserAnswerView
