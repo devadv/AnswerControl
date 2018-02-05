@@ -28,12 +28,7 @@ public class ControllerInputUserAnswer implements ActionListener{
 	// Execute when save button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(model.userAnswerExist(view.getExerciseNr(), userName)){
-			model.updateUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
-		}
-		else{
-			model.createUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
-		}
+		saveUserAnswer();
 	}
 
     /**
@@ -49,15 +44,7 @@ public class ControllerInputUserAnswer implements ActionListener{
 			int option = JOptionPane.showConfirmDialog(null, "Save to database?",
 					"Warning", JOptionPane.YES_NO_OPTION);
 			if(option == 0){ // Yes button
-				if(exist){
-					// user answer exists
-					model.updateUserAnswer(textToCompare, view.getExerciseNr(), userName);
-
-				}
-				else{
-					// make field in database
-					model.createUserAnswer(text, view.getExerciseNr(), userName);
-				}
+				saveUserAnswer();
 			}
 			else if(option == 1){ // No button
 				// Do nothing
@@ -65,5 +52,17 @@ public class ControllerInputUserAnswer implements ActionListener{
 		}
 
 	}// end method saveMessage
+	
+	/**
+	 * Method to sava user answer to data base.
+	 */
+	public void saveUserAnswer() {
+		if(model.userAnswerExist(view.getExerciseNr(), userName)){
+			model.updateUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
+		}
+		else{
+			model.createUserAnswer(view.answer.getText(), view.getExerciseNr(), userName);
+		}
+	}// end method saveUserAnswer
 
 } // end class ControllerInputUserAnswer

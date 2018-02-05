@@ -8,7 +8,7 @@ import mvc.model.Model;
 
 public abstract class SaveView extends AbstractView {
 
-	public JButton btnSave;
+	protected JButton btnSave;
 
 	/**
 	 * constructor SaveView
