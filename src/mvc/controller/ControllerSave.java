@@ -14,7 +14,7 @@ public class ControllerSave implements ActionListener{
 	public ControllerSave() {
 		model = new Model();
 		model.createDBConnection();
-		view = new InputQuestionAnswerView(model);
+		//view = new InputQuestionAnswerView(model);
 		model.addObserver(view);
 		view.addSaveButtonListener(this);
 

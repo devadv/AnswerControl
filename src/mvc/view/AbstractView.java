@@ -34,7 +34,7 @@ public abstract class AbstractView extends JFrame implements Observer {
     protected Font textAreaFont;
     protected int lastBlockIndex;
 	protected int lastExerciseIndex;
-	private JTextArea questionTextArea;
+	protected JTextArea questionTextArea;
 	private GridBagLayout layout;
 	private GridBagConstraints constraints;
 
@@ -159,6 +159,7 @@ public abstract class AbstractView extends JFrame implements Observer {
      * sets exerciseBox to the next item
      */
     public void btnNext() {
+
         if (exerciseBox.getSelectedIndex() < exerciseBox.getItemCount() - 1) {
             exerciseBox.setSelectedIndex(exerciseBox.getSelectedIndex() + 1);
         }
@@ -287,6 +288,12 @@ public abstract class AbstractView extends JFrame implements Observer {
 			}
 		}
     }
+
+	public String getAnswerText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }// end class AbstractView

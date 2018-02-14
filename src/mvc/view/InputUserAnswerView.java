@@ -19,12 +19,14 @@ import mvc.model.Model;
 
 public class InputUserAnswerView extends SaveView {
 
-	public JTextArea answer;
-	private JButton checkAnswer;
-	private ControllerInputUserAnswer controllerInputUserAnswer;
+	protected JTextArea answer;
+	protected JButton checkAnswer;
+	protected ControllerInputUserAnswer controllerInputUserAnswer;
+	protected Model model;
 
 	public InputUserAnswerView(Model model, ControllerInputUserAnswer controllerInputUserAnswer) {
 		super(model);
+		this.model = model;
 		this.setTitle("Input user answer.");
         this.setSize(600, 800);
         this.setLocation(700, 150);
@@ -82,9 +84,11 @@ public class InputUserAnswerView extends SaveView {
 
 	@Override
 	public void btnNext() {
-		// check if text has been changed
-		controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
-				model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
+		if(model.retrieveAnswerUser(getExerciseNr(), getUserName()).equals(answer.getText()) == false){
+			controllerInputUserAnswer.saveMessage(model.retrieveAnswer(getExerciseNr()),
+					answer.getText(), this);
+		}
+		
 		super.btnNext();
 	}
 
@@ -93,14 +97,23 @@ public class InputUserAnswerView extends SaveView {
 	@Override
 	public void btnPrevious() {
 		// check if text has been changed
-		controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
-				model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
+		controllerInputUserAnswer.saveMessage(model.retrieveAnswer(getExerciseNr()),
+				answer.getText(), this);
 		super.btnPrevious();
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		updateView();
+	}
+
+	public String getAnswerText() {
+		return answer.getText();
+	}
+
+	public void callSaveMessage() {
+		controllerInputUserAnswer.saveMessage(model.retrieveAnswer(getExerciseNr()),
+				answer.getText(), this);
 	}
 
 	/**
@@ -111,8 +124,7 @@ public class InputUserAnswerView extends SaveView {
 	class windowClosingAdaptor extends WindowAdapter{
 
 		public void windowClosing(WindowEvent e) {
-			controllerInputUserAnswer.saveMessage(model.retrieveAnswerUser(getExerciseNr(), getUserName()),
-					model.userAnswerExist(getExerciseNr(), getUserName()), answer.getText());
+			callSaveMessage();
 			System.exit(1);
 		}
 	}// end class windowClosingAdaptor

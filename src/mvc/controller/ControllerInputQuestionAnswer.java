@@ -2,48 +2,34 @@ package mvc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
 import mvc.model.Model;
 import mvc.view.InputQuestionAnswerView;
 
-public class ControllerInputQuestionAnswer implements ActionListener{
-	private Model model;
+public class ControllerInputQuestionAnswer extends AbstractController implements ActionListener{
 	private InputQuestionAnswerView view;
+	private String userName;
 
 	/**
 	 * Constructor to make the view for input questions and answers.
 	 */
 	public ControllerInputQuestionAnswer(){
-		model = new Model();
-		model.createDBConnection();
-		view = new InputQuestionAnswerView(model);
+		super();
+		view = new InputQuestionAnswerView(model, this);
 		model.addObserver(view);
 		view.addSaveButtonListener(this);
+		userName = view.getUserName();
 
 	}// end constructor ControllerInputQuestionAnswerView
 
 	// Execute when save button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if(model.questionExist(view.getExerciseNr())){
-			if(model.retrieveQuestion(view.getExerciseNr()).equals(view.getQuestionTextArea().getText()) == false){
-				model.updateQuestion(view.getExerciseNr(), view.getQuestionTextArea().getText(), view.getBlockNumber());
-			}
-		}
-		else{
-			model.createQuestion(view.getExerciseNr(), view.getQuestionTextArea().getText(), view.getBlockNumber());
-		}
-
-
-		if(model.retrieveAnswer(view.getExerciseNr()).equals(view.getAnswer().getText()) == false){
-			model.updateAnswer(view.getExerciseNr(), view.getAnswer().getText(), view.getBlockNumber());
-		}
-		else{
-			model.createAnswer(view.getExerciseNr(), view.getAnswer().getText(), view.getBlockNumber());
-		}
-
-
+		saveUserAnswer(view);
 
 	}// end method actionPerformed
+
 
 }// end class ControllerInputQuestionAnswerView

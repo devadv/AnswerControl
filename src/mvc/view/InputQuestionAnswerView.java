@@ -4,24 +4,30 @@ import java.awt.Insets;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.sun.glass.ui.View;
+
+import mvc.controller.ControllerInputQuestionAnswer;
 import mvc.model.Model;
 
 public class InputQuestionAnswerView extends SaveView {
 	private JTextArea answer;
+	private ControllerInputQuestionAnswer controllerInputQuestionAnswer;
 
 	/**
 	 * Constructor to make view to input question and aswer.
 	 * @param model
 	 */
-	public InputQuestionAnswerView(Model model) {
+	public InputQuestionAnswerView(Model model, ControllerInputQuestionAnswer controllerInputQuestionAnswer) {
 		super(model);
-        this.setTitle("BlueJ version 3.4. Input question and answer.");
+        this.setTitle("BlueJ version 3.5 Input question and answer.");
         this.setSize(600, 800);
         this.setLocation(600, 170);
         this.setVisible(true);
+        this.controllerInputQuestionAnswer = controllerInputQuestionAnswer;
         setAnswer(new JTextArea(10, 37));
         getAnswer().setFont(textAreaFont);
         getAnswer().setMargin(new Insets(5, 10, 0, 10));
@@ -54,6 +60,18 @@ public class InputQuestionAnswerView extends SaveView {
 
 	}
 
+	@Override
+	public void btnNext() {
+		if(questionTextArea.getText().equals(model.retrieveQuestion(getExerciseNr())) == false){
+			controllerInputQuestionAnswer.saveMessage(model.retrieveQuestion(getExerciseNr()),
+				 questionTextArea.getText(), this);
+		}
+		else if(answer.getText().equals(model.retrieveAnswer(getExerciseNr())) == false){
+			controllerInputQuestionAnswer.saveMessage(model.retrieveAnswer(getExerciseNr()),
+					answer.getText(), this);
+		}
+		super.btnNext();
+	}
 
 	public JTextArea getAnswer() {
 		return answer;
@@ -62,6 +80,14 @@ public class InputQuestionAnswerView extends SaveView {
 
 	public void setAnswer(JTextArea answer) {
 		this.answer = answer;
+	}
+
+	/**
+	 *
+	 * @return answer text
+	 */
+	public String getAnswerText() {
+		return answer.getText();
 	}
 
 }
